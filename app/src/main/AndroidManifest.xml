@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,9 +21,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FileSelector"
+            android:name=".FileSelectorActivity"
             android:label="@string/title_activity_file_selector"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TrainingActivity"
+            android:label="@string/title_activity_training"
+            android:theme="@style/FullscreenTheme" />
     </application>
 
 </manifest>

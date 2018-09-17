@@ -14,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -27,14 +28,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        Button btnSkip = (Button)findViewById(R.id.btnSkip);
-        btnSkip.setOnClickListener(new View.OnClickListener() {
+        Button btnTuning = (Button)findViewById(R.id.btnTuning);
+        btnTuning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast toast = Toast.makeText(getApplicationContext(),"튜닝 기능은 아직 구현되지 않았습니다.", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
+        Button btnTraining = (Button)findViewById(R.id.btnTraining);
+        btnTraining.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent();
-                ComponentName name= new ComponentName("com.example.ahnsik.mytuner", "com.example.ahnsik.mytuner.FileSelector");
+                ComponentName name= new ComponentName("com.example.ahnsik.mytuner", "com.example.ahnsik.mytuner.FileSelectorActivity");
                 i.setComponent(name);
                 startActivity(i);
+            }
+        });
+
+        Button btnPlaying = (Button)findViewById(R.id.btnPlaying);
+        btnPlaying.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast toast = Toast.makeText(getApplicationContext(), "연주하며 연습하는 기능은 아직 구현되지 않았습니다.", Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
     }

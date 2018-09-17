@@ -1,5 +1,7 @@
 package com.example.ahnsik.mytuner;
 
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,7 +14,7 @@ import android.widget.TextView;
 
 import java.io.File;
 
-public class FileSelector extends AppCompatActivity {
+public class FileSelectorActivity extends AppCompatActivity {
 
     private String[] songfiles;
 
@@ -62,6 +64,12 @@ public class FileSelector extends AppCompatActivity {
 //                String file=String.valueOf(adapterView.getItemAtPosition(i));
                 // 우선은 그냥 선택된 파일 이름만 선택 - 간단히.
                 System.out.println(songfiles[i]);
+
+                // 플레이(연습용) 액티비티를 기동한다.
+                Intent intent = new Intent();
+                ComponentName name= new ComponentName("com.example.ahnsik.mytuner", "com.example.ahnsik.mytuner.TrainingActivity");
+                intent.setComponent(name);
+                startActivity(intent);
             }
         });
 
