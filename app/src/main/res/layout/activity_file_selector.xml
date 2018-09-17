@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg_selector"
-    tools:context=".FileSelector">
+    tools:context=".FileSelectorActivity">
 
     <TextView
         android:layout_width="match_parent"

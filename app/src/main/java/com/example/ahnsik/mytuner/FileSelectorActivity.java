@@ -69,7 +69,9 @@ public class FileSelectorActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 ComponentName name= new ComponentName("com.example.ahnsik.mytuner", "com.example.ahnsik.mytuner.TrainingActivity");
                 intent.setComponent(name);
+                intent.putExtra("filename", songfiles[i] );
                 startActivity(intent);
+
             }
         });
 
