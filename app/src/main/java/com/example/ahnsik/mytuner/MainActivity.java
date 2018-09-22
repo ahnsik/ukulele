@@ -32,8 +32,10 @@ public class MainActivity extends AppCompatActivity {
         btnTuning.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast toast = Toast.makeText(getApplicationContext(),"튜닝 기능은 아직 구현되지 않았습니다.", Toast.LENGTH_SHORT);
-                toast.show();
+                Intent i = new Intent();
+                ComponentName name= new ComponentName("com.example.ahnsik.mytuner", "com.example.ahnsik.mytuner.TuningActivity");
+                i.setComponent(name);
+                startActivity(i);
             }
         });
 

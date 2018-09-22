@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,6 +24,14 @@ public class FileSelectorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_selector);
 
+        Button btnReturn = (Button)findViewById(R.id.btnReturn);
+        btnReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         String filteringName;
         // 맨 처음 모든 파일의 목록을 가져와서 *.uke 파일만 골라서 리스트를 만들 것임.
         File directory = new File("/storage/sdcard0");
@@ -35,6 +44,11 @@ public class FileSelectorActivity extends AppCompatActivity {
             if (filteringName.toLowerCase().endsWith("uke")) {
                 numUkeFiles++;
             }
+        }
+
+        if (numUkeFiles <= 0) {     // *.uke 파일이 하나도 없다면..?
+            Log.d("ukulele", "ERROR: No *.uke files.");
+            return;
         }
 
         // *.uke 파일이름만 골라 저장할 배열을 생성
