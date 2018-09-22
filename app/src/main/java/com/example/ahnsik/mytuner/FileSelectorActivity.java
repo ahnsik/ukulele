@@ -34,7 +34,8 @@ public class FileSelectorActivity extends AppCompatActivity {
 
         String filteringName;
         // 맨 처음 모든 파일의 목록을 가져와서 *.uke 파일만 골라서 리스트를 만들 것임.
-        File directory = new File("/storage/sdcard0");
+//        File directory = new File("/storage/sdcard0");
+        File directory = getFilesDir();
         File[] allfiles = directory.listFiles();
         int numFiles = allfiles.length;
         // 우선 *.uke 파일의 갯수만 확인.  - 배열의 크기를 결정하기 위해서 임.

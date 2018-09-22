@@ -19,6 +19,7 @@ import java.io.FileOutputStream;
 public class TuningActivity extends AppCompatActivity {
 
     public static final String FTP_ADDRESS="ccash.iptime.org";
+    public static final String FTP_DATA_DIRECTORY="ukulele";
     public static final String FTP_ACCOUNT="ahnsik";
     public static final String FTP_PASSWORD="Ahnsik7@!";
 
@@ -49,58 +50,7 @@ public class TuningActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Log.d("ukulele", "btnImportFromFTP  clicked.");
-                Thread thread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            ftpClient.setControlEncoding("euc-kr");
-                            ftpClient.connect(FTP_ADDRESS, 21);
-                            ftpClient.login(FTP_ACCOUNT, FTP_PASSWORD);
-                            ftpClient.setFileType(FTP.BINARY_FILE_TYPE); // 바이너리 파일
-                            Log.d("ukulele", "FTP: 로그인 완료");
-
-                            ftpClient.changeWorkingDirectory("ukulele");
-
-                            FTPFile[] ftpfiles = ftpClient.listFiles();
-                            int length = ftpfiles.length;
-
-                            for (int i = 0; i < length; i++) {
-                                String name = ftpfiles[i].getName();
-                                boolean isFile = ftpfiles[i].isFile();
-                                if (isFile) {
-//                                    Log.d("ukulele", "FTP: File : " + name);
-                                    if (name.toLowerCase().endsWith(".uke")) {
-                                        Log.d("ukulele", "FTP: File : " + name);
-
-                                        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-                                        ftpClient.setFileTransferMode(FTP.BINARY_FILE_TYPE);
-                                        boolean result = false;
-                                        FileOutputStream fos = new FileOutputStream(getFilesDir() );
-                                        result = ftpClient.retrieveFile(name, fos);
-                                        Log.d("ukuelele", "Access result: "+ result );
-                                        fos.close();
-                                    }
-                                }
-                                else {
-                                    Log.d("ukulele", "FTP: Directory : " + name);
-                                }
-                            }
-                            Log.d("ukulele","FTP: "+ftpClient.getReplyString());
-                            //--------------------------
-                            Toast t = Toast.makeText(getApplicationContext(), "FTP file list OK.", Toast.LENGTH_SHORT);
-                            t.show();
-
-
-
-                        } catch (Exception e) {
-//                            Toast t = Toast.makeText(getApplicationContext(), "FTP Connection Failed.", Toast.LENGTH_SHORT);
-//                            t.show();
-                            e.printStackTrace();
-                        }
-
-                    }   // end of run()
-                });      // end of new Thread()
-                thread.start();
+                openAndGetListFromFtp();
 
             }       // end of onClick
         });
@@ -114,32 +64,98 @@ public class TuningActivity extends AppCompatActivity {
                 File[] allfiles = dir.listFiles();
                 int numFiles = allfiles.length;
                 String fileName;
-//
-                Log.d("ukulele", "Internal Storage: " + dir);
+
+                Log.d("ukulele", "Internal Storage: " + dir + ", " + numFiles + " files exist.");
 
                 for (int i = 0; i < numFiles; i++) {
                     fileName = allfiles[i].getName();
                     Log.d("ukulele", "File: " + fileName );
                 }
 
-//                        String inputData = mEtInput.getText().toString();
-//                        switch(view.getId()) {
-//                            case R.id.bt_internal:
-//                                FileOutputStream fos = null;
-//                                try {
-//                                    fos = openFileOutput("internal.txt", Context.MODE_PRIVATE);
-//                                    fos.write(inputData.getBytes());
-//                                    fos.close();;
-//
-//                                } catch (FileNotFoundException e) {
-//                                    e.printStackTrace();
-//                                } catch (IOException e) {
-//                                    e.printStackTrace();
-//                                }
-//                                break;
-//
-                        }
+//                FileOutputStream fos = null;
+//                try {
+//                    fos = openFileOutput("internal.uke", getApplicationContext().MODE_PRIVATE);
+//                    fos.write( ("Dummy data write !!").getBytes() );
+//                    fos.close();;
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+
+//                File dir = getFilesDir();
+//                File file = new File(dir, "internal.uke");
+//                file.delete();
+
+            }
         });
 
     }
+
+    private void openAndGetListFromFtp() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+            boolean success =true;
+            // 우선 FTP에 접속 & 로그인 시도.
+            try {
+                ftpClient.setControlEncoding("euc-kr");
+                ftpClient.connect(FTP_ADDRESS, 21);
+                ftpClient.login(FTP_ACCOUNT, FTP_PASSWORD);
+                ftpClient.setFileType(FTP.BINARY_FILE_TYPE); // 바이너리 파일
+                Log.d("ukulele", "FTP: 로그인 완료.");
+            } catch (Exception e) {
+                e.printStackTrace();
+                success =false;
+            }
+
+            // 문제 없으면, 데이터 파일이 있는 '우쿨렐레' 폴더로 이동.
+            if (success) {
+                try {
+                    ftpClient.changeWorkingDirectory(FTP_DATA_DIRECTORY);
+                    Log.d("ukulele", "FTP: 우쿨렐레 폴더로 이동 완료.");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    success = false;
+                }
+            }
+
+            // 문제 없으면, 모든 파일목록을 가져와서 *.uke 파일만 골라 로컬 폴더에 복사.
+            if (success) {
+                try {
+                    FTPFile[] ftpfiles = ftpClient.listFiles();
+                    int length = ftpfiles.length;
+
+                    for (int i = 0; i < length; i++) {
+                        String name = ftpfiles[i].getName();
+                        boolean isFile = ftpfiles[i].isFile();
+                        if (isFile) {
+                            if (name.toLowerCase().endsWith(".uke")) {
+                                Log.d("ukulele", "FTP: File : " + name);
+
+                                ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+                                ftpClient.enterLocalPassiveMode();
+                                boolean result = false;
+                                Log.d("ukulele", "Local file name: " + getFilesDir() + "/" + name );
+                                FileOutputStream fos = new FileOutputStream(getFilesDir() + "/" + name );
+                                result = ftpClient.retrieveFile(name, fos);
+                                Log.d("ukulele", "Retrieve " + name + "- result: " + result);
+                                fos.close();
+                            }
+                        } else {
+                            Log.d("ukulele", "FTP: Directory : " + name);
+                        }
+                    }
+                    Log.d("ukulele", "FTP: " + ftpClient.getReplyString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    success = false;
+                }
+                //--------------------------
+            }   // end of if
+
+            }   // end of run()
+        });      // end of new Thread()
+        thread.start();
+    }
+
 }
