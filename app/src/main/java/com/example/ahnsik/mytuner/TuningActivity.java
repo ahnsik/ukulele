@@ -69,21 +69,10 @@ public class TuningActivity extends AppCompatActivity {
 
                 for (int i = 0; i < numFiles; i++) {
                     fileName = allfiles[i].getName();
-                    Log.d("ukulele", "File: " + fileName );
+                    File delFile = new File(getFilesDir(),fileName);
+                    delFile.delete();
+                    Log.d("ukulele", "File: " + fileName + " was deleted." );
                 }
-
-//                FileOutputStream fos = null;
-//                try {
-//                    fos = openFileOutput("internal.uke", getApplicationContext().MODE_PRIVATE);
-//                    fos.write( ("Dummy data write !!").getBytes() );
-//                    fos.close();;
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-
-//                File dir = getFilesDir();
-//                File file = new File(dir, "internal.uke");
-//                file.delete();
 
             }
         });
@@ -140,6 +129,18 @@ public class TuningActivity extends AppCompatActivity {
                                 result = ftpClient.retrieveFile(name, fos);
                                 Log.d("ukulele", "Retrieve " + name + "- result: " + result);
                                 fos.close();
+
+                                // *.uke 파일 전송이 완료되면, 해당 파일을 읽어서 mp3 음악소스를 확인하고 copy 해야 한다.
+                                if (result) {
+                                    String musicUrl = getMusicSourceFile(name);
+                                    Log.d("ukulele", "music file name: "+ musicUrl );
+
+                                    FileOutputStream musicfos = new FileOutputStream(getFilesDir() + "/" + musicUrl );
+                                    result = ftpClient.retrieveFile(musicUrl, musicfos );
+                                    Log.d("ukulele", "Retrieve " + musicUrl + "- result: " + result);
+                                    musicfos.close();
+                                }
+
                             }
                         } else {
                             Log.d("ukulele", "FTP: Directory : " + name);
@@ -156,6 +157,14 @@ public class TuningActivity extends AppCompatActivity {
             }   // end of run()
         });      // end of new Thread()
         thread.start();
+    }
+
+    private String getMusicSourceFile(String name) {
+
+        NoteData temp = new NoteData();
+        temp.loadFromFile( getFilesDir(), name );
+
+        return temp.mMusicURL;
     }
 
 }

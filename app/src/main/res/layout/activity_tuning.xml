@@ -123,7 +123,7 @@
             android:layout_alignEnd="@+id/btnReturn"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="16dp"
-            android:text="FTP에 내보내기"
+            android:text="FTP로컬 파일 지우기"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -5,6 +5,10 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
 public class NoteData {
 
     public  String  mMusicURL;          // 연주할 음악 MP3 주소 또는 YouTube 주소..
@@ -47,86 +51,56 @@ public class NoteData {
         score = null;
     }
 
-    public  NoteData(String dataFileString) {
-        Log.d("ukulele", "-=========== DataFile Dump ===========-");
-        Log.d("ukulele", dataFileString );
-        Log.d("ukulele", "-=========== DataFile Dump END ===========-");
+//    public  NoteData(String dataFileString) {
+//
+//        setData(dataFileString);
+//    }
+
+    public boolean loadFromFile(File dir, String fileName) {
+        String   UkeDataRead;
+        UkeDataRead = readTextFile(dir+"/"+fileName );
+        setData(UkeDataRead);
+        return true;
+    }
+
+    private String readTextFile(String path) {
+        String  datafile = null;
+        File file = new File(path);
+        String  line;
         try {
-            Log.d("ukulele", "start parse" );
-            JSONObject  ukeData = new JSONObject(dataFileString);
-
-            mMusicURL = ukeData.getString("source");
-            mSongTitle = ukeData.getString("title");
-
-            mStartOffset = ukeData.getInt("start_offset");
-            mBpm = ukeData.getInt("bpm");
-
-            JSONArray noteData = ukeData.getJSONArray("notes" );
-            numNotes = noteData.length();
-            playtime = ukeData.getLong("playtime");
-
-            Log.d("ukulele", "Title: " + mSongTitle + ", BPM: "+ mBpm );
-            Log.d("ukulele", "notes.length= " + numNotes );
-
-            timeStamp = new long[numNotes];
-            score = new int[numNotes];
-            chordName = new String[numNotes];
-            tab = new String[numNotes][];
-            note = new String[numNotes][];
-            note_played = new boolean[numNotes][];
-            lyric = new String[numNotes];
-
-            for (int i = 0; i<numNotes; i++) {
-                JSONObject  a_note = noteData.getJSONObject(i);
-                score[i] = 99999999;
-                timeStamp[i] = a_note.getLong("timestamp");
-                try {
-                    chordName[i] = a_note.getString("chord");
-                } catch (Exception e) {
-                    chordName[i] = null;
-                }
-                JSONArray   temp1 = a_note.getJSONArray("tab");
-                tab[i] = new String[temp1.length()];
-                for (int j=0; j<temp1.length(); j++) {
-                    tab[i][j] = temp1.getString(j);
-                }
-                JSONArray   temp2 = a_note.getJSONArray("note");
-                note[i] = new String[temp2.length()];
-                note_played[i] = new boolean[temp2.length()];
-                for (int j=0; j<temp2.length(); j++) {
-                    note[i][j] = temp2.getString(j);
-                    note_played[i][j] = false;
-                }
-                try {
-                    lyric[i] = a_note.getString("lyric");
-//                    Log.d("ukulele", "lyric : " + lyric[i] );
-                } catch (Exception e) {
-                    lyric[i] = null;
+            FileReader fr = new FileReader(file);
+            if (fr==null) {
+                Log.d("ukulele", "File Reader Error:" + fr);
+                return null;
+            }
+            BufferedReader buffrd = new BufferedReader(fr);
+            if (buffrd==null) {
+                Log.d("ukulele", "File Buffered Read Error:" + buffrd);
+                return null;
+            }
+            datafile = "";
+            Log.d("TEST", "Readey to vote !!");
+            while ( (line=buffrd.readLine() ) != null) {
+                if (line == null || line.trim().length() <= 0) {
+                    Log.d("TEST", "Skip Empty line. !!");
+                } else if ( (line.charAt(0)=='#') && (line.charAt(1)=='#') ) {     // 처음 시작하는게 ##로 시작하는 라인은 comment 로 처리 함.
+                    Log.d("TEST", "This Line is comments. !!" );
+                } else {
+                    datafile += line;
                 }
             }
-
-            try {
-                mCategory = ukeData.getString("category");
-                mAuthor = ukeData.getString("auther");
-                mAuthorNote = ukeData.getString("auther_note");
-                mAuthorComment = ukeData.getString("auther_comment");
-                mDateCreated = ukeData.getString("create_date");
-                mCommentary = ukeData.getString("comment");
-            } catch (Exception e) {
-                Log.d("ukulele", "[][][][][][] Parsing Error for sub-informations [][][][][][] ");
-                Log.d("ukulele", "mCategory :"+mCategory );
-                Log.d("ukulele", "mAuthor :"+mAuthor );
-                Log.d("ukulele", "mAuthorNote :"+mAuthorNote );
-                Log.d("ukulele", "mAuthorComment :"+mAuthorComment );
-                Log.d("ukulele", "mDateCreated :"+mDateCreated );
-                Log.d("ukulele", "mCommentary :"+mCommentary );
-            }
-
-        } catch (Exception e) {
-            Log.d("ukulele", "-xxxxxxxxxxxx Error to parse JSON xxxxxxxxxxxx-");
+            Log.d("TEST", "buffrd.close !!");
+            buffrd.close();
+            fr.close();
+            Log.d("TEST", "fullText="+datafile);
+        } catch(Exception e) {
+            Log.d("TEST", "Exceptions ");
             e.printStackTrace();
         }
+        return datafile;
     }
+
+
 
     public JSONObject makeJSON() {
         JSONObject json = new JSONObject();
@@ -172,5 +146,88 @@ public class NoteData {
 
         return json;
     }
+
+    public void setData(String dataFileString ) {
+
+        Log.d("ukulele", "-=========== DataFile Dump ===========-");
+        Log.d("ukulele", dataFileString );
+        Log.d("ukulele", "-=========== DataFile Dump END ===========-");
+        try {
+            Log.d("ukulele", "start parse" );
+            JSONObject  ukeData = new JSONObject(dataFileString);
+
+            this.mMusicURL = ukeData.getString("source");
+            Log.d("ukulele", " ** very important: source - " + this.mMusicURL );
+            this.mSongTitle = ukeData.getString("title");
+
+            this.mStartOffset = ukeData.getInt("start_offset");
+            this.mBpm = ukeData.getInt("bpm");
+
+            JSONArray noteData = ukeData.getJSONArray("notes" );
+            this.numNotes = noteData.length();
+            this.playtime = ukeData.getLong("playtime");
+
+            Log.d("ukulele", "Title: " + this.mSongTitle + ", BPM: "+ this.mBpm );
+            Log.d("ukulele", "notes.length= " + this.numNotes );
+
+            this.timeStamp = new long[this.numNotes];
+            this.score = new int[this.numNotes];
+            this.chordName = new String[this.numNotes];
+            this.tab = new String[this.numNotes][];
+            this.note = new String[this.numNotes][];
+            this.note_played = new boolean[this.numNotes][];
+            this.lyric = new String[this.numNotes];
+
+            for (int i = 0; i<this.numNotes; i++) {
+                JSONObject  a_note = noteData.getJSONObject(i);
+                this.score[i] = 99999999;
+                this.timeStamp[i] = a_note.getLong("timestamp");
+                try {
+                    this.chordName[i] = a_note.getString("chord");
+                } catch (Exception e) {
+                    this.chordName[i] = null;
+                }
+                JSONArray   temp1 = a_note.getJSONArray("tab");
+                this.tab[i] = new String[temp1.length()];
+                for (int j=0; j<temp1.length(); j++) {
+                    this.tab[i][j] = temp1.getString(j);
+                }
+                JSONArray   temp2 = a_note.getJSONArray("note");
+                this.note[i] = new String[temp2.length()];
+                this.note_played[i] = new boolean[temp2.length()];
+                for (int j=0; j<temp2.length(); j++) {
+                    this.note[i][j] = temp2.getString(j);
+                    this.note_played[i][j] = false;
+                }
+                try {
+                    this.lyric[i] = a_note.getString("lyric");
+//                    Log.d("ukulele", "lyric : " + lyric[i] );
+                } catch (Exception e) {
+                    this.lyric[i] = null;
+                }
+            }
+
+            try {
+                this.mCategory = ukeData.getString("category");
+                this.mAuthor = ukeData.getString("auther");
+                this.mAuthorNote = ukeData.getString("auther_note");
+                this.mAuthorComment = ukeData.getString("auther_comment");
+                this.mDateCreated = ukeData.getString("create_date");
+                this.mCommentary = ukeData.getString("comment");
+            } catch (Exception e) {
+                Log.d("ukulele", "[][][][][][] Parsing Error for sub-informations [][][][][][] ");
+                Log.d("ukulele", "mCategory :"+this.mCategory );
+                Log.d("ukulele", "mAuthor :"+this.mAuthor );
+                Log.d("ukulele", "mAuthorNote :"+this.mAuthorNote );
+                Log.d("ukulele", "mAuthorComment :"+this.mAuthorComment );
+                Log.d("ukulele", "mDateCreated :"+this.mDateCreated );
+                Log.d("ukulele", "mCommentary :"+this.mCommentary );
+            }
+
+        } catch (Exception e) {
+            Log.d("ukulele", "-xxxxxxxxxxxx Error to parse JSON xxxxxxxxxxxx-");
+            e.printStackTrace();
+        }
+    }   // end of setData();
 
 }
