@@ -29,9 +29,15 @@
             android:name=".TrainingActivity"
             android:label="@string/title_activity_training"
             android:theme="@style/FullscreenTheme" />
-        <activity android:name=".TuningActivity"
+        <activity
+            android:name=".TuningActivity"
             android:label="@string/title_activity_Tuning"
             android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name=".PlayingActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_playing"
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>

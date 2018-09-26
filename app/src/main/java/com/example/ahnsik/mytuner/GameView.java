@@ -123,6 +123,7 @@ Log.d("ukulele", "Trace #1.. GameView");
 //    private int mViewWidth;
 //    private int mViewHeight;
 
+*/
     public void pause() {
 //        mRunning = false;
 //        try {
@@ -137,5 +138,4 @@ Log.d("ukulele", "Trace #1.. GameView");
 //        mGameThread = new Thread(this);
 //        mGameThread.start();
     }
-*/
 }

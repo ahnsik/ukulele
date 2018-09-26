@@ -25,6 +25,9 @@ public class PlayView extends GameView {
     private int      score;
     private long     mGame_clock;
 
+    private boolean display_notes[];
+    public  double[] spectrum;
+
     private Paint  pText, pBG, pCursor;
     private Bitmap bmpBg, bmpFinger;
     private int c_thumb, c_index, c_middle, c_appoint, c_child;
@@ -103,7 +106,8 @@ public class PlayView extends GameView {
 
         drawCursor(canvas, (int)metronom_pos);    //(int)(bpm-beat)/20);
         drawWholeNotes(canvas);
-
+        // 아래의 내용은 optional. - 디버깅 및 미관상으로 녹음되는 스펙트럼을 그려서 보여주는 정도.
+        drawSpectrum(canvas);
     }
 
 
@@ -280,17 +284,17 @@ public class PlayView extends GameView {
         offColor = new Paint(onColor);
         offColor.setColor(rgb(160, 110,24));  // 잘 안 보이는 옅은 색상
 
-//        if (display_notes==null) {
-//            return;
-//        }
+        if (display_notes==null) {
+            return;
+        }
         int yoffset=0;
         int  length = note_name.length;
         for (int i =0; i<length; i++) {
-//            if (display_notes[i] ) {
-//                dispColor = onColor;
-//            } else {
+            if (display_notes[i] ) {
+                dispColor = onColor;
+            } else {
                 dispColor = offColor;
-//            }
+            }
 
             if (note_name[i].indexOf("#") >= 0)
                 yoffset = -30;
@@ -303,11 +307,35 @@ public class PlayView extends GameView {
 
     }
 
-/*
+    public void setPlayedNote(boolean[] played_note) {
+        display_notes = played_note;
+    }
+    public void setSpectruData(double[] data) {
+        spectrum = data;
+    }
+
+
     private final static float SPECTRUM_DISPLAY_X=(1280-140);        // 소리를 인식하는 최소 데시벨.     1.0f 으로 하면 화음에서 놓치는 음이 너무 많은 듯.,
     private final static float SPECTRUM_DISPLAY_Y_BUTTOM=680;        // 소리를 인식하는 최소 데시벨.     1.0f 으로 하면 화음에서 놓치는 음이 너무 많은 듯.,
     private final static float SPECTRUM_SCALE=30;        // 소리를 인식하는 최소 데시벨.     1.0f 으로 하면 화음에서 놓치는 음이 너무 많은 듯.,
-*/
+
+    public void drawSpectrum(Canvas c) {
+        // 우선 스펙트럼 데이터를 살짝 뭉개서 주변값들을 통합할 필요가 있다.
+        // 그런 다음에 peak 값을 찾아 주파수를 계산하고,
+        // 그 주파수를 기준으로 음계를 찾아 플래그 설정.
+        int length = spectrum.length;
+//        Paint spectrumPaint = new Paint(pBG);
+//        spectrumPaint.setTextSize(20.0f);
+        // 그런 다음에 peak 값을 찾아 주파수를 계산하고,
+        for (int i = 1; i< (length/2)-1; i++) {
+//            if ( (spectrum[i-1]<spectrum[i])&&(blur[i]>blur[i+1]) && (mRec.magnitude(i) > PEAK_MINIMUM_DB) ) {   // PEAK 값
+//                // 임시로 스펙트럼을 그리기 위한 것. (주파수 값 표시)
+////                c.drawText( "." +(int)mRec.frequency(i)+"Hz", SPECTRUM_DISPLAY_X-40+i, SPECTRUM_DISPLAY_Y_BUTTOM-mRec.magnitude(i)*SPECTRUM_SCALE, spectrumPaint );
+//            }
+            // 임시로 스펙트럼을 그리기 위한 것. (막대그래프 표시)
+            c.drawLine( SPECTRUM_DISPLAY_X+(i-37), SPECTRUM_DISPLAY_Y_BUTTOM, SPECTRUM_DISPLAY_X+(i-37), SPECTRUM_DISPLAY_Y_BUTTOM-(int)(spectrum[i]*SPECTRUM_SCALE), pText ) ;
+        }
+    }
 
 }
 
