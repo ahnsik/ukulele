@@ -193,8 +193,8 @@ public class PlayView extends GameView {
             if (xpos > 1200 ) continue;     // 화면 밖으로 나가는 것 들은 그릴 필요 없음.
 
             if ( (songData.chordName[i] != null) ) {
-                Log.d("ukulele", "chord="+ songData.chordName[i] + " at "+xpos );
-                drawChord(canvas, xpos, songData.chordName[i] );
+//                Log.d("ukulele", "chord="+ songData.chordName[i] + " at "+xpos );
+                drawChordName(canvas, xpos, songData.chordName[i] );
             }
             for (int j=0; j<songData.tab[i].length; j++) {
                 drawNote(canvas, xpos, songData.tab[i][j] );
@@ -222,10 +222,10 @@ public class PlayView extends GameView {
                 y = LINE_Y+140;        // 320+140= 460;
                 break;
             case 'E' :  // 2번줄
-                y = LINE_Y+140;        // 320+80= 400;
+                y = LINE_Y+80;        // 320+80= 400;
                 break;
             case 'A' :  // 1번줄
-                y = LINE_Y+140;        // 320+20= 340;
+                y = LINE_Y+20;        // 320+20= 340;
                 break;
             default: y=0;
         }
@@ -269,7 +269,7 @@ public class PlayView extends GameView {
 
     private final static int    CHORD_POSITION_Y=LINE_Y-60;
 
-    private void drawChord(Canvas canvas, int x, String chordName ) {
+    private void drawChordName(Canvas canvas, int x, String chordName ) {
 //        Paint  pChordFont= new Paint(pBG);
 //        pChordFont.setTextSize(48.0f);
 //        pChordFont.setColor(rgb(90, 60, 4) );
