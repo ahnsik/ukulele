@@ -28,7 +28,9 @@ public class PlayingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_playing);
+        // Lock orientation into landscape.
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
 //        mContentView = findViewById(R.id.fullscreen_video);
         videoView = (VideoView)findViewById(R.id.fullscreen_video);
 
