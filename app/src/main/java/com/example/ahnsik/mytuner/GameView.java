@@ -32,6 +32,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
         setFocusable(true);
     }
 
+    public GameView(Context context, AttributeSet attributeSet) {
+        super(context, attributeSet);
+        getHolder().addCallback(this);
+    }
+
+
     public void surfaceCreated(SurfaceHolder h) {
         thread = new Thread(this);
         thread.start();

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.commons.net.ftp.FTP;
@@ -17,12 +18,16 @@ import org.apache.commons.net.ftp.FTPFile;
 import java.io.File;
 import java.io.FileOutputStream;
 
-public class TuningActivity extends AppCompatActivity {
+public class TuningActivity extends AppCompatActivity implements Runnable {
 
     public static final String FTP_ADDRESS="ccash.iptime.org";
     public static final String FTP_DATA_DIRECTORY="ukulele";
     public static final String FTP_ACCOUNT="ahnsik";
     public static final String FTP_PASSWORD="Ahnsik7@!";
+
+    private Recording mRecording;
+    private Thread    mThread = null;
+    private double    decibel;
 
     FTPClient ftpClient;
 
@@ -33,8 +38,15 @@ public class TuningActivity extends AppCompatActivity {
         // Lock orientation into landscape.
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        ftpClient = new FTPClient();
+        decibel = 0.0;
+        // 녹음 시작,
+        mRecording = new Recording();
 
+        mThread = new Thread(this);
+        mThread.start();
+
+
+        ftpClient = new FTPClient();
 
         Toast toast = Toast.makeText(getApplicationContext(),"튜닝 기능은 아직 구현되지 않았습니다.", Toast.LENGTH_SHORT);
         toast.show();
@@ -81,6 +93,39 @@ public class TuningActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mRecording.end();
+        this.finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mRecording.start();
+    }
+
+
+//    TextView freqText;
+    public void run() {
+
+//        freqText = (TextView)findViewById(R.id.txtTunedFreq);
+        String  freqString;
+
+        if (mRecording == null)
+            return;
+
+        while (true) {
+            mRecording.parseSpectrum();
+            freqString =  "Freq:"+ mRecording.center_freq + " Hz";
+//            freqText.setText(freqString);
+//            Log.d("ukulele", "Main " + freqString );
+        }
+    }
+
+
 
     private void openAndGetListFromFtp() {
         Thread thread = new Thread(new Runnable() {

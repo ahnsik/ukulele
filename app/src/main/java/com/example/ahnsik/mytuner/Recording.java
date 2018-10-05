@@ -85,7 +85,7 @@ public class Recording extends Thread {
             Spectrum s = new Spectrum(buffer, RECORDER_SAMPLERATE);
             spectrum = s.getSpectrum();
             center_freq = s.getFrequency();
-//            Log.d ("ukulele", "center_freq is ..." + center_freq  );
+            Log.d ("ukulele", "center_freq is ..." + center_freq  );
         }
 
     }

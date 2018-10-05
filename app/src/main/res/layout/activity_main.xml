@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     android:background="@drawable/bg_title"
     tools:context="com.example.ahnsik.mytuner.MainActivity">
 
@@ -13,8 +14,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/button_shape"
+        android:textColor="#333"
         android:text="우쿨렐레 튜닝"
-        android:textSize="40sp"
+        android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/btnTraining"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -24,8 +27,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/button_shape"
+        android:textColor="#333"
         android:text="혼자 연습하기"
-        android:textSize="40sp"
+        android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/btnPlaying"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -35,8 +40,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/button_shape"
+        android:textColor="#333"
         android:text="연주하며 연습하기"
-        android:textSize="40sp"
+        android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -47,7 +54,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
         android:text="우쿨렐레를 배우자"
-        android:textSize="40sp"
+        android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

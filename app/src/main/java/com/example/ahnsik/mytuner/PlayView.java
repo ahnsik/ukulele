@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.util.AttributeSet;
 import android.util.Log;
 
 import static android.graphics.Color.*;
@@ -40,6 +41,16 @@ public class PlayView extends GameView {
 
     public PlayView(Context context) {
         super(context);
+        resource_load();
+        // 게임 정보 초기화
+        score = 0;
+        mGame_clock = 0;
+    }
+
+    public PlayView(Context context, AttributeSet attributeSet) {
+        super(context, attributeSet);
+        getHolder().addCallback(this);
+
         resource_load();
         // 게임 정보 초기화
         score = 0;

@@ -11,6 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!--<com.example.ahnsik.mytuner.PlayView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
+
+
         <VideoView
             android:id="@+id/fullscreen_video"
             android:layout_width="960px"
@@ -23,14 +28,26 @@
             android:textStyle="bold" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:id="@+id/txtOverlayText"
             android:text="이것은 비디오에 오버레이 될 문자열 입니다."
             android:textSize="64sp"
             android:textColor="#F53"
             android:gravity="center"
             android:layout_gravity="center"/>
+
+        <Button
+            android:id="@+id/btnJustBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/button_shape"
+            android:text="Just Button"
+            android:textColor="#FFF" />
 
     </RelativeLayout>
 
