@@ -17,6 +17,7 @@ public class VideoTestClassActivity extends AppCompatActivity {
     private View mContentView;
     private VideoView   videoView;
     private GameView    surfaceView;
+    private static boolean toggle = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class VideoTestClassActivity extends AppCompatActivity {
         videoView = (VideoView)findViewById(R.id.fullscreen_video);
 
         videoView.setVideoURI(Uri.parse("http://ccash.iptime.org/videoviewdemo.mp4"));
-        videoView.setMediaController(new MediaController(VideoTestClassActivity.this));
+//        videoView.setMediaController(new MediaController(VideoTestClassActivity.this));
         videoView.requestFocus();
         videoView.start();
 
@@ -40,6 +41,13 @@ public class VideoTestClassActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast toast = Toast.makeText(getApplicationContext(), "시험용 Toast. VideoView 위에 OSD 그리기 - 메뉴를 위해", Toast.LENGTH_SHORT);
                 toast.show();
+
+                if (toggle) {
+                    videoView.start();
+                } else {
+                    videoView.pause();
+                }
+                toggle = !toggle;
             }
         });
 
