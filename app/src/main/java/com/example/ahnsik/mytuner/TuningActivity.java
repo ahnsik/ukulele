@@ -1,7 +1,5 @@
 package com.example.ahnsik.mytuner;
 
-import android.content.ComponentName;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -13,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -100,16 +99,41 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
     public class TunerMessageHander extends Handler {
         public void handleMessage(Message m) {
             Log.d("ukulele", "Message Handler !! m="+m );
+            String detectedNote;
 
-            TextView statusText = (TextView) findViewById(R.id.txtWhatToDo);
-            statusText.setText("주파수가 검출 되었습니다.");
+//            TextView statusText = (TextView) findViewById(R.id.txtWhatToDo);
+//            statusText.setText("주파수가 검출 되었습니다.");
 
             TextView freqText = (TextView) findViewById(R.id.txtTunedFreq);
             Float freq = m.getData().getFloat("Freq");
             freqText.setText(":"+freq);
 
+            detectedNote = FindNote.NoteName(freq);
             TextView txtTunedNote = (TextView) findViewById(R.id.txtTunedNote);
-            txtTunedNote.setText( NoteFreq.NoteName(freq) );
+            txtTunedNote.setText( detectedNote );
+
+            TextView statusText = (TextView) findViewById(R.id.txtWhatToDo);
+            statusText.setText( "center:"+FindNote.getCenterFreq(detectedNote) );
+
+            ImageView nob_image = (ImageView) findViewById(R.id.imgTune);
+            switch(detectedNote) {
+                case "G4" :
+                case "G3" :
+                    nob_image.setImageResource( R.drawable.tune_g);
+                    break;
+                case "C4" :
+                    nob_image.setImageResource( R.drawable.tune_c);
+                    break;
+                case "E4" :
+                    nob_image.setImageResource( R.drawable.tune_e);
+                    break;
+                case "A4" :
+                    nob_image.setImageResource( R.drawable.tune_a);
+                    break;
+                default:
+                    nob_image.setImageResource( R.drawable.tuner_none);
+                    break;
+            }
         }
     }
 
