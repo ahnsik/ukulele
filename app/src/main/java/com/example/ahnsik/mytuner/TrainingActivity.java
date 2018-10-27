@@ -10,6 +10,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
+import static android.os.SystemClock.sleep;
+
 public class TrainingActivity extends AppCompatActivity implements Runnable {
 
     private PlayView  mGameView;
@@ -17,7 +19,8 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
     private Recording mRecording;
 
     //  locally used variables.
-    private double    decibel;
+    private double    prev_amplitude = 0;      // index of note data (next position what it will be played.)
+    private boolean   vol_increment = false;
 
     private Thread    mThread = null;
     private long      mGameStartClock = 0;
@@ -41,7 +44,7 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
         mGameView.setSongData(mSongData);
         // initialize local data
 //        display_notes = new boolean[NUM_OF_NOTE_UKE];
-        decibel = 0.0;
+        prev_amplitude = 0.0;
         // 녹음 시작,
         mRecording = new Recording();
 
@@ -49,7 +52,7 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
         mThread.start();
         mGameStartClock = System.currentTimeMillis();     // 시작 싯점의 시스템 클럭을 저장.
 
-        mGameView.setPlayPosition(mGameStartClock);
+//        mGameView.setPlayPosition(mGameStartClock);
     }
 
     @Override
@@ -81,16 +84,38 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
 //            parseSpectrum();
 //        }
 
+        vol_increment = false;
         playing_pos = 0;
+        mGameView.setPlayPosition( mSongData.timeStamp[playing_pos] );      // 맨 처음 위치에서 시작.
+
         while (true) {
             mRecording.parseSpectrum();
             mGameView.setPlayedNote(mRecording.notes_detected);
             mGameView.setSpectruData(mRecording.spectrum);
 
-            mGameView.setPlayPosition( mSongData.timeStamp[playing_pos] );      // 연주해야 할 위치의 시점으로 이동
+//            Log.d("ukulele", "mSongData:"+mSongData );
+//            Log.d("ukulele", "  timeStamp:"+mSongData.timeStamp + "vol:"+ mRecording.detected_volume );
+//            Log.d("ukulele", "  playing_pos:"+mSongData.timeStamp[playing_pos] );
+
+            // 스트로크 체크 하기 위한 루틴을 추가할 것. (녹음된 음량을 가지고 판단)
+//            Log.d("ukulele", "  check peak- , prev:"+ (int)prev_amplitude + ", now:" + (int)mRecording.detected_volume + ", inc:"+vol_increment );
+            if ( vol_increment && (prev_amplitude > mRecording.detected_volume )) {     // prev_amplitude 의 값이 peak 이어야 함.
+                Log.d("ukulele", "  Stroke detected !!   vol:"+ mRecording.detected_volume + ", freq:" + mRecording.center_freq );
+            }
+
+            if ( prev_amplitude > mRecording.detected_volume)
+                vol_increment = false;
+            if ( prev_amplitude < mRecording.detected_volume)
+                vol_increment = true;
+            // 과거의 음량을 갱신 기억.
+            prev_amplitude = mRecording.detected_volume;
+
+
             // 제대로 연주가 되었다면, 다음 note로 이동.
             if ( isPlayedOk(playing_pos) ) {
                 playing_pos++;
+
+                mGameView.setPlayPosition( mSongData.timeStamp[playing_pos] );      // 다음 연주해야 할 위치의 시점으로 이동
 
                 // 디버깅용 코드.
                 String dbgStr = "Next, you have to play : ";
@@ -98,12 +123,15 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
                     dbgStr += mSongData.note[playing_pos][k];
                 Log.d("ukulele", dbgStr );
             }
+
             // 데이터의 끝까지 모두 다 연주가 끝났다면.. 액티비티 종료.
             if (playing_pos >= mSongData.numNotes ) {
                 Log.d("ukulele", "End of this song." );
                 finish();
                 break;          // break for while.
             }
+
+            sleep(10);
         }
     }
 

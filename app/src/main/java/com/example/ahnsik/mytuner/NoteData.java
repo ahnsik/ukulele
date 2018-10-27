@@ -23,7 +23,7 @@ public class NoteData {
     public  int     mStartOffset;       // 처음 시작할 위치의 오프셋
     public  int     mBpm;
     public  int     numNotes;
-    public  long    playtime;
+//    public  long    playtime;
 
     // 여기 아래의 배열들은 진짜 연주해야 할 데이터 들..
     public  long[]       timeStamp;
@@ -59,8 +59,7 @@ public class NoteData {
     public boolean loadFromFile(File dir, String fileName) {
         String   UkeDataRead;
         UkeDataRead = readTextFile(dir+"/"+fileName );
-        setData(UkeDataRead);
-        return true;
+        return setData(UkeDataRead);
     }
 
     private String readTextFile(String path) {
@@ -147,7 +146,7 @@ public class NoteData {
         return json;
     }
 
-    public void setData(String dataFileString ) {
+    public boolean  setData(String dataFileString) {
 
         Log.d("ukulele", "-=========== DataFile Dump ===========-");
         Log.d("ukulele", dataFileString );
@@ -165,7 +164,7 @@ public class NoteData {
 
             JSONArray noteData = ukeData.getJSONArray("notes" );
             this.numNotes = noteData.length();
-            this.playtime = ukeData.getLong("playtime");
+//            this.playtime = ukeData.getLong("playtime");
 
             Log.d("ukulele", "Title: " + this.mSongTitle + ", BPM: "+ this.mBpm );
             Log.d("ukulele", "notes.length= " + this.numNotes );
@@ -227,7 +226,9 @@ public class NoteData {
         } catch (Exception e) {
             Log.d("ukulele", "-xxxxxxxxxxxx Error to parse JSON xxxxxxxxxxxx-");
             e.printStackTrace();
+            return false;
         }
+        return true;
     }   // end of setData();
 
 }

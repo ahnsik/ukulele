@@ -38,11 +38,11 @@
 
             <ImageView
                 android:id="@+id/imgTune"
-                android:layout_width="800dp"
-                android:layout_height="293dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
                 android:layout_gravity="right"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="16dp"
                 app:srcCompat="@drawable/tuner_none" />
 
             <TextView

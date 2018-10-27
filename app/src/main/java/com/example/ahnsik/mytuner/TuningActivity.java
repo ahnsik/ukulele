@@ -101,6 +101,12 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
             Log.d("ukulele", "Message Handler !! m="+m );
             String detectedNote;
 
+            String result_msg = m.getData().getString("result_msg");
+            if ( !result_msg.isEmpty() ) {
+                Toast toast = Toast.makeText(getApplicationContext(),result_msg, Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
 //            TextView statusText = (TextView) findViewById(R.id.txtWhatToDo);
 //            statusText.setText("주파수가 검출 되었습니다.");
 
@@ -144,6 +150,7 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
     private AudioRecord mAudioRecord;
     private static final int[] SAMPLE_RATES = {44100, 22050, 16000, 11025, 8000};
     private Thread mThread = null;
+    private boolean mThreadRunning = false;
     private float mLastComputedFreq = 0;
 
     private void startTuningTask() {
@@ -167,15 +174,22 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
         Log.d("ukulele", "StartRecording.");
         if ( mThread == null ) {
             mThread = new Thread(this);
+            mThreadRunning = true;
             mThread.start();
             Log.d("ukulele", "Thread Start.");
         }
     }
 
+    private void stopTuningTask() {
+        mThreadRunning = false;
+        mAudioRecord.stop();
+    }
 
     @Override
     public void onPause() {
         super.onPause();
+        Log.d("ukulele", "$$$$$$$$$$ Tuning Activity is paused.");
+        stopTuningTask();
         this.finish();
     }
     @Override
@@ -196,18 +210,18 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
 
         Log.d("ukulele", "Detected : Record is OK, anyway.");
 
-        while (true) {
+        while (mThreadRunning) {
             // 녹음된 데이터를 버퍼로 읽어 들이고
             final int readLength = mAudioRecord.read(buffer, 0, bufSize);
 
             if (readLength > 0) {            // 읽어 낸 데이터가 존재한다면.
-                Log.d("ukulele", "readLength : " + readLength );
+//                Log.d("ukulele", "readLength : " + readLength );
                 final double intensity = averageIntensity(buffer, readLength);       // 읽어 낸 데이터들의 평균값 (평균 음량)을 계산.
                 int maxZeroCrossing = (int) (650 * (readLength / 8192) * (sampleRate / 44100.0));   // 650을 기준으로 샘플링 주파수와 버퍼 설정에 맞게 비례하여 최대 값을 지정.
 
                 if (intensity >= 50 && zeroCrossingCount(buffer) <= maxZeroCrossing) {      // 음량이 최소 50 이상, 주파수(?)가 너무 노이즈가 심하지 않은 데이터에 대해서만 확인
 
-                    float freq = getPitch(buffer, readLength / 4, readLength, sampleRate, 50, 650);
+                    float freq = getPitch(buffer, readLength / 4, readLength, sampleRate, 150, 650);
 
                     if (Math.abs(freq - mLastComputedFreq) <= 5f) {     // 새로 계산한 주파수와, 지난번 마지막으로 계산한 주파수의 차이 값이 5f 미만인 경우에만 의미가 있다고 판단. 검출된 주파수를 리턴.
                         mDetectedFreq = freq;
@@ -221,12 +235,12 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
                     b.putFloat("Freq", freq );      // 주파수 값을 넣어서 메세지 전송함.
                     msg.setData(b);
                     mHandler.sendMessage(msg);
+                    Log.d("ukulele", "Detected Freq: " + mDetectedFreq + ",  Intensity: " + mDetectedIntensity );
 
                 } else {
-                    Log.d("ukulele", "intensity : " + intensity +",  maxZeroCrossing: "+ maxZeroCrossing );
+//                    Log.d("ukulele", "intensity : " + intensity +",  maxZeroCrossing: "+ maxZeroCrossing );
                 }
             }
-            Log.d("ukulele", "Detected Freq: " + mDetectedFreq + ",  Intensity: " + mDetectedIntensity );
         }
     }
 
@@ -330,29 +344,43 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
                                 ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
                                 ftpClient.enterLocalPassiveMode();
                                 boolean result = false;
-                                Log.d("ukulele", "Local file name: " + getFilesDir() + "/" + name );
+//                                Log.d("ukulele", "Local file name: " + getFilesDir() + "/" + name );
                                 FileOutputStream fos = new FileOutputStream(getFilesDir() + "/" + name );
                                 result = ftpClient.retrieveFile(name, fos);
-                                Log.d("ukulele", "Retrieve " + name + "- result: " + result);
+//                                Log.d("ukulele", "Retrieve " + name + "- result: " + result);
                                 fos.close();
 
                                 // *.uke 파일 전송이 완료되면, 해당 파일을 읽어서 mp3 음악소스를 확인하고 copy 해야 한다.
                                 if (result) {
                                     String musicUrl = getMusicSourceFile(name);
-                                    Log.d("ukulele", "music file name: "+ musicUrl );
-
-                                    FileOutputStream musicfos = new FileOutputStream(getFilesDir() + "/" + musicUrl );
-                                    result = ftpClient.retrieveFile(musicUrl, musicfos );
-                                    Log.d("ukulele", "Retrieve " + musicUrl + "- result: " + result);
-                                    musicfos.close();
+                                    if ( ! musicUrl.isEmpty() ) {
+                                        FileOutputStream musicfos = new FileOutputStream(getFilesDir() + "/" + musicUrl );
+                                        result = ftpClient.retrieveFile(musicUrl, musicfos );
+//                                        Log.d("ukulele", "Retrieve " + musicUrl + "- result: " + result);
+                                        musicfos.close();
+                                    } else {
+                                    Log.d("ukulele", "?????? music file name: "+ musicUrl );
+                                    }
                                 }
-
                             }
                         } else {
                             Log.d("ukulele", "FTP: Directory : " + name);
                         }
                     }
                     Log.d("ukulele", "FTP: " + ftpClient.getReplyString());
+
+                    // Toast 를 대신 표시하도록 메세지를 던진다.
+                    Message msg = mHandler.obtainMessage();
+                    Bundle b = new Bundle();
+                    b.putString("result_msg", ftpClient.getReplyString() );      // 주파수 값을 넣어서 메세지 전송함.
+                    msg.setData(b);
+                    mHandler.sendMessage(msg);
+
+                    ftpClient.logout();
+                    Log.d("ukulele", "FTP: Logged out." );
+                    ftpClient.disconnect();
+                    Log.d("ukulele", "FTP: Disconnected." );
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     success = false;
@@ -361,15 +389,19 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
             }   // end of if
 
             }   // end of run()
-        });      // end of new Thread()
+            });      // end of new Thread()
         thread.start();
     }
 
     private String getMusicSourceFile(String name) {
+        boolean jsonResult = false;
 
         NoteData temp = new NoteData();
-        temp.loadFromFile( getFilesDir(), name );
-
+        jsonResult = temp.loadFromFile( getFilesDir(), name );
+        if ( !jsonResult) {
+            Log.d("ukulele", "FTP: Could not get music-file info." );
+            return null;
+        }
         return temp.mMusicURL;
     }
 

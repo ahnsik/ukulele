@@ -20,6 +20,7 @@ public class Recording extends Thread {
 
     public  double[] spectrum;
     public  double  center_freq = 0.0f;
+    public  double  detected_volume = 0.0f;
 
     private final static int NUM_OF_NOTE_UKE=36;                // G3 ~ F6 까지..
     public  boolean notes_detected[];
@@ -85,7 +86,8 @@ public class Recording extends Thread {
             Spectrum s = new Spectrum(buffer, RECORDER_SAMPLERATE);
             spectrum = s.getSpectrum();
             center_freq = s.getFrequency();
-            Log.d ("ukulele", "center_freq is ..." + center_freq  );
+            detected_volume = s.getVolume();
+//            Log.d ("ukulele", "center_freq is ..." + center_freq  );
         }
 
     }

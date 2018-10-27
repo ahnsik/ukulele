@@ -8,6 +8,7 @@ public class Spectrum {
 
     double[] spectrum;
     double[] samples;
+    double   max_amplitude;
     int sampleRate;
 
     /**
@@ -121,11 +122,13 @@ public class Spectrum {
 
         // Find the index with highest magnitude,
         int max = 0;
-        double largest = 1.0;
+//        double largest = 1.0;
+        max_amplitude = 1.0;
+
         // search only the first half.
         for (int i = 0; i < spectrum.length/2; i++) {
-            if (spectrum[i] > largest) {
-                largest = spectrum[i];
+            if (spectrum[i] > max_amplitude) {
+                max_amplitude = spectrum[i];
                 max = i;
             }
         }
@@ -141,7 +144,7 @@ public class Spectrum {
          * Calculate the frequency of the highest peak in the range if it is
          * greater than the average overall peak values.
          */
-        if (largest > average*5) {
+        if (max_amplitude > average*5) {
             // Frequency = Fs * i / N
             float freqFraction = peak / (float)spectrum.length; // The fraction of the sampling rate.
             frequency = (float) sampleRate * freqFraction;
@@ -149,17 +152,22 @@ public class Spectrum {
         return frequency;
     }
 
-    /**
-     * Calculates the fundamental frequency of the spectrum within half
-     * the target frequency to twice the target frequency if it is within
-     * a significant amplitude of the highest amplitude peak.
-     *
-     * @return Float value that represents the frequency. Float
-     * accuracy is generally all that is needed for typical purposes.
-     *
-     * 최고 진폭 피크의 상당한 진폭 내에있는 경우 대상 주파수의 절반 이내의 스펙트럼의 기본 주파수를 목표 주파수의 두 배까지 계산합니다.
-     @return : 빈도를 나타내는 부동 소수점 값. 플로트 정확도는 일반적으로 일반적인 목적에 필요한 모든 것입니다.
-     */
+    public double getVolume() {
+        return max_amplitude;
+    }
+
+
+        /**
+         * Calculates the fundamental frequency of the spectrum within half
+         * the target frequency to twice the target frequency if it is within
+         * a significant amplitude of the highest amplitude peak.
+         *
+         * @return Float value that represents the frequency. Float
+         * accuracy is generally all that is needed for typical purposes.
+         *
+         * 최고 진폭 피크의 상당한 진폭 내에있는 경우 대상 주파수의 절반 이내의 스펙트럼의 기본 주파수를 목표 주파수의 두 배까지 계산합니다.
+         @return : 빈도를 나타내는 부동 소수점 값. 플로트 정확도는 일반적으로 일반적인 목적에 필요한 모든 것입니다.
+         */
     public float getFrequency(float target) {
         float frequency = 0, peak = 0;
 
