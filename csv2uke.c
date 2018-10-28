@@ -96,9 +96,7 @@ int main(int argc, char *argv[] )
     fprintf(out_f, "}\n" );
 
     fclose(out_f);
-    printf("\n\n\t 아직 남아 있는 할 일. \n");
-    printf("- tab 악보로 부터 음계(검출용) 정보를 추출해서 note[] 데이터도 만들 것.\n");
-    printf("- JSON 데이터로 출력할 때 주의점 : 배열의 마지막 요소에는 , (콤마)가 없다는 것.\n");
+    printf("\n\n\t 아직 남아 있는 할 일. - 없음. 다 했음.\n");
     printf("- 소스코드 도 정리좀 해서 모듈화 하자.\n\n\n");
     return 0;
 }
@@ -309,6 +307,9 @@ int set_start_offset(char *offset_str)
         라인을 모두 파싱하는 동작을 한다. 
 ***********************/
 
+long noteCount = 0;   // JSON배열을 만들 때, 아이템의 갯수.(갯수가 0이라는 건 첫번째 아이템이므로 ,를 빼야 한다.)
+long chordCount = 0;   // 첫번째 note 데이터에서는 , 로 구분 안하고 시작. 맨 처음이 아니면 , 를 찍고 시작.
+
 int get_note_from_line(char *chord_line) {
     char g_line[READLINE_MAX], *g_ptr;
     char c_line[READLINE_MAX], *c_ptr;
@@ -332,7 +333,7 @@ int get_note_from_line(char *chord_line) {
     if ( readline(in_f, g_line) < 0 )  //  4번줄(G) 악보 읽기가 실패하면 에러 리턴.
     {   return  -4;
     }
-    if ( readline(in_f, lyric_line) < 0 )  //  가사 읽기가 실패하면 아무것도 안함.
+    if ( readline(in_f, lyric_line) < 0 )  //  가사 읽기가 실패하는 건 무시.
     {   printf("Read for lyric was failed.");
     }
 
@@ -357,7 +358,9 @@ int get_note_from_line(char *chord_line) {
 
     printf("\t\tstart_Parsing ! : %s", chord_line );
 
+//    chordCount = 0;
     while( *chord_line != '\0' ) {
+
         //memset(&note, '\0', sizeof(note) );        
         note.time_stamp = time_stamp;
 
@@ -429,7 +432,7 @@ int get_note_from_line(char *chord_line) {
         else
         {
             //printf("\t%s \n", chord_line );
-            printf("timestamp:%d, chord:%s, ", time_stamp, note.chord);
+/*            printf("timestamp:%d, chord:%s, ", time_stamp, note.chord);
             if (note.g[0] != '\0')
                 printf("G%s,", note.g);
             if (note.c[0] != '\0')
@@ -440,41 +443,74 @@ int get_note_from_line(char *chord_line) {
                 printf("A%s,", note.a);
             if (note.lyric[0] != '\0')
                 printf("(%s),", note.lyric);
+*/
+            if ( chordCount > 0 )             // JSON 배열 형식에서 맨 마지막엔 , 를 찍으면 안되기 때문에.. 첫번째 이후의 아이템은 , 를 찍으며 시작하도록 함.
+            {   fprintf(out_f, ",\n" );
+            }
 
             fprintf(out_f, "\t{\n" );
             fprintf(out_f, "\t  \"timestamp\":%d,\n" ,time_stamp );
             fprintf(out_f, "\t  \"chord\":\"%s\",\n" ,note.chord );
             fprintf(out_f, "\t  \"tab\":[" );
+
+            noteCount = 0;
             if (note.g[0] != '\0')
-                fprintf(out_f, "\"G%s\",", note.g);
+            {   if (noteCount>0) fprintf(out_f, ",");
+                fprintf(out_f, "\"G%s\"", note.g);
+                noteCount++;
+            }
             if (note.c[0] != '\0')
-                fprintf(out_f, "\"C%s\",", note.c);
+            {   if (noteCount>0) fprintf(out_f, ",");
+                fprintf(out_f, "\"C%s\"", note.c);
+                noteCount++;
+            }
             if (note.e[0] != '\0')
-                fprintf(out_f, "\"E%s\",", note.e);
+            {   if (noteCount>0) fprintf(out_f, ",");
+                fprintf(out_f, "\"E%s\"", note.e);
+                noteCount++;
+            }
             if (note.a[0] != '\0')
-                fprintf(out_f, "\"A%s\",", note.a);
+            {   if (noteCount>0) fprintf(out_f, ",");
+                fprintf(out_f, "\"A%s\"", note.a);
+                noteCount++;
+            }
             fprintf(out_f, "],\n" );
 
             fprintf(out_f, "\t  \"note\":[" );
+            noteCount = 0;
             if (note.g[0] != '\0')
-                fprintf(out_f, "\"%s\",", convert_note_g(note.g) );
+            {   if (noteCount>0) fprintf(out_f, ",");
+                fprintf(out_f, "\"%s\"", convert_note_g(note.g) );
+                noteCount++;
+            }
             if (note.c[0] != '\0')
-                fprintf(out_f, "\"%s\",", convert_note_c(note.c) );
+            {   if (noteCount>0) fprintf(out_f, ",");
+                fprintf(out_f, "\"%s\"", convert_note_c(note.c) );
+                noteCount++;
+            }
             if (note.e[0] != '\0')
-                fprintf(out_f, "\"%s\",", convert_note_e(note.e) );
+            {   if (noteCount>0) fprintf(out_f, ",");
+                fprintf(out_f, "\"%s\"", convert_note_e(note.e) );
+                noteCount++;
+            }
             if (note.a[0] != '\0')
-                fprintf(out_f, "\"%s\",", convert_note_a(note.a) );
-            fprintf(out_f, "],\n" );
+            {   if (noteCount>0) fprintf(out_f, ",");
+                fprintf(out_f, "\"%s\"", convert_note_a(note.a) );
+                noteCount++;
+            }
+            fprintf(out_f, "]" );
 
             if (note.lyric[0] != '\0')
-                fprintf(out_f, "\t  \"lyric\":\"%s\",\n" ,note.lyric );
+                fprintf(out_f, ",\n\t  \"lyric\":\"%s\"\n" ,note.lyric );
+            else
+                fprintf(out_f, "\n");
 
-            fprintf(out_f, "\t},\n" );
+            fprintf(out_f, "\t}" );
             time_stamp += beat_length_msec;
-            printf("\n");
+//            printf("\n");
+            chordCount++;   // 저장되는 코드의 갯수를 센다. - 맨 첫번째 것만 , 를 안찍는 방법.
         }
     }
-
 }
 /*
     {
@@ -488,6 +524,7 @@ int get_note_from_line(char *chord_line) {
 
 void write_uke_file() 
 {
+    fprintf(out_f, "\n" );
     fprintf(out_f, "  \"title\":\"%s\",\n" , title );
     fprintf(out_f, "  \"author\":\"%s\",\n" , author );
     fprintf(out_f, "  \"author_comment\":\"%s\",\n" , author_comment );
