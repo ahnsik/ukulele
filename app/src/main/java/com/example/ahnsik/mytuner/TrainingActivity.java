@@ -98,6 +98,7 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
 //            Log.d("ukulele", "  playing_pos:"+mSongData.timeStamp[playing_pos] );
 
             // 스트로크 체크 하기 위한 루틴을 추가할 것. (녹음된 음량을 가지고 판단)
+/*
 //            Log.d("ukulele", "  check peak- , prev:"+ (int)prev_amplitude + ", now:" + (int)mRecording.detected_volume + ", inc:"+vol_increment );
             if ( vol_increment && (prev_amplitude > mRecording.detected_volume )) {     // prev_amplitude 의 값이 peak 이어야 함.
                 Log.d("ukulele", "  Stroke detected !!   vol:"+ mRecording.detected_volume + ", freq:" + mRecording.center_freq );
@@ -109,10 +110,10 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
                 vol_increment = true;
             // 과거의 음량을 갱신 기억.
             prev_amplitude = mRecording.detected_volume;
-
+*/
 
             // 제대로 연주가 되었다면, 다음 note로 이동.
-            if ( isPlayedOk(playing_pos) ) {
+            if ( isStroked() && isPlayedOk(playing_pos) ) {
                 playing_pos++;
 
                 mGameView.setPlayPosition( mSongData.timeStamp[playing_pos] );      // 다음 연주해야 할 위치의 시점으로 이동
@@ -133,6 +134,23 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
 
             sleep(10);
         }
+    }
+
+    private boolean isStroked() {
+        boolean  stroked = false;
+//            Log.d("ukulele", "  check peak- , prev:"+ (int)prev_amplitude + ", now:" + (int)mRecording.detected_volume + ", inc:"+vol_increment );
+        if ( vol_increment && (prev_amplitude > mRecording.detected_volume )) {     // prev_amplitude 의 값이 peak 이어야 함.
+            Log.d("ukulele", "  Stroke detected !!   vol:"+ mRecording.detected_volume + ", freq:" + mRecording.center_freq );
+            stroked = true;
+        }
+
+        if ( prev_amplitude > mRecording.detected_volume)
+            vol_increment = false;
+        if ( prev_amplitude < mRecording.detected_volume)
+            vol_increment = true;
+        // 과거의 음량을 갱신 기억.
+        prev_amplitude = mRecording.detected_volume;
+        return stroked;
     }
 
     //연주할 위치에 있는 악보데이터 (음계)가 모두 Play 되고 있는지 판단. 즉, 연습자가 제대로 코드를 연주 했는지 확인하는 함수.
