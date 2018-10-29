@@ -444,6 +444,11 @@ int get_note_from_line(char *chord_line) {
             if (note.lyric[0] != '\0')
                 printf("(%s),", note.lyric);
 */
+            if ( (note.g[0] != '\0')&& (note.c[0] != '\0')&& (note.e[0] != '\0')&& (note.a[0] != '\0') )
+            {       // 기록할 note 가 하나도 없으면 기록하지 않는다. 
+                continue;
+            }
+
             if ( chordCount > 0 )             // JSON 배열 형식에서 맨 마지막엔 , 를 찍으면 안되기 때문에.. 첫번째 이후의 아이템은 , 를 찍으며 시작하도록 함.
             {   fprintf(out_f, ",\n" );
             }
@@ -506,10 +511,10 @@ int get_note_from_line(char *chord_line) {
                 fprintf(out_f, "\n");
 
             fprintf(out_f, "\t}" );
-            time_stamp += beat_length_msec;
 //            printf("\n");
             chordCount++;   // 저장되는 코드의 갯수를 센다. - 맨 첫번째 것만 , 를 안찍는 방법.
         }
+        time_stamp += beat_length_msec;
     }
 }
 /*

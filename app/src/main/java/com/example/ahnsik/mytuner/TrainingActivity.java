@@ -112,24 +112,27 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
             prev_amplitude = mRecording.detected_volume;
 */
 
+            // 데이터의 끝까지 모두 다 연주가 끝났다면.. 액티비티 종료.
+/*            if (playing_pos >= mSongData.numNotes ) {
+                Log.d("ukulele", "End of this song." );
+                finish();
+                break;          // break for while.
+            }
+*/
             // 제대로 연주가 되었다면, 다음 note로 이동.
             if ( isStroked() && isPlayedOk(playing_pos) ) {
                 playing_pos++;
-
-                mGameView.setPlayPosition( mSongData.timeStamp[playing_pos] );      // 다음 연주해야 할 위치의 시점으로 이동
+                if (playing_pos >= mSongData.numNotes ) {
+                    finish();
+                    break;          // break for while.
+                }
+                mGameView.setPlayPosition(mSongData.timeStamp[playing_pos]);      // 다음 연주해야 할 위치의 시점으로 이동
 
                 // 디버깅용 코드.
                 String dbgStr = "Next, you have to play : ";
                 for (int k=0; k<mSongData.note[playing_pos].length; k++)
                     dbgStr += mSongData.note[playing_pos][k];
                 Log.d("ukulele", dbgStr );
-            }
-
-            // 데이터의 끝까지 모두 다 연주가 끝났다면.. 액티비티 종료.
-            if (playing_pos >= mSongData.numNotes ) {
-                Log.d("ukulele", "End of this song." );
-                finish();
-                break;          // break for while.
             }
 
             sleep(10);
