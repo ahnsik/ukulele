@@ -97,31 +97,10 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
 //            Log.d("ukulele", "  timeStamp:"+mSongData.timeStamp + "vol:"+ mRecording.detected_volume );
 //            Log.d("ukulele", "  playing_pos:"+mSongData.timeStamp[playing_pos] );
 
-            // 스트로크 체크 하기 위한 루틴을 추가할 것. (녹음된 음량을 가지고 판단)
-/*
-//            Log.d("ukulele", "  check peak- , prev:"+ (int)prev_amplitude + ", now:" + (int)mRecording.detected_volume + ", inc:"+vol_increment );
-            if ( vol_increment && (prev_amplitude > mRecording.detected_volume )) {     // prev_amplitude 의 값이 peak 이어야 함.
-                Log.d("ukulele", "  Stroke detected !!   vol:"+ mRecording.detected_volume + ", freq:" + mRecording.center_freq );
-            }
-
-            if ( prev_amplitude > mRecording.detected_volume)
-                vol_increment = false;
-            if ( prev_amplitude < mRecording.detected_volume)
-                vol_increment = true;
-            // 과거의 음량을 갱신 기억.
-            prev_amplitude = mRecording.detected_volume;
-*/
-
-            // 데이터의 끝까지 모두 다 연주가 끝났다면.. 액티비티 종료.
-/*            if (playing_pos >= mSongData.numNotes ) {
-                Log.d("ukulele", "End of this song." );
-                finish();
-                break;          // break for while.
-            }
-*/
             // 제대로 연주가 되었다면, 다음 note로 이동.
             if ( isStroked() && isPlayedOk(playing_pos) ) {
                 playing_pos++;
+                // 데이터의 끝까지 모두 다 연주가 끝났다면.. 액티비티 종료.
                 if (playing_pos >= mSongData.numNotes ) {
                     finish();
                     break;          // break for while.
