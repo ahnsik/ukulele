@@ -76,13 +76,7 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
 
 
     public void run() {
-//        long game_clock;
-
-//        while(true) {
-//            game_clock = System.currentTimeMillis() - mGameStartClock;
-//            mGameView.setPlayPosition( game_clock );
-//            parseSpectrum();
-//        }
+        long playing_clock = 0;
 
         vol_increment = false;
         playing_pos = 0;
@@ -96,6 +90,14 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
 //            Log.d("ukulele", "mSongData:"+mSongData );
 //            Log.d("ukulele", "  timeStamp:"+mSongData.timeStamp + "vol:"+ mRecording.detected_volume );
 //            Log.d("ukulele", "  playing_pos:"+mSongData.timeStamp[playing_pos] );
+
+            playing_clock = System.currentTimeMillis()-mGameStartClock;
+            if ( playing_clock < mSongData.timeStamp[playing_pos] ) {
+                // 만약 현재 시간이 연주했어야 하는 시간 보다 이른 시간이라면 천천히 timer 를 갱신해 나가고..
+                mGameView.setPlayPosition(playing_clock);      // 다음 연주해야 할 위치의 시점으로 이동
+            } else {    // 그렇지 않으면.. 즉, 연주 타이밍을 놓쳐서 delay 가 발생했다면, 발생한 delay 만큼 mGameStartClock 을 조정하여 계속 기다리게 한다.
+                mGameStartClock = System.currentTimeMillis() - mSongData.timeStamp[playing_pos];
+            }
 
             // 제대로 연주가 되었다면, 다음 note로 이동.
             if ( isStroked() && isPlayedOk(playing_pos) ) {

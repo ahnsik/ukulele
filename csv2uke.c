@@ -8,6 +8,8 @@
 int readline(FILE *fp, char *buffer);
 int parse_line(char *buffer);
 int set_bpm(char *bpm_str);
+int set_quaver(char *quaver_str); 
+
 int set_start_offset(char *offset_str);
 int get_note_from_line(char *chord_line);
 void write_uke_file();
@@ -15,6 +17,7 @@ char *convert_note_g(char *str_pos);
 char *convert_note_c(char *str_pos);
 char *convert_note_e(char *str_pos);
 char *convert_note_a(char *str_pos);
+int  isNoNotedata(char g, char c, char e, char a);   // 모든 노트에 데이터가 없다면(연주할 음이 없으면) 출력을 SKIP 판단
 
 
 ////////////////////////////
@@ -49,6 +52,7 @@ char comment[READLINE_MAX];
 FILE *in_f, *out_f;
 int start_offset = 0;         // BPM과 음표길이에 따른 timestamp 값을 증가시키는 용도
 int bpm = 0;         // BPM과 음표길이에 따른 timestamp 값을 증가시키는 용도
+int semiquaver_base = 0;    // 악보데이터(엑셀,CSV)가 16분 음표 기반인지 8분 음표 기반인지 플래그.
 int time_stamp = 0;         // BPM과 음표길이에 따른 timestamp 값을 증가시키는 용도
 int beat_length_msec = 0;   // BPM을 기준으로 8분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.
 
@@ -223,12 +227,12 @@ int parse_line(char *buffer)
         printf("author is : %s \n", token);
         strcpy(author_comment, token);
     }
-    else if ( strncmp( str_ptr, "메모", 9) == 0 ) 
-    {   token_len =  get_token(str_ptr+9+1, token);
+    else if ( strncmp( str_ptr, "메모", 6) == 0 ) 
+    {   token_len =  get_token(str_ptr+6+1, token);
         printf("Author is : %s \n", token);
         strcpy(author_note, token);
-    } else if ( strncmp( str_ptr, "author_note", 14) == 0 ) 
-    {   token_len =  get_token(str_ptr+14+1, token);
+    } else if ( strncmp( str_ptr, "author_note", 11) == 0 ) 
+    {   token_len =  get_token(str_ptr+11+1, token);
         printf("author is : %s \n", token);
         strcpy(author_note, token);
     }
@@ -242,6 +246,16 @@ int parse_line(char *buffer)
     {   token_len =  get_token(str_ptr+3+1, token);
         printf("BPM is : %s \n", token);
         set_bpm(token);
+    }
+        // quaver - 이것은 8분음표 기반인지 16분 음표 기반인지를 판단. 이것으로 timestamp 를 계산할 것이므로 매우 중요.
+    else if ( strncmp( str_ptr, "quaver", 6) == 0 ) 
+    {   token_len =  get_token(str_ptr+6+1, token);
+        printf("BPM is : %s \n", token);
+        set_quaver(token); 
+    } else if ( strncmp( str_ptr, "8분음표", 10) == 0 ) 
+    {   token_len =  get_token(str_ptr+10+1, token);
+        printf("BPM is : %s \n", token);
+        set_quaver(token);
     }
 
 /*        // 박자 - 1 마디 안에 들어 갈 박자의 수 - 엑셀파일의 1개 셀은 (기본적으로) 8분음표를 기준으로 했음.
@@ -291,7 +305,31 @@ int parse_line(char *buffer)
 
 int set_bpm(char *bpm_str) 
 {   bpm = atoi(bpm_str);
-    beat_length_msec = 60000 / bpm;   // BPM을 기준으로 8분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.
+
+    if (semiquaver_base)        // 악보 데이터가 16분 음표 기반인지 아닌지 판단.
+        beat_length_msec = 60000 / (bpm*2);   // BPM을 기준으로 16분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.
+    else
+        beat_length_msec = 60000 / bpm;   // BPM을 기준으로 8분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.
+
+    printf("quaver = %d,  bpm=%d, beat_length=%d \n", semiquaver_base, bpm,beat_length_msec );
+
+    return 0;
+}
+
+int set_quaver(char *quaver_str)
+{
+    printf("quaver_str = %s\n", quaver_str );
+    if ( strncmp(quaver_str, "semiquaver", 10)==0 )     // 16분 음표 기반인지 판단.
+    {   semiquaver_base = 1;
+    } else 
+    {   semiquaver_base = 0;
+    }
+
+    if (bpm != 0)       // 이미 bpm 값이 설정 되어 있으면 재설정.
+    {   beat_length_msec = 60000 / (bpm*2);   // BPM을 기준으로 8분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.
+    }
+    printf("quaver = %d,  bpm=%d, beat_length=%d \n", semiquaver_base, bpm,beat_length_msec );
+
     return 0;
 }
 
@@ -444,7 +482,7 @@ int get_note_from_line(char *chord_line) {
             if (note.lyric[0] != '\0')
                 printf("(%s),", note.lyric);
 */
-            if ( (note.g[0] != '\0')&& (note.c[0] != '\0')&& (note.e[0] != '\0')&& (note.a[0] != '\0') )
+            if ( isNoNotedata( note.g[0], note.c[0], note.e[0], note.a[0]) )
             {       // 기록할 note 가 하나도 없으면 기록하지 않는다. 
                 continue;
             }
@@ -526,6 +564,15 @@ int get_note_from_line(char *chord_line) {
       "note":[  "A4#","D4","F4"      ],
     },
 */
+
+int  isNoNotedata(char g, char c, char e, char a)   // 모든 노트에 데이터가 없다면(연주할 음이 없으면) 출력을 SKIP 판단
+{
+    if ( (g == '\0')&& (c == '\0')&& (e == '\0')&& (a == '\0') )
+        return 1;
+    else 
+        return 0;
+}
+
 
 void write_uke_file() 
 {
