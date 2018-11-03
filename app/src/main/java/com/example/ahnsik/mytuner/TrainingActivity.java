@@ -18,10 +18,6 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
     private NoteData  mSongData = new NoteData();
     private Recording mRecording;
 
-    //  locally used variables.
-    private double    prev_amplitude = 0;      // index of note data (next position what it will be played.)
-    private boolean   vol_increment = false;
-
     private Thread    mThread = null;
     private long      mGameStartClock = 0;
     private int       playing_pos = 0;      // index of note data (next position what it will be played.)
@@ -44,7 +40,6 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
         mGameView.setSongData(mSongData);
         // initialize local data
 //        display_notes = new boolean[NUM_OF_NOTE_UKE];
-        prev_amplitude = 0.0;
         // 녹음 시작,
         mRecording = new Recording();
 
@@ -78,7 +73,6 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
     public void run() {
         long playing_clock = 0;
 
-        vol_increment = false;
         playing_pos = 0;
         mGameView.setPlayPosition( mSongData.timeStamp[playing_pos] );      // 맨 처음 위치에서 시작.
 
@@ -100,7 +94,7 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
             }
 
             // 제대로 연주가 되었다면, 다음 note로 이동.
-            if ( isStroked() && isPlayedOk(playing_pos) ) {
+            if ( mRecording.isStroked() && isPlayedOk(playing_pos) ) {
                 playing_pos++;
                 // 데이터의 끝까지 모두 다 연주가 끝났다면.. 액티비티 종료.
                 if (playing_pos >= mSongData.numNotes ) {
@@ -116,39 +110,28 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
                 Log.d("ukulele", dbgStr );
             }
 
-            sleep(10);
+            sleep(5);
         }
     }
 
-    private boolean isStroked() {
-        boolean  stroked = false;
-//            Log.d("ukulele", "  check peak- , prev:"+ (int)prev_amplitude + ", now:" + (int)mRecording.detected_volume + ", inc:"+vol_increment );
-        if ( vol_increment && (prev_amplitude > mRecording.detected_volume )) {     // prev_amplitude 의 값이 peak 이어야 함.
-            Log.d("ukulele", "  Stroke detected !!   vol:"+ mRecording.detected_volume + ", freq:" + mRecording.center_freq );
-            stroked = true;
-        }
-
-        if ( prev_amplitude > mRecording.detected_volume)
-            vol_increment = false;
-        if ( prev_amplitude < mRecording.detected_volume)
-            vol_increment = true;
-        // 과거의 음량을 갱신 기억.
-        prev_amplitude = mRecording.detected_volume;
-        return stroked;
-    }
 
     //연주할 위치에 있는 악보데이터 (음계)가 모두 Play 되고 있는지 판단. 즉, 연습자가 제대로 코드를 연주 했는지 확인하는 함수.
     private boolean isPlayedOk(int pos) {
         int j;
         boolean result = true;
         String[] notes = mSongData.note[pos];       // 연주 되어야 할 데이터 (악보).
+        String  dbgStr = "...Check:";
 
         for (j=0; j<notes.length; j++) {            // 모든 데이터(악보)에 해당하는 소리가 났는지 판단.
             if (!mRecording.isPlayed(notes[j])) {   // 해당하는 음계(주파수)의 소리가 녹음 되지 않았다면, 연주 실패.
                 mSongData.note_played[pos][j] = false;
                 result = false;
+                dbgStr += notes[j] + "(X),";
+            } else {
+                dbgStr += notes[j] + "(O),";
             }
         }
+        Log.d("ukulele", dbgStr );
         return result;
     }
 

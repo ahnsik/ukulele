@@ -15,21 +15,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.apache.commons.net.ftp.FTP;
+/*import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
+*/
 
 public class TuningActivity extends AppCompatActivity implements Runnable {
 
-    public static final String FTP_ADDRESS="ccash.iptime.org";
-    public static final String FTP_DATA_DIRECTORY="ukulele";
-    public static final String FTP_ACCOUNT="ahnsik";
-    public static final String FTP_PASSWORD="Ahnsik7@!";
-
-    FTPClient ftpClient;
     public float mDetectedFreq = 0;
     public double mDetectedIntensity = 0;
     private TunerMessageHander mHandler;
@@ -41,10 +36,7 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
         // Lock orientation into landscape.
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-
-        ftpClient = new FTPClient();
-
-        Toast toast = Toast.makeText(getApplicationContext(),"튜닝 기능은 아직 구현되지 않았습니다.", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(),"튜닝 기능은 아직 많이 부족합니다. 사용이 좀 불편하며 불안정 합니다.", Toast.LENGTH_SHORT);
         toast.show();
 
         Button btnReturn = (Button)findViewById(R.id.btnReturn);
@@ -52,39 +44,6 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
             @Override
             public void onClick(View view) {
                 finish();
-            }
-        });
-
-        Button btnImportFromFTP = (Button)findViewById(R.id.btnImportFromFTP);
-        btnImportFromFTP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Log.d("ukulele", "btnImportFromFTP  clicked.");
-                openAndGetListFromFtp();
-
-            }       // end of onClick
-        });
-
-        Button btnExportToFTP = (Button)findViewById(R.id.btnExportToFTP);
-        btnExportToFTP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                File dir = getFilesDir();
-                File[] allfiles = dir.listFiles();
-                int numFiles = allfiles.length;
-                String fileName;
-
-                Log.d("ukulele", "Internal Storage: " + dir + ", " + numFiles + " files exist.");
-
-                for (int i = 0; i < numFiles; i++) {
-                    fileName = allfiles[i].getName();
-                    File delFile = new File(getFilesDir(),fileName);
-                    delFile.delete();
-                    Log.d("ukulele", "File: " + fileName + " was deleted." );
-                }
-
             }
         });
 
@@ -296,7 +255,7 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
         return sampleRate / (minSumLag + delta);
     }
 
-
+/*
     /////////////////////// FTP 파일 가져오는데 사용되는 함수들. /////////////
 
     private void openAndGetListFromFtp() {
@@ -392,7 +351,7 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
             });      // end of new Thread()
         thread.start();
     }
-
+*/
     private String getMusicSourceFile(String name) {
         boolean jsonResult = false;
 

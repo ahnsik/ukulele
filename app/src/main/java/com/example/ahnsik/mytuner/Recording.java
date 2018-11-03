@@ -11,16 +11,19 @@ public class Recording extends Thread {
     private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_MONO;
     private static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
 
-    private static final float PEAK_MINIMUM_DB=0.6f;        // 소리를 인식하는 최소 데시벨.     1.0f 으로 하면 화음에서 놓치는 음이 너무 많은 듯.,
+    private static final float PEAK_MINIMUM_DB=0.3f;        // 소리를 인식하는 최소 데시벨.     1.0f 으로 하면 화음에서 놓치는 음이 너무 많은 듯.,
 
 
-    private boolean isRecording = false;
-    private int     bufferSize;
+    //  locally used variables.
+    private boolean     isRecording = false;
+    private int         bufferSize;
     private AudioRecord recorder = null;
+    private double      prev_amplitude = 0;      // index of note data (next position what it will be played.)
+    private boolean     vol_increment = false;
+    private double      detected_volume = 0.0f;
 
     public  double[] spectrum;
     public  double  center_freq = 0.0f;
-    public  double  detected_volume = 0.0f;
 
     private final static int NUM_OF_NOTE_UKE=36;                // G3 ~ F6 까지..
     public  boolean notes_detected[];
@@ -31,8 +34,8 @@ public class Recording extends Thread {
             "D#5", "E5", "F5", "F#5", "G5", "G#5", "A5", "A#5", "B5", "C6",
             "C#6", "D6", "D#6", "E6", "E#6", "F6" };
     private final static int base_minimum_freq_table[] = {      // 음계를 찾기 위한 주파수 범위의 최소값
-            190, 201, 213, 226, 239, 253, 269, 285, 302, 320,
-            339, 359, 380, 403, 427, 453, 479, 508, 538, 570,
+            190, 201, 213, 226, 239, 254, 269, 285, 302, 320,
+            339, 359, 381, 404, 428, 453, 479, 508, 538, 570,
             604, 640, 678, 718, 761, 806, 855, 906, 959, 1016,
             1077,1141,1209,1281,1357,1437,
     };
@@ -79,6 +82,10 @@ public class Recording extends Thread {
         Log.d ("ukulele", "run()" );
         byte buffer[] = new byte[bufferSize];
         double freqDomain[];
+
+        vol_increment = false;
+        prev_amplitude = 0.0;
+
         while (isRecording) {
             recorder.read(buffer, 0, bufferSize );
 //            Log.d ("ukulele", "recorder.read.. " + bufferSize );
@@ -105,7 +112,8 @@ public class Recording extends Thread {
         double[] blur = new double[length];
         blur[0] = spectrum[0];
         for (int i = 1; i<length-1; i++) {
-            blur[i] = (spectrum[i-1]+spectrum[i]+spectrum[i+1]) / 3.0f;
+            //blur[i] = (spectrum[i-1]+spectrum[i]+spectrum[i+1]) / 3.0f;
+            blur[i] = spectrum[i] / 3.0f;
         }
         // 그런 다음에 peak 값을 찾아 주파수를 계산하고,
         for (int i=0; i<notes_detected.length; i++)
@@ -160,5 +168,22 @@ public class Recording extends Thread {
             return true;
         }
         return false;       // 검출 안됐으면 그냥 종료.
+    }
+
+    public boolean isStroked() {
+        boolean  stroked = false;
+//            Log.d("ukulele", "  check peak- , prev:"+ (int)prev_amplitude + ", now:" + (int)mRecording.detected_volume + ", inc:"+vol_increment );
+        if ( vol_increment && (prev_amplitude > detected_volume )) {     // prev_amplitude 의 값이 peak 이어야 함.
+            Log.d("ukulele", "  Stroke detected !!   vol:"+ detected_volume + ", freq:" + center_freq );
+            stroked = true;
+        }
+
+        if ( prev_amplitude > detected_volume)
+            vol_increment = false;
+        if ( prev_amplitude < detected_volume)
+            vol_increment = true;
+        // 과거의 음량을 갱신 기억.
+        prev_amplitude = detected_volume;
+        return stroked;
     }
 }

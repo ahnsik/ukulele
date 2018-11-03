@@ -29,7 +29,7 @@ public class PlayView extends GameView {
     private boolean display_notes[];
     public  double[] spectrum;
 
-    private Paint  pText, pBG, pCursor;
+    private Paint  pText, pBG, pCursor, pSpectrum;
     private Bitmap bmpBg, bmpFinger;
     private int c_thumb, c_index, c_middle, c_appoint, c_child;
 
@@ -93,6 +93,9 @@ public class PlayView extends GameView {
         c_appoint = rgb(51, 152, 152);
         c_child = rgb(51, 51, 203);
 
+        pSpectrum = new Paint(pBG);
+        pSpectrum.setColor(rgb(168, 168, 128) );    // 스펙트럼 그래프는 회색(?)
+
         Log.d("ukulele", "width="+ this.width + ", height=" + this.height );
     }
 
@@ -116,9 +119,10 @@ public class PlayView extends GameView {
         double metronom_pos = ((double)MAX_BEAT_POS*beat_diff)/ a_beat;
 
         drawCursor(canvas, (int)metronom_pos);    //(int)(bpm-beat)/20);
+
+        drawSpectrum(canvas);
         drawWholeNotes(canvas);
         // 아래의 내용은 optional. - 디버깅 및 미관상으로 녹음되는 스펙트럼을 그려서 보여주는 정도.
-        drawSpectrum(canvas);
     }
 
 
@@ -326,30 +330,33 @@ public class PlayView extends GameView {
     }
 
 
-    private final static float SPECTRUM_DISPLAY_X=(1280-140);        // 소리를 인식하는 최소 데시벨.     1.0f 으로 하면 화음에서 놓치는 음이 너무 많은 듯.,
+    private final static float SPECTRUM_BAR_THICK=30;        // 소리를 인식하는 최소 데시벨.     1.0f 으로 하면 화음에서 놓치는 음이 너무 많은 듯.,
+    private final static float SPECTRUM_DISPLAY_X=SPECTRUM_BAR_THICK;        // 소리를 인식하는 최소 데시벨.     1.0f 으로 하면 화음에서 놓치는 음이 너무 많은 듯.,
     private final static float SPECTRUM_DISPLAY_Y_BUTTOM=680;        // 소리를 인식하는 최소 데시벨.     1.0f 으로 하면 화음에서 놓치는 음이 너무 많은 듯.,
-    private final static float SPECTRUM_SCALE=30;        // 소리를 인식하는 최소 데시벨.     1.0f 으로 하면 화음에서 놓치는 음이 너무 많은 듯.,
+    private final static float SPECTRUM_SCALE=10;        // 소리를 인식하는 최소 데시벨.     1.0f 으로 하면 화음에서 놓치는 음이 너무 많은 듯.,
 
     public void drawSpectrum(Canvas c) {
         // 우선 스펙트럼 데이터를 살짝 뭉개서 주변값들을 통합할 필요가 있다.
         // 그런 다음에 peak 값을 찾아 주파수를 계산하고,
         // 그 주파수를 기준으로 음계를 찾아 플래그 설정.
-        int length = spectrum.length;
-//        Paint spectrumPaint = new Paint(pBG);
-//        spectrumPaint.setTextSize(20.0f);
+        int length = spectrum.length;       // 76.5는 좀 크다.  72.5 는 쬐끔 작다.
+        double  xpos = 130.0, diff=74.5;    // 수많은 시도 끝에 찾아 낸 숫자들.  xpos 는 그냥 G3 음이 시작하는 위치값을 맞춘 거고, diff 는 음계 별로 건너 뛰는 값 X위치 diff 값이다.
+
         // 그런 다음에 peak 값을 찾아 주파수를 계산하고,
-        for (int i = 1; i< (length/2)-1; i++) {
-//            if ( (spectrum[i-1]<spectrum[i])&&(blur[i]>blur[i+1]) && (mRec.magnitude(i) > PEAK_MINIMUM_DB) ) {   // PEAK 값
-//                // 임시로 스펙트럼을 그리기 위한 것. (주파수 값 표시)
-////                c.drawText( "." +(int)mRec.frequency(i)+"Hz", SPECTRUM_DISPLAY_X-40+i, SPECTRUM_DISPLAY_Y_BUTTOM-mRec.magnitude(i)*SPECTRUM_SCALE, spectrumPaint );
-//            }
+        for (int i = 16; i< (length/2)-1; i++) {
+            //if ( (spectrum[i-1]<spectrum[i])&&(blur[i]>blur[i+1]) && (mRec.magnitude(i) > PEAK_MINIMUM_DB) ) {   // PEAK 값
+            //    // 임시로 스펙트럼을 그리기 위한 것. (주파수 값 표시)
+            //    c.drawText( "." +(int)mRec.frequency(i)+"Hz", SPECTRUM_DISPLAY_X-40+i, SPECTRUM_DISPLAY_Y_BUTTOM-mRec.magnitude(i)*SPECTRUM_SCALE, spectrumPaint );
+            //}
             // 임시로 스펙트럼을 그리기 위한 것. (막대그래프 표시)
-            c.drawLine( SPECTRUM_DISPLAY_X+(i-37), SPECTRUM_DISPLAY_Y_BUTTOM, SPECTRUM_DISPLAY_X+(i-37), SPECTRUM_DISPLAY_Y_BUTTOM-(int)(spectrum[i]*SPECTRUM_SCALE), pText ) ;
+//            c.drawRect( (float)SPECTRUM_DISPLAY_X+(i*SPECTRUM_BAR_THICK), (float)SPECTRUM_DISPLAY_Y_BUTTOM-(int)(spectrum[i]*SPECTRUM_SCALE), (float)SPECTRUM_DISPLAY_X+(i*SPECTRUM_BAR_THICK+SPECTRUM_BAR_THICK-2), (float)SPECTRUM_DISPLAY_Y_BUTTOM, pSpectrum );
+            c.drawRect( (float)xpos, (float)SPECTRUM_DISPLAY_Y_BUTTOM-(int)(spectrum[i]*SPECTRUM_SCALE), (float)(xpos+SPECTRUM_BAR_THICK-2), (float)SPECTRUM_DISPLAY_Y_BUTTOM, pSpectrum );
+            c.drawLine( (float)xpos, (float)SPECTRUM_DISPLAY_Y_BUTTOM, (float)xpos, (float)SPECTRUM_DISPLAY_Y_BUTTOM+60, pSpectrum );
+
+            xpos += diff/2;
+            diff = diff/1.05946;
+        // 1.05946f (비율) - 음과 음(반음) 사이의 비율, 즉 C 와 C# 과의 주파수 비율, C#과 D 와의 주파수 비율은 1.05946 배 이다.
         }
     }
 
 }
-
-
-
-

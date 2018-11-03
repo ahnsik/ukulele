@@ -39,7 +39,8 @@
             android:label="@string/title_activity_playing"
             android:theme="@style/FullscreenTheme" />
         <activity android:name=".VideoTestClassActivity" />
-        <activity android:name=".TunerActivity"></activity>
+        <activity android:name=".TunerActivity" />
+        <activity android:name=".SetupMenuActivity"></activity>
     </application>
 
 </manifest>

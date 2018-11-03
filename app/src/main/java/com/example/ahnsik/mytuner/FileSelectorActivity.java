@@ -19,6 +19,7 @@ import java.io.File;
 public class FileSelectorActivity extends AppCompatActivity {
 
     private String[] songfiles;
+    private String nextActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,13 @@ public class FileSelectorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_file_selector);
         // Lock orientation into landscape.
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+        String playingMode = getIntent().getExtras().getString("mode");
+        if (playingMode.equals("TrainingMode")) {
+            nextActivity = "com.example.ahnsik.mytuner.TrainingActivity";
+        } else {
+            nextActivity = "com.example.ahnsik.mytuner.PlayingActivity";
+        }
 
         Button btnReturn = (Button)findViewById(R.id.btnReturn);
         btnReturn.setOnClickListener(new View.OnClickListener() {
@@ -85,11 +93,11 @@ public class FileSelectorActivity extends AppCompatActivity {
 
                 // 플레이(연습용) 액티비티를 기동한다.
                 Intent intent = new Intent();
-                ComponentName name= new ComponentName("com.example.ahnsik.mytuner", "com.example.ahnsik.mytuner.TrainingActivity");
+//                ComponentName name= new ComponentName("com.example.ahnsik.mytuner", "com.example.ahnsik.mytuner.TrainingActivity");
+                ComponentName name= new ComponentName("com.example.ahnsik.mytuner", nextActivity );
                 intent.setComponent(name);
                 intent.putExtra("filename", songfiles[i] );
                 startActivity(intent);
-
             }
         });
 
