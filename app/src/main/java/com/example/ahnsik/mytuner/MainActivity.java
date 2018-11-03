@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         videoView.requestFocus();
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
-            public void onPrepared(MediaPlayer mp) {
+            public void onPrepared(MediaPlayer mp) {    // Video 무한 루프로 재생하도록 함.
                 mp.setLooping(true);
             }
         });

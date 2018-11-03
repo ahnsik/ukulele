@@ -12,27 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--<VideoView-->
-            <!--android:id="@+id/fullscreen_video"-->
-            <!--android:layout_width="960px"-->
-            <!--android:layout_height="540px"-->
-            <!--android:gravity="center"-->
-            <!--android:keepScreenOn="true"-->
-            <!--android:text="@string/dummy_content"-->
-            <!--android:textColor="#33b5e5"-->
-            <!--android:textSize="50sp"-->
-            <!--android:textStyle="bold" />-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/txtOverlayText"-->
-            <!--android:text="이것은 비디오에 오버레이 될 문자열 입니다."-->
-            <!--android:textSize="64sp"-->
-            <!--android:textColor="#F53"-->
-            <!--android:gravity="center"-->
-            <!--android:layout_gravity="center"/>-->
-
         <com.example.ahnsik.mytuner.PlayView
             android:id="@+id/viewGameView"
             android:layout_width="match_parent"

@@ -68,12 +68,13 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
         mGameStartClock = System.currentTimeMillis();     // 시작 싯점의 시스템 클럭을 저장.
 
         mp = new MediaPlayer();
-        Log.d("ukulele", "!@@@@@@@@@@ MP3 Play ? @@@@@@@@@@@@@@@@@@@@");
+        Log.d("ukulele", "!@@@@@@@@@@ MP3 Play ? @@@@@@@ : " + getFilesDir()+"/"+mSongData.mMusicURL );
+// /data/data/com.example.ahnsik.mytuner/files/nadasoso.mp3
         try {
             mp.reset();
-            mp.setDataSource(mSongData.mMusicURL);
+            mp.setDataSource( getFilesDir()+"/"+mSongData.mMusicURL );
             mp.prepare();
-            mp.start();
+//            mp.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -85,7 +86,7 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
         super.onPause();
         mPlayingView.pause();
         mRecording.end();
-//        mp.pause();
+        mp.pause();
         this.finish();
     }
 
@@ -96,14 +97,13 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
         mPlayingView.resume();
         mRecording.start();
         mGameStartClock = System.currentTimeMillis();     // 시작 싯점의 시스템 클럭을 저장.
-//        mp.start();
+        mp.start();
     }
 
     public void run() {
         long playing_clock = 0;
 
         playing_pos = 0;
-//        mPlayingView.setPlayPosition( mSongData.timeStamp[playing_pos] );      // 맨 처음 위치에서 시작.
 
         while (true) {
             playing_clock = System.currentTimeMillis() - mGameStartClock - mSongData.mStartOffset;     // 시작 싯점의 시스템 클럭을 저장.
