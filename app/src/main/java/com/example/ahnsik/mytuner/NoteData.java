@@ -15,9 +15,9 @@ public class NoteData {
     public  String  mSongTitle;         // 곡의 제목
     public  String  mCategory;          // 연주방법 : Chord / 밴드(단음)연주 / 핑거스타일 / 아르페지오, etc..
     public  String  mAuthor;            // 악보 제작자
-    public  String  mAuthorNote;        // 제작자의 코멘트
-    public  String  mAuthorComment;     // 제작자가 하고 싶은 말.. 설명
-    public  String  mDateCreated;       // 제작한 날짜/시간
+//    public  String  mAuthorNote;        // 제작자의 코멘트
+//    public  String  mAuthorComment;     // 제작자가 하고 싶은 말.. 설명
+//    public  String  mDateCreated;       // 제작한 날짜/시간
     public  String  mCommentary;        // 그 외에 이러 저러한 코멘트.
 
     public  int     mStartOffset;       // 처음 시작할 위치의 오프셋
@@ -108,9 +108,9 @@ public class NoteData {
             json.put("title", mSongTitle);
             json.put("category", mCategory);
             json.put("author", mAuthor );
-            json.put("author_note", mAuthorNote);
-            json.put("author_comment", mAuthorComment);
-            json.put("create_date", mDateCreated );
+//            json.put("author_note", mAuthorNote);
+//            json.put("author_comment", mAuthorComment);
+//            json.put("create_date", mDateCreated );
             json.put("comment", mCommentary);
 
             json.put("start_offset", mStartOffset);
@@ -207,19 +207,20 @@ public class NoteData {
             }
 
             try {
-                this.mCategory = ukeData.getString("category");
-                this.mAuthor = ukeData.getString("auther");
-                this.mAuthorNote = ukeData.getString("auther_note");
-                this.mAuthorComment = ukeData.getString("auther_comment");
-                this.mDateCreated = ukeData.getString("create_date");
                 this.mCommentary = ukeData.getString("comment");
+                this.mCategory = ukeData.getString("category");
+                this.mAuthor = ukeData.getString("author");
+                Log.d("ukulele", "mCommentary :"+this.mCommentary );
+//                this.mAuthorNote = ukeData.getString("auther_note");
+//                this.mAuthorComment = ukeData.getString("auther_comment");
+//                this.mDateCreated = ukeData.getString("create_date");
             } catch (Exception e) {
                 Log.d("ukulele", "[][][][][][] Parsing Error for sub-informations [][][][][][] ");
                 Log.d("ukulele", "mCategory :"+this.mCategory );
                 Log.d("ukulele", "mAuthor :"+this.mAuthor );
-                Log.d("ukulele", "mAuthorNote :"+this.mAuthorNote );
-                Log.d("ukulele", "mAuthorComment :"+this.mAuthorComment );
-                Log.d("ukulele", "mDateCreated :"+this.mDateCreated );
+//                Log.d("ukulele", "mAuthorNote :"+this.mAuthorNote );
+//                Log.d("ukulele", "mAuthorComment :"+this.mAuthorComment );
+//                Log.d("ukulele", "mDateCreated :"+this.mDateCreated );
                 Log.d("ukulele", "mCommentary :"+this.mCommentary );
             }
 
