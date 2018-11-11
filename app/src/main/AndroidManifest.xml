@@ -40,7 +40,8 @@
             android:theme="@style/FullscreenTheme" />
         <activity android:name=".VideoTestClassActivity" />
         <activity android:name=".TunerActivity" />
-        <activity android:name=".SetupMenuActivity"></activity>
+        <activity android:name=".SetupMenuActivity" />
+        <activity android:name=".BpmToolActivity"></activity>
     </application>
 
 </manifest>

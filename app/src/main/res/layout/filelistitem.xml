@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/fileImageView"
         android:layout_width="96dp"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
         android:layout_margin="2dp"
         android:background="#449922"
         app:srcCompat="@mipmap/ic_launcher" />
@@ -37,6 +37,7 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:text="no filename"
+                    android:fontFamily="sans-serif"
                     android:textSize="18sp" />
 
                 <TextView
@@ -46,6 +47,7 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:text="bps: unknown"
+                    android:fontFamily="sans-serif"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -56,6 +58,7 @@
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:text="A long long length of string title"
+                android:fontFamily="sans-serif"
                 android:textSize="32sp" />
 
         </LinearLayout>
@@ -67,6 +70,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:text="A long long length of description strings here. something like, who made this file, mood of songs, difficulty levels, training levels, or ranking, etc.. "
+            android:fontFamily="sans-serif"
             android:textSize="18sp" />
 
     </LinearLayout>

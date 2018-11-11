@@ -21,7 +21,7 @@ public class NoteData {
     public  String  mCommentary;        // 그 외에 이러 저러한 코멘트.
 
     public  int     mStartOffset;       // 처음 시작할 위치의 오프셋
-    public  int     mBpm;
+    public  float   mBpm;
     public  int     numNotes;
 //    public  long    playtime;
 
@@ -40,7 +40,7 @@ public class NoteData {
         mMusicURL = null;
         mSongTitle = null;
         mStartOffset = 0;
-        mBpm = 0;
+        mBpm = 0.0f;
         numNotes = 0;
         // 여기 아래의 배열들은 진짜 연주해야 할 데이터 들..
         timeStamp = null;
@@ -160,7 +160,7 @@ public class NoteData {
             this.mSongTitle = ukeData.getString("title");
 
             this.mStartOffset = ukeData.getInt("start_offset");
-            this.mBpm = ukeData.getInt("bpm");
+            this.mBpm = (float) ukeData.getDouble("bpm");
 
             JSONArray noteData = ukeData.getJSONArray("notes" );
             this.numNotes = noteData.length();

@@ -106,13 +106,13 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
         playing_pos = 0;
 
         while (true) {
-            playing_clock = System.currentTimeMillis() - mGameStartClock - mSongData.mStartOffset;     // 시작 싯점의 시스템 클럭을 저장.
+            playing_clock = System.currentTimeMillis() - mGameStartClock;     // 시작 싯점의 시스템 클럭을 저장.
 //            if (mSongData.playtime <= playing_clock ) {
 //                Log.d("ukulele", "End of this song." + playing_clock );
 //                finish();
 //                break;          // break for while.
 //            }
-            mPlayingView.setPlayPosition( playing_clock );
+            mPlayingView.setPlayPosition( playing_clock - 3000 );
 
             mRecording.parseSpectrum();
             mPlayingView.setPlayedNote(mRecording.notes_detected);

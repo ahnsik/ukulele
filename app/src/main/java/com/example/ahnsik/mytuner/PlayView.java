@@ -14,7 +14,7 @@ import static android.graphics.Color.*;
 
 public class PlayView extends GameView {
 
-    private final static int    PLAYING_POSITION=460;        // 소리를 인식하는 최소 데시벨.     1.0f 으로 하면 화음에서 놓치는 음이 너무 많은 듯.,
+    private final static int    PLAYING_POSITION=460;
     private final static int    MAX_BEAT_POS = 60;
     private final static int    FINGERGUIDE_X=1130;        // TAB악보 가로라인의 세로위치
     private final static int    FINGERGUIDE_Y=560;        // TAB악보 가로라인의 세로위치
@@ -32,6 +32,7 @@ public class PlayView extends GameView {
     private Paint  pText, pBG, pCursor, pSpectrum;
     private Bitmap bmpBg, bmpFinger;
     private int c_thumb, c_index, c_middle, c_appoint, c_child;
+    private int c_Perfect, c_Good, c_Bad, c_Miss, c_tooFast, c_tooLate;
 
     private final static String note_name[] = {
             "G3", "G#3", "A3", "A#3", "B3", "C4", "C#4", "D4", "D#4", "E4",
@@ -92,6 +93,13 @@ public class PlayView extends GameView {
         c_middle = rgb(203, 51, 203);
         c_appoint = rgb(51, 152, 152);
         c_child = rgb(51, 51, 203);
+
+        c_Perfect = rgb(144, 144, 204);
+        c_Good = rgb(144, 196, 144);
+        c_Bad = rgb(144, 144, 144);
+        c_Miss = rgb(190, 144, 144);
+        c_tooFast = rgb(204, 204, 150);
+        c_tooLate = rgb(204, 192, 150);
 
         pSpectrum = new Paint(pBG);
         pSpectrum.setColor(rgb(168, 168, 128) );    // 스펙트럼 그래프는 회색(?)
@@ -173,6 +181,7 @@ public class PlayView extends GameView {
         pTitle.setTextSize(60.0f);
         if (songData != null) {
             canvas.drawText(songData.mSongTitle,12,TITLE_POSITION_Y, pTitle);
+            canvas.drawText("  BPM:"+songData.mBpm,12,TITLE_POSITION_Y+30, pSpectrum);
         } else {
             canvas.drawText("곡 제목 정보가 없습니다.",12,TITLE_POSITION_Y, pTitle);
         }
@@ -196,6 +205,8 @@ public class PlayView extends GameView {
 
     private void drawNotes(Canvas canvas) {
         Paint  pLyric = new Paint(pText);
+        int     c_Miss = rgb(192, 64, 64);
+
         pLyric.setTextSize(48.0f);
         if (songData == null) {
             return;
@@ -212,7 +223,7 @@ public class PlayView extends GameView {
                 drawChordName(canvas, xpos, songData.chordName[i] );
             }
             for (int j=0; j<songData.tab[i].length; j++) {
-                drawNote(canvas, xpos, songData.tab[i][j] );
+                drawNote(canvas, xpos, songData.tab[i][j], c_tooFast );
             }
             if ( (songData.lyric[i] != null) ) {
                 canvas.drawText( songData.lyric[i], xpos,LYRIC_POSITION_Y, pLyric);
@@ -223,7 +234,7 @@ public class PlayView extends GameView {
         }
     }
 
-    private void drawNote(Canvas canvas, int xpos, String note) {
+    private void drawNote(Canvas canvas, int xpos, String note, int scoredColor) {
         Paint fingerColor = new Paint(pBG);
         int y;
         String  flet;
@@ -259,24 +270,56 @@ public class PlayView extends GameView {
                 finger = 'p';
         }
 
-        switch(finger) {
-            case 'i':   // 검지손가락 (index finger)
-                fingerColor.setColor(c_index);    // 검지는 녹색
-                break;
-            case 'm':   // 중지손가락 (middle finger)
-                fingerColor.setColor(c_middle);    // 중지는 보라색
-                break;
-            case 'a':   // 약지손가락 (appointment finger)
-                fingerColor.setColor(c_appoint);    // 약지는 시안(어두운)
-                break;
-            case 'c':   // 새끼손가락 (child? finger)
-                fingerColor.setColor(c_child);    // 새끼는 파랑
-                break;
+        if (xpos >= PLAYING_POSITION ) {      // 아직 timestamp 가 지나가지 않은 note 들은 연주할 손가락을 알려 줄 수 있는 색으로.
+            switch(finger) {
+                case 'i':   // 검지손가락 (index finger)
+                    fingerColor.setColor(c_index);    // 검지는 녹색
+                    break;
+                case 'm':   // 중지손가락 (middle finger)
+                    fingerColor.setColor(c_middle);    // 중지는 보라색
+                    break;
+                case 'a':   // 약지손가락 (appointment finger)
+                    fingerColor.setColor(c_appoint);    // 약지는 시안(어두운)
+                    break;
+                case 'c':   // 새끼손가락 (child? finger)
+                    fingerColor.setColor(c_child);    // 새끼는 파랑
+                    break;
 //            case 'p':   // 엄지손가락 (사용 불가)
-            default:
-                fingerColor.setColor(c_thumb);    // 나머지 (엄지)는 회색
-                break;
+                default:
+                    fingerColor.setColor(c_thumb);    // 나머지 (엄지)는 회색
+                    break;
+            }
+        } else              // 이미 timestamp 가 지나간 이후엔, score 에 따른 색상으로.
+        {
+            fingerColor.setColor(scoredColor);    // 검지는 녹색
+/*
+            c_Perfect = rgb(80, 255, 192);
+            c_Good = rgb(0, 128, 192);
+            c_Bad = rgb(0, 152, 0);
+            c_Miss = rgb(192, 64, 64);
+            c_tooFast = rgb(168, 192, 32);
+            c_tooLate = rgb(192, 96, 16);
+            switch() {
+                case 'i':   // 검지손가락 (index finger)
+                    fingerColor.setColor(c_Perfect);    // 검지는 녹색
+                    break;
+                case 'm':   // 중지손가락 (middle finger)
+                    fingerColor.setColor(c_middle);    // 중지는 보라색
+                    break;
+                case 'a':   // 약지손가락 (appointment finger)
+                    fingerColor.setColor(c_appoint);    // 약지는 시안(어두운)
+                    break;
+                case 'c':   // 새끼손가락 (child? finger)
+                    fingerColor.setColor(c_child);    // 새끼는 파랑
+                    break;
+//            case 'p':   // 엄지손가락 (사용 불가)
+                default:
+                    fingerColor.setColor(c_thumb);    // 나머지 (엄지)는 회색
+                    break;
+            }
+*/
         }
+
         Rect eraserRect = new Rect(xpos-8, y-60, xpos+30, y);
         canvas.drawBitmap(bmpBg, eraserRect, eraserRect, null );
         canvas.drawText(flet,xpos,y, fingerColor );

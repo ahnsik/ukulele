@@ -58,10 +58,10 @@ public class SetupMenuActivity extends AppCompatActivity {
         btnCalcBpm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent i = new Intent();
-//                ComponentName name= new ComponentName("com.example.ahnsik.mytuner", "com.example.ahnsik.mytuner.TuningActivity");
-//                i.setComponent(name);
-//                startActivity(i);
+                Intent i = new Intent();
+                ComponentName name= new ComponentName("com.example.ahnsik.mytuner", "com.example.ahnsik.mytuner.BpmToolActivity");
+                i.setComponent(name);
+                startActivity(i);
             }
         });
 

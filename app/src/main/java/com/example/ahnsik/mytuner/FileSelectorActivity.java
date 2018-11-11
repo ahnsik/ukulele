@@ -18,7 +18,11 @@ import java.io.File;
 
 public class FileSelectorActivity extends AppCompatActivity {
 
-    private String[] songfiles;
+    private String[] songfiles;         // 파일명
+    private String[] songTitles;        // 곡목
+    private String[] songComments;      // 곡목에 대한 설명
+    private String[] songBpm;      // 곡목에 대한 설명
+    private String[] songTypes;         // 멜로디 / 코드 / 핑거스타일
     private String nextActivity;
 
     @Override
@@ -65,13 +69,33 @@ public class FileSelectorActivity extends AppCompatActivity {
 
         // *.uke 파일이름만 골라 저장할 배열을 생성
         songfiles = new String[numUkeFiles];
+        songTitles = new String[numUkeFiles];        // 곡목
+        songComments = new String[numUkeFiles];      // 곡목에 대한 설명
+        songBpm = new String[numUkeFiles];      // BPM
+        songTypes = new String[numUkeFiles];         // 멜로디 / 코드 / 핑거스타일
+
         // 다시 한 번 *.uke 파일만 골라서 배열에 저장함.
         numUkeFiles = 0;
         for (int i = 0; i < allfiles.length; i++) {
             filteringName = allfiles[i].getName();
             if (filteringName.toLowerCase().endsWith("uke")) {
                 songfiles[numUkeFiles] = allfiles[i].getName();
-                Log.d("ukulele", "---> " + songfiles[numUkeFiles]);
+
+                NoteData temp = new NoteData();
+                boolean jsonResult = false;
+
+                jsonResult = temp.loadFromFile( getFilesDir(), filteringName );
+                if ( !jsonResult) {
+//                    Log.d("ukulele", "FTP: Could not get music-file info." );
+                    return;
+                }
+                songTitles[numUkeFiles] = temp.mSongTitle;
+                songComments[numUkeFiles] = "설명:"+temp.mCommentary;
+                songBpm[numUkeFiles] = "BPM:"+temp.mBpm;
+                songTypes[numUkeFiles] = temp.mCategory;
+
+                Log.d("ukulele", "---> " + songfiles[numUkeFiles]+", Title:"+ songTitles[numUkeFiles] +
+                                                    ", Comments:" + songComments[numUkeFiles] );
                 numUkeFiles++;
             }
         }
@@ -121,6 +145,10 @@ public class FileSelectorActivity extends AppCompatActivity {
             view = getLayoutInflater().inflate(R.layout.filelistitem, null);
             TextView filenameTextview = (TextView)view.findViewById(R.id.filenameText);
             filenameTextview.setText(songfiles[i] );
+            TextView songTitleTextview = (TextView)view.findViewById(R.id.songTitleText);
+            songTitleTextview.setText(songTitles[i] );
+            TextView songCommentTextview = (TextView)view.findViewById(R.id.descriptionText);
+            songCommentTextview.setText(songComments[i] );
             return view;
         }
     }
