@@ -59,6 +59,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button btnChordTable = (Button)findViewById(R.id.btnChordTable);
+        btnChordTable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Log.d("ukulele", "Show major chord tables. ");
+                Intent i = new Intent();
+                ComponentName name= new ComponentName("com.example.ahnsik.mytuner", "com.example.ahnsik.mytuner.ChordTableActivity");
+                i.setComponent(name);
+                startActivity(i);
+            }
+        });
+
         Button btnTraining = (Button)findViewById(R.id.btnTraining);
         btnTraining.setOnClickListener(new View.OnClickListener() {
             @Override

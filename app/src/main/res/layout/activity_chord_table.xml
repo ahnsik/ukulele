@@ -20,7 +20,7 @@
             android:fontFamily="sans-serif"
             android:textSize="30sp"
             android:textColor="#f4d62f"
-            android:text="화면을 터치하여 BPM을 계산해 보세요."/>
+            android:text="코드 표를 터치하여 전체 화면으로 볼 수 있습니다."/>
 
         <RelativeLayout
             android:layout_width="match_parent"

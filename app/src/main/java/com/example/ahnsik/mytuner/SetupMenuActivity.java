@@ -97,20 +97,6 @@ public class SetupMenuActivity extends AppCompatActivity {
             }
         });
 
-        Button btnChordTable = (Button)findViewById(R.id.btnChordTable);
-        btnChordTable.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Log.d("ukulele", "Show major chord tables. ");
-                Intent i = new Intent();
-                ComponentName name= new ComponentName("com.example.ahnsik.mytuner", "com.example.ahnsik.mytuner.ChordTableActivity");
-                i.setComponent(name);
-                startActivity(i);
-            }
-        });
-
-
         // FTP에 접속해서 악보 데이터를 읽어 오기 위함.
         ftpClient = new FTPClient();
         mHandler = new FtpAccessMessageHander();
