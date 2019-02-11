@@ -41,7 +41,8 @@
         <activity android:name=".VideoTestClassActivity" />
         <activity android:name=".TunerActivity" />
         <activity android:name=".SetupMenuActivity" />
-        <activity android:name=".BpmToolActivity"></activity>
+        <activity android:name=".BpmToolActivity" />
+        <activity android:name=".ChordTableActivity"></activity>
     </application>
 
 </manifest>

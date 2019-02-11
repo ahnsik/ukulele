@@ -1,8 +1,18 @@
+/*************************************
+*
+*   우쿨렐레 연주 데이터 만들어 주는 변환기. 
+*      엑셀파일로 TAB악보를 편집, CSV 형식으로 저장하고 변환해서 사용할 수 있다.
+*       - by ccash.
+*
+*************************************/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #define READLINE_MAX    512          // 파일 한 라인 당 512 바이트는 넘지 않는 것으로 한다. 
+#define USAGE_PRINT     printf("\n\n  USAGE: csv2uke [CSV-file] [uke-filename]\n  <WARNING> uke-file will be overwritten !!\n\n");
 
 
 int readline(FILE *fp, char *buffer);
@@ -44,14 +54,14 @@ char title[128];
 char create_date[128];
 char source[READLINE_MAX];
 char author[64];
-char author_comment[READLINE_MAX];
+//char author_comment[READLINE_MAX];
 char author_note[READLINE_MAX];
 char comment[READLINE_MAX];
 
 ////////////////////////////
 FILE *in_f, *out_f;
 int start_offset = 0;         // BPM과 음표길이에 따른 timestamp 값을 증가시키는 용도
-int bpm = 0;         // BPM과 음표길이에 따른 timestamp 값을 증가시키는 용도
+float bpm = 0;         // BPM과 음표길이에 따른 timestamp 값을 증가시키는 용도
 int semiquaver_base = 0;    // 악보데이터(엑셀,CSV)가 16분 음표 기반인지 8분 음표 기반인지 플래그.
 int time_stamp = 0;         // BPM과 음표길이에 따른 timestamp 값을 증가시키는 용도
 int beat_length_msec = 0;   // BPM을 기준으로 8분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.
@@ -61,20 +71,22 @@ int main(int argc, char *argv[] )
 {
     char line_buf[READLINE_MAX];
 
-    if (argc<2) 
-    {   printf("\n\n  USAGE: csv2uke [CSV-file] [uke-filename]\n      WARNING: uke-file will be overwritten !!\n\n");
+    if (argc<3) 
+    {   USAGE_PRINT;    //
         return(0);
     }
 
     in_f = fopen( argv[1], "rt" );
     if (in_f==NULL) 
     {   printf("\n ERROR: input-file open error !!\n");
+        USAGE_PRINT;    //
         return(-1);
     }
 
     out_f = fopen( argv[2], "wt" );
     if (out_f==NULL) 
     {   printf("\n ERROR: output-file create (or open) error !!\n");
+        USAGE_PRINT;    //
         return(-1);
     }
     // starting JSON-data
@@ -83,10 +95,10 @@ int main(int argc, char *argv[] )
     fprintf(out_f, "  \"notes\":[\n" );
 
     ///////////////////////////
-    printf("\n\t<< Start CSV-file parsing !! >>\n");
+    printf("\n\t<< Start CSV-file parsing !! >>\n\n");
     while ( readline(in_f, line_buf) >= 0 )  //  한 줄 읽기가 실패 할 때 까지 - 라인에 에러가 있거나 파일의 끝 까지..
     {
-//        printf("line_buf: %s\n", line_buf );
+        ////  printf("line_buf: %s\n", line_buf );
         parse_line(line_buf);
     }
     // end of 'notes'
@@ -100,8 +112,7 @@ int main(int argc, char *argv[] )
     fprintf(out_f, "}\n" );
 
     fclose(out_f);
-    printf("\n\n\t 아직 남아 있는 할 일. - 없음. 다 했음.\n");
-    printf("- 소스코드 도 정리좀 해서 모듈화 하자.\n\n\n");
+    printf("\n\n\t-------- done. --------\n\n");
     return 0;
 }
 
@@ -138,18 +149,18 @@ int get_token(char *buffer, char *token)
 /****************************************
     ** 엑셀파일(csv)형식의 예.
 
-    #chord,,,,,,,F,,,,,,C,,,,,
-    #G,,,,,,,0,,3,,,0,,,3,,,
-    #C,,,,,1,3,1,1,,,,,3,,,,3,
-    #E,,,,,,,0,,,,,,0,,,,,
-    #A,,,,,,,2,,,,,,0,,,,,
-    #가사,,,,,욘,,데,이,루,,,무,네,,노,,도,
-    #chord,Dm,,,,,,Am,,,,,,Bb,,,,,
-    #G,,,0,,,,,,,,0,,,,,,,
-    #C,1,,,,,1,0,,,,,,,,0,,1,3
-    #E,2,2,,,,,0,,,,,,2,,,,,
-    #A,2,,,,,,2,,,,,,3,,,,,
-    #가사,코,카,오,,,쿠,데,,,,이,,쯔,,모, ,코,코
+    #chord,,,,,,,F,,,,,,C,,,,,;
+    #G,,,,,,,0,,3,,,0,,,3,,,;
+    #C,,,,,1,3,1,1,,,,,3,,,,3,;
+    #E,,,,,,,0,,,,,,0,,,,,;
+    #A,,,,,,,2,,,,,,0,,,,,;
+    #가사,,,,,욘,,데,이,루,,,무,네,,노,,도,;
+    #chord,Dm,,,,,,Am,,,,,,Bb,,,,,;
+    #G,,,0,,,,,,,,0,,,,,,,;
+    #C,1,,,,,1,0,,,,,,,,0,,1,3;
+    #E,2,2,,,,,0,,,,,,2,,,,,;
+    #A,2,,,,,,2,,,,,,3,,,,,;
+    #가사,코,카,오,,,쿠,데,,,,이,,쯔,,모, ,코,코;
 
     ** 설명 :  
     **   1라인 문장의 1번째 글자가 #이어야만 한다. 그렇지 않으면 모두 무시. 
@@ -159,6 +170,7 @@ int get_token(char *buffer, char *token)
     **   , (콤마)로 구분되는 것은 1개당 8분음표 길이
           (--> bpm 에 의해 timestamp 값으로 바꿔야 함)
           (--> 별도 명령어을 지정해서 콤마 하나의 길이를 16분음표 로 바꿀 수 있도록 할 필요가 있다.)
+    **   악보데이터 (#chord 및 #G, #C, #E, #A) 는 문자열이 ; 로 끝난다.
 
 *****************************************/
 
@@ -169,12 +181,12 @@ int parse_line(char *buffer)
     char *str_ptr;
     char token[READLINE_MAX];
 
-    if (buffer[0] != '#') 
-    {   
-//        printf("%s has no '#'\n", buffer );
-        return 0;       // #으로 시작하지 않는다면 무시.
-    }
+    // printf("]] %s\n", buffer );         getchar();
 
+    if (buffer[0] != '#') 
+    {   //  printf("%s has no '#'\n", buffer );
+        return 0;       // #으로 시작하지 않는다면 무시. - 몽땅 코멘트로 취급
+    }
     str_ptr = buffer+1;
 
         // 곡 제목..
@@ -218,14 +230,14 @@ int parse_line(char *buffer)
         printf("author is : %s \n", token);
         strcpy(author, token);
     }
-    else if ( strncmp( str_ptr, "코멘트", 9) == 0 ) 
-    {   token_len =  get_token(str_ptr+9+1, token);
-        printf("Author is : %s \n", token);
-        strcpy(author_comment, token);
-    } else if ( strncmp( str_ptr, "author_comment", 14) == 0 ) 
-    {   token_len =  get_token(str_ptr+14+1, token);
-        printf("author is : %s \n", token);
-        strcpy(author_comment, token);
+    else if ( strncmp( str_ptr, "설명", 6) == 0 ) 
+    {   token_len =  get_token(str_ptr+6+1, token);
+        printf("comment is : %s \n", token);
+        strcpy(comment, token);
+    } else if ( strncmp( str_ptr, "comment", 7) == 0 ) 
+    {   token_len =  get_token(str_ptr+7+1, token);
+        printf("comment is : %s \n", token);
+        strcpy(comment, token);
     }
     else if ( strncmp( str_ptr, "메모", 6) == 0 ) 
     {   token_len =  get_token(str_ptr+6+1, token);
@@ -250,12 +262,12 @@ int parse_line(char *buffer)
         // quaver - 이것은 8분음표 기반인지 16분 음표 기반인지를 판단. 이것으로 timestamp 를 계산할 것이므로 매우 중요.
     else if ( strncmp( str_ptr, "quaver", 6) == 0 ) 
     {   token_len =  get_token(str_ptr+6+1, token);
-        printf("BPM is : %s \n", token);
         set_quaver(token); 
+        printf("Beat is : %s \n", token);
     } else if ( strncmp( str_ptr, "8분음표", 10) == 0 ) 
     {   token_len =  get_token(str_ptr+10+1, token);
-        printf("BPM is : %s \n", token);
         set_quaver(token);
+        printf("Beat is : %s \n", token);
     }
 
 /*        // 박자 - 1 마디 안에 들어 갈 박자의 수 - 엑셀파일의 1개 셀은 (기본적으로) 8분음표를 기준으로 했음.
@@ -280,9 +292,11 @@ int parse_line(char *buffer)
     else if ( strncmp( str_ptr, "start_offset", 12) == 0 ) 
     {   token_len =  get_token(str_ptr+12+1, token);
         printf("start_offset is : %s \n", token);
+        set_start_offset(token);
     } else if ( strncmp( str_ptr, "시작위치", 12) == 0 ) 
     {   token_len =  get_token(str_ptr+12+1, token);
         printf("시작시간위치 is : %s \n", token);
+        set_start_offset(token);
     }
 
     else if ( strncmp( str_ptr, "chord", 5) == 0 ) 
@@ -304,21 +318,21 @@ int parse_line(char *buffer)
 }
 
 int set_bpm(char *bpm_str) 
-{   bpm = atoi(bpm_str);
+{   bpm = atof(bpm_str);
 
     if (semiquaver_base)        // 악보 데이터가 16분 음표 기반인지 아닌지 판단.
-        beat_length_msec = 60000 / (bpm*2);   // BPM을 기준으로 16분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.
+        beat_length_msec = (float)60000.0 / (bpm*2);   // BPM을 기준으로 16분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.
     else
-        beat_length_msec = 60000 / bpm;   // BPM을 기준으로 8분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.
+        beat_length_msec = (float)60000.0 / bpm;   // BPM을 기준으로 8분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.
 
-    printf("quaver = %d,  bpm=%d, beat_length=%d \n", semiquaver_base, bpm,beat_length_msec );
+    //printf("quaver = %d,  bpm=%5.1f, beat_length=%d \n", semiquaver_base, bpm,beat_length_msec );
 
     return 0;
 }
 
 int set_quaver(char *quaver_str)
 {
-    printf("quaver_str = %s\n", quaver_str );
+    //printf("quaver_str = %s\n", quaver_str );
     if ( strncmp(quaver_str, "semiquaver", 10)==0 )     // 16분 음표 기반인지 판단.
     {   semiquaver_base = 1;
     } else 
@@ -326,9 +340,9 @@ int set_quaver(char *quaver_str)
     }
 
     if (bpm != 0)       // 이미 bpm 값이 설정 되어 있으면 재설정.
-    {   beat_length_msec = 60000 / (bpm*2);   // BPM을 기준으로 8분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.
+    {   beat_length_msec = (float)60000.0 / (bpm*2);   // BPM을 기준으로 8분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.
     }
-    printf("quaver = %d,  bpm=%d, beat_length=%d \n", semiquaver_base, bpm,beat_length_msec );
+    printf("quaver = %s,  bpm=%5.1f, beat_length=%d \n", quaver_str, bpm,beat_length_msec );
 
     return 0;
 }
@@ -394,11 +408,17 @@ int get_note_from_line(char *chord_line) {
     l_ptr = lyric_line+8;   // "#가사," 를 skip
 
 
-    printf("\t\tstart_Parsing ! : %s", chord_line );
+    printf("\t%s\t%s\t%s\t%s\t%s\n", chord_line, a_ptr, e_ptr, c_ptr, g_ptr );
+    //getchar();
 
 //    chordCount = 0;
     while( *chord_line != '\0' ) {
 
+        if ( *chord_line == ';' )       // 1 라인 버퍼의 끝
+            break;
+
+////////////////////////////////
+// 토큰으로 읽기
         //memset(&note, '\0', sizeof(note) );        
         note.time_stamp = time_stamp;
 
@@ -456,6 +476,8 @@ int get_note_from_line(char *chord_line) {
         }
         l_ptr += token_len+1;      // 다음 토큰(가사)로 포인터 이동.
 
+
+/////////////////////////////////////////
 //        make_note_data(&note);
 
         //// 실제 음계 데이터를 파일에 써 넣기. 
@@ -469,19 +491,6 @@ int get_note_from_line(char *chord_line) {
         }
         else
         {
-            //printf("\t%s \n", chord_line );
-/*            printf("timestamp:%d, chord:%s, ", time_stamp, note.chord);
-            if (note.g[0] != '\0')
-                printf("G%s,", note.g);
-            if (note.c[0] != '\0')
-                printf("C%s,", note.c);
-            if (note.e[0] != '\0')
-                printf("E%s,", note.e);
-            if (note.a[0] != '\0')
-                printf("A%s,", note.a);
-            if (note.lyric[0] != '\0')
-                printf("(%s),", note.lyric);
-*/
             if ( isNoNotedata( note.g[0], note.c[0], note.e[0], note.a[0]) )
             {       // 기록할 note 가 하나도 없으면 기록하지 않는다. 
                 continue;
@@ -579,7 +588,7 @@ void write_uke_file()
     fprintf(out_f, "\n" );
     fprintf(out_f, "  \"title\":\"%s\",\n" , title );
     fprintf(out_f, "  \"author\":\"%s\",\n" , author );
-    fprintf(out_f, "  \"author_comment\":\"%s\",\n" , author_comment );
+    //fprintf(out_f, "  \"author_comment\":\"%s\",\n" , author_comment );
     fprintf(out_f, "  \"author_note\":\"%s\",\n" , author_note );
     fprintf(out_f, "  \"category\":\"%s\",\n" , category );
     fprintf(out_f, "  \"comment\":\"%s\",\n" , comment );
@@ -587,7 +596,7 @@ void write_uke_file()
     // 아래의 내용들은 *.uke 파일로써 반드시 필요한 내용들.
     fprintf(out_f, "  \"source\":\"%s\",\n" , source );
     fprintf(out_f, "  \"start_offset\":\"%d\",\n" , start_offset );
-    fprintf(out_f, "  \"bpm\":\"%d\"\n" , bpm );
+    fprintf(out_f, "  \"bpm\":\"%5.1f\"\n" , bpm );
 }
 
 /*void make_note_data(NOTE_ONE *n) 
