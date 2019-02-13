@@ -7,4 +7,9 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
     <string name="title_activity_playing">PlayingActivity</string>
+    <string name="c_g4_c4_e4_c5">코드C : G4-C4-E4-C5 (도미솔)기본 화음</string>
+    <string name="c_g4_c4_e4_a4s">코드C7: G4-C4-E4-A#4 도-미-솔-라#</string>
+    <string name="btntxt_back">돌아가기</string>
+    <string name="btntxt_play">소리 듣기</string>
+    <string name="btntxt_stop">소리 끄기</string>
 </resources>
