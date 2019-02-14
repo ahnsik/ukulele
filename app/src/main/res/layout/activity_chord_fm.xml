@@ -5,7 +5,7 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/chord_cm"
+    android:background="@drawable/chord_fm"
     tools:context=".FileSelectorActivity">
 
 
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:background="#80453d3c"
         android:fontFamily="sans-serif"
-        android:text="@string/c_g4_d4s_g_c"
+        android:text="@string/c_g4_c4_e4_a4s"
         android:textColor="#f4d62f"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
