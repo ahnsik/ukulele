@@ -2,6 +2,7 @@ package com.example.ahnsik.mytuner;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,7 @@ public class SetupMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         Button btnReturn = (Button)findViewById(R.id.btnReturn);
         btnReturn.setOnClickListener(new View.OnClickListener() {
