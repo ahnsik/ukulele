@@ -20,7 +20,7 @@ public class FindNote {
             1046.502F, 1108.731F, 1174.659F, 1244.508F, 1318.510F, 1396.913F, 1479.978F,
     };
 
-    private static int findIndex(double freq) {
+    public static int findIndex(double freq) {
         int min=0, max=base_minimum_freq_table.length;
         int index = max/2;
         while( (max-min)>0 ) {       // binary search.

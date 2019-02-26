@@ -20,6 +20,9 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
     public float mDetectedFreq = 0;
     public double mDetectedIntensity = 0;
     private TunerMessageHander mHandler;
+    private TuneIndicatorView   tuneIndicatorView;
+
+//    private TuneIndicatorView   tuneIndicatorView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +31,8 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
         // Lock orientation into landscape.
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        Toast toast = Toast.makeText(getApplicationContext(),"튜닝 기능은 아직 많이 부족합니다. 사용이 좀 불편하며 불안정 합니다.", Toast.LENGTH_SHORT);
-        toast.show();
+//        Toast toast = Toast.makeText(getApplicationContext(),"튜닝 기능은 아직 많이 부족합니다. 사용이 좀 불편하며 불안정 합니다.", Toast.LENGTH_SHORT);
+//        toast.show();
 
         Button btnReturn = (Button)findViewById(R.id.btnReturn);
         btnReturn.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +41,8 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
                 finish();
             }
         });
+
+        tuneIndicatorView = (TuneIndicatorView) findViewById(R.id.imgTunedNote);
 
         mHandler = new TunerMessageHander();
         startTuningTask();
@@ -51,16 +56,14 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
             Log.d("ukulele", "Message Handler !! m="+m );
             String detectedNote;
 
-//            TextView statusText = (TextView) findViewById(R.id.txtWhatToDo);
-//            statusText.setText("주파수가 검출 되었습니다.");
-
             TextView freqText = (TextView) findViewById(R.id.txtTunedFreq);
             Float freq = m.getData().getFloat("Freq");
             freqText.setText(":"+freq);
+            tuneIndicatorView.setDetectFreq(mDetectedFreq);
+            tuneIndicatorView.invalidate();
+            Log.d("ukulele", "[][][][][][][][] Draw CustomView [][][][][][]" + mDetectedFreq + "Hz");
 
             detectedNote = FindNote.NoteName(freq);
-            TextView txtTunedNote = (TextView) findViewById(R.id.txtTunedNote);
-            txtTunedNote.setText( detectedNote );
 
             TextView statusText = (TextView) findViewById(R.id.txtWhatToDo);
             statusText.setText( "center:"+FindNote.getCenterFreq(detectedNote) );
@@ -69,19 +72,19 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
             switch(detectedNote) {
                 case "G4" :
                 case "G3" :
-                    nob_image.setImageResource( R.drawable.tune_g);
+                    nob_image.setImageResource( R.drawable.ic_ukulele_tune_g);
                     break;
                 case "C4" :
-                    nob_image.setImageResource( R.drawable.tune_c);
+                    nob_image.setImageResource( R.drawable.ic_ukulele_tune_c);
                     break;
                 case "E4" :
-                    nob_image.setImageResource( R.drawable.tune_e);
+                    nob_image.setImageResource( R.drawable.ic_ukulele_tune_e);
                     break;
                 case "A4" :
-                    nob_image.setImageResource( R.drawable.tune_a);
+                    nob_image.setImageResource( R.drawable.ic_ukulele_tune_a);
                     break;
                 default:
-                    nob_image.setImageResource( R.drawable.tuner_none);
+                    nob_image.setImageResource( R.drawable.ic_ukulele_tune_none);
                     break;
             }
         }
@@ -163,14 +166,14 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
                 final double intensity = averageIntensity(buffer, readLength);       // 읽어 낸 데이터들의 평균값 (평균 음량)을 계산.
                 int maxZeroCrossing = (int) (650 * (readLength / 8192) * (sampleRate / 44100.0));   // 650을 기준으로 샘플링 주파수와 버퍼 설정에 맞게 비례하여 최대 값을 지정.
 
-                if (intensity >= 50 && zeroCrossingCount(buffer) <= maxZeroCrossing) {      // 음량이 최소 50 이상, 주파수(?)가 너무 노이즈가 심하지 않은 데이터에 대해서만 확인
+                if (intensity >= 3 && zeroCrossingCount(buffer) <= maxZeroCrossing) {      // 음량이 최소 20 이상, 주파수(?)가 너무 노이즈가 심하지 않은 데이터에 대해서만 확인
 
                     float freq = getPitch(buffer, readLength / 4, readLength, sampleRate, 150, 650);
 
-                    if (Math.abs(freq - mLastComputedFreq) <= 5f) {     // 새로 계산한 주파수와, 지난번 마지막으로 계산한 주파수의 차이 값이 5f 미만인 경우에만 의미가 있다고 판단. 검출된 주파수를 리턴.
+//                    if (Math.abs(freq - mLastComputedFreq) <= 3f) {     // 새로 계산한 주파수와, 지난번 마지막으로 계산한 주파수의 차이 값이 5f 미만인 경우에만 의미가 있다고 판단. 검출된 주파수를 리턴.
                         mDetectedFreq = freq;
                         mDetectedIntensity = intensity;
-                    }
+//                    }
                     mLastComputedFreq = freq;
 
                     // 검출한 주파수를 String 으로 해서 문자열로 메세지를 전송 --> UI 화면 표시를 고치도록 함.
