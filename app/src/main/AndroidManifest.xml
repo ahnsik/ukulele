@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.ahnsik.mytuner">
+    package="com.example.ahnsik.ukuleletutor">
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -10,41 +10,41 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/android_ukulele"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ChordC_Activity" />
-        <activity android:name=".ChordC7_Activity" />
-        <activity android:name=".ChordCm_Activity" />
-        <activity android:name=".ChordCm7_Activity" />
-        <activity android:name=".ChordD_Activity" />
-        <activity android:name=".ChordD7_Activity" />
-        <activity android:name=".ChordDm_Activity" />
-        <activity android:name=".ChordDm7_Activity" />
-        <activity android:name=".ChordE_Activity" />
-        <activity android:name=".ChordE7_Activity" />
-        <activity android:name=".ChordEm_Activity" />
-        <activity android:name=".ChordEm7_Activity" />
-        <activity android:name=".ChordF_Activity" />
-        <activity android:name=".ChordF7_Activity" />
-        <activity android:name=".ChordFm_Activity" />
-        <activity android:name=".ChordFm7_Activity" />
-        <activity android:name=".ChordG_Activity" />
-        <activity android:name=".ChordG7_Activity" />
-        <activity android:name=".ChordGm_Activity" />
-        <activity android:name=".ChordGm7_Activity" />
-        <activity android:name=".ChordA_Activity" />
-        <activity android:name=".ChordA7_Activity" />
-        <activity android:name=".ChordAm_Activity" />
-        <activity android:name=".ChordAm7_Activity" />
-        <activity android:name=".ChordB_Activity" />
-        <activity android:name=".ChordB7_Activity" />
-        <activity android:name=".ChordBm_Activity" />
-        <activity android:name=".ChordBm7_Activity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordC_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordC7_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordCm_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordCm7_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordD_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordD7_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordDm_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordDm7_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordE_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordE7_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordEm_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordEm7_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordF_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordF7_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordFm_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordFm7_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordG_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordG7_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordGm_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordGm7_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordA_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordA7_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordAm_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordAm7_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordB_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordB7_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordBm_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordBm7_Activity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -52,26 +52,26 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FileSelectorActivity"
+            android:name="com.example.ahnsik.ukuleletutor.FileSelectorActivity"
             android:label="@string/title_activity_file_selector"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".TrainingActivity"
+            android:name="com.example.ahnsik.ukuleletutor.TrainingActivity"
             android:label="@string/title_activity_training"
             android:theme="@style/FullscreenTheme" />
         <activity
-            android:name=".TuningActivity"
+            android:name="com.example.ahnsik.ukuleletutor.TuningActivity"
             android:label="@string/title_activity_Tuning"
             android:theme="@style/FullscreenTheme" />
         <activity
-            android:name=".PlayingActivity"
+            android:name="com.example.ahnsik.ukuleletutor.PlayingActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_playing"
             android:theme="@style/FullscreenTheme" />
-        <activity android:name=".VideoTestClassActivity" />
-        <activity android:name=".SetupMenuActivity" />
-        <activity android:name=".BpmToolActivity" />
-        <activity android:name=".ChordTableActivity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.VideoTestClassActivity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.SetupMenuActivity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.BpmToolActivity" />
+        <activity android:name="com.example.ahnsik.ukuleletutor.ChordTableActivity" />
     </application>
 
 </manifest>

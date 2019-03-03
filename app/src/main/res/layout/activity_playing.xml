@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.example.ahnsik.mytuner.PlayView
+        <com.example.ahnsik.ukuleletutor.PlayView
             android:id="@+id/viewGameView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

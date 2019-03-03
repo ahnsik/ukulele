@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyTuner</string>
+    <string name="app_name">UkuleleTutor</string>
     <string name="title_activity_file_selector">FileSelector</string>
     <string name="title_activity_training">Training Mode</string>
     <string name="title_activity_Tuning">Ukulele Tuning</string>

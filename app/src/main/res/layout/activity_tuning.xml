@@ -58,7 +58,7 @@
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_ukulele_tune_none" />
 
-                <com.example.ahnsik.mytuner.TuneIndicatorView
+                <com.example.ahnsik.ukuleletutor.TuneIndicatorView
                     android:id="@+id/imgTunedNote"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"

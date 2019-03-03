@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:screenOrientation="landscape"
     android:background="@drawable/bg_title"
-    tools:context="com.example.ahnsik.mytuner.MainActivity">
+    tools:context="com.example.ahnsik.ukuleletutor.MainActivity">
 
         <VideoView
             android:id="@+id/fullscreen_video"
