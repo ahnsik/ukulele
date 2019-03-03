@@ -256,7 +256,7 @@ public class PlayView extends GameView {
             default: y=0;
         }
 
-        if ((note.length() > 2) && (note.charAt(2) > '0' && note.charAt(2) < '9')) {
+        if ((note.length() > 2) && (note.charAt(2) >= '0' && note.charAt(2) <= '9')) {
             flet = note.substring(1,3); // 두자리 숫자.
             if (note.length() > 3)
                 finger = note.charAt(3);
