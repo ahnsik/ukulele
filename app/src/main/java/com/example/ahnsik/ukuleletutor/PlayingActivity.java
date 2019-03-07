@@ -1,6 +1,7 @@
 package com.example.ahnsik.ukuleletutor;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,10 +18,11 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
     private PlayView  mPlayingView;
     private MediaPlayer mp;
     private NoteData  mSongData = new NoteData();
+    private long      mScoreData[];
     private Recording mRecording;
 
     private Thread    mThread = null;
-    private long      mGameStartClock = 0;
+    private long      mGameStartClock = 0, endofSong = 0;
     private int       playing_pos = 0;      // index of note data (next position what it will be played.)
 
     @Override
@@ -28,19 +30,9 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
         super.onCreate(savedInstanceState);
         mPlayingView = new PlayView(this);
         setContentView(mPlayingView);
-/*        setContentView(R.layout.activity_playing);
-        mPlayingView = (PlayView)findViewById(R.id.viewGameView);
         // Lock orientation into landscape.
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        Button btnReturn = (Button)findViewById(R.id.btnReturn);
-        btnReturn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-*/
         // 연주할 파일의 파일 이름을 가져 옴.
         Intent intent = getIntent();
         String fileName = intent.getExtras().getString("filename");
@@ -48,6 +40,8 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
         mSongData.loadFromFile( getFilesDir(), fileName);
         mPlayingView.setSongData(mSongData);
         // initialize local data
+        endofSong = mSongData.mStartOffset + mSongData.timeStamp[mSongData.numNotes-1] + 2000 + 3000;       // 마지막 노트 데이터의 2초 뒤.    +3000 은 setPlayPosition 에서의 옵셋
+        mScoreData = new long[mSongData.numNotes];      // 각 음당 평가점수를 저장할 배열
 
         // 녹음 시작,
         mRecording = new Recording();
@@ -58,12 +52,11 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
 
         mp = new MediaPlayer();
         Log.d("ukulele", "!@@@@@@@@@@ MP3 Play ? @@@@@@@ : " + getFilesDir()+"/"+mSongData.mMusicURL );
-// /data/data/com.example.ahnsik.ukuleletutor/files/nadasoso.mp3
+
         try {
             mp.reset();
             mp.setDataSource( getFilesDir()+"/"+mSongData.mMusicURL );
             mp.prepare();
-//            mp.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -96,34 +89,28 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
 
         while (true) {
             playing_clock = System.currentTimeMillis() - mGameStartClock;     // 시작 싯점의 시스템 클럭을 저장.
-//            if (mSongData.playtime <= playing_clock ) {
-//                Log.d("ukulele", "End of this song." + playing_clock );
-//                finish();
-//                break;          // break for while.
-//            }
+            if (endofSong <= playing_clock ) {
+                Log.d("ukulele", "End of this song." + playing_clock + "("+endofSong+")" );
+                finish();
+                break;          // break for while.
+            }
             mPlayingView.setPlayPosition( playing_clock - 3000 );
 
             mRecording.parseSpectrum();
             mPlayingView.setPlayedNote(mRecording.notes_detected);
             mPlayingView.setSpectruData(mRecording.spectrum);
 
-/*            playing_clock = System.currentTimeMillis()-mGameStartClock;
+//            playing_clock = System.currentTimeMillis()-mGameStartClock;
             if ( playing_clock < mSongData.timeStamp[playing_pos] ) {
                 // 만약 현재 시간이 연주했어야 하는 시간 보다 이른 시간이라면 천천히 timer 를 갱신해 나가고..
                 mPlayingView.setPlayPosition(playing_clock);      // 다음 연주해야 할 위치의 시점으로 이동
             } else {    // 그렇지 않으면.. 즉, 연주 타이밍을 놓쳐서 delay 가 발생했다면, 발생한 delay 만큼 mGameStartClock 을 조정하여 계속 기다리게 한다.
                     mGameStartClock = System.currentTimeMillis() - mSongData.timeStamp[playing_pos];
             }
-*/
+
             // 제대로 연주가 되었다면, 다음 note로 이동.
             if ( mRecording.isStroked() && isPlayedOk(playing_pos) ) {
-//                playing_pos++;
-                // 데이터의 끝까지 모두 다 연주가 끝났다면.. 액티비티 종료.
-//                if (playing_pos >= mSongData.numNotes ) {
-//                    finish();
-//                    break;          // break for while.
-//                }
-//                mPlayingView.setPlayPosition(mSongData.timeStamp[playing_pos]);      // 다음 연주해야 할 위치의 시점으로 이동
+                playing_pos++;
 
                 // 디버깅용 코드.
                 String dbgStr = "Next, you have to play : ";

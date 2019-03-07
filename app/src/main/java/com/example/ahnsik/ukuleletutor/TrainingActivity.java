@@ -35,7 +35,7 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
         mSongData.loadFromFile( getFilesDir(), fileName);
         mGameView.setSongData(mSongData);
         // initialize local data
-//        display_notes = new boolean[NUM_OF_NOTE_UKE];
+
         // 녹음 시작,
         mRecording = new Recording();
 
@@ -77,9 +77,6 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
             mGameView.setPlayedNote(mRecording.notes_detected);
             mGameView.setSpectruData(mRecording.spectrum);
 
-//            Log.d("ukulele", "mSongData:"+mSongData );
-//            Log.d("ukulele", "  timeStamp:"+mSongData.timeStamp + "vol:"+ mRecording.detected_volume );
-//            Log.d("ukulele", "  playing_pos:"+mSongData.timeStamp[playing_pos] );
 
             playing_clock = System.currentTimeMillis()-mGameStartClock;
             if ( playing_clock < mSongData.timeStamp[playing_pos] ) {

@@ -76,6 +76,7 @@ public class TuneIndicatorView extends View {
     protected void  onDraw(Canvas c) {
         float   start_offset;
         float   center = 240;       // 중앙좌표를 계산해야 함.
+        float   markpos_center = 240;       // 중앙좌표를 계산해야 함.
         float   grid = 40;       // 중앙좌표를 계산해야 함.
         float   textYpos;
 
@@ -83,15 +84,17 @@ public class TuneIndicatorView extends View {
         textYpos = (float)getHeight()*3/4;   //120.0f;
 
         start_offset = (idealFreq-detectFreq)*grid;
-        center = (float)getWidth() / 2 + start_offset;
+        center = (float)getWidth() / 2;
+        markpos_center = center + start_offset;
 
         Log.d("ukulele", "Drawing...(width="+getWidth()+") [recorded_freq: "+detectFreq+", Detect Note: "+note_name[note]+"]");
-
-        c.drawLine(center, 0.0f, center, 40.0f, mPaint);
+        // ruller
+        c.drawLine(markpos_center, 0.0f, markpos_center, 40.0f, mPaint);
         for (int i=1; i<20; i++) {
-            c.drawLine(center - i*grid, 0.0f, center - i*grid, 20.0f, mPaint);
-            c.drawLine(center + i*grid, 0.0f, center + i*grid, 20.0f, mPaint);
+            c.drawLine(markpos_center- i*grid, 0.0f, markpos_center- i*grid, 20.0f, mPaint);
+            c.drawLine(markpos_center+ i*grid, 0.0f, markpos_center+ i*grid, 20.0f, mPaint);
         }
+        c.drawText("▲",center ,(float)getHeight(), mPaint);
 
         if ( (start_offset < 60)&&(start_offset > -60) ) {
             mDetectedNote.setColor(Color.GREEN);
@@ -99,18 +102,18 @@ public class TuneIndicatorView extends View {
             mDetectedNote.setColor(Color.RED);
         }
         if (note > 2) {
-            c.drawText(note_name[note-2], center-(grid*20), textYpos, mPaint );
-            c.drawText(note_name[note-1], center-(grid*10), textYpos, mPaint );
-            c.drawText(note_name[note], center, textYpos, mDetectedNote );
-            c.drawText(note_name[note+1], center+(grid*10), textYpos, mPaint );
-            c.drawText(note_name[note+2], center+(grid*20), textYpos, mPaint );
+            c.drawText(note_name[note-2], markpos_center-(grid*20), textYpos, mPaint );
+            c.drawText(note_name[note-1], markpos_center-(grid*10), textYpos, mPaint );
+            c.drawText(note_name[note], markpos_center, textYpos, mDetectedNote );
+            c.drawText(note_name[note+1], markpos_center+(grid*10), textYpos, mPaint );
+            c.drawText(note_name[note+2], markpos_center+(grid*20), textYpos, mPaint );
         }
 
-        arrowColor[0] = arrowColor[1] = arrowColor[2] = Color.RED;
-        center = (float)getWidth() / 2;
-        arrowVerts[0] = center-grid;    arrowVerts[1] = 0;
-        arrowVerts[2] = center;         arrowVerts[3] = 40;
-        arrowVerts[4] = center+grid;    arrowVerts[5] = 0;
-        c.drawVertices(Canvas.VertexMode.TRIANGLES, arrowVerts.length, arrowVerts, 0, null, 0, arrowColor,   0, null, 0, 0, mPaint);
+//        arrowColor[0] = arrowColor[1] = arrowColor[2] = Color.RED;
+////        center = (float)getWidth() / 2;
+//        arrowVerts[0] = center-grid;    arrowVerts[1] = 0;
+//        arrowVerts[2] = center;         arrowVerts[3] = 40;
+//        arrowVerts[4] = center+grid;    arrowVerts[5] = 0;
+//        c.drawVertices(Canvas.VertexMode.TRIANGLES, arrowVerts.length, arrowVerts, 0, null, 0, arrowColor,   0, null, 0, 0, mPaint);
     }
 }

@@ -68,7 +68,7 @@
         android:id="@+id/btnImportFromFTP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/button_shape"
         android:fontFamily="sans-serif"
