@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #define READLINE_MAX    512          // 파일 한 라인 당 512 바이트는 넘지 않는 것으로 한다. 
 #define USAGE_PRINT     printf("\n\n  USAGE: csv2uke [CSV-file] [uke-filename]\n  <WARNING> uke-file will be overwritten !!\n\n");
@@ -144,6 +145,17 @@ int get_token(char *buffer, char *token)
     }
     token[pos] = '\0';
     return pos;
+}
+
+char *remove_white(char *str) 
+{   int pos = 0;
+    while( *str != '\0' )
+    {   if (isspace(*str))
+	    str++;
+	else 
+	    break;
+    }
+    return str;    
 }
 
 /****************************************
@@ -424,7 +436,7 @@ int get_note_from_line(char *chord_line) {
 
         token_len = get_token(chord_line, token);
         if (token_len > 0)
-        {   strcpy(note.chord, token);
+        {   strcpy(note.chord, remove_white(token));
         } 
         else 
         {   note.chord[0] = '\0';
@@ -433,7 +445,7 @@ int get_note_from_line(char *chord_line) {
 
         token_len = get_token(g_ptr, token);
         if (token_len > 0)
-        {   strcpy(note.g, token);
+        {   strcpy(note.g, remove_white(token));
         } 
         else 
         {   note.g[0] = '\0';
@@ -442,7 +454,7 @@ int get_note_from_line(char *chord_line) {
 
         token_len = get_token(c_ptr, token);
         if (token_len > 0)
-        {   strcpy(note.c, token);
+        {   strcpy(note.c, remove_white(token));
         } 
         else 
         {   note.c[0] = '\0';
@@ -451,7 +463,7 @@ int get_note_from_line(char *chord_line) {
 
         token_len = get_token(e_ptr, token);
         if (token_len > 0)
-        {   strcpy(note.e, token);
+        {   strcpy(note.e, remove_white(token));
         } 
         else 
         {   note.e[0] = '\0';
@@ -460,7 +472,7 @@ int get_note_from_line(char *chord_line) {
 
         token_len = get_token(a_ptr, token);
         if (token_len > 0)
-        {   strcpy(note.a, token);
+        {   strcpy(note.a, remove_white(token));
         } 
         else 
         {   note.a[0] = '\0';
@@ -621,7 +633,7 @@ char *convert_note_g(char *str_pos)
     int flet_num;
     sscanf(str_pos, "%d", &flet_num);
     if ((flet_num < 0) || (flet_num > MAX_FLET))
-    {   printf("parse_G has Error occured. Wrong flet number !! (%d)\n", flet_num );
+    {   printf("parse_G has Error occured. Wrong flet number !! (%d) from [%s]\n", flet_num, str_pos );
         return NULL;
     }
     return G_note[flet_num];
@@ -631,7 +643,7 @@ char *convert_note_c(char *str_pos)
     int flet_num;
     sscanf(str_pos, "%d", &flet_num);
     if ((flet_num < 0) || (flet_num > MAX_FLET))
-    {   printf("parse_C has Error occured. Wrong flet number !! (%d)\n", flet_num );
+    {   printf("parse_C has Error occured. Wrong flet number !! (%d) from [%s]\n", flet_num, str_pos );
         return NULL;
     }
     return C_note[flet_num];
@@ -641,7 +653,7 @@ char *convert_note_e(char *str_pos)
     int flet_num;
     sscanf(str_pos, "%d", &flet_num);
     if ((flet_num < 0) || (flet_num > MAX_FLET))
-    {   printf("parse_E has Error occured. Wrong flet number !! (%d)\n", flet_num );
+    {   printf("parse_E has Error occured. Wrong flet number !! (%d) from [%s]\n", flet_num, str_pos );
         return NULL;
     }
     return E_note[flet_num];
@@ -651,7 +663,7 @@ char *convert_note_a(char *str_pos)
     int flet_num;
     sscanf(str_pos, "%d", &flet_num);
     if ((flet_num < 0) || (flet_num > MAX_FLET))
-    {   printf("parse_A has Error occured. Wrong flet number !! (%d)\n", flet_num );
+    {   printf("parse_A has Error occured. Wrong flet number !! (%d) from [%s]\n", flet_num, str_pos );
         return NULL;
     }
     return A_note[flet_num];
