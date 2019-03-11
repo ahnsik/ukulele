@@ -1,8 +1,5 @@
 package com.example.ahnsik.ukuleletutor;
 
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +17,7 @@ import org.apache.commons.net.ftp.FTPFile;
 import java.io.File;
 import java.io.FileOutputStream;
 
-public class SetupMenuActivity extends AppCompatActivity {
+public class TerminalActivity extends AppCompatActivity {
 
     public static final String FTP_ADDRESS="ccash.gonetis.com";  //"ccash.iptime.org";
     public static final String FTP_DATA_DIRECTORY="ukulele";
@@ -29,13 +26,12 @@ public class SetupMenuActivity extends AppCompatActivity {
 
     private FTPClient ftpClient;
     private FtpAccessMessageHander mHandler;
-    private int     hiddenTouchCount = 0;
+    private String  logString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setup);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        setContentView(R.layout.activity_terminal);
 
         Button btnReturn = (Button)findViewById(R.id.btnReturn);
         btnReturn.setOnClickListener(new View.OnClickListener() {
@@ -45,35 +41,12 @@ public class SetupMenuActivity extends AppCompatActivity {
             }
         });
 
-        Button btnTuning = (Button)findViewById(R.id.btnTuning);
-        btnTuning.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent();
-                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.TuningActivity");
-                i.setComponent(name);
-                startActivity(i);
-            }
-        });
-
-        Button btnCalcBpm = (Button)findViewById(R.id.btnCalcBpm);
-        btnCalcBpm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent();
-                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.BpmToolActivity");
-//                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.TerminalActivity");
-                i.setComponent(name);
-                startActivity(i);
-            }
-        });
-
         Button btnImportFromFTP = (Button)findViewById(R.id.btnImportFromFTP);
         btnImportFromFTP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Log.d("ukulele", "btnImportFromFTP  clicked.");
+                log("btnImportFromFTP  clicked.");
                 openAndGetListFromFtp();
 
             }       // end of onClick
@@ -90,12 +63,14 @@ public class SetupMenuActivity extends AppCompatActivity {
                 String fileName;
 
                 Log.d("ukulele", "Internal Storage: " + dir + ", " + numFiles + " files exist.");
+                log( "Internal Storage: " + dir + ", " + numFiles + " files exist.");
 
                 for (int i = 0; i < numFiles; i++) {
                     fileName = allfiles[i].getName();
                     File delFile = new File(getFilesDir(),fileName);
                     delFile.delete();
                     Log.d("ukulele", "File: " + fileName + " was deleted." );
+                    log( "File: " + fileName + " was deleted." );
                 }
             }
         });
@@ -104,23 +79,14 @@ public class SetupMenuActivity extends AppCompatActivity {
         ftpClient = new FTPClient();
         mHandler = new FtpAccessMessageHander();
 
-        TextView txtAppTitle = (TextView) findViewById(R.id.txtAppTitle);
-        txtAppTitle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                hiddenTouchCount++;
-                Log.d("ukulele", "touch 7th will show the management activity : count=" + hiddenTouchCount);
-                if (hiddenTouchCount >= 7) {
-                    Intent i = new Intent();
-//                    ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.VideoTestClassActivity");
-                    ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.TerminalActivity");
-                    i.setComponent(name);
-                    startActivity(i);
-                    hiddenTouchCount = 0;
-                }
-            }       // end of onClick
-        });
-        hiddenTouchCount = 0;
+        logString = "";
+    }
+
+    /////////////////////// Terminal 에 로그를 기록하는 함수 /////////////
+    private void log(String logMsg) {
+        logString = logString + "\n" + logMsg;
+        TextView txtLogs = (TextView) findViewById(R.id.txtLogs);
+        txtLogs.setText(logString);
     }
 
     /////////////////////// FTP 파일 가져오는데 사용되는 함수들. /////////////
@@ -138,6 +104,7 @@ public class SetupMenuActivity extends AppCompatActivity {
                     ftpClient.login(FTP_ACCOUNT, FTP_PASSWORD);
                     ftpClient.setFileType(FTP.BINARY_FILE_TYPE); // 바이너리 파일
                     Log.d("ukulele", "FTP: 로그인 완료.");
+                    log("FTP: 로그인 완료.");
                 } catch (Exception e) {
                     e.printStackTrace();
                     success =false;
@@ -148,6 +115,7 @@ public class SetupMenuActivity extends AppCompatActivity {
                     try {
                         ftpClient.changeWorkingDirectory(FTP_DATA_DIRECTORY);
                         Log.d("ukulele", "FTP: 우쿨렐레 폴더로 이동 완료.");
+                        log("FTP: 우쿨렐레 폴더로 이동 완료.");
                     } catch (Exception e) {
                         e.printStackTrace();
                         success = false;
