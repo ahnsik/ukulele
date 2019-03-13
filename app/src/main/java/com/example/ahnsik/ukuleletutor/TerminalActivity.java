@@ -84,9 +84,17 @@ public class TerminalActivity extends AppCompatActivity {
 
     /////////////////////// Terminal 에 로그를 기록하는 함수 /////////////
     private void log(String logMsg) {
-        logString = logString + "\n" + logMsg;
-        TextView txtLogs = (TextView) findViewById(R.id.txtLogs);
-        txtLogs.setText(logString);
+        Log.d("ukulele", logMsg);
+
+//        logString = logString + "\n" + logMsg;
+//        TextView txtLogs = (TextView) findViewById(R.id.txtLogs);
+//        txtLogs.setText(logString);
+
+        Message msg = mHandler.obtainMessage();
+        Bundle b = new Bundle();
+        b.putString("logString", logMsg );      // 로그 출력할 문자열을 넣어서 메세지 전송
+        msg.setData(b);
+        mHandler.sendMessage(msg);
     }
 
     /////////////////////// FTP 파일 가져오는데 사용되는 함수들. /////////////
@@ -103,10 +111,11 @@ public class TerminalActivity extends AppCompatActivity {
                     ftpClient.connect(FTP_ADDRESS, 21);
                     ftpClient.login(FTP_ACCOUNT, FTP_PASSWORD);
                     ftpClient.setFileType(FTP.BINARY_FILE_TYPE); // 바이너리 파일
-                    Log.d("ukulele", "FTP: 로그인 완료.");
+//                    Log.d("ukulele", "FTP: 로그인 완료.");
                     log("FTP: 로그인 완료.");
                 } catch (Exception e) {
                     e.printStackTrace();
+                    Log.d("ukulele", "Trace .. Error #3");
                     success =false;
                 }
 
@@ -114,13 +123,17 @@ public class TerminalActivity extends AppCompatActivity {
                 if (success) {
                     try {
                         ftpClient.changeWorkingDirectory(FTP_DATA_DIRECTORY);
-                        Log.d("ukulele", "FTP: 우쿨렐레 폴더로 이동 완료.");
+//                        Log.d("ukulele", "FTP: 우쿨렐레 폴더로 이동 완료.");
                         log("FTP: 우쿨렐레 폴더로 이동 완료.");
                     } catch (Exception e) {
+                        Log.d("ukulele", "Trace .. Error #1");
                         e.printStackTrace();
                         success = false;
                     }
                 }
+
+//                Log.d("ukulele", "FTP: 진행점검");
+                log("FTP: 진행상황 점검");
 
                 // 문제 없으면, 모든 파일목록을 가져와서 *.uke 파일만 골라 로컬 폴더에 복사.
                 if (success) {
@@ -133,7 +146,7 @@ public class TerminalActivity extends AppCompatActivity {
                             boolean isFile = ftpfiles[i].isFile();
                             if (isFile) {
                                 if (name.toLowerCase().endsWith(".uke")) {
-                                    Log.d("ukulele", "FTP: File : " + name);
+                                    log( "FTP: File : " + name);
 
                                     ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
                                     ftpClient.enterLocalPassiveMode();
@@ -153,15 +166,15 @@ public class TerminalActivity extends AppCompatActivity {
 //                                        Log.d("ukulele", "Retrieve " + musicUrl + "- result: " + result);
                                             musicfos.close();
                                         } else {
-                                            Log.d("ukulele", "?????? music file name: "+ musicUrl );
+                                            log("?????? music file name: "+ musicUrl );
                                         }
                                     }
                                 }
                             } else {
-                                Log.d("ukulele", "FTP: Directory : " + name);
+                                log("FTP: Directory : " + name);
                             }
                         }
-                        Log.d("ukulele", "FTP: " + ftpClient.getReplyString());
+                        log("FTP: " + ftpClient.getReplyString());
 
                         // Toast 를 대신 표시하도록 메세지를 던진다.
                         Message msg = mHandler.obtainMessage();
@@ -171,11 +184,12 @@ public class TerminalActivity extends AppCompatActivity {
                         mHandler.sendMessage(msg);
 
                         ftpClient.logout();
-                        Log.d("ukulele", "FTP: Logged out." );
+                        log("FTP: Logged out." );
                         ftpClient.disconnect();
-                        Log.d("ukulele", "FTP: Disconnected." );
+                        log("FTP: Disconnected." );
 
                     } catch (Exception e) {
+                        log("Trace .. Error #2");
                         e.printStackTrace();
                         success = false;
                     }
@@ -193,9 +207,17 @@ public class TerminalActivity extends AppCompatActivity {
             String detectedNote;
 
             String result_msg = m.getData().getString("result_msg");
-            if ( !result_msg.isEmpty() ) {
+            if ( (result_msg!=null)&& !result_msg.isEmpty() ) {
                 Toast toast = Toast.makeText(getApplicationContext(),result_msg, Toast.LENGTH_SHORT);
                 toast.show();
+                return;
+            }
+
+            String log_msg = m.getData().getString("logString");
+            if ( (log_msg!=null) && !log_msg.isEmpty() ) {
+                logString = logString + "\n" + log_msg;
+                TextView txtLogs = (TextView) findViewById(R.id.txtLogs);
+                txtLogs.setText(logString);
                 return;
             }
 
