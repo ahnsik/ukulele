@@ -1,5 +1,6 @@
 package com.example.ahnsik.ukuleletutor;
 
+import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -50,13 +51,15 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
 
     /////////////////////// 튜닝 하면서 필요한 메세지를 핸들링 - UI 업데이트를 위함. /////////////
 
+    @SuppressLint("HandlerLeak")
     public class TunerMessageHander extends Handler {
+        @SuppressLint("SetTextI18n")
         public void handleMessage(Message m) {
             Log.d("ukulele", "Message Handler !! m="+m );
             String detectedNote;
 
             TextView freqText = (TextView) findViewById(R.id.txtTunedFreq);
-            Float freq = m.getData().getFloat("Freq");
+            float freq = m.getData().getFloat("Freq");
             freqText.setText(":"+freq);
             tuneIndicatorView.setDetectFreq(mDetectedFreq);
             tuneIndicatorView.invalidate();
@@ -97,7 +100,9 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
     private static final int[] SAMPLE_RATES = {44100, 22050, 16000, 11025, 8000};
     private Thread mThread = null;
     private boolean mThreadRunning = false;
-    private float mLastComputedFreq = 0;
+
+    private static final int SAMPLERATE_DIVIDER = 4;        // 버퍼 크기를 조정하에 따른 샘플레이트 분배값. - 2의 승수로 할 것. 이 값이 커질 수록 버퍼의 크기를 작게 할 수 있으므로, 화면 Update가 빨라짐.
+    private static final int BUFFSIZE_DIVIDER = (SAMPLERATE_DIVIDER*2);     // Audio녹음버퍼의 크기를 줄임으로써 화면 Refresh 속도가 빨라짐. - 튜닝에 유리하다.
 
     private void startTuningTask() {
 
@@ -106,7 +111,7 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
         int avalaibleSampleRates = SAMPLE_RATES.length;
         int i = 0;
         do {
-            int sampleRate = SAMPLE_RATES[i];
+            int sampleRate = SAMPLE_RATES[i] / SAMPLERATE_DIVIDER;
             int minBufSize = AudioRecord.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
             if (minBufSize != AudioRecord.ERROR_BAD_VALUE && minBufSize != AudioRecord.ERROR) {
                 mAudioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, Math.max(bufSize, minBufSize * 4));
@@ -147,7 +152,7 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
 
     public void run() {
 
-        int bufSize = 8192;
+        int bufSize = 8192 / BUFFSIZE_DIVIDER;
         final int sampleRate = mAudioRecord.getSampleRate();
         final short[] buffer = new short[bufSize];
 
@@ -163,17 +168,12 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
             if (readLength > 0) {            // 읽어 낸 데이터가 존재한다면.
 //                Log.d("ukulele", "readLength : " + readLength );
                 final double intensity = averageIntensity(buffer, readLength);       // 읽어 낸 데이터들의 평균값 (평균 음량)을 계산.
-                int maxZeroCrossing = (int) (650 * (readLength / 8192) * (sampleRate / 44100.0));   // 650을 기준으로 샘플링 주파수와 버퍼 설정에 맞게 비례하여 최대 값을 지정.
+                int maxZeroCrossing = (int) (380 * (readLength / (8192/BUFFSIZE_DIVIDER) ) * (sampleRate / (44100/SAMPLERATE_DIVIDER) ));   // 650을 기준으로 샘플링 주파수와 버퍼 설정에 맞게 비례하여 최대 값을 지정.
 
-                if (intensity >= 3 && zeroCrossingCount(buffer) <= maxZeroCrossing) {      // 음량이 최소 20 이상, 주파수(?)가 너무 노이즈가 심하지 않은 데이터에 대해서만 확인
-
+                if (intensity >= 6 && zeroCrossingCount(buffer) <= maxZeroCrossing) {      // 음량이 최소 20 이상, 주파수(?)가 너무 노이즈가 심하지 않은 데이터에 대해서만 확인
                     float freq = getPitch(buffer, readLength / 4, readLength, sampleRate, 150, 650);
-
-//                    if (Math.abs(freq - mLastComputedFreq) <= 3f) {     // 새로 계산한 주파수와, 지난번 마지막으로 계산한 주파수의 차이 값이 5f 미만인 경우에만 의미가 있다고 판단. 검출된 주파수를 리턴.
-                        mDetectedFreq = freq;
-                        mDetectedIntensity = intensity;
-//                    }
-                    mLastComputedFreq = freq;
+                    mDetectedFreq = freq;
+                    mDetectedIntensity = intensity;
 
                     // 검출한 주파수를 String 으로 해서 문자열로 메세지를 전송 --> UI 화면 표시를 고치도록 함.
                     Message msg = mHandler.obtainMessage();
