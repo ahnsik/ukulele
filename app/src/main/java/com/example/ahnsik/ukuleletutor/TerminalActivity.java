@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,10 +87,6 @@ public class TerminalActivity extends AppCompatActivity {
     private void log(String logMsg) {
         Log.d("ukulele", logMsg);
 
-//        logString = logString + "\n" + logMsg;
-//        TextView txtLogs = (TextView) findViewById(R.id.txtLogs);
-//        txtLogs.setText(logString);
-
         Message msg = mHandler.obtainMessage();
         Bundle b = new Bundle();
         b.putString("logString", logMsg );      // 로그 출력할 문자열을 넣어서 메세지 전송
@@ -111,7 +108,6 @@ public class TerminalActivity extends AppCompatActivity {
                     ftpClient.connect(FTP_ADDRESS, 21);
                     ftpClient.login(FTP_ACCOUNT, FTP_PASSWORD);
                     ftpClient.setFileType(FTP.BINARY_FILE_TYPE); // 바이너리 파일
-//                    Log.d("ukulele", "FTP: 로그인 완료.");
                     log("FTP: 로그인 완료.");
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -123,16 +119,13 @@ public class TerminalActivity extends AppCompatActivity {
                 if (success) {
                     try {
                         ftpClient.changeWorkingDirectory(FTP_DATA_DIRECTORY);
-//                        Log.d("ukulele", "FTP: 우쿨렐레 폴더로 이동 완료.");
                         log("FTP: 우쿨렐레 폴더로 이동 완료.");
                     } catch (Exception e) {
-                        Log.d("ukulele", "Trace .. Error #1");
                         e.printStackTrace();
                         success = false;
                     }
                 }
 
-//                Log.d("ukulele", "FTP: 진행점검");
                 log("FTP: 진행상황 점검");
 
                 // 문제 없으면, 모든 파일목록을 가져와서 *.uke 파일만 골라 로컬 폴더에 복사.
@@ -189,7 +182,6 @@ public class TerminalActivity extends AppCompatActivity {
                         log("FTP: Disconnected." );
 
                     } catch (Exception e) {
-                        log("Trace .. Error #2");
                         e.printStackTrace();
                         success = false;
                     }
@@ -217,7 +209,10 @@ public class TerminalActivity extends AppCompatActivity {
             if ( (log_msg!=null) && !log_msg.isEmpty() ) {
                 logString = logString + "\n" + log_msg;
                 TextView txtLogs = (TextView) findViewById(R.id.txtLogs);
-                txtLogs.setText(logString);
+                ScrollView logScroll = (ScrollView) findViewById(R.id.scrollLogs);
+//                txtLogs.setText(logString);
+                txtLogs.append(log_msg);
+                logScroll.fullScroll(View.FOCUS_DOWN);      // 맨 아래 위치로 자동 스크롤 시키기 위함. https://m.blog.naver.com/PostView.nhn?blogId=wotjd1005&logNo=110169020180&proxyReferer=https%3A%2F%2Fwww.google.com%2F
                 return;
             }
 
