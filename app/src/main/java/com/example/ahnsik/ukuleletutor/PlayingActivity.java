@@ -108,7 +108,7 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
 //                    mGameStartClock = System.currentTimeMillis() - mSongData.timeStamp[playing_pos];
 //            }
 
-            // 제대로 연주가 되었다면, 다음 note로 이동.
+/*            // 제대로 연주가 되었다면, 다음 note로 이동.
             if ( mRecording.isStroked() && isPlayedOk(playing_pos) ) {
                 playing_pos++;
 
@@ -118,7 +118,7 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
                     dbgStr += mSongData.note[playing_pos][k];
                 Log.d("ukulele", dbgStr );
             }
-
+*/
             sleep(5);
         }
     }

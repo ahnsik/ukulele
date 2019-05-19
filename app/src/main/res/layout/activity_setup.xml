@@ -36,47 +36,47 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnCalcBpm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/button_shape"
-        android:fontFamily="sans-serif"
-        android:text="BPM 계산용"
-        android:textColor="#333"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnClearUkeFile"
-        app:layout_constraintStart_toStartOf="parent" />
+    <!--<Button-->
+        <!--android:id="@+id/btnCalcBpm"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--android:background="@drawable/button_shape"-->
+        <!--android:fontFamily="sans-serif"-->
+        <!--android:text="BPM 계산용"-->
+        <!--android:textColor="#333"-->
+        <!--android:textSize="22sp"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/btnClearUkeFile"-->
+        <!--app:layout_constraintStart_toStartOf="parent" />-->
 
-    <Button
-        android:id="@+id/btnClearUkeFile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/button_shape"
-        android:fontFamily="sans-serif"
-        android:text="악보데이터 지우기"
-        android:textColor="#333"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnImportFromFTP"
-        app:layout_constraintStart_toStartOf="parent" />
+    <!--<Button-->
+        <!--android:id="@+id/btnClearUkeFile"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--android:background="@drawable/button_shape"-->
+        <!--android:fontFamily="sans-serif"-->
+        <!--android:text="악보데이터 지우기"-->
+        <!--android:textColor="#333"-->
+        <!--android:textSize="22sp"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/btnImportFromFTP"-->
+        <!--app:layout_constraintStart_toStartOf="parent" />-->
 
-    <Button
-        android:id="@+id/btnImportFromFTP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/button_shape"
-        android:fontFamily="sans-serif"
-        android:text="악보데이터 가져오기"
-        android:textColor="#333"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <!--<Button-->
+        <!--android:id="@+id/btnImportFromFTP"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--android:background="@drawable/button_shape"-->
+        <!--android:fontFamily="sans-serif"-->
+        <!--android:text="악보데이터 가져오기"-->
+        <!--android:textColor="#333"-->
+        <!--android:textSize="22sp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent" />-->
 
     <Button
         android:id="@+id/btnTuning"

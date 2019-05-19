@@ -1,5 +1,6 @@
 package com.example.ahnsik.ukuleletutor;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -14,9 +15,15 @@ import android.widget.Toast;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 public class TerminalActivity extends AppCompatActivity {
 
@@ -24,6 +31,16 @@ public class TerminalActivity extends AppCompatActivity {
     public static final String FTP_DATA_DIRECTORY="ukulele";
     public static final String FTP_ACCOUNT="ahnsik";
     public static final String FTP_PASSWORD="Ahnsik7@!";
+
+    public static final String INDEXFILENAME="ftpsonglist.json";  //"ccash.iptime.org";
+    public static final int MAX_NUM_OF_SONGS = 1024;
+
+    private String[] songfiles;         // 파일명
+    private String[] songTitles;        // 곡목
+    private String[] songComments;      // 곡목에 대한 설명
+    private String[] songBpm;      // 곡목에 대한 설명
+    private String[] songTypes;         // 멜로디 / 코드 / 핑거스타일
+    private int      num_of_solgs;         // 멜로디 / 코드 / 핑거스타일
 
     private FTPClient ftpClient;
     private FtpAccessMessageHander mHandler;
@@ -81,6 +98,13 @@ public class TerminalActivity extends AppCompatActivity {
         mHandler = new FtpAccessMessageHander();
 
         logString = "";
+
+//        num_of_solgs = 0;
+//        songfiles = null;       // 파일이름
+//        songTitles = null;      // 곡목
+//        songComments = null;    // 곡목에 대한 설명
+//        songBpm = null;         // BPM
+//        songTypes = null;       // 멜로디 / 코드 / 핑거스타일
     }
 
     /////////////////////// Terminal 에 로그를 기록하는 함수 /////////////
@@ -97,6 +121,15 @@ public class TerminalActivity extends AppCompatActivity {
     /////////////////////// FTP 파일 가져오는데 사용되는 함수들. /////////////
 
     private void openAndGetListFromFtp() {
+
+        // FTP에서 *.uke 데이터를 읽어서 index 파일을 만들기 위한 버퍼들을 준비.
+        num_of_solgs = 0;
+        songfiles = new String[MAX_NUM_OF_SONGS];       // 파일이름
+        songTitles = new String[MAX_NUM_OF_SONGS];      // 곡목
+        songComments = new String[MAX_NUM_OF_SONGS];    // 곡목에 대한 설명
+        songBpm = new String[MAX_NUM_OF_SONGS];         // BPM
+        songTypes = new String[MAX_NUM_OF_SONGS];       // 멜로디 / 코드 / 핑거스타일
+
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -152,7 +185,7 @@ public class TerminalActivity extends AppCompatActivity {
 
                                     // *.uke 파일 전송이 완료되면, 해당 파일을 읽어서 mp3 음악소스를 확인하고 copy 해야 한다.
                                     if (result) {
-                                        String musicUrl = getMusicSourceFile(name);
+                                        String musicUrl = getMusicSourceFile(name, num_of_solgs);
                                         if ( ! musicUrl.isEmpty() ) {
                                             FileOutputStream musicfos = new FileOutputStream(getFilesDir() + "/" + musicUrl );
                                             result = ftpClient.retrieveFile(musicUrl, musicfos );
@@ -162,6 +195,7 @@ public class TerminalActivity extends AppCompatActivity {
                                             log("?????? music file name: "+ musicUrl );
                                         }
                                     }
+                                    num_of_solgs++;
                                 }
                             } else {
                                 log("FTP: Directory : " + name);
@@ -180,6 +214,8 @@ public class TerminalActivity extends AppCompatActivity {
                         log("FTP: Logged out." );
                         ftpClient.disconnect();
                         log("FTP: Disconnected." );
+
+                        makeFileIndexData();
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -220,7 +256,7 @@ public class TerminalActivity extends AppCompatActivity {
     }
 
 
-    private String getMusicSourceFile(String name) {
+    private String getMusicSourceFile(String name, int index) {
         boolean jsonResult = false;
 
         NoteData temp = new NoteData();
@@ -229,7 +265,68 @@ public class TerminalActivity extends AppCompatActivity {
             Log.d("ukulele", "FTP: Could not get music-file info." );
             return null;
         }
+        songfiles[index] = name;                // 파일이름
+        songTitles[index] = temp.mSongTitle;    // 곡목
+        songComments[index] = temp.mCommentary; // 곡목에 대한 설명
+        songBpm[index] = " "+temp.mBpm;             // BPM
+        songTypes[index] = temp.mCategory;      // 멜로디 / 코드 / 핑거스타일
+        Log.d("ukulele", "filename:"+name+", title:"+songTitles[index]+", bpm:"+songBpm[index]+", comments:"+songComments[index] );
+
         return temp.mMusicURL;
     }
+
+    private JSONObject  makeFileIndexData() {
+        JSONObject json = new JSONObject();
+
+        try {
+            json.put("num_of_songs", num_of_solgs);
+            JSONArray tabJ= new JSONArray();
+            for (int i=0; i<num_of_solgs; i++) {
+                JSONObject song = new JSONObject();
+                song.put("filename", songfiles[i] );
+                song.put("title", songTitles[i] );
+                song.put("comment", songComments[i] );
+                song.put("bpm", songBpm[i] );
+                song.put("type", songTypes[i] );
+
+                tabJ.put(song);
+            }
+            json.put("songList", tabJ);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+//        Log.d("ukulele", json.toString() );
+        File file = new File( INDEXFILENAME ) ;
+        FileWriter fw = null ;
+        BufferedWriter bufwr = null ;
+
+        try {
+            // open file.
+            fw = new FileWriter(file) ;
+            bufwr = new BufferedWriter(fw);
+
+            // write data to the file.
+            bufwr.write(json.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // close file.
+        try {
+            if (bufwr != null)
+                bufwr.close();
+            if (fw != null)
+                fw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return json;
+    }
+
+
 
 }

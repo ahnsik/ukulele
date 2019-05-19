@@ -28,7 +28,7 @@ public class SetupMenuActivity extends AppCompatActivity {
     public static final String FTP_PASSWORD="Ahnsik7@!";
 
     private FTPClient ftpClient;
-    private FtpAccessMessageHander mHandler;
+//    private FtpAccessMessageHander mHandler;
     private int     hiddenTouchCount = 0;
 
     @Override
@@ -56,6 +56,7 @@ public class SetupMenuActivity extends AppCompatActivity {
             }
         });
 
+/*
         Button btnCalcBpm = (Button)findViewById(R.id.btnCalcBpm);
         btnCalcBpm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +104,7 @@ public class SetupMenuActivity extends AppCompatActivity {
         // FTP에 접속해서 악보 데이터를 읽어 오기 위함.
         ftpClient = new FTPClient();
         mHandler = new FtpAccessMessageHander();
-
+*/
         TextView txtAppTitle = (TextView) findViewById(R.id.txtAppTitle);
         txtAppTitle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +125,7 @@ public class SetupMenuActivity extends AppCompatActivity {
     }
 
     /////////////////////// FTP 파일 가져오는데 사용되는 함수들. /////////////
-
+/*
     private void openAndGetListFromFtp() {
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -233,8 +234,8 @@ public class SetupMenuActivity extends AppCompatActivity {
 
         }
     }
-
-
+*/
+/*
     private String getMusicSourceFile(String name) {
         boolean jsonResult = false;
 
@@ -246,5 +247,5 @@ public class SetupMenuActivity extends AppCompatActivity {
         }
         return temp.mMusicURL;
     }
-
+*/
 }
