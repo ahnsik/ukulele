@@ -64,11 +64,12 @@ public class TerminalActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d("ukulele", "btnImportFromFTP  clicked.");
-                log("btnImportFromFTP  clicked.");
+                log("btnImportFromFTP  clicked.\n");
                 openAndGetListFromFtp();
 
             }       // end of onClick
         });
+        btnImportFromFTP.requestFocus();
 
         Button btnExportToFTP = (Button)findViewById(R.id.btnClearUkeFile);
         btnExportToFTP.setOnClickListener(new View.OnClickListener() {
@@ -81,14 +82,14 @@ public class TerminalActivity extends AppCompatActivity {
                 String fileName;
 
                 Log.d("ukulele", "Internal Storage: " + dir + ", " + numFiles + " files exist.");
-                log( "Internal Storage: " + dir + ", " + numFiles + " files exist.");
+                log( "Internal Storage: " + dir + ", " + numFiles + " files exist.\n");
 
                 for (int i = 0; i < numFiles; i++) {
                     fileName = allfiles[i].getName();
                     File delFile = new File(getFilesDir(),fileName);
                     delFile.delete();
                     Log.d("ukulele", "File: " + fileName + " was deleted." );
-                    log( "File: " + fileName + " was deleted." );
+                    log( "File: " + fileName + " was deleted.\n" );
                 }
             }
         });
@@ -141,7 +142,7 @@ public class TerminalActivity extends AppCompatActivity {
                     ftpClient.connect(FTP_ADDRESS, 21);
                     ftpClient.login(FTP_ACCOUNT, FTP_PASSWORD);
                     ftpClient.setFileType(FTP.BINARY_FILE_TYPE); // 바이너리 파일
-                    log("FTP: 로그인 완료.");
+                    log("FTP: 로그인 완료.\n");
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.d("ukulele", "Trace .. Error #3");
@@ -152,14 +153,14 @@ public class TerminalActivity extends AppCompatActivity {
                 if (success) {
                     try {
                         ftpClient.changeWorkingDirectory(FTP_DATA_DIRECTORY);
-                        log("FTP: 우쿨렐레 폴더로 이동 완료.");
+                        log("FTP: 우쿨렐레 폴더로 이동 완료.\n");
                     } catch (Exception e) {
                         e.printStackTrace();
                         success = false;
                     }
                 }
 
-                log("FTP: 진행상황 점검");
+                log("FTP: 진행상황 점검\n");
 
                 // 문제 없으면, 모든 파일목록을 가져와서 *.uke 파일만 골라 로컬 폴더에 복사.
                 if (success) {
@@ -172,7 +173,7 @@ public class TerminalActivity extends AppCompatActivity {
                             boolean isFile = ftpfiles[i].isFile();
                             if (isFile) {
                                 if (name.toLowerCase().endsWith(".uke")) {
-                                    log( "FTP: File : " + name);
+                                    log( "FTP: File : " + name + '\n');
 
                                     ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
                                     ftpClient.enterLocalPassiveMode();
@@ -192,16 +193,16 @@ public class TerminalActivity extends AppCompatActivity {
 //                                        Log.d("ukulele", "Retrieve " + musicUrl + "- result: " + result);
                                             musicfos.close();
                                         } else {
-                                            log("?????? music file name: "+ musicUrl );
+                                            log("?????? music file name: "+ musicUrl + '\n');
                                         }
                                     }
                                     num_of_solgs++;
                                 }
                             } else {
-                                log("FTP: Directory : " + name);
+                                log("FTP: Directory : " + name + '\n');
                             }
                         }
-                        log("FTP: " + ftpClient.getReplyString());
+                        log("FTP: " + ftpClient.getReplyString() + '\n');
 
                         // Toast 를 대신 표시하도록 메세지를 던진다.
                         Message msg = mHandler.obtainMessage();
@@ -211,11 +212,12 @@ public class TerminalActivity extends AppCompatActivity {
                         mHandler.sendMessage(msg);
 
                         ftpClient.logout();
-                        log("FTP: Logged out." );
+                        log("FTP: Logged out.\n" );
                         ftpClient.disconnect();
-                        log("FTP: Disconnected." );
+                        log("FTP: Disconnected.\n" );
 
                         makeFileIndexData();
+                        log("FTP: makeFileIndexData.\n" );
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -280,6 +282,7 @@ public class TerminalActivity extends AppCompatActivity {
 
         try {
             json.put("num_of_songs", num_of_solgs);
+            Log.d("ukulele", "makeFileIndexData.." + num_of_solgs );
             JSONArray tabJ= new JSONArray();
             for (int i=0; i<num_of_solgs; i++) {
                 JSONObject song = new JSONObject();
@@ -290,6 +293,7 @@ public class TerminalActivity extends AppCompatActivity {
                 song.put("type", songTypes[i] );
 
                 tabJ.put(song);
+                Log.d("ukulele", ".." + i );
             }
             json.put("songList", tabJ);
 
@@ -299,12 +303,13 @@ public class TerminalActivity extends AppCompatActivity {
         }
 
 //        Log.d("ukulele", json.toString() );
-        File file = new File( INDEXFILENAME ) ;
+        File file = new File( getFilesDir() + "/" + INDEXFILENAME ) ;
         FileWriter fw = null ;
         BufferedWriter bufwr = null ;
 
         try {
             // open file.
+            Log.d("ukulele", "\n.. Ready to write.." );
             fw = new FileWriter(file) ;
             bufwr = new BufferedWriter(fw);
 
@@ -323,6 +328,8 @@ public class TerminalActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Log.d("ukulele", "\n..Indexing done." );
+        log( "Done." );
 
         return json;
     }

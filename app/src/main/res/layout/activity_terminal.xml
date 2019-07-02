@@ -82,8 +82,8 @@
         android:text="악보데이터 지우기"
         android:textColor="#333"
         android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnImportFromFTP"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/btnImportFromFTP" />
 
     <Button
         android:id="@+id/btnImportFromFTP"

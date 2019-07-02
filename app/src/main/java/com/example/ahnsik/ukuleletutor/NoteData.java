@@ -28,6 +28,7 @@ public class NoteData {
     // 여기 아래의 배열들은 진짜 연주해야 할 데이터 들..
     public  long[]       timeStamp;
     public  String[]    chordName;
+    public  String[]    stroke;
     public  String[][]  tab;
     public  String[][]  note;
     public  boolean[][] note_played;
@@ -45,6 +46,7 @@ public class NoteData {
         // 여기 아래의 배열들은 진짜 연주해야 할 데이터 들..
         timeStamp = null;
         chordName = null;
+        stroke = null;
         tab = null;
         note = null;
         note_played = null;
@@ -58,6 +60,7 @@ public class NoteData {
 
     public boolean loadFromFile(File dir, String fileName) {
         String   UkeDataRead;
+        Log.d("ukulele", "loadFromFile : "+dir+"/"+fileName );
         UkeDataRead = readTextFile(dir+"/"+fileName );
         return setData(UkeDataRead);
     }
@@ -123,6 +126,9 @@ public class NoteData {
                 if ( (chordName[i] !=null) && ( ! chordName[i].isEmpty() ) ) {
                     oneChord.put("chord", chordName[i] );
                 }
+                if ( (stroke[i] !=null) && ( ! stroke[i].isEmpty() ) ) {
+                    oneChord.put("stroke", stroke[i] );
+                }
                 JSONArray tabJ= new JSONArray();
                 for (int j=0; j<tab[i].length; j++) {
                     tabJ.put(tab[i][j]);
@@ -172,6 +178,7 @@ public class NoteData {
             this.timeStamp = new long[this.numNotes];
             this.score = new int[this.numNotes];
             this.chordName = new String[this.numNotes];
+            this.stroke = new String[this.numNotes];
             this.tab = new String[this.numNotes][];
             this.note = new String[this.numNotes][];
             this.note_played = new boolean[this.numNotes][];
@@ -185,6 +192,11 @@ public class NoteData {
                     this.chordName[i] = a_note.getString("chord");
                 } catch (Exception e) {
                     this.chordName[i] = null;
+                }
+                try {
+                    this.stroke[i] = a_note.getString("stroke");
+                } catch (Exception e) {
+                    this.stroke[i] = null;
                 }
                 JSONArray   temp1 = a_note.getJSONArray("tab");
                 this.tab[i] = new String[temp1.length()];

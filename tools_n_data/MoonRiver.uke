@@ -90,8 +90,8 @@
 	{
 	  "timestamp":11250,
 	  "chord":"",
-	  "tab":["G0","C0","E3"],
-	  "note":["G4","C4","G4"],
+	  "tab":["G0","C0","E3","A "],
+	  "note":["G4","C4","G4","C5"],
 	  "lyric":"style"
 	},
 	{
@@ -111,14 +111,14 @@
 	{
 	  "timestamp":15000,
 	  "chord":"",
-	  "tab":["A2"],
-	  "note":["B4"]
+	  "tab":["E ","A2"],
+	  "note":["(null)","B4"]
 	},
 	{
 	  "timestamp":15375,
 	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
+	  "tab":["E ","A0"],
+	  "note":["(null)","A4"]
 	},
 	{
 	  "timestamp":15750,
@@ -152,6 +152,12 @@
 	  "chord":"",
 	  "tab":["E0"],
 	  "note":["E4"]
+	},
+	{
+	  "timestamp":21750,
+	  "chord":"",
+	  "tab":["C "],
+	  "note":["(null)"]
 	},
 	{
 	  "timestamp":22125,
@@ -190,8 +196,8 @@
 	{
 	  "timestamp":27000,
 	  "chord":"",
-	  "tab":["G2 ","C0"],
-	  "note":["A4","C4"],
+	  "tab":["G2","C0","E "],
+	  "note":["A4","C4","E4"],
 	  "lyric":"ever"
 	},
 	{
@@ -218,8 +224,8 @@
 	{
 	  "timestamp":30000,
 	  "chord":"",
-	  "tab":["E2"],
-	  "note":["F#4"],
+	  "tab":["A2"],
+	  "note":["B4"],
 	  "lyric":"going"
 	},
 	{
@@ -261,284 +267,277 @@
 	  "note":["G4","D4","F4","B4"]
 	},
 	{
-	  "timestamp":38250,
+	  "timestamp":40500,
 	  "chord":"",
-	  "tab":["G0","C0"],
-	  "note":["G4","C4"],
+	  "tab":["G0","C0","A "],
+	  "note":["G4","C4","A4"],
 	  "lyric":"two"
 	},
 	{
-	  "timestamp":40500,
+	  "timestamp":42750,
 	  "chord":"",
 	  "tab":["C0","E0","A5"],
 	  "note":["C4","E4","D5"],
 	  "lyric":"drifters"
 	},
 	{
-	  "timestamp":41250,
+	  "timestamp":43500,
 	  "chord":"",
 	  "tab":["A3"],
 	  "note":["C5"]
 	},
 	{
-	  "timestamp":42750,
+	  "timestamp":45000,
 	  "chord":"",
 	  "tab":["C0","E1","A2"],
 	  "note":["C4","F4","B4"],
 	  "lyric":"off"
 	},
 	{
-	  "timestamp":43875,
+	  "timestamp":46125,
 	  "chord":"",
 	  "tab":["A0"],
 	  "note":["A4"],
 	  "lyric":"to "
 	},
 	{
-	  "timestamp":44250,
+	  "timestamp":46500,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"],
 	  "lyric":"see "
 	},
 	{
-	  "timestamp":44625,
+	  "timestamp":46875,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"],
 	  "lyric":"the "
 	},
 	{
-	  "timestamp":45000,
+	  "timestamp":47250,
 	  "chord":"",
 	  "tab":["G0","C0","E3"],
 	  "note":["G4","C4","G4"],
 	  "lyric":"world"
 	},
 	{
-	  "timestamp":46500,
+	  "timestamp":48750,
 	  "chord":"",
 	  "tab":["C0"],
 	  "note":["C4"]
 	},
 	{
-	  "timestamp":47250,
+	  "timestamp":49500,
 	  "chord":"",
 	  "tab":["C0","E1","A2"],
 	  "note":["C4","F4","B4"]
 	},
 	{
-	  "timestamp":48375,
+	  "timestamp":50625,
 	  "chord":"",
 	  "tab":["A0"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":48750,
+	  "timestamp":51000,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"]
 	},
 	{
-	  "timestamp":49125,
+	  "timestamp":51375,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"]
 	},
 	{
-	  "timestamp":49500,
+	  "timestamp":51750,
 	  "chord":"",
-	  "tab":["G0","C0","E3"],
-	  "note":["G4","C4","G4"]
+	  "tab":["G0","C0","E3","A "],
+	  "note":["G4","C4","G4","C5"]
 	},
 	{
-	  "timestamp":51000,
+	  "timestamp":53250,
 	  "chord":"",
 	  "tab":["C0"],
 	  "note":["C4"]
 	},
 	{
-	  "timestamp":51750,
+	  "timestamp":54000,
 	  "chord":"",
-	  "tab":["C2 "],
+	  "tab":["C2"],
 	  "note":["D4"]
 	},
 	{
-	  "timestamp":53250,
+	  "timestamp":55500,
 	  "chord":"",
 	  "tab":["A2"],
 	  "note":["B4"]
 	},
 	{
-	  "timestamp":53625,
+	  "timestamp":55875,
 	  "chord":"",
 	  "tab":["A0"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":54000,
+	  "timestamp":56250,
 	  "chord":"",
 	  "tab":["G1","C2","E0","A2"],
 	  "note":["G#4","D4","E4","B4"]
 	},
 	{
-	  "timestamp":55500,
+	  "timestamp":57750,
 	  "chord":"",
 	  "tab":["E0"],
 	  "note":["E4"]
 	},
 	{
-	  "timestamp":56250,
+	  "timestamp":58500,
 	  "chord":"",
 	  "tab":["G2","C0"],
 	  "note":["A4","C4"]
 	},
 	{
-	  "timestamp":57000,
+	  "timestamp":59250,
 	  "chord":"",
 	  "tab":["E0"],
 	  "note":["E4"]
 	},
 	{
-	  "timestamp":57750,
+	  "timestamp":60000,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"]
 	},
 	{
-	  "timestamp":58500,
+	  "timestamp":60750,
 	  "chord":"",
 	  "tab":["G2","C0","E2","A3"],
 	  "note":["A4","C4","F#4","C5"],
 	  "lyric":"same"
 	},
 	{
-	  "timestamp":60750,
+	  "timestamp":63000,
 	  "chord":"",
 	  "tab":["G5","C5","E5","A5"],
 	  "note":["C5","F4","A4","D5"],
 	  "lyric":"rainbow’s"
 	},
 	{
-	  "timestamp":62250,
+	  "timestamp":64500,
 	  "chord":"",
 	  "tab":["A3"],
 	  "note":["C5"]
 	},
 	{
-	  "timestamp":63000,
+	  "timestamp":65250,
 	  "chord":"",
 	  "tab":["G0","C0","E3"],
 	  "note":["G4","C4","G4"],
 	  "lyric":"end"
 	},
 	{
-	  "timestamp":65250,
+	  "timestamp":67500,
 	  "chord":"",
 	  "tab":["C0"],
 	  "note":["C4"]
 	},
 	{
-	  "timestamp":66000,
+	  "timestamp":68250,
 	  "chord":"",
 	  "tab":["A2"],
 	  "note":["B4"]
 	},
 	{
-	  "timestamp":66375,
+	  "timestamp":68625,
 	  "chord":"",
 	  "tab":["A0"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":66750,
+	  "timestamp":69000,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"]
 	},
 	{
-	  "timestamp":67125,
+	  "timestamp":69375,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"]
-	},
-	{
-	  "timestamp":67500,
-	  "chord":"",
-	  "tab":["G0","C0","E3"],
-	  "note":["G4","C4","G4"]
 	},
 	{
 	  "timestamp":69750,
 	  "chord":"",
+	  "tab":["G0","C0","E3"],
+	  "note":["G4","C4","G4"]
+	},
+	{
+	  "timestamp":72000,
+	  "chord":"",
 	  "tab":["C0"],
 	  "note":["C4"]
 	},
 	{
-	  "timestamp":70500,
+	  "timestamp":72750,
 	  "chord":"",
 	  "tab":["A2"],
 	  "note":["B4"]
 	},
 	{
-	  "timestamp":70875,
+	  "timestamp":73125,
 	  "chord":"",
 	  "tab":["A0"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":71250,
+	  "timestamp":73500,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"]
 	},
 	{
-	  "timestamp":71625,
+	  "timestamp":73875,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"]
 	},
 	{
-	  "timestamp":72000,
+	  "timestamp":74250,
 	  "chord":"",
 	  "tab":["G0","C0","E3"],
 	  "note":["G4","C4","G4"]
 	},
 	{
-	  "timestamp":74250,
+	  "timestamp":76500,
 	  "chord":"",
 	  "tab":["G2","C0"],
 	  "note":["A4","C4"],
 	  "lyric":"moon"
 	},
 	{
-	  "timestamp":76500,
+	  "timestamp":78750,
 	  "chord":"",
 	  "tab":["G2","C2","E1"],
 	  "note":["A4","D4","F4"],
 	  "lyric":"river"
 	},
 	{
-	  "timestamp":77250,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":78750,
-	  "chord":"",
-	  "tab":["C2 "],
-	  "note":["D4"],
-	  "lyric":"and "
-	},
-	{
 	  "timestamp":79500,
+	  "chord":"",
+	  "tab":["C2","E "],
+	  "note":["D4","F#4"]
+	},
+	{
+	  "timestamp":81375,
 	  "chord":"",
 	  "tab":["E0"],
 	  "note":["E4"]
 	},
 	{
-	  "timestamp":81000,
+	  "timestamp":82875,
 	  "chord":"",
 	  "tab":["G0","C0","E0","A3"],
 	  "note":["G4","C4","E4","C5"],
@@ -551,7 +550,7 @@
   "category":"FingerStyle",
   "comment":"from YouTube - 대전 aloha ukulele 동영상",
   "create_date":"----/--/--",
-  "source":"http://",
+  "source":"moon_river_ukulele_fingerstyle_basic.mp4",
   "start_offset":"0",
   "bpm":" 80.0"
 }

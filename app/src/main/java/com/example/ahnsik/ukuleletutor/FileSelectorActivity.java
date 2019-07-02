@@ -136,7 +136,7 @@ Log.d("ukulele", "index="+i+", filename:"+songfiles[i]  );
                 songTypes[i] = info.getString("type");         // 멜로디 / 코드 / 핑거스타일
             }
         } catch (Exception e) {
-            Log.d("ukulele", "-xxxxxxxxxxxx Error to parse JSON xxxxxxxxxxxx-");
+            Log.d("ukulele", "-xxxxxxxxxxxx Error to parse Index file xxxxxxxxxxxx-");
             e.printStackTrace();
             songfiles = null;
             songTitles = null;
