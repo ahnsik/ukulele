@@ -59,7 +59,7 @@
                 android:ellipsize="end"
                 android:text="A long long length of string title"
                 android:fontFamily="sans-serif"
-                android:textSize="32sp" />
+                android:textSize="22sp" />
 
         </LinearLayout>
 

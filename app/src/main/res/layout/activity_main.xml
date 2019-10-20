@@ -33,7 +33,7 @@
             android:fontFamily="sans-serif"
             android:textColor="#333"
             android:text="설정"
-            android:textSize="36sp"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,7 +47,7 @@
             android:fontFamily="sans-serif"
             android:textColor="#333"
             android:text="코드 잡는 법"
-            android:textSize="36sp"
+            android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/btnTraining"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -61,7 +61,7 @@
             android:fontFamily="sans-serif"
             android:textColor="#333"
             android:text="혼자 연습하기"
-            android:textSize="36sp"
+            android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/btnPlaying"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -75,7 +75,7 @@
             android:fontFamily="sans-serif"
             android:textColor="#333"
             android:text="연주하며 연습하기"
-            android:textSize="36sp"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -88,7 +88,7 @@
             android:fontFamily="sans-serif"
             android:textColor="#fabc11"
             android:text="우쿨렐레를 배우자"
-            android:textSize="36sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:shadowColor="#333"
             android:shadowRadius="4"

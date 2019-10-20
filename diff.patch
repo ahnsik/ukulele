@@ -1,0 +1,1537 @@
+diff --git a/.idea/caches/build_file_checksums.ser b/.idea/caches/build_file_checksums.ser
+index 8a53b0e..b1f0c25 100644
+Binary files a/.idea/caches/build_file_checksums.ser and b/.idea/caches/build_file_checksums.ser differ
+diff --git a/.idea/caches/gradle_models.ser b/.idea/caches/gradle_models.ser
+index d849116..438cbd9 100644
+Binary files a/.idea/caches/gradle_models.ser and b/.idea/caches/gradle_models.ser differ
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+index 3a1c9dc..8dc9fd9 100644
+--- a/.idea/modules.xml
++++ b/.idea/modules.xml
+@@ -3,7 +3,7 @@
+   <component name="ProjectModuleManager">
+     <modules>
+       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+-      <module fileurl="file://$PROJECT_DIR$/ukulele_compare.iml" filepath="$PROJECT_DIR$/ukulele_compare.iml" />
++      <module fileurl="file://$PROJECT_DIR$/ukulele_tutorial.iml" filepath="$PROJECT_DIR$/ukulele_tutorial.iml" />
+     </modules>
+   </component>
+ </project>
+\ No newline at end of file
+diff --git a/app/src/main/java/com/example/ahnsik/ukuleletutor/PlayView.java b/app/src/main/java/com/example/ahnsik/ukuleletutor/PlayView.java
+index 45c1d2c..2a2401f 100644
+--- a/app/src/main/java/com/example/ahnsik/ukuleletutor/PlayView.java
++++ b/app/src/main/java/com/example/ahnsik/ukuleletutor/PlayView.java
+@@ -52,6 +52,9 @@ public class PlayView extends GameView {
+         super(context, attributeSet);
+         getHolder().addCallback(this);
+ 
++        // PlayView 가 표시되고 있는 동안에는 계속 Sleep 모드로 들어 가지 않는다.
++        setKeepScreenOn(true);
++
+         resource_load();
+         // 게임 정보 초기화
+         score = 0;
+@@ -69,7 +72,8 @@ public class PlayView extends GameView {
+ 
+     private void resource_load() {
+         // 비트맵 로딩이 Multi Threading 이 된다면.. 먼저 로드를 시작해 두고 나머지를 설정하는 편이 좋다.
+-        bmpBg = BitmapFactory.decodeResource(this.getResources(), R.drawable.bg_paper );
++//        bmpBg = BitmapFactory.decodeResource(this.getResources(), R.drawable.bg_paper );
++        bmpBg = null;
+         bmpFinger = BitmapFactory.decodeResource(this.getResources(), R.drawable.finger_guide );
+ 
+         // 전체적으로 기본적으로 사용될 Font 및 기본 색상 등을 지정.
+@@ -191,7 +195,13 @@ public class PlayView extends GameView {
+         Paint  pScore= new Paint(pBG);
+ 
+         Rect eraserRect = new Rect(SCORE_POSITION_X, TITLE_POSITION_Y-58, 1280, TITLE_POSITION_Y+34);
+-        canvas.drawBitmap(bmpBg, eraserRect, eraserRect, null );
++        if (null != bmpBg) {
++            canvas.drawBitmap(bmpBg, eraserRect, eraserRect, null );
++        } else {
++            Paint pPaper = new Paint(pBG);
++            pPaper.setColor(rgb(234, 193, 122));    // 오선지(X) TAB악보 라인 의 색상 / Font색상.
++            canvas.drawRect(eraserRect, pPaper);
++        }
+ 
+         pScore.setTextSize(48.0f);
+         canvas.drawText("Score: " + score, SCORE_POSITION_X, TITLE_POSITION_Y-12, pScore);
+@@ -321,7 +331,13 @@ public class PlayView extends GameView {
+         }
+ 
+         Rect eraserRect = new Rect(xpos-8, y-60, xpos+30, y);
+-        canvas.drawBitmap(bmpBg, eraserRect, eraserRect, null );
++        if (null != bmpBg) {
++            canvas.drawBitmap(bmpBg, eraserRect, eraserRect, null );
++        } else {
++            Paint pPaper = new Paint(pBG);
++            pPaper.setColor(rgb(234, 193, 122));    // 오선지(X) TAB악보 라인 의 색상 / Font색상.
++            canvas.drawRect(eraserRect, pPaper);
++        }
+         canvas.drawText(flet,xpos,y, fingerColor );
+     }
+ 
+diff --git a/app/src/main/res/drawable/button_shape.xml b/app/src/main/res/drawable/button_shape.xml
+index f6ff82d..a93ea5d 100644
+--- a/app/src/main/res/drawable/button_shape.xml
++++ b/app/src/main/res/drawable/button_shape.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
+     <corners
+-        android:radius="36dp"
++        android:radius="24dp"
+         />
+     <solid
+         android:color="#c0f1da96"
+@@ -14,7 +14,7 @@
+         />
+     <size
+         android:width="170dp"
+-        android:height="60dp"
++        android:height="36dp"
+         />
+ </shape>
+ 
+diff --git a/app/src/main/res/layout/activity_bpm_tool.xml b/app/src/main/res/layout/activity_bpm_tool.xml
+index 143ac12..42ebfd7 100644
+--- a/app/src/main/res/layout/activity_bpm_tool.xml
++++ b/app/src/main/res/layout/activity_bpm_tool.xml
+@@ -18,7 +18,7 @@
+             android:layout_height="wrap_content"
+             android:background="#80453d3c"
+             android:fontFamily="sans-serif"
+-            android:textSize="30sp"
++            android:textSize="22sp"
+             android:textColor="#f4d62f"
+             android:text="화면을 터치하여 BPM을 계산해 보세요."/>
+ 
+@@ -56,7 +56,7 @@
+                 android:layout_height="wrap_content"
+                 android:layout_marginStart="32dp"
+                 android:layout_marginEnd="16dp"
+-                android:layout_marginTop="180dp"
++                android:layout_marginTop="120dp"
+                 android:layout_marginBottom="16dp"
+                 android:gravity="center"
+                 android:fontFamily="sans-serif"
+@@ -77,7 +77,7 @@
+         android:layout_marginTop="16dp"
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         android:text="@string/btntxt_back"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+diff --git a/app/src/main/res/layout/activity_chord_a.xml b/app/src/main/res/layout/activity_chord_a.xml
+index bc6e6e0..dbb5237 100644
+--- a/app/src/main/res/layout/activity_chord_a.xml
++++ b/app/src/main/res/layout/activity_chord_a.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_a7.xml b/app/src/main/res/layout/activity_chord_a7.xml
+index 89cc88b..883e551 100644
+--- a/app/src/main/res/layout/activity_chord_a7.xml
++++ b/app/src/main/res/layout/activity_chord_a7.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_am.xml b/app/src/main/res/layout/activity_chord_am.xml
+index 4c377b7..497d28c 100644
+--- a/app/src/main/res/layout/activity_chord_am.xml
++++ b/app/src/main/res/layout/activity_chord_am.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_am7.xml b/app/src/main/res/layout/activity_chord_am7.xml
+index 1c750a0..643cc49 100644
+--- a/app/src/main/res/layout/activity_chord_am7.xml
++++ b/app/src/main/res/layout/activity_chord_am7.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_b.xml b/app/src/main/res/layout/activity_chord_b.xml
+index fc385a9..9efeae7 100644
+--- a/app/src/main/res/layout/activity_chord_b.xml
++++ b/app/src/main/res/layout/activity_chord_b.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_b7.xml b/app/src/main/res/layout/activity_chord_b7.xml
+index 14aa296..e2e8dfb 100644
+--- a/app/src/main/res/layout/activity_chord_b7.xml
++++ b/app/src/main/res/layout/activity_chord_b7.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_bm.xml b/app/src/main/res/layout/activity_chord_bm.xml
+index 44e99ba..cb399d9 100644
+--- a/app/src/main/res/layout/activity_chord_bm.xml
++++ b/app/src/main/res/layout/activity_chord_bm.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_bm7.xml b/app/src/main/res/layout/activity_chord_bm7.xml
+index 557a22c..4c23462 100644
+--- a/app/src/main/res/layout/activity_chord_bm7.xml
++++ b/app/src/main/res/layout/activity_chord_bm7.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_c.xml b/app/src/main/res/layout/activity_chord_c.xml
+index 3ebbb22..cc47366 100644
+--- a/app/src/main/res/layout/activity_chord_c.xml
++++ b/app/src/main/res/layout/activity_chord_c.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_c5"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_c7.xml b/app/src/main/res/layout/activity_chord_c7.xml
+index 4b4ae43..3701954 100644
+--- a/app/src/main/res/layout/activity_chord_c7.xml
++++ b/app/src/main/res/layout/activity_chord_c7.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_cm.xml b/app/src/main/res/layout/activity_chord_cm.xml
+index da3fcb0..9e6fb13 100644
+--- a/app/src/main/res/layout/activity_chord_cm.xml
++++ b/app/src/main/res/layout/activity_chord_cm.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_d4s_g_c"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_cm7.xml b/app/src/main/res/layout/activity_chord_cm7.xml
+index 0dbdbc8..744a1e6 100644
+--- a/app/src/main/res/layout/activity_chord_cm7.xml
++++ b/app/src/main/res/layout/activity_chord_cm7.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_d.xml b/app/src/main/res/layout/activity_chord_d.xml
+index de3da2c..2dc61c8 100644
+--- a/app/src/main/res/layout/activity_chord_d.xml
++++ b/app/src/main/res/layout/activity_chord_d.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_d7.xml b/app/src/main/res/layout/activity_chord_d7.xml
+index 4e0df23..b60bf79 100644
+--- a/app/src/main/res/layout/activity_chord_d7.xml
++++ b/app/src/main/res/layout/activity_chord_d7.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_dm.xml b/app/src/main/res/layout/activity_chord_dm.xml
+index da011d1..110a16c 100644
+--- a/app/src/main/res/layout/activity_chord_dm.xml
++++ b/app/src/main/res/layout/activity_chord_dm.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_dm7.xml b/app/src/main/res/layout/activity_chord_dm7.xml
+index 3028ce5..c740d08 100644
+--- a/app/src/main/res/layout/activity_chord_dm7.xml
++++ b/app/src/main/res/layout/activity_chord_dm7.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_e.xml b/app/src/main/res/layout/activity_chord_e.xml
+index 1f90e01..7215799 100644
+--- a/app/src/main/res/layout/activity_chord_e.xml
++++ b/app/src/main/res/layout/activity_chord_e.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_e7.xml b/app/src/main/res/layout/activity_chord_e7.xml
+index 14f01a3..023f311 100644
+--- a/app/src/main/res/layout/activity_chord_e7.xml
++++ b/app/src/main/res/layout/activity_chord_e7.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_em.xml b/app/src/main/res/layout/activity_chord_em.xml
+index 0e42cde..d78ef6f 100644
+--- a/app/src/main/res/layout/activity_chord_em.xml
++++ b/app/src/main/res/layout/activity_chord_em.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_em7.xml b/app/src/main/res/layout/activity_chord_em7.xml
+index ac0d6f3..2f76bc9 100644
+--- a/app/src/main/res/layout/activity_chord_em7.xml
++++ b/app/src/main/res/layout/activity_chord_em7.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_f.xml b/app/src/main/res/layout/activity_chord_f.xml
+index 748d60d..76669e0 100644
+--- a/app/src/main/res/layout/activity_chord_f.xml
++++ b/app/src/main/res/layout/activity_chord_f.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_f7.xml b/app/src/main/res/layout/activity_chord_f7.xml
+index d1c93f2..87fe2c9 100644
+--- a/app/src/main/res/layout/activity_chord_f7.xml
++++ b/app/src/main/res/layout/activity_chord_f7.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_fm.xml b/app/src/main/res/layout/activity_chord_fm.xml
+index 325b7dc..d115db8 100644
+--- a/app/src/main/res/layout/activity_chord_fm.xml
++++ b/app/src/main/res/layout/activity_chord_fm.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_fm7.xml b/app/src/main/res/layout/activity_chord_fm7.xml
+index bd4d0fb..ade175a 100644
+--- a/app/src/main/res/layout/activity_chord_fm7.xml
++++ b/app/src/main/res/layout/activity_chord_fm7.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_g.xml b/app/src/main/res/layout/activity_chord_g.xml
+index 7e7bca3..c1588d4 100644
+--- a/app/src/main/res/layout/activity_chord_g.xml
++++ b/app/src/main/res/layout/activity_chord_g.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_g7.xml b/app/src/main/res/layout/activity_chord_g7.xml
+index e624372..daafc5c 100644
+--- a/app/src/main/res/layout/activity_chord_g7.xml
++++ b/app/src/main/res/layout/activity_chord_g7.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_gm.xml b/app/src/main/res/layout/activity_chord_gm.xml
+index 4e24836..5ada983 100644
+--- a/app/src/main/res/layout/activity_chord_gm.xml
++++ b/app/src/main/res/layout/activity_chord_gm.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_gm7.xml b/app/src/main/res/layout/activity_chord_gm7.xml
+index be032b6..430e019 100644
+--- a/app/src/main/res/layout/activity_chord_gm7.xml
++++ b/app/src/main/res/layout/activity_chord_gm7.xml
+@@ -18,7 +18,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/c_g4_c4_e4_a4s"
+         android:textColor="#f4d62f"
+-        android:textSize="30sp"
++        android:textSize="22sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_play"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_chord_table.xml b/app/src/main/res/layout/activity_chord_table.xml
+index 7154f62..e04c1fc 100644
+--- a/app/src/main/res/layout/activity_chord_table.xml
++++ b/app/src/main/res/layout/activity_chord_table.xml
+@@ -18,7 +18,7 @@
+             android:layout_height="wrap_content"
+             android:background="#80453d3c"
+             android:fontFamily="sans-serif"
+-            android:textSize="30sp"
++            android:textSize="22sp"
+             android:textColor="#f4d62f"
+             android:text="코드 표를 터치하여 전체 화면으로 볼 수 있습니다."/>
+ 
+@@ -40,32 +40,32 @@
+ 
+                     <Button
+                         android:id="@+id/btnChord_C"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_c" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_C7"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_c7" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_Cm"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_cm" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_Cm7"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_cm7" />
+@@ -75,32 +75,32 @@
+ 
+                     <Button
+                         android:id="@+id/btnChord_D"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_d" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_D7"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_d7" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_Dm"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_dm" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_Dm7"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_dm7" />
+@@ -110,32 +110,32 @@
+ 
+                     <Button
+                         android:id="@+id/btnChord_E"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_e" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_E7"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_e7" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_Em"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_em" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_Em7"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_em7" />
+@@ -145,32 +145,32 @@
+ 
+                     <Button
+                         android:id="@+id/btnChord_F"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_f" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_F7"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_f7" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_Fm"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_fm" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_Fm7"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_fm7" />
+@@ -180,32 +180,32 @@
+ 
+                     <Button
+                         android:id="@+id/btnChord_G"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_g" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_G7"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_g7" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_Gm"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_gm" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_Gm7"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_gm7" />
+@@ -215,32 +215,32 @@
+ 
+                     <Button
+                         android:id="@+id/btnChord_A"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_a" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_A7"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_a7" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_Am"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_am" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_Am7"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_am7" />
+@@ -250,32 +250,32 @@
+ 
+                     <Button
+                         android:id="@+id/btnChord_B"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_b" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_B7"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_b7" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_Bm"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_bm" />
+ 
+                     <Button
+                         android:id="@+id/btnChord_Bm7"
+-                        android:layout_width="180dp"
+-                        android:layout_height="80dp"
++                        android:layout_width="144dp"
++                        android:layout_height="64dp"
+                         android:layout_marginTop="0dp"
+                         android:layout_marginEnd="0dp"
+                         android:background="@drawable/btn_chord_bm7" />
+@@ -299,7 +299,7 @@
+         android:layout_marginTop="16dp"
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         android:text="@string/btntxt_back"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+diff --git a/app/src/main/res/layout/activity_file_selector.xml b/app/src/main/res/layout/activity_file_selector.xml
+index 4da67b0..6e56f03 100644
+--- a/app/src/main/res/layout/activity_file_selector.xml
++++ b/app/src/main/res/layout/activity_file_selector.xml
+@@ -18,7 +18,7 @@
+             android:layout_height="wrap_content"
+             android:background="#80453d3c"
+             android:fontFamily="sans-serif"
+-            android:textSize="30sp"
++            android:textSize="22sp"
+             android:textColor="#f4d62f"
+             android:text="연습할 파일을 선택하세요."/>
+ 
+@@ -26,7 +26,7 @@
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:fontFamily="sans-serif"
+-            android:textSize="36sp"
++            android:textSize="24sp"
+             android:textColor="#FFFFFF"
+             android:id="@+id/fileList" />
+ 
+@@ -42,7 +42,7 @@
+         android:layout_marginTop="16dp"
+         android:background="@drawable/button_shape"
+         android:fontFamily="sans-serif"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         android:text="@string/btntxt_back"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+diff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml
+index 538c04e..2f465fe 100644
+--- a/app/src/main/res/layout/activity_main.xml
++++ b/app/src/main/res/layout/activity_main.xml
+@@ -33,7 +33,7 @@
+             android:fontFamily="sans-serif"
+             android:textColor="#333"
+             android:text="설정"
+-            android:textSize="36sp"
++            android:textSize="24sp"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -47,7 +47,7 @@
+             android:fontFamily="sans-serif"
+             android:textColor="#333"
+             android:text="코드 잡는 법"
+-            android:textSize="36sp"
++            android:textSize="24sp"
+             app:layout_constraintBottom_toTopOf="@+id/btnTraining"
+             app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -61,7 +61,7 @@
+             android:fontFamily="sans-serif"
+             android:textColor="#333"
+             android:text="혼자 연습하기"
+-            android:textSize="36sp"
++            android:textSize="24sp"
+             app:layout_constraintBottom_toTopOf="@+id/btnPlaying"
+             app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -75,7 +75,7 @@
+             android:fontFamily="sans-serif"
+             android:textColor="#333"
+             android:text="연주하며 연습하기"
+-            android:textSize="36sp"
++            android:textSize="24sp"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent" />
+ 
+@@ -88,7 +88,7 @@
+             android:fontFamily="sans-serif"
+             android:textColor="#fabc11"
+             android:text="우쿨렐레를 배우자"
+-            android:textSize="36sp"
++            android:textSize="24sp"
+             android:textStyle="bold"
+             android:shadowColor="#333"
+             android:shadowRadius="4"
+diff --git a/app/src/main/res/layout/activity_playing.xml b/app/src/main/res/layout/activity_playing.xml
+index bf86e0a..df41f0f 100644
+--- a/app/src/main/res/layout/activity_playing.xml
++++ b/app/src/main/res/layout/activity_playing.xml
+@@ -27,7 +27,7 @@
+             android:layout_marginTop="16dp"
+             android:background="@drawable/button_shape"
+             android:fontFamily="sans-serif"
+-            android:textSize="36sp"
++            android:textSize="24sp"
+             android:text="@string/btntxt_back"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+diff --git a/app/src/main/res/layout/activity_setup.xml b/app/src/main/res/layout/activity_setup.xml
+index 52cf775..2233145 100644
+--- a/app/src/main/res/layout/activity_setup.xml
++++ b/app/src/main/res/layout/activity_setup.xml
+@@ -16,7 +16,7 @@
+         android:layout_marginTop="40dp"
+         android:fontFamily="sans-serif"
+         android:text="설정"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -32,7 +32,7 @@
+         android:fontFamily="sans-serif"
+         android:textColor="#333"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -88,7 +88,7 @@
+         android:fontFamily="sans-serif"
+         android:textColor="#333"
+         android:text="우쿨렐레 튜닝"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="parent"
+         app:layout_constraintEnd_toEndOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_terminal.xml b/app/src/main/res/layout/activity_terminal.xml
+index 299a524..35a4abd 100644
+--- a/app/src/main/res/layout/activity_terminal.xml
++++ b/app/src/main/res/layout/activity_terminal.xml
+@@ -67,7 +67,7 @@
+         android:fontFamily="sans-serif"
+         android:textColor="#333"
+         android:text="@string/btntxt_back"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/activity_tuning.xml b/app/src/main/res/layout/activity_tuning.xml
+index 8a516d5..902654d 100644
+--- a/app/src/main/res/layout/activity_tuning.xml
++++ b/app/src/main/res/layout/activity_tuning.xml
+@@ -1,9 +1,9 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+-
+-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
++<merge xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
++    xmlns:android="http://schemas.android.com/apk/res/android">
++
++<RelativeLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:background="@drawable/bg_paper"
+@@ -26,7 +26,7 @@
+             android:fontFamily="sans-serif"
+             android:text="우쿨렐레를 튜닝 하세요"
+             android:textColor="#f4d62f"
+-            android:textSize="32sp" />
++            android:textSize="22sp" />
+ 
+         <RelativeLayout
+             android:layout_width="match_parent"
+@@ -42,7 +42,7 @@
+                 android:layout_marginEnd="16dp"
+                 android:fontFamily="sans-serif"
+                 android:text="기본(High-G) 튜닝"
+-                android:textSize="28sp" />
++                android:textSize="22sp" />
+ 
+             <LinearLayout
+                 android:layout_width="620dp"
+@@ -54,14 +54,14 @@
+                 <ImageView
+                     android:id="@+id/imgTune"
+                     android:layout_width="match_parent"
+-                    android:layout_height="180dp"
++                    android:layout_height="wrap_content"
+                     android:scaleType="fitCenter"
+                     app:srcCompat="@drawable/ic_ukulele_tune_none" />
+ 
+                 <com.example.ahnsik.ukuleletutor.TuneIndicatorView
+                     android:id="@+id/imgTunedNote"
+                     android:layout_width="match_parent"
+-                    android:layout_height="100dp"
++                    android:layout_height="50dp"
+                     android:layout_marginTop="34dp"
+                     android:background="#ddd"
+                     app:srcCompat="@drawable/ic_ukulele_tune_none" />
+@@ -74,17 +74,17 @@
+                     android:fontFamily="sans-serif"
+                     android:gravity="center"
+                     android:text="442.5 Hz"
+-                    android:textSize="32sp" />
++                    android:textSize="20sp" />
+ 
+                 <TextView
+                     android:id="@+id/txtWhatToDo"
+                     android:layout_width="fill_parent"
+-                    android:layout_height="wrap_content"
++                    android:layout_height="26dp"
+                     android:layout_marginTop="8dp"
+                     android:fontFamily="sans-serif"
+                     android:gravity="center"
+                     android:text="Adjust NOB"
+-                    android:textSize="28sp" />
++                    android:textSize="24sp" />
+ 
+             </LinearLayout>
+ 
+@@ -104,7 +104,7 @@
+         android:fontFamily="sans-serif"
+         android:text="@string/btntxt_back"
+         android:textColor="#333"
+-        android:textSize="36sp"
++        android:textSize="24sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+diff --git a/app/src/main/res/layout/filelistitem.xml b/app/src/main/res/layout/filelistitem.xml
+index 361f083..d027f3c 100644
+--- a/app/src/main/res/layout/filelistitem.xml
++++ b/app/src/main/res/layout/filelistitem.xml
+@@ -59,7 +59,7 @@
+                 android:ellipsize="end"
+                 android:text="A long long length of string title"
+                 android:fontFamily="sans-serif"
+-                android:textSize="32sp" />
++                android:textSize="22sp" />
+ 
+         </LinearLayout>
+ 

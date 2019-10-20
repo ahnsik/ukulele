@@ -16,7 +16,7 @@
         android:layout_marginTop="40dp"
         android:fontFamily="sans-serif"
         android:text="설정"
-        android:textSize="36sp"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,7 +32,7 @@
         android:fontFamily="sans-serif"
         android:textColor="#333"
         android:text="@string/btntxt_back"
-        android:textSize="36sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -88,7 +88,7 @@
         android:fontFamily="sans-serif"
         android:textColor="#333"
         android:text="우쿨렐레 튜닝"
-        android:textSize="36sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

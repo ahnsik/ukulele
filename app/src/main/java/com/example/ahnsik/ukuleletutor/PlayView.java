@@ -52,6 +52,9 @@ public class PlayView extends GameView {
         super(context, attributeSet);
         getHolder().addCallback(this);
 
+        // PlayView 가 표시되고 있는 동안에는 계속 Sleep 모드로 들어 가지 않는다.
+        setKeepScreenOn(true);
+
         resource_load();
         // 게임 정보 초기화
         score = 0;
@@ -69,7 +72,8 @@ public class PlayView extends GameView {
 
     private void resource_load() {
         // 비트맵 로딩이 Multi Threading 이 된다면.. 먼저 로드를 시작해 두고 나머지를 설정하는 편이 좋다.
-        bmpBg = BitmapFactory.decodeResource(this.getResources(), R.drawable.bg_paper );
+//        bmpBg = BitmapFactory.decodeResource(this.getResources(), R.drawable.bg_paper );
+        bmpBg = null;
         bmpFinger = BitmapFactory.decodeResource(this.getResources(), R.drawable.finger_guide );
 
         // 전체적으로 기본적으로 사용될 Font 및 기본 색상 등을 지정.
@@ -191,7 +195,13 @@ public class PlayView extends GameView {
         Paint  pScore= new Paint(pBG);
 
         Rect eraserRect = new Rect(SCORE_POSITION_X, TITLE_POSITION_Y-58, 1280, TITLE_POSITION_Y+34);
-        canvas.drawBitmap(bmpBg, eraserRect, eraserRect, null );
+        if (null != bmpBg) {
+            canvas.drawBitmap(bmpBg, eraserRect, eraserRect, null );
+        } else {
+            Paint pPaper = new Paint(pBG);
+            pPaper.setColor(rgb(234, 193, 122));    // 오선지(X) TAB악보 라인 의 색상 / Font색상.
+            canvas.drawRect(eraserRect, pPaper);
+        }
 
         pScore.setTextSize(48.0f);
         canvas.drawText("Score: " + score, SCORE_POSITION_X, TITLE_POSITION_Y-12, pScore);
@@ -324,7 +334,13 @@ public class PlayView extends GameView {
         }
 
         Rect eraserRect = new Rect(xpos-8, y-60, xpos+30, y);
-        canvas.drawBitmap(bmpBg, eraserRect, eraserRect, null );
+        if (null != bmpBg) {
+            canvas.drawBitmap(bmpBg, eraserRect, eraserRect, null );
+        } else {
+            Paint pPaper = new Paint(pBG);
+            pPaper.setColor(rgb(234, 193, 122));    // 오선지(X) TAB악보 라인 의 색상 / Font색상.
+            canvas.drawRect(eraserRect, pPaper);
+        }
         canvas.drawText(flet,xpos,y, fingerColor );
     }
 
