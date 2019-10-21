@@ -3,6 +3,8 @@ package com.example.ahnsik.ukuleletutor;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,6 +32,7 @@ public class FileSelectorActivity extends AppCompatActivity {
     private String[] songfiles;         // 파일명
     private String[] songTitles;        // 곡목
     private String[] songComments;      // 곡목에 대한 설명
+    private Bitmap[] thumbnailBitmap;    // 곡에 대한 thmubnail 이미지
     private String[] songBpm;      // 곡목에 대한 설명
     private String[] songTypes;         // 멜로디 / 코드 / 핑거스타일
     private String nextActivity;
@@ -82,6 +86,7 @@ public class FileSelectorActivity extends AppCompatActivity {
         songfiles = new String[numUkeFiles];
         songTitles = new String[numUkeFiles];        // 곡목
         songComments = new String[numUkeFiles];      // 곡목에 대한 설명
+        thumbnailBitmap =
         songBpm = new String[numUkeFiles];      // BPM
         songTypes = new String[numUkeFiles];         // 멜로디 / 코드 / 핑거스타일
 
@@ -102,6 +107,7 @@ public class FileSelectorActivity extends AppCompatActivity {
                 }
                 songTitles[numUkeFiles] = temp.mSongTitle;
                 songComments[numUkeFiles] = "설명:"+temp.mCommentary;
+                thumbnailBitmap =
                 songBpm[numUkeFiles] = "BPM:"+temp.mBpm;
                 songTypes[numUkeFiles] = temp.mCategory;
 
@@ -122,6 +128,7 @@ public class FileSelectorActivity extends AppCompatActivity {
             songfiles = new String[numUkeFiles];
             songTitles = new String[numUkeFiles];        // 곡목
             songComments = new String[numUkeFiles];      // 곡목에 대한 설명
+            thumbnailBitmap = new Bitmap[numUkeFiles];    // 곡의 Thumbnail 이미지
             songBpm = new String[numUkeFiles];      // BPM
             songTypes = new String[numUkeFiles];         // 멜로디 / 코드 / 핑거스타일
 
@@ -132,6 +139,7 @@ Log.d("ukulele", "index="+i+", filename:"+songfiles[i]  );
                 songfiles[i] = info.getString("filename");;
                 songTitles[i] = info.getString("title");        // 곡목
                 songComments[i] = info.getString("comment");      // 곡목에 대한 설명
+//                thumbnailBitmap[i] = BitmapFactory.decodeFile(info.getString("thumbnail"));
                 songBpm[i] = info.getString("bpm");
                 songTypes[i] = info.getString("type");         // 멜로디 / 코드 / 핑거스타일
             }
@@ -141,6 +149,7 @@ Log.d("ukulele", "index="+i+", filename:"+songfiles[i]  );
             songfiles = null;
             songTitles = null;
             songComments = null;
+            thumbnailBitmap = null;
             songBpm = null;
             songTypes = null;
         }
@@ -198,6 +207,9 @@ Log.d("ukulele", "index="+i+", filename:"+songfiles[i]  );
             songTitleTextview.setText(songTitles[i] );
             TextView songCommentTextview = (TextView)view.findViewById(R.id.descriptionText);
             songCommentTextview.setText(songComments[i] );
+//            ImageView thumbnailImageview = (ImageView)view.findViewById(R.id.fileImageView);
+//            if (thumbnailBitmap != null)
+//                thumbnailImageview.setImageBitmap( thumbnailBitmap[i] );
             return view;
         }
     }

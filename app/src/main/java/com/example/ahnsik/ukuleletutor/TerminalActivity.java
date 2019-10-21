@@ -36,6 +36,7 @@ public class TerminalActivity extends AppCompatActivity {
     public static final int MAX_NUM_OF_SONGS = 1024;
 
     private String[] songfiles;         // 파일명
+    private String[] thumbfiles;         // 파일명
     private String[] songTitles;        // 곡목
     private String[] songComments;      // 곡목에 대한 설명
     private String[] songBpm;      // 곡목에 대한 설명
@@ -126,6 +127,7 @@ public class TerminalActivity extends AppCompatActivity {
         // FTP에서 *.uke 데이터를 읽어서 index 파일을 만들기 위한 버퍼들을 준비.
         num_of_solgs = 0;
         songfiles = new String[MAX_NUM_OF_SONGS];       // 파일이름
+        thumbfiles = new String[MAX_NUM_OF_SONGS];      // 앨범사진(썸네일)파일 이름
         songTitles = new String[MAX_NUM_OF_SONGS];      // 곡목
         songComments = new String[MAX_NUM_OF_SONGS];    // 곡목에 대한 설명
         songBpm = new String[MAX_NUM_OF_SONGS];         // BPM
@@ -192,6 +194,16 @@ public class TerminalActivity extends AppCompatActivity {
                                             result = ftpClient.retrieveFile(musicUrl, musicfos );
 //                                        Log.d("ukulele", "Retrieve " + musicUrl + "- result: " + result);
                                             musicfos.close();
+                                        } else {
+                                            log("?????? music file name: "+ musicUrl + '\n');
+                                        }
+                                        //// MP3 다음은 Thmbnail 그림파일도.
+                                        String thumbnailUrl = getThumbnailFile(name, num_of_solgs);
+                                        if ( ! thumbnailUrl.isEmpty() ) {
+                                            FileOutputStream thumbfos = new FileOutputStream(getFilesDir() + "/" + thumbnailUrl );
+                                            result = ftpClient.retrieveFile(thumbnailUrl, thumbfos );
+//                                        Log.d("ukulele", "Retrieve " + musicUrl + "- result: " + result);
+                                            thumbfos.close();
                                         } else {
                                             log("?????? music file name: "+ musicUrl + '\n');
                                         }
@@ -276,6 +288,22 @@ public class TerminalActivity extends AppCompatActivity {
 
         return temp.mMusicURL;
     }
+
+    private String getThumbnailFile(String name, int index) {
+        boolean jsonResult = false;
+
+        NoteData temp = new NoteData();
+        jsonResult = temp.loadFromFile( getFilesDir(), name );
+        if ( !jsonResult) {
+            Log.d("ukulele", "FTP: Could not get thumbnail-file info." );
+            return null;
+        }
+        thumbfiles[index] = name;                // 파일이름
+        Log.d("ukulele", "filename:"+name+", title:"+songTitles[index]+", bpm:"+songBpm[index]+", comments:"+songComments[index] );
+
+        return temp.mMusicURL;
+    }
+
 
     private JSONObject  makeFileIndexData() {
         JSONObject json = new JSONObject();

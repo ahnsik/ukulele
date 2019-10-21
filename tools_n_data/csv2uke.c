@@ -1,6 +1,6 @@
 /*************************************
 *
-*   우쿨렐레 연주 데이터 만들어 주는 변환기. 
+*   우쿨렐레 연주 데이터 만들어 주는 변환기.
 *      엑셀파일로 TAB악보를 편집, CSV 형식으로 저장하고 변환해서 사용할 수 있다.
 *       - by ccash.
 *
@@ -12,14 +12,14 @@
 #include <string.h>
 #include <ctype.h>
 
-#define READLINE_MAX    512          // 파일 한 라인 당 512 바이트는 넘지 않는 것으로 한다. 
+#define READLINE_MAX    1024         // 파일 한 라인 당 512 바이트는 넘지 않는 것으로 한다.
 #define USAGE_PRINT     printf("\n\n  USAGE: csv2uke [CSV-file] [uke-filename]\n  <WARNING> uke-file will be overwritten !!\n\n");
 
 
 int readline(FILE *fp, char *buffer);
 int parse_line(char *buffer);
 int set_bpm(char *bpm_str);
-int set_quaver(char *quaver_str); 
+int set_quaver(char *quaver_str);
 
 int set_start_offset(char *offset_str);
 int get_note_from_line(char *chord_line);
@@ -54,6 +54,7 @@ char category[64];
 char title[128];
 char create_date[128];
 char source[READLINE_MAX];
+char thumbnail[READLINE_MAX];
 char author[64];
 //char author_comment[READLINE_MAX];
 char author_note[READLINE_MAX];
@@ -72,20 +73,20 @@ int main(int argc, char *argv[] )
 {
     char line_buf[READLINE_MAX];
 
-    if (argc<3) 
+    if (argc<3)
     {   USAGE_PRINT;    //
         return(0);
     }
 
     in_f = fopen( argv[1], "rt" );
-    if (in_f==NULL) 
+    if (in_f==NULL)
     {   printf("\n ERROR: input-file open error !!\n");
         USAGE_PRINT;    //
         return(-1);
     }
 
     out_f = fopen( argv[2], "wt" );
-    if (out_f==NULL) 
+    if (out_f==NULL)
     {   printf("\n ERROR: output-file create (or open) error !!\n");
         USAGE_PRINT;    //
         return(-1);
@@ -118,7 +119,7 @@ int main(int argc, char *argv[] )
 }
 
 
-int readline(FILE *fp, char *buffer) 
+int readline(FILE *fp, char *buffer)
 {   char *ret_ptr;
     int  len;
 
@@ -127,7 +128,7 @@ int readline(FILE *fp, char *buffer)
     {   return -1;
     }
     len = strlen(buffer);
-    if (len==0) 
+    if (len==0)
         return 0;
 
     return len;
@@ -136,9 +137,9 @@ int readline(FILE *fp, char *buffer)
 int get_token(char *buffer, char *token)
 {   int pos = 0;
     while (buffer[pos] != ',')
-    {   if (buffer[pos] == '\0')   
+    {   if (buffer[pos] == '\0')
             break;
-       if (buffer[pos] == '\n')   
+       if (buffer[pos] == '\n')
             break;
         token[pos] = buffer[pos];
         pos++;
@@ -147,15 +148,15 @@ int get_token(char *buffer, char *token)
     return pos;
 }
 
-char *remove_white(char *str) 
+char *remove_white(char *str)
 {   int pos = 0;
     while( *str != '\0' )
     {   if (isspace(*str))
 	    str++;
-	else 
+	else
 	    break;
     }
-    return str;    
+    return str;
 }
 
 /****************************************
@@ -174,11 +175,11 @@ char *remove_white(char *str)
     #A,2,,,,,,2,,,,,,3,,,,,;
     #가사,코,카,오,,,쿠,데,,,,이,,쯔,,모, ,코,코;
 
-    ** 설명 :  
-    **   1라인 문장의 1번째 글자가 #이어야만 한다. 그렇지 않으면 모두 무시. 
+    ** 설명 :
+    **   1라인 문장의 1번째 글자가 #이어야만 한다. 그렇지 않으면 모두 무시.
     **   #BPM, #beat, #title, #start_offset #chord 는 필수.
     **   #chord 아래에 #G, #C, #E, #A 도 반드시 순서대로 나와야 하고 필수.
-    **   #가사 는 옵션. 없어도 된다. 
+    **   #가사 는 옵션. 없어도 된다.
     **   , (콤마)로 구분되는 것은 1개당 8분음표 길이
           (--> bpm 에 의해 timestamp 값으로 바꿔야 함)
           (--> 별도 명령어을 지정해서 콤마 하나의 길이를 16분음표 로 바꿀 수 있도록 할 필요가 있다.)
@@ -195,127 +196,138 @@ int parse_line(char *buffer)
 
     // printf("]] %s\n", buffer );         getchar();
 
-    if (buffer[0] != '#') 
+    if (buffer[0] != '#')
     {   //  printf("%s has no '#'\n", buffer );
         return 0;       // #으로 시작하지 않는다면 무시. - 몽땅 코멘트로 취급
     }
     str_ptr = buffer+1;
 
         // 곡 제목..
-    if ( strncmp( str_ptr, "title", 5) == 0 ) 
+    if ( strncmp( str_ptr, "title", 5) == 0 )
     {   token_len =  get_token(str_ptr+5+1, token);
         printf("Title is : %s \n", token );
         strcpy(title, token);
-    } else if ( strncmp( str_ptr, "제목", 6) == 0 ) 
+    } else if ( strncmp( str_ptr, "제목", 6) == 0 )
     {   token_len =  get_token(str_ptr+6+1, token);
         printf("Title is : %s \n", token );
         strcpy(title, token);
-    } 
+    }
 
-    else if ( strncmp( str_ptr, "category", 8) == 0 ) 
+    else if ( strncmp( str_ptr, "category", 8) == 0 )
     {   token_len =  get_token(str_ptr+8+1, token);
         printf("category is : %s \n", token);
         strcpy(category, token);
-    } else if ( strncmp( str_ptr, "카테고리", 12) == 0 ) 
+    } else if ( strncmp( str_ptr, "카테고리", 12) == 0 )
     {   token_len =  get_token(str_ptr+12+1, token);
         printf("category is : %s \n", token);
         strcpy(category, token);
-    } 
+    }
 
         //  source - 음악파일 (MP3) 또는 동영상 파일의 URL.
-    else if ( strncmp( str_ptr, "source", 6) == 0 ) 
+    else if ( strncmp( str_ptr, "source", 6) == 0 )
     {   token_len =  get_token(str_ptr+6+1, token);
         printf("source Music is : %s \n", token);
         strcpy(source, token);
-    } else if ( strncmp( str_ptr, "음악파일", 12) == 0 ) 
+    } else if ( strncmp( str_ptr, "음악파일", 12) == 0 )
     {   token_len =  get_token(str_ptr+12+1, token);
         printf("source Music is : %s \n", token);
         strcpy(source, token);
-    } 
+    }
 
-    else if ( strncmp( str_ptr, "작성자", 9) == 0 ) 
+        //  thumbnail - 연주곡 리스트의 아이콘들을 준비함..
+    else if ( strncmp( str_ptr, "thumbnail", 9) == 0 )
+    {   token_len =  get_token(str_ptr+9+1, token);
+        printf("thumbnail is : %s \n", token);
+        strcpy(thumbnail, token);
+    } else if ( strncmp( str_ptr, "앨범표지", 12) == 0 )
+    {   token_len =  get_token(str_ptr+12+1, token);
+        printf("thumbnail is : %s \n", token);
+        strcpy(thumbnail, token);
+    }
+
+    else if ( strncmp( str_ptr, "작성자", 9) == 0 )
     {   token_len =  get_token(str_ptr+9+1, token);
         printf("Author is : %s \n", token);
         strcpy(author, token);
-    } else if ( strncmp( str_ptr, "author", 6) == 0 ) 
+    } else if ( strncmp( str_ptr, "author", 6) == 0 )
     {   token_len =  get_token(str_ptr+6+1, token);
         printf("author is : %s \n", token);
         strcpy(author, token);
     }
-    else if ( strncmp( str_ptr, "설명", 6) == 0 ) 
+    else if ( strncmp( str_ptr, "설명", 6) == 0 )
     {   token_len =  get_token(str_ptr+6+1, token);
         printf("comment is : %s \n", token);
         strcpy(comment, token);
-    } else if ( strncmp( str_ptr, "comment", 7) == 0 ) 
+    } else if ( strncmp( str_ptr, "comment", 7) == 0 )
     {   token_len =  get_token(str_ptr+7+1, token);
         printf("comment is : %s \n", token);
         strcpy(comment, token);
     }
-    else if ( strncmp( str_ptr, "메모", 6) == 0 ) 
+    else if ( strncmp( str_ptr, "메모", 6) == 0 )
     {   token_len =  get_token(str_ptr+6+1, token);
         printf("Author is : %s \n", token);
         strcpy(author_note, token);
-    } else if ( strncmp( str_ptr, "author_note", 11) == 0 ) 
+    } else if ( strncmp( str_ptr, "author_note", 11) == 0 )
     {   token_len =  get_token(str_ptr+11+1, token);
         printf("author is : %s \n", token);
         strcpy(author_note, token);
     }
 
         // BPM - 이 것으로 timestamp 를 계산할 것이므로 매우 중요.
-    else if ( strncmp( str_ptr, "bpm", 3) == 0 ) 
+    else if ( strncmp( str_ptr, "bpm", 3) == 0 )
     {   token_len =  get_token(str_ptr+3+1, token);
         printf("BPM is : %s \n", token);
-        set_bpm(token); 
-    } else if ( strncmp( str_ptr, "BPM", 3) == 0 ) 
+        set_bpm(token);
+    } else if ( strncmp( str_ptr, "BPM", 3) == 0 )
     {   token_len =  get_token(str_ptr+3+1, token);
         printf("BPM is : %s \n", token);
         set_bpm(token);
     }
         // quaver - 이것은 8분음표 기반인지 16분 음표 기반인지를 판단. 이것으로 timestamp 를 계산할 것이므로 매우 중요.
-    else if ( strncmp( str_ptr, "quaver", 6) == 0 ) 
+    else if ( strncmp( str_ptr, "quaver", 6) == 0 )
     {   token_len =  get_token(str_ptr+6+1, token);
-        set_quaver(token); 
+        set_quaver(token);
         printf("Beat is : %s \n", token);
-    } else if ( strncmp( str_ptr, "8분음표", 10) == 0 ) 
+    } else if ( strncmp( str_ptr, "8분음표", 10) == 0 )
     {   token_len =  get_token(str_ptr+10+1, token);
         set_quaver(token);
         printf("Beat is : %s \n", token);
     }
 
 /*        // 박자 - 1 마디 안에 들어 갈 박자의 수 - 엑셀파일의 1개 셀은 (기본적으로) 8분음표를 기준으로 했음.
-    else if ( strncmp( str_ptr, "beat", 4) == 0 ) 
+    else if ( strncmp( str_ptr, "beat", 4) == 0 )
     {   token_len =  get_token(str_ptr+4+1, token);
         printf("beat is : %s \n", token);
-    } else if ( strncmp( str_ptr, "박자", 6) == 0 ) 
+    } else if ( strncmp( str_ptr, "박자", 6) == 0 )
     {   token_len =  get_token(str_ptr+6+1, token);
         printf("beat is : %s \n", token);
     }
 
         // 엑셀 파일의 가로 1 줄에 포함된 마디 수.
-    else if ( strncmp( str_ptr, "measure", 7) == 0 ) 
+    else if ( strncmp( str_ptr, "measure", 7) == 0 )
     {   token_len =  get_token(str_ptr+7+1, token);
         printf("measure in a line is : %s \n", token);
-    } else if ( strncmp( str_ptr, "마디", 6) == 0 ) 
+    } else if ( strncmp( str_ptr, "마디", 6) == 0 )
     {   token_len =  get_token(str_ptr+6+1, token);
         printf("1행 당 마디 수 : %s \n", token);
     }
 */
         // Start_offset.
-    else if ( strncmp( str_ptr, "start_offset", 12) == 0 ) 
+    else if ( strncmp( str_ptr, "start_offset", 12) == 0 )
     {   token_len =  get_token(str_ptr+12+1, token);
         printf("start_offset is : %s \n", token);
         set_start_offset(token);
-    } else if ( strncmp( str_ptr, "시작위치", 12) == 0 ) 
+    } else if ( strncmp( str_ptr, "시작위치", 12) == 0 )
     {   token_len =  get_token(str_ptr+12+1, token);
         printf("시작시간위치 is : %s \n", token);
         set_start_offset(token);
     }
 
-    else if ( strncmp( str_ptr, "chord", 5) == 0 ) 
+    else if ( strncmp( str_ptr, "chord", 5) == 0 )
     {   token_len =  get_token(str_ptr+5+1, token);
 //        printf("\nchord is : %s \n", token);
         get_note_from_line(str_ptr+5+1);
-    } else if ( strncmp( str_ptr, "코드", 6) == 0 ) 
+    } else if ( strncmp( str_ptr, "코드", 6) == 0 )
     {   token_len =  get_token(str_ptr+6+1, token);
 //        printf("\nchord is : %s \n", token);
         get_note_from_line(str_ptr+6+1);
@@ -326,10 +338,10 @@ int parse_line(char *buffer)
 //        printf("could not get TAG: %s\n", str_ptr);
         printf("Unknown TAG: %s\n", buffer );
     }
-    
+
 }
 
-int set_bpm(char *bpm_str) 
+int set_bpm(char *bpm_str)
 {   bpm = atof(bpm_str);
 
     if (semiquaver_base)        // 악보 데이터가 16분 음표 기반인지 아닌지 판단.
@@ -347,7 +359,7 @@ int set_quaver(char *quaver_str)
     //printf("quaver_str = %s\n", quaver_str );
     if ( strncmp(quaver_str, "semiquaver", 10)==0 )     // 16분 음표 기반인지 판단.
     {   semiquaver_base = 1;
-    } else 
+    } else
     {   semiquaver_base = 0;
     }
 
@@ -359,7 +371,7 @@ int set_quaver(char *quaver_str)
     return 0;
 }
 
-int set_start_offset(char *offset_str) 
+int set_start_offset(char *offset_str)
 {   int offset = atoi(offset_str);
     time_stamp = start_offset = offset;   // BPM과 음표길이에 따른 timestamp 값을 증가시키는 용도
     return 0;
@@ -367,8 +379,8 @@ int set_start_offset(char *offset_str)
 
 
 /**********************
-    #chord 를 발견하게 되면, 그 아랫 줄의 #G, #C, #E, #A 와 #가사 까지도 모두 순차적으로 읽어 와서 
-        라인을 모두 파싱하는 동작을 한다. 
+    #chord 를 발견하게 되면, 그 아랫 줄의 #G, #C, #E, #A 와 #가사 까지도 모두 순차적으로 읽어 와서
+        라인을 모두 파싱하는 동작을 한다.
 ***********************/
 
 long noteCount = 0;   // JSON배열을 만들 때, 아이템의 갯수.(갯수가 0이라는 건 첫번째 아이템이므로 ,를 빼야 한다.)
@@ -431,14 +443,14 @@ int get_note_from_line(char *chord_line) {
 
 ////////////////////////////////
 // 토큰으로 읽기
-        //memset(&note, '\0', sizeof(note) );        
+        //memset(&note, '\0', sizeof(note) );
         note.time_stamp = time_stamp;
 
         token_len = get_token(chord_line, token);
         if (token_len > 0)
         {   strcpy(note.chord, remove_white(token));
-        } 
-        else 
+        }
+        else
         {   note.chord[0] = '\0';
         }
         chord_line += token_len+1;      // 다음 토큰(코드)로 포인터 이동.
@@ -446,8 +458,8 @@ int get_note_from_line(char *chord_line) {
         token_len = get_token(g_ptr, token);
         if (token_len > 0)
         {   strcpy(note.g, remove_white(token));
-        } 
-        else 
+        }
+        else
         {   note.g[0] = '\0';
         }
         g_ptr += token_len+1;      // 다음 토큰(G)로 포인터 이동.
@@ -455,8 +467,8 @@ int get_note_from_line(char *chord_line) {
         token_len = get_token(c_ptr, token);
         if (token_len > 0)
         {   strcpy(note.c, remove_white(token));
-        } 
-        else 
+        }
+        else
         {   note.c[0] = '\0';
         }
         c_ptr += token_len+1;      // 다음 토큰(C)로 포인터 이동.
@@ -464,8 +476,8 @@ int get_note_from_line(char *chord_line) {
         token_len = get_token(e_ptr, token);
         if (token_len > 0)
         {   strcpy(note.e, remove_white(token));
-        } 
-        else 
+        }
+        else
         {   note.e[0] = '\0';
         }
         e_ptr += token_len+1;      // 다음 토큰(E)로 포인터 이동.
@@ -473,8 +485,8 @@ int get_note_from_line(char *chord_line) {
         token_len = get_token(a_ptr, token);
         if (token_len > 0)
         {   strcpy(note.a, remove_white(token));
-        } 
-        else 
+        }
+        else
         {   note.a[0] = '\0';
         }
         a_ptr += token_len+1;      // 다음 토큰(A)로 포인터 이동.
@@ -482,8 +494,8 @@ int get_note_from_line(char *chord_line) {
         token_len = get_token(l_ptr, token);
         if (token_len > 0)
         {   strcpy(note.lyric, token);
-        } 
-        else 
+        }
+        else
         {   note.lyric[0] = '\0';
         }
         l_ptr += token_len+1;      // 다음 토큰(가사)로 포인터 이동.
@@ -492,19 +504,19 @@ int get_note_from_line(char *chord_line) {
 /////////////////////////////////////////
 //        make_note_data(&note);
 
-        //// 실제 음계 데이터를 파일에 써 넣기. 
+        //// 실제 음계 데이터를 파일에 써 넣기.
         if ( (note.chord[0] == '\0')&&
                 (note.g[0]=='\0')&&
                 (note.c[0]=='\0')&&
                 (note.e[0]=='\0')&&
                 (note.a[0]=='\0')&&
                 (note.lyric[0]=='\0') )
-        {       // 연주할 음이 없는 상태 - 쉼표, 쉬는 마디, 이전 음계의 연속, 등.. 
+        {       // 연주할 음이 없는 상태 - 쉼표, 쉬는 마디, 이전 음계의 연속, 등..
         }
         else
         {
             if ( isNoNotedata( note.g[0], note.c[0], note.e[0], note.a[0]) )
-            {       // 기록할 note 가 하나도 없으면 기록하지 않는다. 
+            {       // 기록할 note 가 하나도 없으면 기록하지 않는다.
                 continue;
             }
 
@@ -590,12 +602,12 @@ int  isNoNotedata(char g, char c, char e, char a)   // 모든 노트에 데이�
 {
     if ( (g == '\0')&& (c == '\0')&& (e == '\0')&& (a == '\0') )
         return 1;
-    else 
+    else
         return 0;
 }
 
 
-void write_uke_file() 
+void write_uke_file()
 {
     fprintf(out_f, "\n" );
     fprintf(out_f, "  \"title\":\"%s\",\n" , title );
@@ -607,13 +619,14 @@ void write_uke_file()
     fprintf(out_f, "  \"create_date\":\"----/--/--\",\n" );
     // 아래의 내용들은 *.uke 파일로써 반드시 필요한 내용들.
     fprintf(out_f, "  \"source\":\"%s\",\n" , source );
+    fprintf(out_f, "  \"thumbnail\":\"%s\",\n" , thumbnail );
     fprintf(out_f, "  \"start_offset\":\"%d\",\n" , start_offset );
     fprintf(out_f, "  \"bpm\":\"%5.1f\"\n" , bpm );
 }
 
-/*void make_note_data(NOTE_ONE *n) 
+/*void make_note_data(NOTE_ONE *n)
 {
-    
+
     n->notedata_string
 }*/
 
@@ -621,14 +634,14 @@ void write_uke_file()
 #define MAX_FLET 17
 char *note_names[NOTENAME_LENG] = { "G3", "G#3", "A3", "A#3", "B3",         // 낮은 음으로 G 현을 조정했을 경우..
                                     "C4", "C#4", "D4", "D#4", "E4", "F4", "F#4", "G4", "G#4", "A4", "A#4", "B4",
-                                    "C5", "C#5", "D5", "D#5", "E5", "F5", "F#5", "G5", "G#5", "A5", "A#5", "B5", 
+                                    "C5", "C#5", "D5", "D#5", "E5", "F5", "F#5", "G5", "G#5", "A5", "A#5", "B5",
                                     "C5", "C#5", "D5", "D#5", "E5" };
 char **G_note = &note_names[12];
 char **C_note = &note_names[5];
 char **E_note = &note_names[9];
 char **A_note = &note_names[14];
 
-char *convert_note_g(char *str_pos) 
+char *convert_note_g(char *str_pos)
 {
     int flet_num;
     sscanf(str_pos, "%d", &flet_num);
@@ -638,7 +651,7 @@ char *convert_note_g(char *str_pos)
     }
     return G_note[flet_num];
 }
-char *convert_note_c(char *str_pos) 
+char *convert_note_c(char *str_pos)
 {
     int flet_num;
     sscanf(str_pos, "%d", &flet_num);
@@ -648,7 +661,7 @@ char *convert_note_c(char *str_pos)
     }
     return C_note[flet_num];
 }
-char *convert_note_e(char *str_pos) 
+char *convert_note_e(char *str_pos)
 {
     int flet_num;
     sscanf(str_pos, "%d", &flet_num);
@@ -658,7 +671,7 @@ char *convert_note_e(char *str_pos)
     }
     return E_note[flet_num];
 }
-char *convert_note_a(char *str_pos) 
+char *convert_note_a(char *str_pos)
 {
     int flet_num;
     sscanf(str_pos, "%d", &flet_num);
@@ -668,4 +681,3 @@ char *convert_note_a(char *str_pos)
     }
     return A_note[flet_num];
 }
-
