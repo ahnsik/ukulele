@@ -131,20 +131,24 @@ public class FileSelectorActivity extends AppCompatActivity {
             songTitles = new String[numUkeFiles];        // 곡목
             songComments = new String[numUkeFiles];      // 곡목에 대한 설명
             thumbPath = new String[numUkeFiles];          // 곡의 thumbnail 파일명
-//            thumbnailBitmap = new Bitmap[numUkeFiles];    // 곡의 Thumbnail 이미지
+            thumbnailBitmap = new Bitmap[numUkeFiles];    // 곡의 Thumbnail 이미지
             songBpm = new String[numUkeFiles];      // BPM
             songTypes = new String[numUkeFiles];         // 멜로디 / 코드 / 핑거스타일
 
             JSONArray songList = jsonFile.getJSONArray("songList" );
             for (int i=0; i<numUkeFiles; i++ ) {
                 JSONObject  info = songList.getJSONObject(i);
-//Log.d("ukulele", "index="+i+", filename:"+songfiles[i]  );
                 songfiles[i] = info.getString("filename");;
                 songTitles[i] = info.getString("title");        // 곡목
                 songComments[i] = info.getString("comment");      // 곡목에 대한 설명
                 thumbPath[i] = info.getString("thumbnail");          // 곡의 thumbnail 파일명
-Log.d("ukulele", "index="+i+", thumbnail:"+thumbPath[i] );
-//                thumbnailBitmap[i] = BitmapFactory.decodeFile(info.getString(thumbPath[i]) );
+                Log.d("ukulele", "index="+i+", thumbnail:"+thumbPath[i] );
+                if ( thumbPath[i]==null || thumbPath[i].equals("null") ) {
+                    thumbnailBitmap[i] = BitmapFactory.decodeResource(getResources(), R.drawable.ukulele_icon);
+                } else {
+                    thumbnailBitmap[i] = BitmapFactory.decodeFile( getFilesDir() + "/" + thumbPath[i] );
+                    Log.d("ukulele", "index="+i+", thumbnailBitmap = "+thumbnailBitmap[i] );
+                }
                 songBpm[i] = info.getString("bpm");
                 songTypes[i] = info.getString("type");         // 멜로디 / 코드 / 핑거스타일
             }
@@ -154,7 +158,7 @@ Log.d("ukulele", "index="+i+", thumbnail:"+thumbPath[i] );
             songfiles = null;
             songTitles = null;
             songComments = null;
-//            thumbnailBitmap = null;
+            thumbnailBitmap = null;
             songBpm = null;
             songTypes = null;
         }
@@ -212,9 +216,10 @@ Log.d("ukulele", "index="+i+", thumbnail:"+thumbPath[i] );
             songTitleTextview.setText(songTitles[i] );
             TextView songCommentTextview = (TextView)view.findViewById(R.id.descriptionText);
             songCommentTextview.setText(songComments[i] );
-//            ImageView thumbnailImageview = (ImageView)view.findViewById(R.id.fileImageView);
-//            if (thumbnailBitmap != null)
-//                thumbnailImageview.setImageBitmap( thumbnailBitmap[i] );
+            ImageView thumbnailImageview = (ImageView)view.findViewById(R.id.fileImageView);
+            if (thumbnailBitmap != null) {
+                thumbnailImageview.setImageBitmap( thumbnailBitmap[i] );
+            }
             return view;
         }
     }
