@@ -41,7 +41,7 @@ public class TerminalActivity extends AppCompatActivity {
     private String[] songComments;      // 곡목에 대한 설명
     private String[] songBpm;      // 곡목에 대한 설명
     private String[] songTypes;         // 멜로디 / 코드 / 핑거스타일
-    private int      num_of_solgs;         // 멜로디 / 코드 / 핑거스타일
+    private int      num_of_songs;         // 멜로디 / 코드 / 핑거스타일
 
     private FTPClient ftpClient;
     private FtpAccessMessageHander mHandler;
@@ -101,12 +101,6 @@ public class TerminalActivity extends AppCompatActivity {
 
         logString = "";
 
-//        num_of_solgs = 0;
-//        songfiles = null;       // 파일이름
-//        songTitles = null;      // 곡목
-//        songComments = null;    // 곡목에 대한 설명
-//        songBpm = null;         // BPM
-//        songTypes = null;       // 멜로디 / 코드 / 핑거스타일
     }
 
     /////////////////////// Terminal 에 로그를 기록하는 함수 /////////////
@@ -125,7 +119,7 @@ public class TerminalActivity extends AppCompatActivity {
     private void openAndGetListFromFtp() {
 
         // FTP에서 *.uke 데이터를 읽어서 index 파일을 만들기 위한 버퍼들을 준비.
-        num_of_solgs = 0;
+        num_of_songs = 0;
         songfiles = new String[MAX_NUM_OF_SONGS];       // 파일이름
         thumbfiles = new String[MAX_NUM_OF_SONGS];      // 앨범사진(썸네일)파일 이름
         songTitles = new String[MAX_NUM_OF_SONGS];      // 곡목
@@ -166,76 +160,7 @@ public class TerminalActivity extends AppCompatActivity {
 
                 // 문제 없으면, 모든 파일목록을 가져와서 *.uke 파일만 골라 로컬 폴더에 복사.
                 if (success) {
-                    try {
-                        FTPFile[] ftpfiles = ftpClient.listFiles();
-                        int length = ftpfiles.length;
-
-                        for (int i = 0; i < length; i++) {
-                            String name = ftpfiles[i].getName();
-                            boolean isFile = ftpfiles[i].isFile();
-                            if (isFile) {
-                                if (name.toLowerCase().endsWith(".uke")) {
-                                    log( "FTP: File : " + name + '\n');
-
-                                    ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-                                    ftpClient.enterLocalPassiveMode();
-                                    boolean result = false;
-//                                Log.d("ukulele", "Local file name: " + getFilesDir() + "/" + name );
-                                    FileOutputStream fos = new FileOutputStream(getFilesDir() + "/" + name );
-                                    result = ftpClient.retrieveFile(name, fos);
-//                                Log.d("ukulele", "Retrieve " + name + "- result: " + result);
-                                    fos.close();
-
-                                    // *.uke 파일 전송이 완료되면, 해당 파일을 읽어서 mp3 음악소스를 확인하고 copy 해야 한다.
-                                    if (result) {
-                                        String musicUrl = getMusicSourceFile(name, num_of_solgs);
-                                        if ( ! musicUrl.isEmpty() ) {
-                                            FileOutputStream musicfos = new FileOutputStream(getFilesDir() + "/" + musicUrl );
-                                            result = ftpClient.retrieveFile(musicUrl, musicfos );
-//                                        Log.d("ukulele", "Retrieve " + musicUrl + "- result: " + result);
-                                            musicfos.close();
-                                        } else {
-                                            log("?????? music file name: "+ musicUrl + '\n');
-                                        }
-                                        //// MP3 다음은 Thmbnail 그림파일도.
-                                        String thumbnailUrl = getThumbnailFile(name, num_of_solgs);
-                                        if ( ! thumbnailUrl.isEmpty() ) {
-                                            FileOutputStream thumbfos = new FileOutputStream(getFilesDir() + "/" + thumbnailUrl );
-                                            result = ftpClient.retrieveFile(thumbnailUrl, thumbfos );
-//                                        Log.d("ukulele", "Retrieve " + musicUrl + "- result: " + result);
-                                            thumbfos.close();
-                                        } else {
-                                            log("?????? music file name: "+ musicUrl + '\n');
-                                        }
-                                    }
-                                    num_of_solgs++;
-                                }
-                            } else {
-                                log("FTP: Directory : " + name + '\n');
-                            }
-                        }
-                        log("FTP: " + ftpClient.getReplyString() + '\n');
-
-                        // Toast 를 대신 표시하도록 메세지를 던진다.
-                        Message msg = mHandler.obtainMessage();
-                        Bundle b = new Bundle();
-                        b.putString("result_msg", ftpClient.getReplyString() );      // 주파수 값을 넣어서 메세지 전송함.
-                        msg.setData(b);
-                        mHandler.sendMessage(msg);
-
-                        ftpClient.logout();
-                        log("FTP: Logged out.\n" );
-                        ftpClient.disconnect();
-                        log("FTP: Disconnected.\n" );
-
-                        makeFileIndexData();
-                        log("FTP: makeFileIndexData.\n" );
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        success = false;
-                    }
-                    //--------------------------
+                    success = copyingUkeFiles();
                 }   // end of if
 
             }   // end of run()
@@ -270,6 +195,89 @@ public class TerminalActivity extends AppCompatActivity {
     }
 
 
+    private boolean copyingUkeFiles() {
+        try {
+            FTPFile[] ftpfiles = ftpClient.listFiles();
+            int length = ftpfiles.length;
+
+            for (int i = 0; i < length; i++) {
+                String name = ftpfiles[i].getName();
+                boolean isFile = ftpfiles[i].isFile();
+                if (isFile) {
+                    if (name.toLowerCase().endsWith(".uke")) {
+                        log( "FTP: File : " + name + '\n');
+
+                        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+                        ftpClient.enterLocalPassiveMode();
+                        boolean result = false;
+//                        Log.d("ukulele", "Local file name: " + getFilesDir() + "/" + name );
+                        FileOutputStream fos = new FileOutputStream(getFilesDir() + "/" + name );
+                        result = ftpClient.retrieveFile(name, fos);
+//                        Log.d("ukulele", "Retrieve " + name + "- result: " + result);
+                        fos.close();
+
+                        // *.uke 파일 전송이 완료되면, 해당 파일을 읽어서 mp3 음악소스를 확인하고 copy 해야 한다.
+                        if (result) {
+                            String musicUrl = getMusicSourceFile(name, num_of_songs);
+                            Log.d("ukulele", "musicUrl : " + musicUrl );
+                            if ( ! musicUrl.isEmpty() ) {
+                                if ( ! musicUrl.contains("https://") ) {  // URL 인 경우엔 파일 복사하지 않고 통과.
+                                    Log.d("ukulele", "Copying.." + musicUrl);
+                                    FileOutputStream musicfos = new FileOutputStream(getFilesDir() + "/" + musicUrl);
+                                    result = ftpClient.retrieveFile(musicUrl, musicfos);
+                                    Log.d("ukulele", "Retrieve " + musicUrl + "- result: " + result);
+                                    musicfos.close();
+                                } else {
+                                    Log.d("ukulele", "Music file is on the web.." + musicUrl);
+                                }
+                                // 음악파일을 정상으로 가져 왔으면 Thumbnail 파일 이름도 가져 와서 FTP로 부터 다운로드..
+                                if ( !thumbfiles[num_of_songs].isEmpty() ) {
+                                    String thumbUrl = thumbfiles[num_of_songs];
+                                    Log.d("ukulele", "Thumbnail.. " + thumbUrl );
+
+                                    if ( thumbUrl.equals("null") || thumbUrl.contains("https://") ) {    // web 에 있는 파일이 아니라면,
+                                        thumbfiles[num_of_songs] = null;
+                                    } else {
+                                        FileOutputStream thumbfos = new FileOutputStream(getFilesDir() + "/" + thumbUrl );
+                                        result = ftpClient.retrieveFile(thumbUrl, thumbfos );
+                                        Log.d("ukulele", "Thumbnail.. " + thumbUrl + "- result: " + result);
+                                        thumbfos.close();
+                                    }
+                                }
+                            } else {
+                                log("?????? empty music file name: "+ musicUrl + '\n');
+                            }
+                        }
+                        num_of_songs++;
+                    }
+                } else {
+                    log("FTP: Directory : " + name + '\n');
+                }
+            }
+            log("FTP: " + ftpClient.getReplyString() + '\n');
+
+            // Toast 를 대신 표시하도록 메세지를 던진다.
+            Message msg = mHandler.obtainMessage();
+            Bundle b = new Bundle();
+            b.putString("result_msg", ftpClient.getReplyString() );      // 주파수 값을 넣어서 메세지 전송함.
+            msg.setData(b);
+            mHandler.sendMessage(msg);
+
+            ftpClient.logout();
+            log("FTP: Logged out.\n" );
+            ftpClient.disconnect();
+            log("FTP: Disconnected.\n" );
+
+            makeFileIndexData();
+            log("FTP: makeFileIndexData.\n" );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return  false;
+        }
+        return  true;
+    }
+
     private String getMusicSourceFile(String name, int index) {
         boolean jsonResult = false;
 
@@ -284,12 +292,13 @@ public class TerminalActivity extends AppCompatActivity {
         songComments[index] = temp.mCommentary; // 곡목에 대한 설명
         songBpm[index] = " "+temp.mBpm;             // BPM
         songTypes[index] = temp.mCategory;      // 멜로디 / 코드 / 핑거스타일
+        thumbfiles[index] = temp.mThumbnailURL; // 앨범 사진파일
         Log.d("ukulele", "filename:"+name+", title:"+songTitles[index]+", bpm:"+songBpm[index]+", comments:"+songComments[index] );
 
         return temp.mMusicURL;
     }
 
-    private String getThumbnailFile(String name, int index) {
+/*    private String getThumbnailFile(String name, int index) {
         boolean jsonResult = false;
 
         NoteData temp = new NoteData();
@@ -298,25 +307,28 @@ public class TerminalActivity extends AppCompatActivity {
             Log.d("ukulele", "FTP: Could not get thumbnail-file info." );
             return null;
         }
-        thumbfiles[index] = name;                // 파일이름
-        Log.d("ukulele", "filename:"+name+", title:"+songTitles[index]+", bpm:"+songBpm[index]+", comments:"+songComments[index] );
+        thumbfiles[index] = temp.mThumbnailURL;   // 앨범사진 파일이름
+        Log.d("ukulele", "Thumbnail:"+thumbfiles[index] );
 
-        return temp.mMusicURL;
+        return temp.mThumbnailURL;
     }
-
-
+*/
     private JSONObject  makeFileIndexData() {
         JSONObject json = new JSONObject();
 
         try {
-            json.put("num_of_songs", num_of_solgs);
-            Log.d("ukulele", "makeFileIndexData.." + num_of_solgs );
+            json.put("num_of_songs", num_of_songs);
+            Log.d("ukulele", "makeFileIndexData.." + num_of_songs );
             JSONArray tabJ= new JSONArray();
-            for (int i=0; i<num_of_solgs; i++) {
+            for (int i=0; i<num_of_songs; i++) {
                 JSONObject song = new JSONObject();
                 song.put("filename", songfiles[i] );
                 song.put("title", songTitles[i] );
                 song.put("comment", songComments[i] );
+                if ( thumbfiles[i]==null || thumbfiles[i].isEmpty() )
+                    song.put("thumbnail", "null" );
+                else
+                    song.put("thumbnail", thumbfiles[i] );
                 song.put("bpm", songBpm[i] );
                 song.put("type", songTypes[i] );
 

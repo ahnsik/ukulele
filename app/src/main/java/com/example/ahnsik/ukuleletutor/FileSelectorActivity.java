@@ -32,10 +32,12 @@ public class FileSelectorActivity extends AppCompatActivity {
     private String[] songfiles;         // 파일명
     private String[] songTitles;        // 곡목
     private String[] songComments;      // 곡목에 대한 설명
+    private String[] thumbPath;      // 곡목에 대한 thumbnail 이미지의 path(파일명)
     private Bitmap[] thumbnailBitmap;    // 곡에 대한 thmubnail 이미지
     private String[] songBpm;      // 곡목에 대한 설명
     private String[] songTypes;         // 멜로디 / 코드 / 핑거스타일
     private String nextActivity;
+
 
     public static final String INDEXFILENAME="ftpsonglist.json";  //"ccash.iptime.org";
 
@@ -128,18 +130,21 @@ public class FileSelectorActivity extends AppCompatActivity {
             songfiles = new String[numUkeFiles];
             songTitles = new String[numUkeFiles];        // 곡목
             songComments = new String[numUkeFiles];      // 곡목에 대한 설명
-            thumbnailBitmap = new Bitmap[numUkeFiles];    // 곡의 Thumbnail 이미지
+            thumbPath = new String[numUkeFiles];          // 곡의 thumbnail 파일명
+//            thumbnailBitmap = new Bitmap[numUkeFiles];    // 곡의 Thumbnail 이미지
             songBpm = new String[numUkeFiles];      // BPM
             songTypes = new String[numUkeFiles];         // 멜로디 / 코드 / 핑거스타일
 
             JSONArray songList = jsonFile.getJSONArray("songList" );
             for (int i=0; i<numUkeFiles; i++ ) {
                 JSONObject  info = songList.getJSONObject(i);
-Log.d("ukulele", "index="+i+", filename:"+songfiles[i]  );
+//Log.d("ukulele", "index="+i+", filename:"+songfiles[i]  );
                 songfiles[i] = info.getString("filename");;
                 songTitles[i] = info.getString("title");        // 곡목
                 songComments[i] = info.getString("comment");      // 곡목에 대한 설명
-//                thumbnailBitmap[i] = BitmapFactory.decodeFile(info.getString("thumbnail"));
+                thumbPath[i] = info.getString("thumbnail");          // 곡의 thumbnail 파일명
+Log.d("ukulele", "index="+i+", thumbnail:"+thumbPath[i] );
+//                thumbnailBitmap[i] = BitmapFactory.decodeFile(info.getString(thumbPath[i]) );
                 songBpm[i] = info.getString("bpm");
                 songTypes[i] = info.getString("type");         // 멜로디 / 코드 / 핑거스타일
             }
@@ -149,7 +154,7 @@ Log.d("ukulele", "index="+i+", filename:"+songfiles[i]  );
             songfiles = null;
             songTitles = null;
             songComments = null;
-            thumbnailBitmap = null;
+//            thumbnailBitmap = null;
             songBpm = null;
             songTypes = null;
         }

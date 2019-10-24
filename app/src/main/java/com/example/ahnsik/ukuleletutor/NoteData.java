@@ -12,6 +12,7 @@ import java.io.FileReader;
 public class NoteData {
 
     public  String  mMusicURL;          // 연주할 음악 MP3 주소 또는 YouTube 주소..
+    public  String  mThumbnailURL;          // 연주할 음악 MP3 주소 또는 YouTube 주소..
     public  String  mSongTitle;         // 곡의 제목
     public  String  mCategory;          // 연주방법 : Chord / 밴드(단음)연주 / 핑거스타일 / 아르페지오, etc..
     public  String  mAuthor;            // 악보 제작자
@@ -39,6 +40,7 @@ public class NoteData {
 
     public  NoteData() {
         mMusicURL = null;
+        mThumbnailURL = null;
         mSongTitle = null;
         mStartOffset = 0;
         mBpm = 0.0f;
@@ -108,6 +110,7 @@ public class NoteData {
         JSONObject json = new JSONObject();
         try {
             json.put("source", mMusicURL );
+            json.put("thumbnail", mThumbnailURL );
             json.put("title", mSongTitle);
             json.put("category", mCategory);
             json.put("author", mAuthor );
@@ -163,6 +166,7 @@ public class NoteData {
 
             this.mMusicURL = ukeData.getString("source");
             Log.d("ukulele", " ** very important: source - " + this.mMusicURL );
+            this.mThumbnailURL = ukeData.getString("thumbnail");
             this.mSongTitle = ukeData.getString("title");
 
             this.mStartOffset = ukeData.getInt("start_offset");
