@@ -22,10 +22,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 public class FileSelectorActivity extends AppCompatActivity {
 
@@ -37,6 +34,7 @@ public class FileSelectorActivity extends AppCompatActivity {
     private String[] songBpm;      // 곡목에 대한 설명
     private String[] songTypes;         // 멜로디 / 코드 / 핑거스타일
     private String nextActivity;
+    private Bitmap defaultThumbnail;    // 곡에 대한 thmubnail 이미지
 
 
     public static final String INDEXFILENAME="ftpsonglist.json";  //"ccash.iptime.org";
@@ -63,63 +61,6 @@ public class FileSelectorActivity extends AppCompatActivity {
             }
         });
 
-/*======================= 이 부분은 index파일 (INDEXFILENAME) 을 만들어 처리하는 것으로 대체 함. ================================ *
-        String filteringName;
-        // 맨 처음 모든 파일의 목록을 가져와서 *.uke 파일만 골라서 리스트를 만들 것임.
-//        File directory = new File("/storage/sdcard0");
-        File directory = getFilesDir();
-        File[] allfiles = directory.listFiles();
-        int numFiles = allfiles.length;
-        // 우선 *.uke 파일의 갯수만 확인.  - 배열의 크기를 결정하기 위해서 임.
-        int numUkeFiles = 0;
-        for (int i = 0; i < numFiles; i++) {
-            filteringName = allfiles[i].getName();
-            if (filteringName.toLowerCase().endsWith("uke")) {
-                numUkeFiles++;
-            }
-        }
-
-        if (numUkeFiles <= 0) {     // *.uke 파일이 하나도 없다면..?
-            Log.d("ukulele", "ERROR: No *.uke files.");
-            return;
-        }
-
-        // *.uke 파일이름만 골라 저장할 배열을 생성
-        songfiles = new String[numUkeFiles];
-        songTitles = new String[numUkeFiles];        // 곡목
-        songComments = new String[numUkeFiles];      // 곡목에 대한 설명
-        thumbnailBitmap =
-        songBpm = new String[numUkeFiles];      // BPM
-        songTypes = new String[numUkeFiles];         // 멜로디 / 코드 / 핑거스타일
-
-        // 다시 한 번 *.uke 파일만 골라서 배열에 저장함.
-        numUkeFiles = 0;
-        for (int i = 0; i < allfiles.length; i++) {
-            filteringName = allfiles[i].getName();
-            if (filteringName.toLowerCase().endsWith("uke")) {
-                songfiles[numUkeFiles] = allfiles[i].getName();
-
-                NoteData temp = new NoteData();
-                boolean jsonResult = false;
-
-                jsonResult = temp.loadFromFile( getFilesDir(), filteringName );
-                if ( !jsonResult) {
-//                    Log.d("ukulele", "FTP: Could not get music-file info." );
-                    return;
-                }
-                songTitles[numUkeFiles] = temp.mSongTitle;
-                songComments[numUkeFiles] = "설명:"+temp.mCommentary;
-                thumbnailBitmap =
-                songBpm[numUkeFiles] = "BPM:"+temp.mBpm;
-                songTypes[numUkeFiles] = temp.mCategory;
-
-                Log.d("ukulele", "---> " + songfiles[numUkeFiles]+", Title:"+ songTitles[numUkeFiles] +
-                                                    ", Comments:" + songComments[numUkeFiles] );
-                numUkeFiles++;
-            }
-        }
-*======================= 이 부분은 index파일 (INDEXFILENAME) 을 만들어 처리하는 것으로 대체 함. ================================ */
-
     /*--------- INDEXFILENAME 이란 파일에서 List Object를 구성할 데이터를 읽어 오기 ---------------------- */
         try
         {
@@ -134,6 +75,7 @@ public class FileSelectorActivity extends AppCompatActivity {
             thumbnailBitmap = new Bitmap[numUkeFiles];    // 곡의 Thumbnail 이미지
             songBpm = new String[numUkeFiles];      // BPM
             songTypes = new String[numUkeFiles];         // 멜로디 / 코드 / 핑거스타일
+            defaultThumbnail = BitmapFactory.decodeResource(getResources(), R.drawable.ukulele_icon);
 
             JSONArray songList = jsonFile.getJSONArray("songList" );
             for (int i=0; i<numUkeFiles; i++ ) {
@@ -144,7 +86,7 @@ public class FileSelectorActivity extends AppCompatActivity {
                 thumbPath[i] = info.getString("thumbnail");          // 곡의 thumbnail 파일명
                 Log.d("ukulele", "index="+i+", thumbnail:"+thumbPath[i] );
                 if ( thumbPath[i]==null || thumbPath[i].equals("null") ) {
-                    thumbnailBitmap[i] = BitmapFactory.decodeResource(getResources(), R.drawable.ukulele_icon);
+                    thumbnailBitmap[i] = null;
                 } else {
                     thumbnailBitmap[i] = BitmapFactory.decodeFile( getFilesDir() + "/" + thumbPath[i] );
                     Log.d("ukulele", "index="+i+", thumbnailBitmap = "+thumbnailBitmap[i] );
@@ -191,6 +133,22 @@ public class FileSelectorActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        int num_BitmapFiles = thumbnailBitmap.length;
+        for (int i=0; i<num_BitmapFiles; i++) {
+            if (thumbnailBitmap[i] != null)
+                thumbnailBitmap[i].recycle();
+        }
+        songfiles = null;
+        songTitles = null;
+        songComments = null;
+        thumbnailBitmap = null;
+        songBpm = null;
+        songTypes = null;
+    }
+
     class CustomAdaptor extends BaseAdapter {
         @Override
         public int getCount() {
@@ -210,15 +168,17 @@ public class FileSelectorActivity extends AppCompatActivity {
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             view = getLayoutInflater().inflate(R.layout.filelistitem, null);
-            TextView filenameTextview = (TextView)view.findViewById(R.id.filenameText);
-            filenameTextview.setText(songfiles[i] );
-            TextView songTitleTextview = (TextView)view.findViewById(R.id.songTitleText);
-            songTitleTextview.setText(songTitles[i] );
-            TextView songCommentTextview = (TextView)view.findViewById(R.id.descriptionText);
-            songCommentTextview.setText(songComments[i] );
-            ImageView thumbnailImageview = (ImageView)view.findViewById(R.id.fileImageView);
-            if (thumbnailBitmap != null) {
-                thumbnailImageview.setImageBitmap( thumbnailBitmap[i] );
+            TextView filenameTextview = (TextView) view.findViewById(R.id.filenameText);
+            filenameTextview.setText(songfiles[i]);
+            TextView songTitleTextview = (TextView) view.findViewById(R.id.songTitleText);
+            songTitleTextview.setText(songTitles[i]);
+            TextView songCommentTextview = (TextView) view.findViewById(R.id.descriptionText);
+            songCommentTextview.setText(songComments[i]);
+            ImageView thumbnailImageview = (ImageView) view.findViewById(R.id.fileImageView);
+            if (thumbnailBitmap[i] == null) {
+                thumbnailImageview.setImageBitmap(defaultThumbnail);
+            } else {
+                thumbnailImageview.setImageBitmap(thumbnailBitmap[i]);
             }
             return view;
         }
