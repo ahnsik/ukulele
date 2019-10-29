@@ -66,7 +66,7 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
     public void onPause() {
         Log.d("ukulele", "!@@@@@@@@@@ onPause() ------------- ");
         super.onPause();
-        mPlayingView.pause();
+        mPlayingView = null;
         mRecording.end();
         mp.pause();
         this.finish();
@@ -76,7 +76,7 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
     protected void onResume() {
         Log.d("ukulele", "!@@@@@@@@@@ onResume() -------------");
         super.onResume();
-        mPlayingView.resume();
+//        mPlayingView.resume();
         mRecording.start();
         mGameStartClock = System.currentTimeMillis();     // 시작 싯점의 시스템 클럭을 저장.
         mp.start();
