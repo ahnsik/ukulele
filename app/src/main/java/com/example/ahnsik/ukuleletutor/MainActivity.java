@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.VideoView;
 
@@ -33,9 +34,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPrepared(MediaPlayer mp) {    // Video 무한 루프로 재생하도록 함.
                 mp.setLooping(true);
+                mp.setScreenOnWhilePlaying(false);      // Video 가 무한으로 재생되고 있더라도 Sleep 모드로 들어갈 수 있게 해 주려면 false 를 설정.
             }
         });
         videoView.start();
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         Button btnSetup = (Button)findViewById(R.id.btnSetup);
         btnSetup.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("ukulele", "!@@@@@@@@@@ onResume() -------------");
         super.onResume();
         videoView.start();
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
 }

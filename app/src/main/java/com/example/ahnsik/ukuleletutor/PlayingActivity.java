@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
 
 import static android.os.SystemClock.sleep;
 
@@ -32,6 +33,7 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
         setContentView(mPlayingView);
         // Lock orientation into landscape.
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);       // 연습 도중에 무조작으로 Sleep 모드로 들어가면 곤란하므로, Sleep Mode 로 가지 않게 설정.
 
         // 연주할 파일의 파일 이름을 가져 옴.
         Intent intent = getIntent();
