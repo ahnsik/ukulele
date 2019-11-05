@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
     public void onPause() {
         Log.d("ukulele", "!@@@@@@@@@@ onPause() ------------- ");
         super.onPause();
-        videoView.stopPlayback();
+        videoView.pause();
     }
 
     @Override
