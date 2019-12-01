@@ -136,17 +136,7 @@ public class FileSelectorActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        int num_BitmapFiles = thumbnailBitmap.length;
-        for (int i=0; i<num_BitmapFiles; i++) {
-            if (thumbnailBitmap[i] != null)
-                thumbnailBitmap[i].recycle();
-        }
-        songfiles = null;
-        songTitles = null;
-        songComments = null;
-        thumbnailBitmap = null;
-        songBpm = null;
-        songTypes = null;
+        finish();
     }
 
     class CustomAdaptor extends BaseAdapter {
@@ -175,7 +165,7 @@ public class FileSelectorActivity extends AppCompatActivity {
             TextView songCommentTextview = (TextView) view.findViewById(R.id.descriptionText);
             songCommentTextview.setText(songComments[i]);
             ImageView thumbnailImageview = (ImageView) view.findViewById(R.id.fileImageView);
-            if (thumbnailBitmap[i] == null) {
+            if ((thumbnailBitmap == null) || (thumbnailBitmap[i] == null)) {
                 thumbnailImageview.setImageBitmap(defaultThumbnail);
             } else {
                 thumbnailImageview.setImageBitmap(thumbnailBitmap[i]);

@@ -181,7 +181,7 @@ public class PlayView extends GameView {
             canvas.drawBitmap(bmpBg, 0, 0, null);
         else {
             canvas.drawRect( new Rect(0, 0, 1920, 1080), pPaper);
-            Log.d("ukulele", "Can not draw Bitmap. because bitmap handle is null.");
+//            Log.d("ukulele", "Can not draw Bitmap. because bitmap handle is null.");
         }
 
         canvas.drawRect(new Rect(TAB_LEFT_END, LINE_Y, TAB_RIGHT_END, LINE_Y+4), pBG);

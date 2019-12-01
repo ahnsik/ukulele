@@ -96,11 +96,13 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
                 finish();
                 break;          // break for while.
             }
-            mPlayingView.setPlayPosition( playing_clock - 3000 );
+            if (mPlayingView != null ) {
+                mPlayingView.setPlayPosition( playing_clock - 3000 );
 
-            mRecording.parseSpectrum();
-            mPlayingView.setPlayedNote(mRecording.notes_detected);
-            mPlayingView.setSpectruData(mRecording.spectrum);
+                mRecording.parseSpectrum();
+                mPlayingView.setPlayedNote(mRecording.notes_detected);
+                mPlayingView.setSpectruData(mRecording.spectrum);
+            }
 
             playing_clock = System.currentTimeMillis()-mGameStartClock;
 //            if ( playing_clock < mSongData.timeStamp[playing_pos] ) {
