@@ -15,4 +15,9 @@
     <string name="btntxt_stop">소리 끄기</string>
     <string name="title_activity_chord_cm7">ChordCm7</string>
     <string name="title_activity_chord_d_">ChordD_Activity</string>
+    <string name="Label_Setup">설정</string>
+    <string name="Label_ChordTable">코드 잡는 법</string>
+    <string name="Label_TrainingFinger">혼자 연습하기</string>
+    <string name="Label_TrainingWithPlay">연주하며 연습하기</string>
+    <string name="Label_MainTitle">우쿨렐레를 배우자</string>
 </resources>

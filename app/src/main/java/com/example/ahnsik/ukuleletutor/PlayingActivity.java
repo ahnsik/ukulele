@@ -2,6 +2,7 @@ package com.example.ahnsik.ukuleletutor;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import static android.os.SystemClock.sleep;
  */
 public class PlayingActivity extends AppCompatActivity implements Runnable {
 
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 121106;
     private PlayView  mPlayingView;
     private MediaPlayer mp;
     private NoteData  mSongData = new NoteData();
@@ -86,6 +88,7 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
 
     public void run() {
         long playing_clock = 0;
+        long stroked_clock = 0;
 
         playing_pos = 0;
 
@@ -104,7 +107,8 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
                 mPlayingView.setSpectruData(mRecording.spectrum);
             }
 
-            playing_clock = System.currentTimeMillis()-mGameStartClock;
+//            playing_clock = System.currentTimeMillis()-mGameStartClock;
+
 //            if ( playing_clock < mSongData.timeStamp[playing_pos] ) {
 //                // 만약 현재 시간이 연주했어야 하는 시간 보다 이른 시간이라면 천천히 timer 를 갱신해 나가고..
 //                mPlayingView.setPlayPosition(playing_clock);      // 다음 연주해야 할 위치의 시점으로 이동
@@ -112,6 +116,12 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
 //                    mGameStartClock = System.currentTimeMillis() - mSongData.timeStamp[playing_pos];
 //            }
 
+            if ( mRecording.isStroked() ) {
+                // 스트로크 입력된 시점의 time stamp 를 일단 저장.
+                stroked_clock = playing_clock;
+                // searching for nearest note from 악보.
+
+            }
 /*            // 제대로 연주가 되었다면, 다음 note로 이동.
             if ( mRecording.isStroked() && isPlayedOk(playing_pos) ) {
                 playing_pos++;
@@ -124,6 +134,52 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
             }
 */
             sleep(5);
+        }
+    }
+
+    private int search_nearest_note( long clock, int start_index ) {
+        long minimum_timediff = 999999;
+        long timediff = 0;
+        if (mSongData.timeStamp[start_index] > clock) { // start 로 지정한 index 의 clock 이 아직 미래의 것 이라면, 최근의 과거의 것으로 거슬러 올라가서 시작하기로 한다.
+            while(start_index > 0) {
+                if (mSongData.timeStamp[start_index] < clock)
+                    break;
+                start_index--;
+            }
+        }
+        // 지정한 index 부터 검색해서 가장 가까운 timestamp 의 index 를 찾아 리턴하자.
+        int  ret_index = 0;
+        for (int i = start_index; i<mSongData.timeStamp.length; i++) {
+            timediff = mSongData.timeStamp[i] - clock;
+            if (timediff < 0) timediff = -1*timediff;   // 절대값 계산
+            if (minimum_timediff > timediff) {
+                minimum_timediff = timediff;
+                ret_index = i;
+            }
+        }
+        return ret_index;
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
         }
     }
 
