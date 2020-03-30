@@ -2,22 +2,29 @@ package com.example.ahnsik.ukuleletutor;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.SoundPool;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
 
+import static android.media.AudioManager.STREAM_MUSIC;
 import static android.os.SystemClock.sleep;
 
 public class TrainingActivity extends AppCompatActivity implements Runnable {
 
+    private int mInterval;
     private PlayView  mGameView;
     private NoteData  mSongData = new NoteData();
     private Recording mRecording;
 
     private Thread    mThread = null;
+    private boolean   running;
     private long      mGameStartClock = 0;
     private int       playing_pos = 0;      // index of note data (next position what it will be played.)
+    private SoundPool pool;
+    private int       tik, tok;
+    private long      sysClock, last_clock;
 
 
     @Override
@@ -29,6 +36,10 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);       // 연습 도중에 무조작으로 Sleep 모드로 들어가면 곤란하므로, Sleep Mode 로 가지 않게 설정.
 
+        pool = new SoundPool(2, STREAM_MUSIC, 0);
+        tik = pool.load(this, R.raw.metronom_tik, 1);
+        tok = pool.load(this, R.raw.metronom_tok, 1);
+
         // 연주할 파일의 파일 이름을 가져 옴.
         Intent intent = getIntent();
         String fileName = intent.getExtras().getString("filename");
@@ -37,12 +48,16 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
         mGameView.setSongData(mSongData);
         // initialize local data
 
+        setBpm(146);        // defailt 100 BPM for test
+
         // 녹음 시작,
         mRecording = new Recording();
 
         mThread = new Thread(this);
         mThread.start();
         mGameStartClock = System.currentTimeMillis();     // 시작 싯점의 시스템 클럭을 저장.
+        sysClock = last_clock = mGameStartClock;
+        running = true;
 
 //        mGameView.setPlayPosition(mGameStartClock);
     }
@@ -78,7 +93,6 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
             mGameView.setPlayedNote(mRecording.notes_detected);
             mGameView.setSpectruData(mRecording.spectrum);
 
-
             playing_clock = System.currentTimeMillis()-mGameStartClock;
             if ( playing_clock < mSongData.timeStamp[playing_pos] ) {
                 // 만약 현재 시간이 연주했어야 하는 시간 보다 이른 시간이라면 천천히 timer 를 갱신해 나가고..
@@ -104,7 +118,14 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
                 Log.d("ukulele", dbgStr );
             }
 
-            sleep(5);
+            // 메트로놈 소리.
+            sysClock = System.currentTimeMillis();     // 시작 싯점의 시스템 클럭을 저장.
+//            Log.d("ukulele", "sysClock = "+sysClock+", lastClock = "+last_clock+", mInterval="+mInterval + ", sleep="+ ((last_clock+mInterval)-sysClock)  );
+            if ( sysClock >= last_clock+mInterval ) {
+                pool.play(tik, 0.4f, 0.4f, 1, 0, 1.0f);
+                last_clock = last_clock+mInterval;
+            }
+
         }
     }
 
@@ -129,4 +150,7 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
         return result;
     }
 
+    private void setBpm(int bpm) {
+        mInterval = 60000 / bpm;        // 1분= 60초 * milliseconds.
+    }
 }

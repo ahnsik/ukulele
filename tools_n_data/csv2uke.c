@@ -2,6 +2,13 @@
 *
 *   우쿨렐레 연주 데이터 만들어 주는 변환기.
 *      엑셀파일로 TAB악보를 편집, CSV 형식으로 저장하고 변환해서 사용할 수 있다.
+        ** 참고 : https://stackoverflow.com/questions/10557360/convert-xlsx-to-csv-in-linux-with-command-line
+
+*      엑셀 파일은 *.xlsx 로 저장하고, 우분투 리눅스에서는
+*          $ sudo apt install catdoc
+*      위 명령으로 프로그램을 설치 한 후에,
+*          $ xlsx2csv my_file.xlsx -s 2 second_sheet.csv
+*      이런 명령어로 xlsx 파일을 csv 로 변환 한 후, csv2uke 명령으로 UKE파일을 만들 수 있겠다.
 *       - by ccash.
 *
 *************************************/
@@ -39,6 +46,8 @@ typedef struct _note_data {
     char c[8];
     char e[8];
     char a[8];
+    char stroke[8];
+    char technic[8];
 
     char g_finger[8];
     char c_finger[8];
@@ -55,6 +64,7 @@ char title[128];
 char create_date[128];
 char source[READLINE_MAX];
 char thumbnail[READLINE_MAX];
+char ukulele_tune[64];
 char author[64];
 //char author_comment[READLINE_MAX];
 char author_note[READLINE_MAX];
@@ -67,6 +77,7 @@ float bpm = 0;         // BPM과 음표길이에 따른 timestamp 값을 증가�
 int semiquaver_base = 0;    // 악보데이터(엑셀,CSV)가 16분 음표 기반인지 8분 음표 기반인지 플래그.
 int time_stamp = 0;         // BPM과 음표길이에 따른 timestamp 값을 증가시키는 용도
 int beat_length_msec = 0;   // BPM을 기준으로 8분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.
+float uke_version = 1.0f;
 
 
 int main(int argc, char *argv[] )
@@ -159,6 +170,11 @@ char *remove_white(char *str)
     return str;
 }
 
+void str_lowercase(char* beg)
+{
+    while (*beg++ = toupper(*beg));
+}
+
 /****************************************
     ** 엑셀파일(csv)형식의 예.
 
@@ -187,10 +203,10 @@ char *remove_white(char *str)
 
 *****************************************/
 
-
 int parse_line(char *buffer)
 {
     int token_len = 0;
+    int retValue = 0;   // no Error
     char *str_ptr;
     char token[READLINE_MAX];
 
@@ -322,22 +338,50 @@ int parse_line(char *buffer)
         printf("시작시간위치 is : %s \n", token);
         set_start_offset(token);
     }
+    // UKE형식 버전 비교..
+    else if ( strncmp( str_ptr, "version", 7) == 0 )
+    {   token_len =  get_token(str_ptr+7+1, token);
+        printf("UKE버전: %s \n", token);
+        sscanf(token, "%f", &uke_version);
+    } else if ( strncmp( str_ptr, "버전", 6) == 0 )
+    {   token_len =  get_token(str_ptr+6+1, token);
+        printf("UKE버전: %s \n", token);
+        sscanf(token, "%f", &uke_version);
+    }
+    // UKE형식 버전 비교..
+    else if ( strncmp( str_ptr, "tuning", 6) == 0 )
+    {   token_len =  get_token(str_ptr+6+1, token);
+        printf("조율방법: %s \n", token);
+        strcpy(ukulele_tune, token);
+        str_lowercase(ukulele_tune);
+    } else if ( strncmp( str_ptr, "조율방법", 12) == 0 )
+    {   token_len =  get_token(str_ptr+12+1, token);
+        printf("조율방법: %s \n", token);
+        strcpy(ukulele_tune, token);
+        str_lowercase(ukulele_tune);
+    }
+
 
     else if ( strncmp( str_ptr, "chord", 5) == 0 )
     {   token_len =  get_token(str_ptr+5+1, token);
 //        printf("\nchord is : %s \n", token);
-        get_note_from_line(str_ptr+5+1);
+        retValue = get_note_from_line(str_ptr+5+1);
     } else if ( strncmp( str_ptr, "코드", 6) == 0 )
     {   token_len =  get_token(str_ptr+6+1, token);
 //        printf("\nchord is : %s \n", token);
-        get_note_from_line(str_ptr+6+1);
+        retValue = get_note_from_line(str_ptr+6+1);
     }
-
 
     else {
 //        printf("could not get TAG: %s\n", str_ptr);
         printf("Unknown TAG: %s\n", buffer );
     }
+
+    // Read Error Check
+    if (retValue < 0 ) {    // get_note_from_line()  returned error.
+      printf("...get_note_from_line() return %d\n", retValue);
+    }
+
 
 }
 
@@ -387,11 +431,13 @@ long noteCount = 0;   // JSON배열을 만들 때, 아이템의 갯수.(갯수�
 long chordCount = 0;   // 첫번째 note 데이터에서는 , 로 구분 안하고 시작. 맨 처음이 아니면 , 를 찍고 시작.
 
 int get_note_from_line(char *chord_line) {
-    char g_line[READLINE_MAX], *g_ptr;
-    char c_line[READLINE_MAX], *c_ptr;
-    char e_line[READLINE_MAX], *e_ptr;
     char a_line[READLINE_MAX], *a_ptr;
+    char e_line[READLINE_MAX], *e_ptr;
+    char c_line[READLINE_MAX], *c_ptr;
+    char g_line[READLINE_MAX], *g_ptr;
     char lyric_line[READLINE_MAX], *l_ptr;
+    char stroke[READLINE_MAX], *stroke_ptr;
+    char technic[READLINE_MAX], *technic_ptr;
     int  token_len = 0;
     char token[READLINE_MAX];
 
@@ -412,24 +458,49 @@ int get_note_from_line(char *chord_line) {
     if ( readline(in_f, lyric_line) < 0 )  //  가사 읽기가 실패하는 건 무시.
     {   printf("Read for lyric was failed.");
     }
+    // printf("  # lyric_line : %s \n", lyric_line);
+
+    if (uke_version >= 2.0f) {
+      // printf("uke_ver2.0 has to read for #stroke & #technic line \n");
+
+      if ( readline(in_f, stroke) < 0 )  //  스트로크 방향을 지정하지 않는 것도 무시.
+      {   printf("Read for #stroke was failed.");
+      }
+
+      if ( readline(in_f, technic) < 0 )  //  sliding, hammering-on 등의 연주기교를 지정하지 않는 것도 무시.
+      {   printf("Read for #technic was failed.");
+      }
+
+      // printf(" - #stroke = %s \n - #technic = %s\n", stroke, technic );
+    }
 
     if ( (g_line[0] != '#') || (g_line[1] != 'G') )
-    {   return -4;
+    {   printf("g_line has Error: %s\n", g_line );
+        return -4;
     }
     if ( (c_line[0] != '#') || (c_line[1] != 'C') )
-    {   return -3;
+    {   printf("c_line has Error: %s\n", c_line );
+        return -3;
     }
     if ( (e_line[0] != '#') || (e_line[1] != 'E') )
-    {   return -2;
+    {   printf("e_line has Error: %s\n", e_line );
+        return -2;
     }
     if ( (a_line[0] != '#') || (a_line[1] != 'A') )
-    {   return -1;
+    {   printf("a_line has Error: %s\n", a_line );
+        return -1;
     }
     g_ptr = g_line+3;       // "#G," 를 skip
     c_ptr = c_line+3;       // "#C," 를 skip
     e_ptr = e_line+3;       // "#E," 를 skip
     a_ptr = a_line+3;       // "#A," 를 skip
     l_ptr = lyric_line+8;   // "#가사," 를 skip
+    if (uke_version >= 2.0f) {
+      stroke_ptr = stroke+8;  // "#stroke," 를 skip
+      technic_ptr = technic+9;  // "#technic," 를 skip
+    } else {
+      stroke_ptr = technic_ptr = NULL;
+    }
 
 
     printf("\t%s\t%s\t%s\t%s\t%s\n", chord_line, a_ptr, e_ptr, c_ptr, g_ptr );
@@ -500,6 +571,25 @@ int get_note_from_line(char *chord_line) {
         }
         l_ptr += token_len+1;      // 다음 토큰(가사)로 포인터 이동.
 
+        if (uke_version >= 2.0f) {
+          token_len = get_token(stroke_ptr, token);
+          if (token_len > 0)
+          {   strcpy(note.stroke, token);
+          }
+          else
+          {   note.stroke[0] = '\0';
+          }
+          stroke_ptr += token_len+1;      // 다음 토큰(가사)로 포인터 이동.
+
+          token_len = get_token(technic_ptr, token);
+          if (token_len > 0)
+          {   strcpy(note.technic, token);
+          }
+          else
+          {   note.technic[0] = '\0';
+          }
+          technic_ptr += token_len+1;      // 다음 토큰(가사)로 포인터 이동.
+        }
 
 /////////////////////////////////////////
 //        make_note_data(&note);
@@ -577,9 +667,22 @@ int get_note_from_line(char *chord_line) {
             fprintf(out_f, "]" );
 
             if (note.lyric[0] != '\0')
-                fprintf(out_f, ",\n\t  \"lyric\":\"%s\"\n" ,note.lyric );
-            else
+                fprintf(out_f, ",\n\t  \"lyric\":\"%s\"" ,note.lyric );
+            else {
+              if (uke_version < 2.0f)   // 2.0 부터는 아래의 stroke 와 technic 을 확인한 이후에 처리 하게 되므로.
                 fprintf(out_f, "\n");
+            }
+
+            if (uke_version >= 2.0f) {
+              if (note.stroke[0] != '\0')
+                  fprintf(out_f, ",\n\t  \"stroke\":\"%s\"" ,note.stroke );
+              else
+                  fprintf(out_f, "\n");
+              if (note.technic[0] != '\0')
+                  fprintf(out_f, ",\n\t  \"technic\":\"%s\"" ,note.technic );
+              else
+                  fprintf(out_f, "\n");
+            }
 
             fprintf(out_f, "\t}" );
 //            printf("\n");
