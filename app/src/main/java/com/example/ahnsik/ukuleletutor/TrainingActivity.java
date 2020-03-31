@@ -48,13 +48,14 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
         mGameView.setSongData(mSongData);
         // initialize local data
 
-        setBpm(146);        // defailt 100 BPM for test
+        setBpm(mSongData.mBpm);        // defailt 100 BPM for test
 
         // 녹음 시작,
         mRecording = new Recording();
 
         mThread = new Thread(this);
         mThread.start();
+        running = true;
         mGameStartClock = System.currentTimeMillis();     // 시작 싯점의 시스템 클럭을 저장.
         sysClock = last_clock = mGameStartClock;
         running = true;
@@ -68,8 +69,8 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
         super.onPause();
         mGameView.pause();
         mRecording.end();
-//        mp.pause();
         this.finish();
+        running = false;
     }
 
     @Override
@@ -88,7 +89,7 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
         playing_pos = 0;
         mGameView.setPlayPosition( mSongData.timeStamp[playing_pos] );      // 맨 처음 위치에서 시작.
 
-        while (true) {
+        while (running) {
             mRecording.parseSpectrum();
             mGameView.setPlayedNote(mRecording.notes_detected);
             mGameView.setSpectruData(mRecording.spectrum);
@@ -150,7 +151,7 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
         return result;
     }
 
-    private void setBpm(int bpm) {
-        mInterval = 60000 / bpm;        // 1분= 60초 * milliseconds.
+    private void setBpm(float bpm) {
+        mInterval = (int)(60000.0f / bpm);        // 1분= 60초 * milliseconds.
     }
 }
