@@ -14,7 +14,6 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:keepScreenOn="true"
-            android:text="@string/dummy_content"
             android:textColor="#33b5e5"
             android:textSize="50sp"
             android:textStyle="bold"
@@ -32,24 +31,10 @@
             android:background="@drawable/button_shape"
             android:fontFamily="sans-serif"
             android:textColor="#333"
-            android:text="@string/Label_Setup"
+            android:text="@string/btn_first_start"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btnChordTable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/button_shape"
-            android:fontFamily="sans-serif"
-            android:textColor="#333"
-            android:text="@string/Label_ChordTable"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/btnTraining"
-            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
             android:id="@+id/btnTraining"

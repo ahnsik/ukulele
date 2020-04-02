@@ -1,5 +1,6 @@
 package com.example.ahnsik.ukuleletutor;
 
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -31,6 +32,7 @@ public class SetupMenuActivity extends AppCompatActivity {
 //    private FtpAccessMessageHander mHandler;
     private int     hiddenTouchCount = 0;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,19 @@ public class SetupMenuActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent();
                 ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.TuningActivity");
+                i.setComponent(name);
+                startActivity(i);
+            }
+        });
+
+        Button btnChordTable = (Button)findViewById(R.id.btnChordTable);
+        btnChordTable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Log.d("ukulele", "Show major chord tables. ");
+                Intent i = new Intent();
+                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.ChordTableActivity");
                 i.setComponent(name);
                 startActivity(i);
             }

@@ -11,20 +11,19 @@ import java.io.FileReader;
 
 public class NoteData {
 
+    public  String  version;          // NoteData 구조의 버전 - stroke 나  hammering-on 등의 기법도 표시할 수 있도록 대비한 구조체
+
     public  String  mMusicURL;          // 연주할 음악 MP3 주소 또는 YouTube 주소..
     public  String  mThumbnailURL;          // 연주할 음악 MP3 주소 또는 YouTube 주소..
     public  String  mSongTitle;         // 곡의 제목
     public  String  mCategory;          // 연주방법 : Chord / 밴드(단음)연주 / 핑거스타일 / 아르페지오, etc..
     public  String  mAuthor;            // 악보 제작자
-//    public  String  mAuthorNote;        // 제작자의 코멘트
-//    public  String  mAuthorComment;     // 제작자가 하고 싶은 말.. 설명
-//    public  String  mDateCreated;       // 제작한 날짜/시간
     public  String  mCommentary;        // 그 외에 이러 저러한 코멘트.
 
     public  int     mStartOffset;       // 처음 시작할 위치의 오프셋
+    public  int     mLevel;             // 곡의 난이도 레벨. 숫자가 적을 수록 쉬운 레벨.
     public  float   mBpm;
     public  int     numNotes;
-//    public  long    playtime;
 
     // 여기 아래의 배열들은 진짜 연주해야 할 데이터 들..
     public  long[]       timeStamp;

@@ -20,4 +20,5 @@
     <string name="Label_TrainingFinger">혼자 연습하기</string>
     <string name="Label_TrainingWithPlay">연주하며 연습하기</string>
     <string name="Label_MainTitle">우쿨렐레를 배우자</string>
+    <string name="btn_first_start">맨 처기음 시작하기</string>
 </resources>

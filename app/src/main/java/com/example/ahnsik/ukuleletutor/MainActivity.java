@@ -1,6 +1,7 @@
 package com.example.ahnsik.ukuleletutor;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private VideoView   videoView;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,19 +67,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent();
                 ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.SetupMenuActivity");
-                i.setComponent(name);
-                startActivity(i);
-            }
-        });
-
-        Button btnChordTable = (Button)findViewById(R.id.btnChordTable);
-        btnChordTable.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Log.d("ukulele", "Show major chord tables. ");
-                Intent i = new Intent();
-                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.ChordTableActivity");
                 i.setComponent(name);
                 startActivity(i);
             }
