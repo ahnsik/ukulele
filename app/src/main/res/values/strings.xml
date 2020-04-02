@@ -20,5 +20,8 @@
     <string name="Label_TrainingFinger">혼자 연습하기</string>
     <string name="Label_TrainingWithPlay">연주하며 연습하기</string>
     <string name="Label_MainTitle">우쿨렐레를 배우자</string>
-    <string name="btn_first_start">맨 처기음 시작하기</string>
+    <string name="Label_first_start">맨 처음 시작하기</string>
+    <string name="Label_HowtoReadTAB">타브 악보 읽는 법</string>
+    <string name="Label_about_ukulele">우쿨렐레 설명</string>
+    <string name="Label_aboutThisApp">이 앱에 대하여 설정</string>
 </resources>

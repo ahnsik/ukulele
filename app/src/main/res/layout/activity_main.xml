@@ -21,7 +21,7 @@
             tools:layout_editor_absoluteY="388dp" />
 
         <Button
-            android:id="@+id/btnSetup"
+            android:id="@+id/btnGuideTop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -31,7 +31,7 @@
             android:background="@drawable/button_shape"
             android:fontFamily="sans-serif"
             android:textColor="#333"
-            android:text="@string/btn_first_start"
+            android:text="@string/Label_first_start"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

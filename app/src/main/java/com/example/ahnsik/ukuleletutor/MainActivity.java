@@ -61,12 +61,12 @@ public class MainActivity extends AppCompatActivity {
         videoView.start();
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        Button btnSetup = (Button)findViewById(R.id.btnSetup);
-        btnSetup.setOnClickListener(new View.OnClickListener() {
+        Button btnGuideTop = (Button)findViewById(R.id.btnGuideTop);
+        btnGuideTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent();
-                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.SetupMenuActivity");
+                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.GuideTopActivity");
                 i.setComponent(name);
                 startActivity(i);
             }

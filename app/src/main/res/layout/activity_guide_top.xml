@@ -15,7 +15,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
         android:fontFamily="sans-serif"
-        android:text="설정"
+        android:text="@string/Label_first_start"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,14 +24,14 @@
         android:id="@+id/btnReturn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="16dp"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/button_shape"
         android:fontFamily="sans-serif"
-        android:textColor="#333"
         android:text="@string/btntxt_back"
+        android:textColor="#333"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -50,60 +50,61 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!--<Button-->
-        <!--android:id="@+id/btnCalcBpm"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="16dp"-->
-        <!--android:layout_marginBottom="16dp"-->
-        <!--android:background="@drawable/button_shape"-->
-        <!--android:fontFamily="sans-serif"-->
-        <!--android:text="BPM 계산용"-->
-        <!--android:textColor="#333"-->
-        <!--android:textSize="22sp"-->
-        <!--app:layout_constraintBottom_toTopOf="@+id/btnClearUkeFile"-->
-        <!--app:layout_constraintStart_toStartOf="parent" />-->
-
-    <!--<Button-->
-        <!--android:id="@+id/btnClearUkeFile"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="16dp"-->
-        <!--android:layout_marginBottom="16dp"-->
-        <!--android:background="@drawable/button_shape"-->
-        <!--android:fontFamily="sans-serif"-->
-        <!--android:text="악보데이터 지우기"-->
-        <!--android:textColor="#333"-->
-        <!--android:textSize="22sp"-->
-        <!--app:layout_constraintBottom_toTopOf="@+id/btnImportFromFTP"-->
-        <!--app:layout_constraintStart_toStartOf="parent" />-->
-
-    <!--<Button-->
-        <!--android:id="@+id/btnImportFromFTP"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="16dp"-->
-        <!--android:layout_marginBottom="16dp"-->
-        <!--android:background="@drawable/button_shape"-->
-        <!--android:fontFamily="sans-serif"-->
-        <!--android:text="악보데이터 가져오기"-->
-        <!--android:textColor="#333"-->
-        <!--android:textSize="22sp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent" />-->
+    <Button
+        android:id="@+id/btnHowtoReadTAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_shape"
+        android:fontFamily="sans-serif"
+        android:text="@string/Label_HowtoReadTAB"
+        android:textColor="#333"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnChordTable"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/btnTuning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/button_shape"
         android:fontFamily="sans-serif"
-        android:textColor="#333"
         android:text="우쿨렐레 튜닝"
+        android:textColor="#333"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnHowtoReadTAB"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnExplainUkulele"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_shape"
+        android:fontFamily="sans-serif"
+        android:text="@string/Label_about_ukulele"
+        android:textColor="#333"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnTuning"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <Button
+        android:id="@+id/btnSetup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_shape"
+        android:fontFamily="sans-serif"
+        android:text="@string/Label_aboutThisApp"
+        android:textColor="#333"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

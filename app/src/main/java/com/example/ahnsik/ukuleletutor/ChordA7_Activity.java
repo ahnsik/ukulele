@@ -1,5 +1,6 @@
 package com.example.ahnsik.ukuleletutor;
 
+import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ public class ChordA7_Activity extends AppCompatActivity {
     private MediaPlayer mp;
     private int mp3_resource = R.raw.chord_a7;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

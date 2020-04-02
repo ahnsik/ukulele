@@ -1,5 +1,6 @@
 package com.example.ahnsik.ukuleletutor;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -74,6 +75,12 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
         mRecording.end();
         mp.pause();
         this.finish();
+
+        Intent i = new Intent();
+        ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.FileSelectorActivity");
+        i.setComponent(name);
+        i.putExtra("mode", "PlayingMode");
+        startActivity(i);
     }
 
     @Override
