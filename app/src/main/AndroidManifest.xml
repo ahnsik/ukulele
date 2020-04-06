@@ -16,7 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".TerminalActivity"></activity>
+        <activity android:name=".HelpReadTabActivity"></activity>
+        <activity android:name=".AboutUkuleleActivity" />
+        <activity android:name=".SetupActivity" />
+        <activity android:name=".TerminalActivity" />
         <activity android:name=".ChordC_Activity" />
         <activity android:name=".ChordC7_Activity" />
         <activity android:name=".ChordCm_Activity" />
@@ -48,6 +51,7 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

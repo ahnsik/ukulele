@@ -24,6 +24,7 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
 
 //    private TuneIndicatorView   tuneIndicatorView;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -170,7 +171,7 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
                 final double intensity = averageIntensity(buffer, readLength);       // 읽어 낸 데이터들의 평균값 (평균 음량)을 계산.
                 int maxZeroCrossing = (int) (380 * (readLength / (8192/BUFFSIZE_DIVIDER) ) * (sampleRate / (44100/SAMPLERATE_DIVIDER) ));   // 650을 기준으로 샘플링 주파수와 버퍼 설정에 맞게 비례하여 최대 값을 지정.
 
-                if (intensity >= 6 && zeroCrossingCount(buffer) <= maxZeroCrossing) {      // 음량이 최소 20 이상, 주파수(?)가 너무 노이즈가 심하지 않은 데이터에 대해서만 확인
+                if (intensity >= 10 && zeroCrossingCount(buffer) <= maxZeroCrossing) {      // 음량이 최소 20 이상, 주파수(?)가 너무 노이즈가 심하지 않은 데이터에 대해서만 확인
                     float freq = getPitch(buffer, readLength / 4, readLength, sampleRate, 150, 650);
                     mDetectedFreq = freq;
                     mDetectedIntensity = intensity;

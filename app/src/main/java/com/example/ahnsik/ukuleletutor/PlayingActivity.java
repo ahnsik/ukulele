@@ -26,8 +26,10 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
     private Recording mRecording;
 
     private Thread    mThread = null;
+    private boolean   running;
     private long      mGameStartClock = 0, endofSong = 0;
     private int       playing_pos = 0;      // index of note data (next position what it will be played.)
+    private Metronom  mMetronom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +50,17 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
         endofSong = mSongData.mStartOffset + mSongData.timeStamp[mSongData.numNotes-1] + 2000 + 3000;       // 마지막 노트 데이터의 2초 뒤.    +3000 은 setPlayPosition 에서의 옵셋
         mScoreData = new long[mSongData.numNotes];      // 각 음당 평가점수를 저장할 배열
 
+        // initialize local data
+        mMetronom = new Metronom(this);
+        mMetronom.setBpm(mSongData.mBpm);        // defailt 100 BPM for test
+        mMetronom.setBeat(4);                   // 4/4 박자 메트로놈.
+
         // 녹음 시작,
         mRecording = new Recording();
 
         mThread = new Thread(this);
         mThread.start();
+        running = true;
         mGameStartClock = System.currentTimeMillis();     // 시작 싯점의 시스템 클럭을 저장.
 
         mp = new MediaPlayer();
@@ -65,6 +73,7 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        mMetronom.start(mGameStartClock);
     }
 
     @Override
@@ -75,6 +84,7 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
         mRecording.end();
         mp.pause();
         this.finish();
+        running = false;
 
         Intent i = new Intent();
         ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.FileSelectorActivity");
@@ -99,7 +109,7 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
 
         playing_pos = 0;
 
-        while (true) {
+        while (running) {
             playing_clock = System.currentTimeMillis() - mGameStartClock;     // 시작 싯점의 시스템 클럭을 저장.
             if (endofSong <= playing_clock ) {
                 Log.d("ukulele", "End of this song." + playing_clock + "("+endofSong+")" );
@@ -114,33 +124,13 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
                 mPlayingView.setSpectruData(mRecording.spectrum);
             }
 
-//            playing_clock = System.currentTimeMillis()-mGameStartClock;
-
-//            if ( playing_clock < mSongData.timeStamp[playing_pos] ) {
-//                // 만약 현재 시간이 연주했어야 하는 시간 보다 이른 시간이라면 천천히 timer 를 갱신해 나가고..
-//                mPlayingView.setPlayPosition(playing_clock);      // 다음 연주해야 할 위치의 시점으로 이동
-//            } else {    // 그렇지 않으면.. 즉, 연주 타이밍을 놓쳐서 delay 가 발생했다면, 발생한 delay 만큼 mGameStartClock 을 조정하여 계속 기다리게 한다.
-//                    mGameStartClock = System.currentTimeMillis() - mSongData.timeStamp[playing_pos];
-//            }
-
             if ( mRecording.isStroked() ) {
                 // 스트로크 입력된 시점의 time stamp 를 일단 저장.
                 stroked_clock = playing_clock;
                 // searching for nearest note from 악보.
 
             }
-/*            // 제대로 연주가 되었다면, 다음 note로 이동.
-            if ( mRecording.isStroked() && isPlayedOk(playing_pos) ) {
-                playing_pos++;
-
-                // 디버깅용 코드.
-                String dbgStr = "Next, you have to play : ";
-                for (int k=0; k<mSongData.note[playing_pos].length; k++)
-                    dbgStr += mSongData.note[playing_pos][k];
-                Log.d("ukulele", dbgStr );
-            }
-*/
-            sleep(5);
+            mMetronom.running(System.currentTimeMillis());
         }
     }
 
