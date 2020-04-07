@@ -1,0 +1,20 @@
+{
+  "notes":[
+	{
+	  "timestamp":-2000,
+	  "chord":"C",
+	  "tab":["G0","C0","E0","A3a"],
+	  "note":["G4","C4","E4","C5"],
+	  "lyric":"0"	}  ],
+
+  "title":" 체리 – 스피츠 ",
+  "author":"Spitz",
+  "author_note":"",
+  "category":"chord",
+  "comment":" 스피츠 체리 -  ",
+  "create_date":"----/--/--",
+  "source":"d1_tr10-2.mp3",
+  "thumbnail":"Shimanchu_nu_takara.jpg",
+  "start_offset":"-2000",
+  "bpm":"160.0"
+}

@@ -142,6 +142,12 @@ int readline(FILE *fp, char *buffer)
     if (len==0)
         return 0;
 
+    while(*ret_ptr != '\0') {
+      if (*ret_ptr == '\"')
+        *ret_ptr = ' ';
+      ret_ptr++;
+    }
+
     return len;
 }
 
@@ -261,6 +267,15 @@ int parse_line(char *buffer)
         strcpy(thumbnail, token);
     }
 
+    else if ( strncmp( str_ptr, "작성자메모", 15) == 0 )
+    {   token_len =  get_token(str_ptr+15+1, token);
+        printf("Author Note : %s \n", token);
+        strcpy(author_note, token);
+    } else if ( strncmp( str_ptr, "author_note", 11) == 0 )
+    {   token_len =  get_token(str_ptr+11+1, token);
+        printf("author notes : %s \n", token);
+        strcpy(author_note, token);
+    }
     else if ( strncmp( str_ptr, "작성자", 9) == 0 )
     {   token_len =  get_token(str_ptr+9+1, token);
         printf("Author is : %s \n", token);
@@ -278,15 +293,6 @@ int parse_line(char *buffer)
     {   token_len =  get_token(str_ptr+7+1, token);
         printf("comment is : %s \n", token);
         strcpy(comment, token);
-    }
-    else if ( strncmp( str_ptr, "메모", 6) == 0 )
-    {   token_len =  get_token(str_ptr+6+1, token);
-        printf("Author is : %s \n", token);
-        strcpy(author_note, token);
-    } else if ( strncmp( str_ptr, "author_note", 11) == 0 )
-    {   token_len =  get_token(str_ptr+11+1, token);
-        printf("author is : %s \n", token);
-        strcpy(author_note, token);
     }
 
         // BPM - 이 것으로 timestamp 를 계산할 것이므로 매우 중요.
@@ -310,7 +316,7 @@ int parse_line(char *buffer)
         printf("Beat is : %s \n", token);
     }
 
-/*        // 박자 - 1 마디 안에 들어 갈 박자의 수 - 엑셀파일의 1개 셀은 (기본적으로) 8분음표를 기준으로 했음.
+        // 박자 - 1 마디 안에 들어 갈 박자의 수 - 엑셀파일의 1개 셀은 (기본적으로) 8분음표를 기준으로 했음.
     else if ( strncmp( str_ptr, "beat", 4) == 0 )
     {   token_len =  get_token(str_ptr+4+1, token);
         printf("beat is : %s \n", token);
@@ -318,7 +324,7 @@ int parse_line(char *buffer)
     {   token_len =  get_token(str_ptr+6+1, token);
         printf("beat is : %s \n", token);
     }
-
+/*
         // 엑셀 파일의 가로 1 줄에 포함된 마디 수.
     else if ( strncmp( str_ptr, "measure", 7) == 0 )
     {   token_len =  get_token(str_ptr+7+1, token);
@@ -339,12 +345,12 @@ int parse_line(char *buffer)
         set_start_offset(token);
     }
     // UKE형식 버전 비교..
-    else if ( strncmp( str_ptr, "version", 7) == 0 )
-    {   token_len =  get_token(str_ptr+7+1, token);
+    else if ( strncmp( str_ptr, "docversion", 10) == 0 )
+    {   token_len =  get_token(str_ptr+10+1, token);
         printf("UKE버전: %s \n", token);
         sscanf(token, "%f", &uke_version);
-    } else if ( strncmp( str_ptr, "버전", 6) == 0 )
-    {   token_len =  get_token(str_ptr+6+1, token);
+    } else if ( strncmp( str_ptr, "문서버전", 12) == 0 )
+    {   token_len =  get_token(str_ptr+12+1, token);
         printf("UKE버전: %s \n", token);
         sscanf(token, "%f", &uke_version);
     }
@@ -676,19 +682,26 @@ int get_note_from_line(char *chord_line) {
             if (uke_version >= 2.0f) {
               if (note.stroke[0] != '\0')
                   fprintf(out_f, ",\n\t  \"stroke\":\"%s\"" ,note.stroke );
-              else
-                  fprintf(out_f, "\n");
+              // else
+              //     fprintf(out_f, "\n");
               if (note.technic[0] != '\0')
                   fprintf(out_f, ",\n\t  \"technic\":\"%s\"" ,note.technic );
-              else
-                  fprintf(out_f, "\n");
+              // else
+                  // fprintf(out_f, "\n");
             }
 
-            fprintf(out_f, "\t}" );
+            fprintf(out_f, "\n\t}" );
 //            printf("\n");
             chordCount++;   // 저장되는 코드의 갯수를 센다. - 맨 첫번째 것만 , 를 안찍는 방법.
         }
-        time_stamp += beat_length_msec;
+
+        if (uke_version >= 2.0f) {
+          if (note.technic[0] == '/') {     // 일시적으로 반음만 처리.
+            time_stamp += (beat_length_msec / 2);
+          } else {
+            time_stamp += beat_length_msec;
+          }
+        }
     }
 }
 /*

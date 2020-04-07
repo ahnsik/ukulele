@@ -19,16 +19,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <CheckBox
-        android:id="@+id/chkMetronomOnOff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/chkMetronom"
-        android:textSize="24sp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        android:background="@color/white_overlay"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAppTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/txtAppTitle">
+
+        <CheckBox
+            android:id="@+id/chkTraingMetronomOnOff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/chkLabelTrainigMetronomOnOff"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtAppTitle" />
+
+        <CheckBox
+            android:id="@+id/chkPlayingMetronomOnOff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/chkLabelPlayingMetronomOnOff"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtAppTitle" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnReturn"

@@ -36,9 +36,9 @@ public class PlayView extends GameView {
     private final static int    DEFAULT_TEXT_COLOR = rgb(90, 60, 4);        // 기본 글자 색상
     private final static int    CURSOR_COLOR = rgb(209, 73, 46);        // 커서 색상은 빨간색
     private final static int    THUMB_FINGER_COLOR = rgb(120,80,4);     // 엄지손가락 rgb(96, 96, 96);
-    private final static int    INDEX_FINGER_COLOR = rgb(0, 152, 0);    // 검지손가락
+    private final static int    INDEX_FINGER_COLOR = rgb(32, 192, 0);    // 검지손가락
     private final static int    MIDDLE_FINGER_COLOR = rgb(203, 51, 203);    // 중지손가락
-    private final static int    APPOINT_FINGER_COLOR = rgb(51, 152, 152);   // 약지손가락
+    private final static int    APPOINT_FINGER_COLOR = rgb(101, 162, 202);   // 약지손가락
     private final static int    CHILD_FINGER_COLOR = rgb(51, 51, 203);  // 새끼손가락
 
     private final static int    SCORE_COLOR_PERFECT = rgb(144, 144, 204);
@@ -145,8 +145,10 @@ public class PlayView extends GameView {
         pLyric = new Paint(pText);
         pLyric.setTextSize(48.0f);
 
-
         Log.d("ukulele", "width="+ this.width + ", height=" + this.height );
+        if (this.width <= 0 ) {     // width 를 모른다.
+
+        }
     }
 
 
