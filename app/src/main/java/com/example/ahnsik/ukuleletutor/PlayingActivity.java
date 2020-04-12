@@ -77,10 +77,16 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPlayingView = null;
+    }
+
+    @Override
     public void onPause() {
         Log.d("ukulele", "!@@@@@@@@@@ onPause() ------------- ");
         super.onPause();
-        mPlayingView = null;
+//        mPlayingView = null;
         mRecording.end();
         mp.pause();
         this.finish();
@@ -117,7 +123,7 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
                 break;          // break for while.
             }
             if (mPlayingView != null ) {
-                mPlayingView.setPlayPosition( playing_clock - 3000 );
+                mPlayingView.setPlayPosition( playing_clock );
 
                 mRecording.parseSpectrum();
                 mPlayingView.setPlayedNote(mRecording.notes_detected);

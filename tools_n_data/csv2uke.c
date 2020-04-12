@@ -66,6 +66,7 @@ char source[READLINE_MAX];
 char thumbnail[READLINE_MAX];
 char ukulele_tune[64];
 char author[64];
+char basic_beat[64];
 //char author_comment[READLINE_MAX];
 char author_note[READLINE_MAX];
 char comment[READLINE_MAX];
@@ -267,15 +268,15 @@ int parse_line(char *buffer)
         strcpy(thumbnail, token);
     }
 
-    else if ( strncmp( str_ptr, "작성자메모", 15) == 0 )
-    {   token_len =  get_token(str_ptr+15+1, token);
-        printf("Author Note : %s \n", token);
-        strcpy(author_note, token);
-    } else if ( strncmp( str_ptr, "author_note", 11) == 0 )
-    {   token_len =  get_token(str_ptr+11+1, token);
-        printf("author notes : %s \n", token);
-        strcpy(author_note, token);
-    }
+    // else if ( strncmp( str_ptr, "작성자메모", 15) == 0 )
+    // {   token_len =  get_token(str_ptr+15+1, token);
+    //     printf("Author Note : %s \n", token);
+    //     strcpy(author_note, token);
+    // } else if ( strncmp( str_ptr, "author_note", 11) == 0 )
+    // {   token_len =  get_token(str_ptr+11+1, token);
+    //     printf("author notes : %s \n", token);
+    //     strcpy(author_note, token);
+    // }
     else if ( strncmp( str_ptr, "작성자", 9) == 0 )
     {   token_len =  get_token(str_ptr+9+1, token);
         printf("Author is : %s \n", token);
@@ -320,9 +321,11 @@ int parse_line(char *buffer)
     else if ( strncmp( str_ptr, "beat", 4) == 0 )
     {   token_len =  get_token(str_ptr+4+1, token);
         printf("beat is : %s \n", token);
+        strcpy(basic_beat, token);
     } else if ( strncmp( str_ptr, "박자", 6) == 0 )
     {   token_len =  get_token(str_ptr+6+1, token);
         printf("beat is : %s \n", token);
+        strcpy(basic_beat, token);
     }
 /*
         // 엑셀 파일의 가로 1 줄에 포함된 마디 수.
@@ -395,11 +398,11 @@ int set_bpm(char *bpm_str)
 {   bpm = atof(bpm_str);
 
     if (semiquaver_base)        // 악보 데이터가 16분 음표 기반인지 아닌지 판단.
-        beat_length_msec = (float)60000.0 / (bpm*2);   // BPM을 기준으로 16분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.
+        beat_length_msec = (float)30000.0 / (bpm*2);   // BPM을 기준으로 16분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.
     else
-        beat_length_msec = (float)60000.0 / bpm;   // BPM을 기준으로 8분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.
+        beat_length_msec = (float)30000.0 / bpm;   // BPM을 기준으로 8분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.
 
-    //printf("quaver = %d,  bpm=%5.1f, beat_length=%d \n", semiquaver_base, bpm,beat_length_msec );
+    printf("quaver = %d,  bpm=%5.1f, beat_length=%d \n", semiquaver_base, bpm,beat_length_msec );
 
     return 0;
 }
@@ -414,9 +417,13 @@ int set_quaver(char *quaver_str)
     }
 
     if (bpm != 0)       // 이미 bpm 값이 설정 되어 있으면 재설정.
-    {   beat_length_msec = (float)60000.0 / (bpm*2);   // BPM을 기준으로 8분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.
+    { if (semiquaver_base)
+      { beat_length_msec = (float)30000.0 / (bpm*2);   // BPM을 기준으로 8분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.  1qns 60ch=60000 을 8분음표 기준이므로 반으로 나누어 30000 으로 하여 계산.
+      } else
+      { beat_length_msec = (float)30000.0 / bpm;   // BPM을 기준으로 8분음표 길이의 msec 값.   #BPM를 읽을 때 계산해 둠.
+      }
     }
-    printf("quaver = %s,  bpm=%5.1f, beat_length=%d \n", quaver_str, bpm,beat_length_msec );
+    printf("semiquaver_base = %d, quaver = %s,  bpm=%5.1f, beat_length=%d \n", semiquaver_base, quaver_str, bpm,beat_length_msec );
 
     return 0;
 }
@@ -737,6 +744,7 @@ void write_uke_file()
     fprintf(out_f, "  \"source\":\"%s\",\n" , source );
     fprintf(out_f, "  \"thumbnail\":\"%s\",\n" , thumbnail );
     fprintf(out_f, "  \"start_offset\":\"%d\",\n" , start_offset );
+    fprintf(out_f, "  \"basic_beat\":\"%s\",\n" , basic_beat );
     fprintf(out_f, "  \"bpm\":\"%5.1f\"\n" , bpm );
 }
 

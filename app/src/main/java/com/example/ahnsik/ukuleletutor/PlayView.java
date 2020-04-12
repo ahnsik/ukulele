@@ -202,12 +202,12 @@ public class PlayView extends GameView {
     private long beat_clock = 0;
     private void drawCursor(Canvas canvas, int beat_offset) {
         canvas.drawText("▼",PLAYING_POSITION-28,LINE_Y-beat_offset, pCursor);
-        canvas.drawText("▲",PLAYING_POSITION-28,LINE_Y+222+beat_offset, pCursor);
+        canvas.drawText("▲",PLAYING_POSITION-28,LINE_Y+TAB_LINE_SPACE*3+beat_offset, pCursor);
         if (beat_offset<5) {
             beat_clock = mGame_clock;
-            canvas.drawRect(new Rect(PLAYING_POSITION-10, 320, PLAYING_POSITION+10, 500), pCursor );       // 정확한 타이밍 일 때
+            canvas.drawRect(new Rect(PLAYING_POSITION-10, 320, PLAYING_POSITION+10, 320+TAB_LINE_SPACE*3), pCursor );       // 정확한 타이밍 일 때
         } else {
-            canvas.drawRect(new Rect(PLAYING_POSITION-5, 300, PLAYING_POSITION+5, 520), pCursor );       // 플레이 위치 가이드.
+            canvas.drawRect(new Rect(PLAYING_POSITION-5, 300, PLAYING_POSITION+5, 320+TAB_LINE_SPACE*3), pCursor );       // 플레이 위치 가이드.
         }
         canvas.drawText(" " + beat_clock, PLAYING_POSITION-60, LINE_Y-MAX_BEAT_POS, pCursor );
     }
@@ -221,7 +221,8 @@ public class PlayView extends GameView {
         if (songData != null) {
             canvas.drawText(songData.mSongTitle, TAB_LEFT_END, TITLE_POSITION_Y, pTitle);
             pTitle.setTextSize(40.0f);
-            canvas.drawText("BPM:"+songData.mBpm, TAB_LEFT_END,CHORD_POSITION_Y-100, pTitle);
+            canvas.drawText("♩="+songData.mBpm, TAB_LEFT_END,CHORD_POSITION_Y-100, pTitle);
+//            canvas.drawText(songData.mBasicBeat, TAB_LEFT_END,CHORD_POSITION_Y-120, pTitle);
         } else {
             canvas.drawText("곡 제목 정보가 없습니다.", TAB_LEFT_END, TITLE_POSITION_Y, pTitle);
         }
@@ -405,6 +406,8 @@ public class PlayView extends GameView {
     private final static float SPECTRUM_SCALE=10;        // 소리를 인식하는 최소 데시벨.     1.0f 으로 하면 화음에서 놓치는 음이 너무 많은 듯.,
 
     public void drawSpectrum(Canvas c) {
+        if (spectrum == null)
+            return;
         int length = spectrum.length;       // 76.5는 좀 크다.  72.5 는 쬐끔 작다.
         double  xpos = 170.0, diff=94.5;    // 수많은 시도 끝에 찾아 낸 숫자들.  xpos 는 그냥 G3 음이 시작하는 위치값을 맞춘 거고, diff 는 음계 별로 건너 뛰는 값 X위치 diff 값이다.
         float   value = 0.0f,   prev_xpos = 15.0f, prev_ypos = (float)SPECTRUM_DISPLAY_Y_BUTTOM;

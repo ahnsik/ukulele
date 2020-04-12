@@ -1,1947 +1,1041 @@
 {
   "notes":[
 	{
-	  "timestamp":0,
-	  "chord":"F",
-	  "tab":["G2","C0"],
-	  "note":["A4","C4"]
-	},
-	{
-	  "timestamp":922,
+	  "timestamp":1248,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"]
 	},
 	{
-	  "timestamp":1844,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":2766,
-	  "chord":"F",
-	  "tab":["G2","C0"],
-	  "note":["A4","C4"]
-	},
-	{
-	  "timestamp":3688,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":4610,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":5532,
-	  "chord":"F",
-	  "tab":["G2","C0"],
-	  "note":["A4","C4"]
-	},
-	{
-	  "timestamp":6454,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":7376,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":8298,
-	  "chord":"F",
-	  "tab":["G2","C0","E1","A0"],
-	  "note":["A4","C4","F4","A4"]
-	},
-	{
-	  "timestamp":10142,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":10603,
+	  "timestamp":1560,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"]
 	},
 	{
-	  "timestamp":11064,
+	  "timestamp":1872,
 	  "chord":"F",
 	  "tab":["G2","C0","E1","A0"],
 	  "note":["A4","C4","F4","A4"]
 	},
 	{
-	  "timestamp":11525,
+	  "timestamp":2184,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"]
 	},
 	{
-	  "timestamp":11986,
+	  "timestamp":2496,
 	  "chord":"",
 	  "tab":["A3"],
 	  "note":["C5"]
 	},
 	{
-	  "timestamp":13369,
+	  "timestamp":3432,
 	  "chord":"",
 	  "tab":["A0"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":13830,
+	  "timestamp":3744,
 	  "chord":"C",
 	  "tab":["G0","C0","E3"],
 	  "note":["G4","C4","G4"]
 	},
 	{
-	  "timestamp":14752,
+	  "timestamp":4368,
 	  "chord":"",
 	  "tab":["A3"],
 	  "note":["C5"]
 	},
 	{
-	  "timestamp":15674,
+	  "timestamp":4992,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"]
 	},
 	{
-	  "timestamp":16596,
+	  "timestamp":5616,
 	  "chord":"Dm",
 	  "tab":["G2","C2","E1"],
 	  "note":["A4","D4","F4"]
 	},
 	{
-	  "timestamp":17057,
+	  "timestamp":5928,
 	  "chord":"",
 	  "tab":["C2"],
 	  "note":["D4"]
 	},
 	{
-	  "timestamp":17518,
+	  "timestamp":6240,
 	  "chord":"",
 	  "tab":["A0"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":18901,
+	  "timestamp":7176,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"]
 	},
 	{
-	  "timestamp":19362,
+	  "timestamp":7488,
 	  "chord":"Am",
-	  "tab":["G2","C0","E0"],
+	  "tab":["G2  ","C0","E0"],
 	  "note":["A4","C4","E4"]
 	},
 	{
-	  "timestamp":21206,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":21667,
+	  "timestamp":8736,
 	  "chord":"",
 	  "tab":["E0"],
 	  "note":["E4"]
 	},
 	{
-	  "timestamp":22128,
+	  "timestamp":9360,
 	  "chord":"Bb",
 	  "tab":["G3","C2"],
 	  "note":["A#4","D4"]
 	},
 	{
-	  "timestamp":23050,
+	  "timestamp":9984,
 	  "chord":"",
 	  "tab":["E0"],
 	  "note":["E4"]
 	},
 	{
-	  "timestamp":23972,
+	  "timestamp":10608,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"]
 	},
 	{
-	  "timestamp":24433,
+	  "timestamp":10920,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"]
 	},
 	{
-	  "timestamp":24894,
+	  "timestamp":11232,
 	  "chord":"F",
 	  "tab":["G2","C0"],
 	  "note":["A4","C4"]
 	},
 	{
-	  "timestamp":25816,
+	  "timestamp":11856,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"]
 	},
 	{
-	  "timestamp":26738,
+	  "timestamp":12480,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"]
 	},
 	{
-	  "timestamp":27199,
+	  "timestamp":12792,
 	  "chord":"",
 	  "tab":["A0"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":27660,
-	  "chord":"Gm",
-	  "tab":["G0","C2","E3","A1"],
-	  "note":["G4","D4","G4","A#4"]
+	  "timestamp":13104,
+	  "chord":"Gm7",
+	  "tab":["G0","C2","E1","A1"],
+	  "note":["G4","D4","F4","A#4"]
 	},
 	{
-	  "timestamp":28582,
+	  "timestamp":13728,
 	  "chord":"",
 	  "tab":["A1"],
 	  "note":["A#4"]
 	},
 	{
-	  "timestamp":29043,
+	  "timestamp":14040,
 	  "chord":"",
 	  "tab":["A0"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":29504,
+	  "timestamp":14352,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"]
 	},
 	{
-	  "timestamp":29965,
+	  "timestamp":14664,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"]
 	},
 	{
-	  "timestamp":30426,
-	  "chord":"C7",
-	  "tab":["G3","C0","E3"],
-	  "note":["A#4","C4","G4"]
-	},
-	{
-	  "timestamp":31348,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":32270,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":32731,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":33192,
-	  "chord":"F",
-	  "tab":["G2","C0","E1","A0"],
-	  "note":["A4","C4","F4","A4"]
-	},
-	{
-	  "timestamp":33653,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":34114,
-	  "chord":"",
-	  "tab":["A3"],
-	  "note":["C5"]
-	},
-	{
-	  "timestamp":35497,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":35958,
-	  "chord":"F",
-	  "tab":["G0","C0","E3"],
-	  "note":["G4","C4","G4"]
-	},
-	{
-	  "timestamp":36880,
-	  "chord":"",
-	  "tab":["A3"],
-	  "note":["C5"]
-	},
-	{
-	  "timestamp":37802,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":38724,
-	  "chord":"Dm",
-	  "tab":["G2","C2","E1"],
-	  "note":["A4","D4","F4"]
-	},
-	{
-	  "timestamp":39185,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":39646,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":40568,
-	  "chord":"",
-	  "tab":["E0"],
-	  "note":["E4"]
-	},
-	{
-	  "timestamp":41029,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":41490,
-	  "chord":"Am",
-	  "tab":["G2","C0"],
-	  "note":["A4","C4"]
-	},
-	{
-	  "timestamp":43334,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":43795,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":44256,
-	  "chord":"Bb",
-	  "tab":["G3","C2"],
-	  "note":["A#4","D4"]
-	},
-	{
-	  "timestamp":45178,
-	  "chord":"",
-	  "tab":["E0"],
-	  "note":["E4"]
-	},
-	{
-	  "timestamp":46100,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":46561,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":47022,
-	  "chord":"F",
-	  "tab":["G2","C0"],
-	  "note":["A4","C4"]
-	},
-	{
-	  "timestamp":47944,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":48866,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":49327,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":49788,
-	  "chord":"Gm",
-	  "tab":["G0","C2","E3","A1"],
-	  "note":["G4","D4","G4","A#4"]
-	},
-	{
-	  "timestamp":50710,
-	  "chord":"",
-	  "tab":["A1"],
-	  "note":["A#4"]
-	},
-	{
-	  "timestamp":51171,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":51632,
-	  "chord":"C7",
-	  "tab":["G3","C0","E3"],
-	  "note":["A#4","C4","G4"]
-	},
-	{
-	  "timestamp":52093,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":52554,
-	  "chord":"F",
-	  "tab":["G2","C0","E1"],
-	  "note":["A4","C4","F4"]
-	},
-	{
-	  "timestamp":53476,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":54398,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":55320,
-	  "chord":"F",
-	  "tab":["G2","C0","E1","A0"],
-	  "note":["A4","C4","F4","A4"]
-	},
-	{
-	  "timestamp":57164,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":57625,
-	  "chord":"",
-	  "tab":["A1"],
-	  "note":["A#4"]
-	},
-	{
-	  "timestamp":58086,
-	  "chord":"F",
-	  "tab":["G2","C0","E1","A3"],
-	  "note":["A4","C4","F4","C5"]
-	},
-	{
-	  "timestamp":59008,
-	  "chord":"",
-	  "tab":["A3"],
-	  "note":["C5"]
-	},
-	{
-	  "timestamp":59930,
-	  "chord":"",
-	  "tab":["A3"],
-	  "note":["C5"]
-	},
-	{
-	  "timestamp":60852,
-	  "chord":"C",
-	  "tab":["G0","C0","E0","A3"],
-	  "note":["G4","C4","E4","C5"]
-	},
-	{
-	  "timestamp":61774,
-	  "chord":"",
-	  "tab":["A3"],
-	  "note":["C5"]
-	},
-	{
-	  "timestamp":62235,
-	  "chord":"",
-	  "tab":["A5"],
-	  "note":["D5"]
-	},
-	{
-	  "timestamp":62696,
-	  "chord":"",
-	  "tab":["A3"],
-	  "note":["C5"]
-	},
-	{
-	  "timestamp":63157,
-	  "chord":"",
-	  "tab":["A1"],
-	  "note":["A#4"]
-	},
-	{
-	  "timestamp":63618,
-	  "chord":"Dm",
-	  "tab":["G2","C2","E1","A0"],
-	  "note":["A4","D4","F4","A4"]
-	},
-	{
-	  "timestamp":64540,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":65462,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":66384,
-	  "chord":"Am",
-	  "tab":["G2","C0","E0","A0"],
-	  "note":["A4","C4","E4","A4"]
-	},
-	{
-	  "timestamp":67306,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":67767,
-	  "chord":"",
-	  "tab":["A1"],
-	  "note":["A#4"]
-	},
-	{
-	  "timestamp":68228,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":68689,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":69150,
-	  "chord":"Bb",
-	  "tab":["G3","C2","E1"],
-	  "note":["A#4","D4","F4"]
-	},
-	{
-	  "timestamp":70072,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":70994,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":71455,
-	  "chord":"",
-	  "tab":["E0"],
-	  "note":["E4"]
-	},
-	{
-	  "timestamp":71916,
-	  "chord":"Dm",
-	  "tab":["G2","C2"],
-	  "note":["A4","D4"]
-	},
-	{
-	  "timestamp":72838,
-	  "chord":"",
-	  "tab":["E0"],
-	  "note":["E4"]
-	},
-	{
-	  "timestamp":73760,
-	  "chord":"",
-	  "tab":["E0"],
-	  "note":["E4"]
-	},
-	{
-	  "timestamp":74221,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":74682,
-	  "chord":"Gm",
-	  "tab":["G3","C2","E3"],
-	  "note":["A#4","D4","G4"]
-	},
-	{
-	  "timestamp":75604,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":76065,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":76526,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":76987,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":77448,
-	  "chord":"C7",
-	  "tab":["G3","C0","E3"],
-	  "note":["A#4","C4","G4"]
-	},
-	{
-	  "timestamp":78370,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":79292,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":79753,
-	  "chord":"",
-	  "tab":["A1"],
-	  "note":["A#4"]
-	},
-	{
-	  "timestamp":80214,
-	  "chord":"F",
-	  "tab":["G2","C0","E1","A3"],
-	  "note":["A4","C4","F4","C5"]
-	},
-	{
-	  "timestamp":81136,
-	  "chord":"",
-	  "tab":["A3"],
-	  "note":["C5"]
-	},
-	{
-	  "timestamp":82058,
-	  "chord":"",
-	  "tab":["A3"],
-	  "note":["C5"]
-	},
-	{
-	  "timestamp":82980,
-	  "chord":"C",
-	  "tab":["G0","C0","E0","A3a"],
-	  "note":["G4","C4","E4","C5"]
-	},
-	{
-	  "timestamp":83902,
-	  "chord":"",
-	  "tab":["A3"],
-	  "note":["C5"]
-	},
-	{
-	  "timestamp":84363,
-	  "chord":"",
-	  "tab":["A5"],
-	  "note":["D5"]
-	},
-	{
-	  "timestamp":84824,
-	  "chord":"",
-	  "tab":["A3"],
-	  "note":["C5"]
-	},
-	{
-	  "timestamp":85285,
-	  "chord":"",
-	  "tab":["A1"],
-	  "note":["A#4"]
-	},
-	{
-	  "timestamp":85746,
-	  "chord":"Dm",
-	  "tab":["G2","C2","E1","A0"],
-	  "note":["A4","D4","F4","A4"]
-	},
-	{
-	  "timestamp":86668,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":87590,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":88512,
-	  "chord":"Am",
-	  "tab":["G2","C0","E0","A0"],
-	  "note":["A4","C4","E4","A4"]
-	},
-	{
-	  "timestamp":88973,
-	  "chord":"",
-	  "tab":["A1"],
-	  "note":["A#4"]
-	},
-	{
-	  "timestamp":89434,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":89895,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":90356,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":90817,
-	  "chord":"",
-	  "tab":["E0"],
-	  "note":["E4"]
-	},
-	{
-	  "timestamp":91278,
-	  "chord":"Bb",
-	  "tab":["G3","C2"],
-	  "note":["A#4","D4"]
-	},
-	{
-	  "timestamp":92200,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":92661,
-	  "chord":"",
-	  "tab":["E0"],
-	  "note":["E4"]
-	},
-	{
-	  "timestamp":93122,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":93583,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":94044,
-	  "chord":"F",
-	  "tab":["G2","C0"],
-	  "note":["A4","C4"]
-	},
-	{
-	  "timestamp":94966,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":95888,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":96349,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":96810,
-	  "chord":"Gm",
-	  "tab":["G3","C2","E3"],
-	  "note":["A#4","D4","G4"]
-	},
-	{
-	  "timestamp":97732,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":98193,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":98654,
-	  "chord":"C7",
-	  "tab":["G3","C0","E3"],
-	  "note":["A#4","C4","G4"]
-	},
-	{
-	  "timestamp":99115,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":99576,
-	  "chord":"F",
-	  "tab":["G2","C0","E1"],
-	  "note":["A4","C4","F4"]
-	},
-	{
-	  "timestamp":100498,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":100959,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":101420,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":101881,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":102342,
-	  "chord":"F",
-	  "tab":["G2","C0","E1","A0"],
-	  "note":["A4","C4","F4","A4"]
-	},
-	{
-	  "timestamp":104186,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":104647,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":105108,
-	  "chord":"F",
-	  "tab":["G2","C0","E1","A0"],
-	  "note":["A4","C4","F4","A4"]
-	},
-	{
-	  "timestamp":105569,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":106030,
-	  "chord":"",
-	  "tab":["A3"],
-	  "note":["C5"]
-	},
-	{
-	  "timestamp":106491,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":106952,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":107413,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":107874,
+	  "timestamp":14976,
 	  "chord":"C",
 	  "tab":["G0","C0","E3"],
 	  "note":["G4","C4","G4"]
 	},
 	{
-	  "timestamp":108796,
-	  "chord":"",
-	  "tab":["A3"],
-	  "note":["C5"]
-	},
-	{
-	  "timestamp":109257,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":109718,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":110179,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":110640,
-	  "chord":"Dm",
-	  "tab":["G2","C2","E1"],
-	  "note":["A4","D4","F4"]
-	},
-	{
-	  "timestamp":111101,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":111562,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":112484,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":112945,
+	  "timestamp":16224,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"]
 	},
 	{
-	  "timestamp":113406,
+	  "timestamp":16536,
+	  "chord":"",
+	  "tab":["E3"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":16848,
+	  "chord":"F",
+	  "tab":["G2","C0","E1","A0"],
+	  "note":["A4","C4","F4","A4"]
+	},
+	{
+	  "timestamp":17160,
+	  "chord":"",
+	  "tab":["E1"],
+	  "note":["F4"]
+	},
+	{
+	  "timestamp":17472,
+	  "chord":"",
+	  "tab":["A3"],
+	  "note":["C5"]
+	},
+	{
+	  "timestamp":18408,
+	  "chord":"",
+	  "tab":["A0"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":18720,
+	  "chord":"C",
+	  "tab":["G0","C0","E3"],
+	  "note":["G4","C4","G4"]
+	},
+	{
+	  "timestamp":19344,
+	  "chord":"",
+	  "tab":["A3"],
+	  "note":["C5"]
+	},
+	{
+	  "timestamp":19968,
+	  "chord":"",
+	  "tab":["E3"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":20592,
+	  "chord":"Dm",
+	  "tab":["G2","C2","E1"],
+	  "note":["A4","D4","F4"]
+	},
+	{
+	  "timestamp":20904,
+	  "chord":"",
+	  "tab":["C2"],
+	  "note":["D4"]
+	},
+	{
+	  "timestamp":21216,
+	  "chord":"",
+	  "tab":["A0"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":22152,
+	  "chord":"",
+	  "tab":["E1"],
+	  "note":["F4"]
+	},
+	{
+	  "timestamp":22464,
 	  "chord":"Am",
-	  "tab":["G2","C0","E0"],
+	  "tab":["G2  ","C0","E0"],
 	  "note":["A4","C4","E4"]
 	},
 	{
-	  "timestamp":114328,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":115250,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":115711,
+	  "timestamp":23712,
 	  "chord":"",
 	  "tab":["E0"],
 	  "note":["E4"]
 	},
 	{
-	  "timestamp":116172,
+	  "timestamp":24336,
 	  "chord":"Bb",
 	  "tab":["G3","C2"],
 	  "note":["A#4","D4"]
 	},
 	{
-	  "timestamp":117094,
+	  "timestamp":24960,
 	  "chord":"",
 	  "tab":["E0"],
 	  "note":["E4"]
 	},
 	{
-	  "timestamp":117555,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":118016,
+	  "timestamp":25584,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"]
 	},
 	{
-	  "timestamp":118477,
+	  "timestamp":25896,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"]
 	},
 	{
-	  "timestamp":118938,
+	  "timestamp":26208,
 	  "chord":"F",
 	  "tab":["G2","C0"],
 	  "note":["A4","C4"]
 	},
 	{
-	  "timestamp":119860,
+	  "timestamp":26832,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"]
 	},
 	{
-	  "timestamp":120321,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":120782,
+	  "timestamp":27456,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"]
 	},
 	{
-	  "timestamp":121243,
+	  "timestamp":27768,
 	  "chord":"",
 	  "tab":["A0"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":121704,
-	  "chord":"Gm",
-	  "tab":["G0","C2","E3","A1"],
-	  "note":["G4","D4","G4","A#4"]
+	  "timestamp":28080,
+	  "chord":"Gm7",
+	  "tab":["G0","C2","E1","A1"],
+	  "note":["G4","D4","F4","A#4"]
 	},
 	{
-	  "timestamp":122626,
+	  "timestamp":28704,
 	  "chord":"",
 	  "tab":["A1"],
 	  "note":["A#4"]
 	},
 	{
-	  "timestamp":123087,
+	  "timestamp":29016,
 	  "chord":"",
 	  "tab":["A0"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":123548,
+	  "timestamp":29328,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"]
 	},
 	{
-	  "timestamp":124009,
+	  "timestamp":29640,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"]
 	},
 	{
-	  "timestamp":124470,
-	  "chord":"C7",
-	  "tab":["G3","C0","E3"],
-	  "note":["A#4","C4","G4"]
-	},
-	{
-	  "timestamp":124931,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":125392,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":125853,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":126314,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":126775,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":127236,
+	  "timestamp":29952,
 	  "chord":"F",
+	  "tab":["G2  ","C0","E1"],
+	  "note":["A4","C4","F4"]
+	},
+	{
+	  "timestamp":31200,
+	  "chord":"",
+	  "tab":["C0"],
+	  "note":["C4"]
+	},
+	{
+	  "timestamp":31824,
+	  "chord":"",
 	  "tab":["G2","C0","E1","A0"],
 	  "note":["A4","C4","F4","A4"]
 	},
 	{
-	  "timestamp":127697,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":128158,
-	  "chord":"",
-	  "tab":["A3"],
-	  "note":["C5"]
-	},
-	{
-	  "timestamp":128619,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":129080,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":129541,
+	  "timestamp":33072,
 	  "chord":"",
 	  "tab":["A0"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":130002,
-	  "chord":"C",
-	  "tab":["G0","C0","E3"],
-	  "note":["G4","C4","G4"]
+	  "timestamp":33384,
+	  "chord":"",
+	  "tab":["A1"],
+	  "note":["A#4"]
 	},
 	{
-	  "timestamp":130924,
+	  "timestamp":33696,
+	  "chord":"F",
+	  "tab":["G2","C0","E1","A3"],
+	  "note":["A4","C4","F4","C5"]
+	},
+	{
+	  "timestamp":34320,
 	  "chord":"",
 	  "tab":["A3"],
 	  "note":["C5"]
 	},
 	{
-	  "timestamp":131385,
+	  "timestamp":34944,
 	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
+	  "tab":["A3"],
+	  "note":["C5"]
 	},
 	{
-	  "timestamp":131846,
-	  "chord":"A7",
-	  "tab":["G0","C1","E0"],
-	  "note":["G4","C#4","E4"]
+	  "timestamp":35568,
+	  "chord":"C",
+	  "tab":["G0","C0","E0","A3"],
+	  "note":["G4","C4","E4","C5"]
 	},
 	{
-	  "timestamp":132768,
+	  "timestamp":36192,
+	  "chord":"",
+	  "tab":["A3"],
+	  "note":["C5"]
+	},
+	{
+	  "timestamp":36504,
+	  "chord":"",
+	  "tab":["A5"],
+	  "note":["D5"]
+	},
+	{
+	  "timestamp":36816,
+	  "chord":"",
+	  "tab":["A3"],
+	  "note":["C5"]
+	},
+	{
+	  "timestamp":37128,
+	  "chord":"",
+	  "tab":["A1"],
+	  "note":["A#4"]
+	},
+	{
+	  "timestamp":37440,
+	  "chord":"Dm",
+	  "tab":["G2  ","C2  ","E1","A0"],
+	  "note":["A4","D4","F4","A4"]
+	},
+	{
+	  "timestamp":38064,
+	  "chord":"",
+	  "tab":["A0"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":38688,
+	  "chord":"",
+	  "tab":["A0"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":39312,
+	  "chord":"Am",
+	  "tab":["G2","C0","E0","A0"],
+	  "note":["A4","C4","E4","A4"]
+	},
+	{
+	  "timestamp":39936,
+	  "chord":"",
+	  "tab":["A0"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":40248,
+	  "chord":"",
+	  "tab":["A1"],
+	  "note":["A#4"]
+	},
+	{
+	  "timestamp":40560,
+	  "chord":"",
+	  "tab":["A0"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":40872,
+	  "chord":"",
+	  "tab":["E3"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":41184,
 	  "chord":"Dm",
 	  "tab":["G2","C2","E1"],
 	  "note":["A4","D4","F4"]
 	},
 	{
-	  "timestamp":133229,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":133690,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":134612,
-	  "chord":"",
-	  "tab":["E0"],
-	  "note":["E4"]
-	},
-	{
-	  "timestamp":135073,
+	  "timestamp":41808,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"]
 	},
 	{
-	  "timestamp":135534,
-	  "chord":"Am",
-	  "tab":["G2","C0"],
-	  "note":["A4","C4"]
-	},
-	{
-	  "timestamp":136456,
+	  "timestamp":42432,
 	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
+	  "tab":["E1"],
+	  "note":["F4"]
 	},
 	{
-	  "timestamp":137378,
+	  "timestamp":42744,
 	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
+	  "tab":["E0"],
+	  "note":["E4"]
 	},
 	{
-	  "timestamp":137839,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":138300,
+	  "timestamp":43056,
 	  "chord":"Bb",
 	  "tab":["G3","C2"],
 	  "note":["A#4","D4"]
 	},
 	{
-	  "timestamp":139222,
+	  "timestamp":43680,
 	  "chord":"",
 	  "tab":["E0"],
 	  "note":["E4"]
 	},
 	{
-	  "timestamp":139683,
+	  "timestamp":44304,
 	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
+	  "tab":["E0"],
+	  "note":["E4"]
 	},
 	{
-	  "timestamp":140144,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":140605,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":141066,
-	  "chord":"F",
-	  "tab":["G2","C0"],
-	  "note":["A4","C4"]
-	},
-	{
-	  "timestamp":141988,
+	  "timestamp":44616,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"]
 	},
 	{
-	  "timestamp":142449,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
+	  "timestamp":44928,
+	  "chord":"Gm",
+	  "tab":["G0","C2  ","E3"],
+	  "note":["G4","D4","G4"]
 	},
 	{
-	  "timestamp":142910,
+	  "timestamp":45552,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"]
 	},
 	{
-	  "timestamp":143371,
+	  "timestamp":45864,
 	  "chord":"",
 	  "tab":["A0"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":143832,
-	  "chord":"Gm",
-	  "tab":["G0","C2","E3","A1"],
-	  "note":["G4","D4","G4","A#4"]
+	  "timestamp":46176,
+	  "chord":"",
+	  "tab":["E3"],
+	  "note":["G4"]
 	},
 	{
-	  "timestamp":144754,
+	  "timestamp":46488,
+	  "chord":"",
+	  "tab":["A0"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":46800,
+	  "chord":"C",
+	  "tab":["G0","C0","E3"],
+	  "note":["G4","C4","G4"]
+	},
+	{
+	  "timestamp":47424,
+	  "chord":"",
+	  "tab":["C0"],
+	  "note":["C4"]
+	},
+	{
+	  "timestamp":48048,
+	  "chord":"",
+	  "tab":["A0"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":48360,
 	  "chord":"",
 	  "tab":["A1"],
 	  "note":["A#4"]
 	},
 	{
-	  "timestamp":145215,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":145676,
-	  "chord":"",
-	  "tab":["G3","C0","E3"],
-	  "note":["A#4","C4","G4"]
-	},
-	{
-	  "timestamp":146137,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":146598,
+	  "timestamp":48672,
 	  "chord":"F",
-	  "tab":["G2","C0","E1"],
-	  "note":["A4","C4","F4"]
+	  "tab":["G2","C0","E1","A3"],
+	  "note":["A4","C4","F4","C5"]
 	},
 	{
-	  "timestamp":147520,
+	  "timestamp":49296,
 	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
+	  "tab":["A3"],
+	  "note":["C5"]
 	},
 	{
-	  "timestamp":147981,
+	  "timestamp":49920,
 	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
+	  "tab":["A3"],
+	  "note":["C5"]
 	},
 	{
-	  "timestamp":148442,
+	  "timestamp":50544,
+	  "chord":"C",
+	  "tab":["G0","C0","E0","A3"],
+	  "note":["G4","C4","E4","C5"]
+	},
+	{
+	  "timestamp":51168,
+	  "chord":"",
+	  "tab":["A3"],
+	  "note":["C5"]
+	},
+	{
+	  "timestamp":51480,
+	  "chord":"",
+	  "tab":["A5"],
+	  "note":["D5"]
+	},
+	{
+	  "timestamp":51792,
+	  "chord":"",
+	  "tab":["A3"],
+	  "note":["C5"]
+	},
+	{
+	  "timestamp":52104,
+	  "chord":"",
+	  "tab":["A1"],
+	  "note":["A#4"]
+	},
+	{
+	  "timestamp":52416,
+	  "chord":"Dm",
+	  "tab":["G2  ","C2  ","E1","A0"],
+	  "note":["A4","D4","F4","A4"]
+	},
+	{
+	  "timestamp":53040,
 	  "chord":"",
 	  "tab":["A0"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":148903,
+	  "timestamp":53664,
 	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
+	  "tab":["A0"],
+	  "note":["A4"]
 	},
 	{
-	  "timestamp":149364,
+	  "timestamp":54288,
+	  "chord":"Am",
+	  "tab":["G2","C0","E0","A0"],
+	  "note":["A4","C4","E4","A4"]
+	},
+	{
+	  "timestamp":54600,
+	  "chord":"",
+	  "tab":["A1"],
+	  "note":["A#4"]
+	},
+	{
+	  "timestamp":54912,
+	  "chord":"",
+	  "tab":["A0"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":55224,
+	  "chord":"",
+	  "tab":["E3"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":55536,
+	  "chord":"",
+	  "tab":["E1"],
+	  "note":["F4"]
+	},
+	{
+	  "timestamp":55848,
+	  "chord":"",
+	  "tab":["E0"],
+	  "note":["E4"]
+	},
+	{
+	  "timestamp":56160,
+	  "chord":"Bb",
+	  "tab":["G3","C2"],
+	  "note":["A#4","D4"]
+	},
+	{
+	  "timestamp":56784,
+	  "chord":"",
+	  "tab":["C2"],
+	  "note":["D4"]
+	},
+	{
+	  "timestamp":57096,
+	  "chord":"",
+	  "tab":["E0"],
+	  "note":["E4"]
+	},
+	{
+	  "timestamp":57408,
+	  "chord":"",
+	  "tab":["E1"],
+	  "note":["F4"]
+	},
+	{
+	  "timestamp":57720,
+	  "chord":"",
+	  "tab":["E3"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":58032,
+	  "chord":"F",
+	  "tab":["G2","C0"],
+	  "note":["A4","C4"]
+	},
+	{
+	  "timestamp":58656,
+	  "chord":"",
+	  "tab":["E1"],
+	  "note":["F4"]
+	},
+	{
+	  "timestamp":59280,
+	  "chord":"",
+	  "tab":["E3"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":59592,
+	  "chord":"",
+	  "tab":["A0"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":59904,
+	  "chord":"C",
+	  "tab":["G0","C0","E3"],
+	  "note":["G4","C4","G4"]
+	},
+	{
+	  "timestamp":60840,
+	  "chord":"",
+	  "tab":["E3"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":61152,
+	  "chord":"",
+	  "tab":["E3"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":61464,
+	  "chord":"",
+	  "tab":["E1"],
+	  "note":["F4"]
+	},
+	{
+	  "timestamp":61776,
 	  "chord":"F",
 	  "tab":["G2","C0","E1","A0"],
 	  "note":["A4","C4","F4","A4"]
 	},
 	{
-	  "timestamp":151208,
+	  "timestamp":63024,
 	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
+	  "tab":["C0"],
+	  "note":["C4"]
 	},
 	{
-	  "timestamp":151669,
-	  "chord":"",
-	  "tab":["A1"],
-	  "note":["A#4"]
-	},
-	{
-	  "timestamp":152130,
+	  "timestamp":63648,
 	  "chord":"F",
-	  "tab":["G2","C0","E1","A3"],
-	  "note":["A4","C4","F4","C5"]
+	  "tab":["G2","C0","E1","A0"],
+	  "note":["A4","C4","F4","A4"]
 	},
 	{
-	  "timestamp":152591,
+	  "timestamp":64896,
 	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
+	  "tab":["E1"],
+	  "note":["F4"]
 	},
 	{
-	  "timestamp":153052,
+	  "timestamp":65208,
 	  "chord":"",
-	  "tab":["E1","A3"],
-	  "note":["F4","C5"]
+	  "tab":["E3"],
+	  "note":["G4"]
 	},
 	{
-	  "timestamp":153513,
+	  "timestamp":65520,
+	  "chord":"F",
+	  "tab":["G2","C0","E1","A0"],
+	  "note":["A4","C4","F4","A4"]
+	},
+	{
+	  "timestamp":65832,
 	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
+	  "tab":["E1"],
+	  "note":["F4"]
 	},
 	{
-	  "timestamp":153974,
-	  "chord":"",
-	  "tab":["E1","A3"],
-	  "note":["F4","C5"]
-	},
-	{
-	  "timestamp":154435,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":154896,
-	  "chord":"C",
-	  "tab":["G0","C0","E0","A3"],
-	  "note":["G4","C4","E4","C5"]
-	},
-	{
-	  "timestamp":155357,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":155818,
-	  "chord":"",
-	  "tab":["E0","A3"],
-	  "note":["E4","C5"]
-	},
-	{
-	  "timestamp":156279,
-	  "chord":"",
-	  "tab":["A5"],
-	  "note":["D5"]
-	},
-	{
-	  "timestamp":156740,
+	  "timestamp":66144,
 	  "chord":"",
 	  "tab":["A3"],
 	  "note":["C5"]
 	},
 	{
-	  "timestamp":157201,
-	  "chord":"",
-	  "tab":["A1"],
-	  "note":["A#4"]
-	},
-	{
-	  "timestamp":157662,
-	  "chord":"Dm",
-	  "tab":["G2","C2","E1","A0"],
-	  "note":["A4","D4","F4","A4"]
-	},
-	{
-	  "timestamp":158123,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":158584,
-	  "chord":"",
-	  "tab":["E1","A0"],
-	  "note":["F4","A4"]
-	},
-	{
-	  "timestamp":159045,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":159506,
-	  "chord":"",
-	  "tab":["E1","A0"],
-	  "note":["F4","A4"]
-	},
-	{
-	  "timestamp":159967,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":160428,
-	  "chord":"Am",
-	  "tab":["G2","C0","E0","A0"],
-	  "note":["A4","C4","E4","A4"]
-	},
-	{
-	  "timestamp":160889,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":161350,
-	  "chord":"",
-	  "tab":["E0","A0"],
-	  "note":["E4","A4"]
-	},
-	{
-	  "timestamp":161811,
-	  "chord":"",
-	  "tab":["A1"],
-	  "note":["A#4"]
-	},
-	{
-	  "timestamp":162272,
+	  "timestamp":67080,
 	  "chord":"",
 	  "tab":["A0"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":162733,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":163194,
-	  "chord":"Bb",
-	  "tab":["G3","C2","E1"],
-	  "note":["A#4","D4","F4"]
-	},
-	{
-	  "timestamp":163655,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":164116,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":164577,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":165038,
-	  "chord":"",
-	  "tab":["E1"],
-	  "note":["F4"]
-	},
-	{
-	  "timestamp":165499,
-	  "chord":"",
-	  "tab":["E0"],
-	  "note":["E4"]
-	},
-	{
-	  "timestamp":165960,
-	  "chord":"Dm",
-	  "tab":["G2","C2"],
-	  "note":["A4","D4"]
-	},
-	{
-	  "timestamp":166882,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":167343,
-	  "chord":"",
-	  "tab":["G2"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":167804,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":168265,
-	  "chord":"",
-	  "tab":["C1"],
-	  "note":["C#4"]
-	},
-	{
-	  "timestamp":168726,
-	  "chord":"Gm",
-	  "tab":["G3","C2","E3"],
-	  "note":["A#4","D4","G4"]
-	},
-	{
-	  "timestamp":169648,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":170109,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":170570,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":171031,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":171492,
-	  "chord":"C7",
-	  "tab":["G3","C0","E3"],
-	  "note":["A#4","C4","G4"]
-	},
-	{
-	  "timestamp":171953,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":172414,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":172875,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":173336,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":173797,
-	  "chord":"",
-	  "tab":["A1"],
-	  "note":["A#4"]
-	},
-	{
-	  "timestamp":174258,
-	  "chord":"F",
-	  "tab":["G2","C0","E1","A3"],
-	  "note":["A4","C4","F4","C5"]
-	},
-	{
-	  "timestamp":174719,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":175180,
-	  "chord":"",
-	  "tab":["E1","A3"],
-	  "note":["F4","C5"]
-	},
-	{
-	  "timestamp":175641,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":176102,
-	  "chord":"",
-	  "tab":["E1","A3"],
-	  "note":["F4","C5"]
-	},
-	{
-	  "timestamp":176563,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":177024,
+	  "timestamp":67392,
 	  "chord":"C",
-	  "tab":["G0","C0","E0","A3"],
-	  "note":["G4","C4","E4","C5"]
+	  "tab":["G0","C0","E3"],
+	  "note":["G4","C4","G4"]
 	},
 	{
-	  "timestamp":177485,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
-	},
-	{
-	  "timestamp":177946,
-	  "chord":"",
-	  "tab":["E0","A3"],
-	  "note":["E4","C5"]
-	},
-	{
-	  "timestamp":178407,
-	  "chord":"",
-	  "tab":["A5"],
-	  "note":["D5"]
-	},
-	{
-	  "timestamp":178868,
+	  "timestamp":68016,
 	  "chord":"",
 	  "tab":["A3"],
 	  "note":["C5"]
 	},
 	{
-	  "timestamp":179329,
-	  "chord":"",
-	  "tab":["A1"],
-	  "note":["A#4"]
-	},
-	{
-	  "timestamp":179790,
-	  "chord":"Dm",
-	  "tab":["G2","C2","E1","A0"],
-	  "note":["A4","D4","F4","A4"]
-	},
-	{
-	  "timestamp":180251,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":180712,
-	  "chord":"",
-	  "tab":["E1","A0"],
-	  "note":["F4","A4"]
-	},
-	{
-	  "timestamp":181173,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":181634,
-	  "chord":"",
-	  "tab":["E1","A0"],
-	  "note":["F4","A4"]
-	},
-	{
-	  "timestamp":182095,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":182556,
-	  "chord":"Am",
-	  "tab":["G2","C0","E0","A0"],
-	  "note":["A4","C4","E4","A4"]
-	},
-	{
-	  "timestamp":183017,
-	  "chord":"",
-	  "tab":["A1"],
-	  "note":["A#4"]
-	},
-	{
-	  "timestamp":183478,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":183939,
+	  "timestamp":68640,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"]
 	},
 	{
-	  "timestamp":184400,
+	  "timestamp":69264,
+	  "chord":"Dm",
+	  "tab":["G2","C2","E1"],
+	  "note":["A4","D4","F4"]
+	},
+	{
+	  "timestamp":69576,
+	  "chord":"",
+	  "tab":["C2"],
+	  "note":["D4"]
+	},
+	{
+	  "timestamp":69888,
+	  "chord":"",
+	  "tab":["A0"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":70824,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"]
 	},
 	{
-	  "timestamp":184861,
+	  "timestamp":71136,
+	  "chord":"Am",
+	  "tab":["G2  ","C0","E0"],
+	  "note":["A4","C4","E4"]
+	},
+	{
+	  "timestamp":72384,
 	  "chord":"",
 	  "tab":["E0"],
 	  "note":["E4"]
 	},
 	{
-	  "timestamp":185322,
+	  "timestamp":73008,
 	  "chord":"Bb",
 	  "tab":["G3","C2"],
 	  "note":["A#4","D4"]
 	},
 	{
-	  "timestamp":186244,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":186705,
+	  "timestamp":73632,
 	  "chord":"",
 	  "tab":["E0"],
 	  "note":["E4"]
 	},
 	{
-	  "timestamp":187166,
+	  "timestamp":74256,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"]
 	},
 	{
-	  "timestamp":187627,
+	  "timestamp":74568,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"]
 	},
 	{
-	  "timestamp":188088,
+	  "timestamp":74880,
+	  "chord":"F",
+	  "tab":["G2  ","C0"],
+	  "note":["A4","C4"]
+	},
+	{
+	  "timestamp":75504,
+	  "chord":"",
+	  "tab":["E1"],
+	  "note":["F4"]
+	},
+	{
+	  "timestamp":76440,
+	  "chord":"",
+	  "tab":["E0"],
+	  "note":["E4"]
+	},
+	{
+	  "timestamp":76752,
+	  "chord":"Bb",
+	  "tab":["G3","C2"],
+	  "note":["A#4","D4"]
+	},
+	{
+	  "timestamp":77376,
+	  "chord":"",
+	  "tab":["E0"],
+	  "note":["E4"]
+	},
+	{
+	  "timestamp":78000,
+	  "chord":"",
+	  "tab":["E1"],
+	  "note":["F4"]
+	},
+	{
+	  "timestamp":78312,
+	  "chord":"",
+	  "tab":["E3"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":78624,
 	  "chord":"F",
 	  "tab":["G2","C0"],
 	  "note":["A4","C4"]
 	},
 	{
-	  "timestamp":189010,
+	  "timestamp":79872,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"]
 	},
 	{
-	  "timestamp":189471,
+	  "timestamp":80184,
 	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
+	  "tab":["E0"],
+	  "note":["E4"]
 	},
 	{
-	  "timestamp":189932,
+	  "timestamp":80496,
+	  "chord":"Bb",
+	  "tab":["G3","C2"],
+	  "note":["A#4","D4"]
+	},
+	{
+	  "timestamp":81120,
 	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
+	  "tab":["E0"],
+	  "note":["E4"]
 	},
 	{
-	  "timestamp":190393,
-	  "chord":"",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":190854,
-	  "chord":"Gm",
-	  "tab":["G3","C2","E3"],
-	  "note":["A#4","D4","G4"]
-	},
-	{
-	  "timestamp":191776,
-	  "chord":"",
-	  "tab":["C2"],
-	  "note":["D4"]
-	},
-	{
-	  "timestamp":192237,
-	  "chord":"",
-	  "tab":["E3"],
-	  "note":["G4"]
-	},
-	{
-	  "timestamp":192698,
-	  "chord":"",
-	  "tab":["G3","C0","E3"],
-	  "note":["A#4","C4","G4"]
-	},
-	{
-	  "timestamp":193159,
+	  "timestamp":81744,
 	  "chord":"",
 	  "tab":["E1"],
 	  "note":["F4"]
 	},
 	{
-	  "timestamp":193620,
+	  "timestamp":82056,
+	  "chord":"",
+	  "tab":["E3"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":82368,
 	  "chord":"F",
-	  "tab":["G2","C0","E1"],
-	  "note":["A4","C4","F4"]
+	  "tab":["G2  ","C0"],
+	  "note":["A4","C4"]
 	},
 	{
-	  "timestamp":194542,
+	  "timestamp":82992,
+	  "chord":"",
+	  "tab":["E1"],
+	  "note":["F4"]
+	},
+	{
+	  "timestamp":83616,
+	  "chord":"",
+	  "tab":["E3"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":83928,
 	  "chord":"",
 	  "tab":["A0"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":195003,
-	  "chord":"",
-	  "tab":["C0"],
-	  "note":["C4"]
+	  "timestamp":84240,
+	  "chord":"G7",
+	  "tab":["G0","C2","E1","A1"],
+	  "note":["G4","D4","F4","A#4"]
 	},
 	{
-	  "timestamp":195464,
+	  "timestamp":84864,
 	  "chord":"",
-	  "tab":["A3"],
-	  "note":["C5"]
+	  "tab":["A1"],
+	  "note":["A#4"]
 	},
 	{
-	  "timestamp":196386,
+	  "timestamp":85176,
 	  "chord":"",
-	  "tab":["G5","C5","E5","A8"],
-	  "note":["C5","F4","A4","F5"]
+	  "tab":["A0"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":85488,
+	  "chord":"G7",
+	  "tab":["G0","C0","E3"],
+	  "note":["G4","C4","G4"]
+	},
+	{
+	  "timestamp":85800,
+	  "chord":"",
+	  "tab":["E1"],
+	  "note":["F4"]
+	},
+	{
+	  "timestamp":86112,
+	  "chord":"F",
+	  "tab":["G2","C0","E1","A0"],
+	  "note":["A4","C4","F4","A4"]
 	}  ],
 
-  "title":"언제라도 몇번이라도",
-  "author":"최안식",
-  "author_comment":"",
+  "title":" 언제나 몇번이라도 - 센과치히로의 행방불명OST ",
+  "author":"��모",
   "author_note":"",
-  "category":"FingerStyle",
-  "comment":"",
+  "category":"Melody",
+  "comment":" 지브리 애니메이션 '센과 치히로의 행방불명' OST ",
   "create_date":"----/--/--",
   "source":"itsumonandodemo.mp3",
-  "thumbnail":"null",
+  "thumbnail":"itsumonandodemo.jpg",
   "start_offset":"0",
-  "bpm":"130"
+  "basic_beat":"3/4",
+  "bpm":" 96.0"
 }

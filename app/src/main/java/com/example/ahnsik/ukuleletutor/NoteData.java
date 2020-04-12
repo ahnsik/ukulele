@@ -19,6 +19,7 @@ public class NoteData {
     public  String  mCategory;          // 연주방법 : Chord / 밴드(단음)연주 / 핑거스타일 / 아르페지오, etc..
     public  String  mAuthor;            // 악보 제작자
     public  String  mCommentary;        // 그 외에 이러 저러한 코멘트.
+    public  String  mBasicBeat;         // 박자 : 2/4, 3/4, 4/4, 6/8, ...
 
     public  int     mStartOffset;       // 처음 시작할 위치의 오프셋
     public  int     mLevel;             // 곡의 난이도 레벨. 숫자가 적을 수록 쉬운 레벨.
@@ -117,7 +118,7 @@ public class NoteData {
 //            json.put("author_comment", mAuthorComment);
 //            json.put("create_date", mDateCreated );
             json.put("comment", mCommentary);
-
+            json.put("basic_beat", mBasicBeat);
             json.put("start_offset", mStartOffset);
             json.put("bpm", mBpm);
 
@@ -222,6 +223,7 @@ public class NoteData {
             }
 
             try {
+                this.mBasicBeat = ukeData.getString("basic_beat");
                 this.mCommentary = ukeData.getString("comment");
                 this.mCategory = ukeData.getString("category");
                 this.mAuthor = ukeData.getString("author");
