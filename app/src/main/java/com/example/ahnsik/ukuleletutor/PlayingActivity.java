@@ -2,9 +2,11 @@ package com.example.ahnsik.ukuleletutor;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +32,7 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
     private long      mGameStartClock = 0, endofSong = 0;
     private int       playing_pos = 0;      // index of note data (next position what it will be played.)
     private Metronom  mMetronom;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +40,7 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
         mPlayingView = new PlayView(this);
         setContentView(mPlayingView);
         // Lock orientation into landscape.
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);       // 연습 도중에 무조작으로 Sleep 모드로 들어가면 곤란하므로, Sleep Mode 로 가지 않게 설정.
 
         // 연주할 파일의 파일 이름을 가져 옴.
@@ -73,7 +76,16 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mMetronom.start(mGameStartClock);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if (preferences.getBoolean("playing_metronom_onoff", false )) {
+            mMetronom.start(mGameStartClock);
+            Log.d("ukulele", "!@@@@@@@@@@ Start Metronom for playing activity. @@@@@@@ : " );
+        } else {
+            Log.d("ukulele", "!~~~~~~  not playing Metronom for playing activity. ~~~~~~ : " );
+        }
+
     }
 
     @Override

@@ -3,8 +3,10 @@ package com.example.ahnsik.ukuleletutor;
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.media.SoundPool;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +26,7 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
     private long      mGameStartClock = 0;
     private int       playing_pos = 0;      // index of note data (next position what it will be played.)
     private Metronom  mMetronom;
+    private SharedPreferences preferences;
 
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
@@ -54,7 +57,15 @@ public class TrainingActivity extends AppCompatActivity implements Runnable {
         mThread.start();
         running = true;
         mGameStartClock = System.currentTimeMillis();     // 시작 싯점의 시스템 클럭을 저장.
-        mMetronom.start(mGameStartClock);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if (preferences.getBoolean("playing_metronom_onoff", true )) {
+            mMetronom.start(mGameStartClock);
+            Log.d("ukulele", "!@@@@@@@@@@ Start Metronom for playing activity. @@@@@@@ : " );
+        } else {
+            Log.d("ukulele", "!~~~~~~  not playing Metronom for playing activity. ~~~~~~ : " );
+        }
 
 //        mGameView.setPlayPosition(mGameStartClock);
     }

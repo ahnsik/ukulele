@@ -3,21 +3,21 @@
 	{
 	  "timestamp":9172,
 	  "chord":"C",
-	  "tab":["G0","C0","E3"],
+	  "tab":["G0","C0","E3a"],
 	  "note":["G4","C4","G4"],
 	  "lyric":" Moon  "
 	},
 	{
 	  "timestamp":11422,
 	  "chord":"Am",
-	  "tab":["G2a","C0","E0","A5c"],
+	  "tab":["G2i","C0","E0","A5c"],
 	  "note":["A4","C4","E4","D5"],
 	  "lyric":"River"
 	},
 	{
 	  "timestamp":12172,
 	  "chord":"",
-	  "tab":["A3"],
+	  "tab":["A3m"],
 	  "note":["C5"]
 	},
 	{
@@ -29,7 +29,7 @@
 	{
 	  "timestamp":13672,
 	  "chord":"Fadd9",
-	  "tab":["G0","C0","E1","A2"],
+	  "tab":["G0","C0","E1i","A2m"],
 	  "note":["G4","C4","F4","B4"],
 	  "lyric":"Wilder"
 	},
@@ -74,7 +74,7 @@
 	{
 	  "timestamp":18172,
 	  "chord":"Fadd9",
-	  "tab":["G0","C0","E1","A2"],
+	  "tab":["G0","C0","E1i","A2m"],
 	  "note":["G4","C4","F4","B4"],
 	  "lyric":"crossing"
 	},
@@ -120,7 +120,7 @@
 	{
 	  "timestamp":22672,
 	  "chord":"Bm7",
-	  "tab":["G2  ","C2m"],
+	  "tab":["G2i","C2im"],
 	  "note":["A4","D4"],
 	  "lyric":"day"
 	},
@@ -133,39 +133,39 @@
 	{
 	  "timestamp":24172,
 	  "chord":"",
-	  "tab":["E1"],
+	  "tab":["E1i"],
 	  "note":["F4"]
 	},
 	{
 	  "timestamp":24922,
 	  "chord":"E7",
-	  "tab":["G1","C2a","E0","A3i"],
+	  "tab":["G1i","C2m","E0","A3c"],
 	  "note":["G#4","D4","E4","C5"]
 	},
 	{
 	  "timestamp":25672,
 	  "chord":"",
-	  "tab":["A2"],
+	  "tab":["A2m"],
 	  "note":["B4"]
 	},
 	{
 	  "timestamp":26422,
 	  "chord":"",
-	  "tab":["C2"],
+	  "tab":["C2m"],
 	  "note":["D4"],
 	  "lyric":"old"
 	},
 	{
 	  "timestamp":27172,
 	  "chord":"Am",
-	  "tab":["G3","C0"],
-	  "note":["A#4","C4"],
+	  "tab":["G2m","C0"],
+	  "note":["A4","C4"],
 	  "lyric":"dream"
 	},
 	{
 	  "timestamp":29422,
 	  "chord":"C7",
-	  "tab":["G3a","C0","E3a"],
+	  "tab":["G3i","C0","E3m"],
 	  "note":["A#4","C4","G4"],
 	  "lyric":"maker"
 	},
@@ -178,21 +178,21 @@
 	{
 	  "timestamp":31297,
 	  "chord":"",
-	  "tab":["C2"],
+	  "tab":["C2m"],
 	  "note":["D4"],
 	  "lyric":"you"
 	},
 	{
 	  "timestamp":31672,
 	  "chord":"F  ",
-	  "tab":["G2","C0"],
+	  "tab":["G2m","C0"],
 	  "note":["A4","C4"],
 	  "lyric":"heart"
 	},
 	{
 	  "timestamp":33922,
 	  "chord":"Bb",
-	  "tab":["G3a","C2i","E3a"],
+	  "tab":["G3m","C2i","E3a"],
 	  "note":["A#4","D4","G4"],
 	  "lyric":"breaker"
 	},
@@ -205,14 +205,14 @@
 	{
 	  "timestamp":35797,
 	  "chord":"",
-	  "tab":["C2"],
+	  "tab":["C2m"],
 	  "note":["D4"],
 	  "lyric":"Where-ever"
 	},
 	{
 	  "timestamp":36172,
 	  "chord":"Am",
-	  "tab":["G2  ","C0"],
+	  "tab":["G2m","C0"],
 	  "note":["A4","C4"]
 	},
 	{
@@ -224,21 +224,21 @@
 	{
 	  "timestamp":37672,
 	  "chord":"",
-	  "tab":["E3"],
+	  "tab":["E3a"],
 	  "note":["G4"],
 	  "lyric":"you’re"
 	},
 	{
 	  "timestamp":38422,
 	  "chord":"F#m7",
-	  "tab":["G2a","C4","E2a","A3i"],
+	  "tab":["G2i","C4c","E2i","A3a"],
 	  "note":["A4","E4","F#4","C5"],
 	  "lyric":"going"
 	},
 	{
 	  "timestamp":39172,
 	  "chord":"B7",
-	  "tab":["G2","C3","E2","A2"],
+	  "tab":["G2i","C3m","E2i","A2i"],
 	  "note":["A4","D#4","F#4","B4"]
 	},
 	{
@@ -251,7 +251,7 @@
 	{
 	  "timestamp":40672,
 	  "chord":"Em",
-	  "tab":["G0","C4","E3","A2"],
+	  "tab":["G0","C4","E3a","A2m"],
 	  "note":["G4","E4","G4","B4"],
 	  "lyric":"going"
 	},
@@ -264,25 +264,25 @@
 	{
 	  "timestamp":42172,
 	  "chord":"A7",
-	  "tab":["G0","C1","E3a"],
+	  "tab":["G0","C1i","E3a"],
 	  "note":["G4","C#4","G4"]
 	},
 	{
 	  "timestamp":42547,
 	  "chord":"Dm7",
-	  "tab":["G2i","C2i","E1","A0"],
+	  "tab":["G2i","C2i","E1i","A0"],
 	  "note":["A4","D4","F4","A4"]
 	},
 	{
 	  "timestamp":44047,
 	  "chord":"G7",
-	  "tab":["G0","C2","E1","A2"],
+	  "tab":["G0","C2m","E1i","A2m"],
 	  "note":["G4","D4","F4","B4"]
 	},
 	{
 	  "timestamp":45547,
 	  "chord":"C",
-	  "tab":["G0","C0","E3"],
+	  "tab":["G0","C0","E3a"],
 	  "note":["G4","C4","G4"],
 	  "lyric":"Two"
 	},
@@ -296,7 +296,7 @@
 	{
 	  "timestamp":48547,
 	  "chord":"",
-	  "tab":["A3"],
+	  "tab":["A3m"],
 	  "note":["C5"]
 	},
 	{
@@ -310,7 +310,7 @@
 	{
 	  "timestamp":50047,
 	  "chord":"Fadd9",
-	  "tab":["G0","C0","E1","A2"],
+	  "tab":["G0","C0","E1i","A2m"],
 	  "note":["G4","C4","F4","B4"],
 	  "lyric":"off"
 	},
@@ -356,7 +356,7 @@
 	{
 	  "timestamp":54547,
 	  "chord":"Fadd9",
-	  "tab":["G0","C0","E1","A2"],
+	  "tab":["G0","C0","E1i","A2m"],
 	  "note":["G4","C4","F4","B4"],
 	  "lyric":"such"
 	},
@@ -402,7 +402,7 @@
 	{
 	  "timestamp":59047,
 	  "chord":"Bm7",
-	  "tab":["G2","C2"],
+	  "tab":["G2i","C2m"],
 	  "note":["A4","D4"],
 	  "lyric":"see"
 	},
@@ -415,32 +415,32 @@
 	{
 	  "timestamp":60547,
 	  "chord":"",
-	  "tab":["E1"],
+	  "tab":["E1i"],
 	  "note":["F4"]
 	},
 	{
 	  "timestamp":61297,
 	  "chord":"E7",
-	  "tab":["G1","C2a","E0","A3a"],
+	  "tab":["G1i","C2m","E0","A3c"],
 	  "note":["G#4","D4","E4","C5"]
 	},
 	{
 	  "timestamp":62047,
 	  "chord":"",
-	  "tab":["E2"],
+	  "tab":["E2a"],
 	  "note":["F#4"]
 	},
 	{
 	  "timestamp":62797,
 	  "chord":"",
-	  "tab":["C2"],
+	  "tab":["C2m"],
 	  "note":["D4"],
 	  "lyric":"We’re"
 	},
 	{
 	  "timestamp":63547,
 	  "chord":"Am",
-	  "tab":["G2  ","C0"],
+	  "tab":["G2i","C0"],
 	  "note":["A4","C4"],
 	  "lyric":"af-"
 	},
@@ -454,48 +454,48 @@
 	{
 	  "timestamp":67297,
 	  "chord":"",
-	  "tab":["E3"],
+	  "tab":["E3a"],
 	  "note":["G4"],
 	  "lyric":"the"
 	},
 	{
 	  "timestamp":68047,
 	  "chord":"F#dim7",
-	  "tab":["G2","C3","E2","A3"],
+	  "tab":["G2i","C3m","E2i","A3a"],
 	  "note":["A4","D#4","F#4","C5"],
 	  "lyric":"same"
 	},
 	{
 	  "timestamp":70297,
 	  "chord":"F",
-	  "tab":["C0","E1","A5"],
+	  "tab":["C0","E1i","A5c"],
 	  "note":["C4","F4","D5"],
 	  "lyric":"rain-"
 	},
 	{
 	  "timestamp":71797,
 	  "chord":"",
-	  "tab":["A3"],
+	  "tab":["A3a"],
 	  "note":["C5"],
 	  "lyric":"bow’s"
 	},
 	{
 	  "timestamp":72547,
 	  "chord":"C",
-	  "tab":["G0","C0","E3"],
+	  "tab":["G0","C0","E3m"],
 	  "note":["G4","C4","G4"],
 	  "lyric":"end"
 	},
 	{
 	  "timestamp":74797,
 	  "chord":"F",
-	  "tab":["G2a","C0","E1","A0"],
+	  "tab":["G2a","C0","E1i","A0"],
 	  "note":["A4","C4","F4","A4"]
 	},
 	{
 	  "timestamp":75547,
 	  "chord":"",
-	  "tab":["A2"],
+	  "tab":["A2mm"],
 	  "note":["B4"],
 	  "lyric":" waiting round the  "
 	},
@@ -508,26 +508,26 @@
 	{
 	  "timestamp":76297,
 	  "chord":"",
-	  "tab":["E3"],
+	  "tab":["E3a"],
 	  "note":["G4"]
 	},
 	{
 	  "timestamp":76672,
 	  "chord":"",
-	  "tab":["E1"],
+	  "tab":["E1i"],
 	  "note":["F4"]
 	},
 	{
 	  "timestamp":77047,
 	  "chord":"C",
-	  "tab":["G0","C0","E3  "],
+	  "tab":["G0","C0","E3a  "],
 	  "note":["G4","C4","G4"],
 	  "lyric":"bend"
 	},
 	{
 	  "timestamp":79297,
 	  "chord":"F  ",
-	  "tab":["G2a","C0","E1","A0"],
+	  "tab":["G2a","C0","E1i","A0"],
 	  "note":["A4","C4","F4","A4"]
 	},
 	{
@@ -540,7 +540,7 @@
 	{
 	  "timestamp":80047,
 	  "chord":"",
-	  "tab":["A2"],
+	  "tab":["A2m"],
 	  "note":["B4"]
 	},
 	{
@@ -552,47 +552,47 @@
 	{
 	  "timestamp":80797,
 	  "chord":"",
-	  "tab":["E3"],
+	  "tab":["E3a"],
 	  "note":["G4"]
 	},
 	{
 	  "timestamp":81172,
 	  "chord":"",
-	  "tab":["E1"],
+	  "tab":["E1i"],
 	  "note":["F4"]
 	},
 	{
 	  "timestamp":81547,
 	  "chord":"C",
-	  "tab":["G0","C0","E3"],
+	  "tab":["G0","C0","E3a"],
 	  "note":["G4","C4","G4"],
 	  "lyric":"friend"
 	},
 	{
 	  "timestamp":83797,
 	  "chord":"Am",
-	  "tab":["G2i","C0"],
+	  "tab":["G2m","C0"],
 	  "note":["A4","C4"],
 	  "lyric":"Moon"
 	},
 	{
 	  "timestamp":86047,
 	  "chord":"Dm",
-	  "tab":["G2","C2","E1"],
+	  "tab":["G2a","C2m","E1i"],
 	  "note":["A4","D4","F4"],
 	  "lyric":"ri-"
 	},
 	{
 	  "timestamp":86797,
 	  "chord":"",
-	  "tab":["C2"],
+	  "tab":["C2m"],
 	  "note":["D4"],
 	  "lyric":"ver"
 	},
 	{
 	  "timestamp":88297,
 	  "chord":"G7",
-	  "tab":["G0","C2a","E1"],
+	  "tab":["G0","C2m","E1i"],
 	  "note":["G4","D4","F4"]
 	},
 	{
@@ -605,7 +605,7 @@
 	{
 	  "timestamp":90547,
 	  "chord":"C",
-	  "tab":["C0","E3  "],
+	  "tab":["C0","E3a  "],
 	  "note":["C4","G4"],
 	  "lyric":"me."
 	},
@@ -618,7 +618,7 @@
 	{
 	  "timestamp":93547,
 	  "chord":"",
-	  "tab":["A3"],
+	  "tab":["A3m"],
 	  "note":["C5"]
 	},
 	{
@@ -630,43 +630,43 @@
 	{
 	  "timestamp":95047,
 	  "chord":"C",
-	  "tab":["C0","E3"],
+	  "tab":["C0","E3a"],
 	  "note":["C4","G4"]
 	},
 	{
 	  "timestamp":97297,
 	  "chord":"Am",
-	  "tab":["G2i","C0","E0","A5"],
+	  "tab":["G2i","C0","E0","A5c"],
 	  "note":["A4","C4","E4","D5"]
 	},
 	{
 	  "timestamp":98047,
 	  "chord":"",
-	  "tab":["A3"],
+	  "tab":["A3m"],
 	  "note":["C5"]
 	},
 	{
 	  "timestamp":99547,
 	  "chord":"G7",
-	  "tab":["C2","E1","A0"],
+	  "tab":["C2m","E1i","A0"],
 	  "note":["D4","F4","A4"]
 	},
 	{
 	  "timestamp":100297,
 	  "chord":"",
-	  "tab":["C4","E3"],
+	  "tab":["C4c","E3a"],
 	  "note":["E4","G4"]
 	},
 	{
 	  "timestamp":101047,
 	  "chord":"",
-	  "tab":["C2","E1"],
+	  "tab":["C2m","E1i"],
 	  "note":["D4","F4"]
 	},
 	{
 	  "timestamp":101797,
 	  "chord":"Cadd9",
-	  "tab":["G0","C2a","E0","A3a"],
+	  "tab":["G0","C2i","E0","A3a"],
 	  "note":["G4","D4","E4","C5"]
 	}  ],
 
@@ -674,7 +674,7 @@
   "author":"ahnsik",
   "author_note":"",
   "category":"Melody",
-  "comment":" 티파니에서 아침을 OST ",
+  "comment":" 출처: 우쿨렐레 콘서트 연주곡집 – 티파니에서 아침을 OST ",
   "create_date":"----/--/--",
   "source":"moonriver_ukul_concert.mp3",
   "thumbnail":"ukulele_concert_book.jpg",
