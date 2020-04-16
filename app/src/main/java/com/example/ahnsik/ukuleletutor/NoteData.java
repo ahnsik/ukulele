@@ -30,6 +30,7 @@ public class NoteData {
     public  long[]       timeStamp;
     public  String[]    chordName;
     public  String[]    stroke;
+    public  String[]    technic;
     public  String[][]  tab;
     public  String[][]  note;
     public  boolean[][] note_played;
@@ -49,6 +50,7 @@ public class NoteData {
         timeStamp = null;
         chordName = null;
         stroke = null;
+        technic = null;
         tab = null;
         note = null;
         note_played = null;
@@ -132,6 +134,10 @@ public class NoteData {
                 if ( (stroke[i] !=null) && ( ! stroke[i].isEmpty() ) ) {
                     oneChord.put("stroke", stroke[i] );
                 }
+                if ( (technic[i] !=null) && ( ! technic[i].isEmpty() ) ) {
+                    oneChord.put("technic", technic[i] );
+                }
+
                 JSONArray tabJ= new JSONArray();
                 for (int j=0; j<tab[i].length; j++) {
                     tabJ.put(tab[i][j]);
@@ -183,6 +189,7 @@ public class NoteData {
             this.score = new int[this.numNotes];
             this.chordName = new String[this.numNotes];
             this.stroke = new String[this.numNotes];
+            this.technic = new String[this.numNotes];
             this.tab = new String[this.numNotes][];
             this.note = new String[this.numNotes][];
             this.note_played = new boolean[this.numNotes][];
@@ -201,6 +208,11 @@ public class NoteData {
                     this.stroke[i] = a_note.getString("stroke");
                 } catch (Exception e) {
                     this.stroke[i] = null;
+                }
+                try {
+                    this.technic[i] = a_note.getString("technic");
+                } catch (Exception e) {
+                    this.technic[i] = null;
                 }
                 JSONArray   temp1 = a_note.getJSONArray("tab");
                 this.tab[i] = new String[temp1.length()];

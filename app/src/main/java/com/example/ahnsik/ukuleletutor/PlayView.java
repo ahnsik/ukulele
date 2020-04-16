@@ -268,6 +268,11 @@ public class PlayView extends GameView {
             for (int j=0; j<songData.tab[i].length; j++) {
                 drawNote(canvas, xpos, songData.tab[i][j], SCORE_COLOR_TOO_FAST );
             }
+            if ( songData.technic[i] != null ) {            // 마디 표시
+                if ( songData.technic[i].indexOf('|') >= 0 ) {
+                    canvas.drawRect(xpos-4, LINE_Y, xpos-2, LINE_Y+TAB_LINE_SPACE*3+4, pLyric );
+                }
+            }
             if ( (songData.lyric[i] != null) ) {
                 canvas.drawText( songData.lyric[i], xpos,LYRIC_POSITION_Y, pLyric);
             }
@@ -360,12 +365,14 @@ public class PlayView extends GameView {
 
     private void drawStroke(Canvas canvas, int x, String strokedirection ) {
         switch(strokedirection.charAt(0) ) {
+            case '^':
             case 'u':
             case 'U':
                 canvas.drawLine(x, CHORD_POSITION_Y-20, x, CHORD_POSITION_Y-60, pText );
                 canvas.drawLine(x, CHORD_POSITION_Y-60, x+30, CHORD_POSITION_Y-60, pText );
                 canvas.drawLine(x+30, CHORD_POSITION_Y-20, x+30, CHORD_POSITION_Y-60, pText );
                 break;
+            case 'v':
             case 'd':
             case 'D':
                 canvas.drawLine(x, CHORD_POSITION_Y-60, x+15, CHORD_POSITION_Y-20, pText );
