@@ -65,7 +65,7 @@ public class PlayView extends GameView {
 
     private Paint  pText, pBG, pPaper, pCursor, pSpectrum, pTitle, pLyric;
     private Paint  pInfo;       // 디버깅 정보 등, 부가적인 정보를 표시하기 위한 색상.
-    private Bitmap bmpBg, bmpFinger, bmpChord;
+    private Bitmap bmpBg, bmpFinger, bmpThumbStroke, bmpChord;
 
     private final static String[] note_name = {
             "G3", "G#3", "A3", "A#3", "B3", "C4", "C#4", "D4", "D#4", "E4",
@@ -114,7 +114,8 @@ public class PlayView extends GameView {
         // 비트맵 로딩이 Multi Threading 이 된다면.. 먼저 로드를 시작해 두고 나머지를 설정하는 편이 좋다.
 //        bmpBg = BitmapFactory.decodeResource(this.getResources(), R.drawable.bg_paper );
         bmpBg = null;
-        bmpFinger = decodeResource(this.getResources(), finger_guide );
+        bmpFinger = BitmapFactory.decodeResource(this.getResources(), R.drawable.finger_guide );
+        bmpThumbStroke = BitmapFactory.decodeResource(this.getResources(), R.drawable.thumb_stroke );
 
         // 전체적으로 기본적으로 사용될 Font 및 기본 색상 등을 지정.
         pText = new Paint();
@@ -256,7 +257,7 @@ public class PlayView extends GameView {
         int length = songData.numNotes;
 
         for (int i =0; i<length; i++) {
-            int xpos = PLAYING_POSITION + (int)( songData.timeStamp[i]-mGame_clock)/4;  // 진행 속도에 따라 /6 의 값은 변동적으로 해야 함. - bps 를 고려하는 계산을 나중에 처리해야 함.
+            int xpos = PLAYING_POSITION + (int)( songData.timeStamp[i]-mGame_clock)/3;  // 진행 속도에 따라 /4 의 값은 변동적으로 해야 함. - bps 를 고려하는 계산을 나중에 처리해야 함.
             if (xpos < TAB_LEFT_END+60 ) continue;        // 화면 밖으로 나가는 것 들은 그릴 필요 없음.
             if (xpos > TAB_RIGHT_END-80 ) continue;     // 화면 밖으로 나가는 것 들은 그릴 필요 없음.
 
@@ -272,7 +273,10 @@ public class PlayView extends GameView {
             }
             if ( songData.technic[i] != null ) {            // 마디 표시
                 if ( songData.technic[i].indexOf('|') >= 0 ) {
-                    canvas.drawRect(xpos-4, LINE_Y, xpos-2, LINE_Y+TAB_LINE_SPACE*3+4, pLyric );
+                    canvas.drawRect(xpos-22, LINE_Y, xpos-18, LINE_Y+TAB_LINE_SPACE*3+4, pLyric );
+                }
+                if ( songData.technic[i].indexOf('T') >= 0 ) {
+                    canvas.drawBitmap(bmpThumbStroke, xpos-20, LINE_Y, null);
                 }
             }
             if ( (songData.lyric[i] != null) ) {
