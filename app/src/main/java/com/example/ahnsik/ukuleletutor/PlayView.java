@@ -10,7 +10,9 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
 
+import static android.graphics.BitmapFactory.*;
 import static android.graphics.Color.*;
+import static com.example.ahnsik.ukuleletutor.R.drawable.finger_guide;
 
 public class PlayView extends GameView {
 
@@ -63,7 +65,7 @@ public class PlayView extends GameView {
 
     private Paint  pText, pBG, pPaper, pCursor, pSpectrum, pTitle, pLyric;
     private Paint  pInfo;       // 디버깅 정보 등, 부가적인 정보를 표시하기 위한 색상.
-    private Bitmap bmpBg, bmpFinger;
+    private Bitmap bmpBg, bmpFinger, bmpChord;
 
     private final static String[] note_name = {
             "G3", "G#3", "A3", "A#3", "B3", "C4", "C#4", "D4", "D#4", "E4",
@@ -112,7 +114,7 @@ public class PlayView extends GameView {
         // 비트맵 로딩이 Multi Threading 이 된다면.. 먼저 로드를 시작해 두고 나머지를 설정하는 편이 좋다.
 //        bmpBg = BitmapFactory.decodeResource(this.getResources(), R.drawable.bg_paper );
         bmpBg = null;
-        bmpFinger = BitmapFactory.decodeResource(this.getResources(), R.drawable.finger_guide );
+        bmpFinger = decodeResource(this.getResources(), finger_guide );
 
         // 전체적으로 기본적으로 사용될 Font 및 기본 색상 등을 지정.
         pText = new Paint();
@@ -146,9 +148,9 @@ public class PlayView extends GameView {
         pLyric.setTextSize(48.0f);
 
         Log.d("ukulele", "width="+ this.width + ", height=" + this.height );
-        if (this.width <= 0 ) {     // width 를 모른다.
-
-        }
+//        if (this.width <= 0 ) {     // width 를 모른다.
+//
+//        }
     }
 
 
@@ -360,7 +362,68 @@ public class PlayView extends GameView {
     }
 
     private void drawChordName(Canvas canvas, int x, String chordName ) {
-        canvas.drawText(chordName, x, CHORD_POSITION_Y, pBG);
+        switch(chordName) {
+            case "A":
+                bmpChord = decodeResource(this.getResources(), R.drawable.a );   break;
+            case "A7":
+                bmpChord = decodeResource(this.getResources(), R.drawable.a7 );   break;
+            case "Am":
+                bmpChord = decodeResource(this.getResources(), R.drawable.am );   break;
+            case "B7":
+                bmpChord = decodeResource(this.getResources(), R.drawable.b7 );   break;
+            case "Bm":
+                bmpChord = decodeResource(this.getResources(), R.drawable.bm );   break;
+            case "Bb":
+                bmpChord = decodeResource(this.getResources(), R.drawable.bb );   break;
+            case "C":
+                bmpChord = decodeResource(this.getResources(), R.drawable.c );   break;
+            case "C#":
+                bmpChord = decodeResource(this.getResources(), R.drawable.csharp );   break;
+            case "C#m":
+                bmpChord = decodeResource(this.getResources(), R.drawable.csharpm );   break;
+            case "Cm":
+                bmpChord = decodeResource(this.getResources(), R.drawable.cm );   break;
+            case "D":
+                bmpChord = decodeResource(this.getResources(), R.drawable.d );   break;
+            case "D7":
+                bmpChord = decodeResource(this.getResources(), R.drawable.d7 );   break;
+            case "Dm":
+                bmpChord = decodeResource(this.getResources(), R.drawable.dm );   break;
+            case "E":
+                bmpChord = decodeResource(this.getResources(), R.drawable.e );   break;
+            case "E7":
+                bmpChord = decodeResource(this.getResources(), R.drawable.e7 );   break;
+            case "Eb":
+                bmpChord = decodeResource(this.getResources(), R.drawable.eb );   break;
+            case "Em":
+                bmpChord = decodeResource(this.getResources(), R.drawable.em );   break;
+            case "F":
+                bmpChord = decodeResource(this.getResources(), R.drawable.f );   break;
+            case "F#m":
+                bmpChord = decodeResource(this.getResources(), R.drawable.fsharpm );   break;
+            case "F7":
+                bmpChord = decodeResource(this.getResources(), R.drawable.f7 );   break;
+            case "Fm":
+                bmpChord = decodeResource(this.getResources(), R.drawable.fm );   break;
+            case "G":
+                bmpChord = decodeResource(this.getResources(), R.drawable.g );   break;
+            case "G#m":
+                bmpChord = decodeResource(this.getResources(), R.drawable.gsharpm );   break;
+            case "G7":
+                bmpChord = decodeResource(this.getResources(), R.drawable.g7 );   break;
+            case "Gm":
+                bmpChord = decodeResource(this.getResources(), R.drawable.gm );   break;
+            default:
+                bmpChord = null;       break;
+        }
+
+        if (bmpChord == null) {
+            canvas.drawText(chordName, x, CHORD_POSITION_Y, pBG);
+        } else {
+//            bmpChord = BitmapFactory.decodeResource(this.getResources(), R.drawable.finger_guide );
+            int w = bmpChord.getWidth(), h = bmpChord.getHeight();
+            canvas.drawBitmap(bmpChord, new Rect(0,0,w,h), new Rect(x-40, CHORD_POSITION_Y-140, x+80, CHORD_POSITION_Y+10), null);
+        }
     }
 
     private void drawStroke(Canvas canvas, int x, String strokedirection ) {
