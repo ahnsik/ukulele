@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AndroidStudioProjects-ukulele.iml" filepath="$PROJECT_DIR$/AndroidStudioProjects-ukulele.iml" group="ukulele" />
-      <module fileurl="file://$PROJECT_DIR$/app/AndroidStudioProjects-ukulele-app.iml" filepath="$PROJECT_DIR$/app/AndroidStudioProjects-ukulele-app.iml" group="ukulele/app" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ukulele.iml" filepath="$PROJECT_DIR$/ukulele.iml" group="ukulele" />
-      <module fileurl="file://$PROJECT_DIR$/app/ukulele-app.iml" filepath="$PROJECT_DIR$/app/ukulele-app.iml" group="ukulele/app" />
-      <module fileurl="file://$PROJECT_DIR$/ukulele-ukulele.iml" filepath="$PROJECT_DIR$/ukulele-ukulele.iml" group="ukulele" />
-      <module fileurl="file://$PROJECT_DIR$/app/ukulele-ukulele-app.iml" filepath="$PROJECT_DIR$/app/ukulele-ukulele-app.iml" group="ukulele/app" />
+      <module fileurl="file://$PROJECT_DIR$/ukulele.iml" filepath="$PROJECT_DIR$/ukulele.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ukulele.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ukulele.app.iml" />
     </modules>
   </component>
 </project>
