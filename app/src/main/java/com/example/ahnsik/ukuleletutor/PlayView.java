@@ -37,6 +37,7 @@ public class PlayView extends GameView {
     private final static int    BG_TAB_LINE_COLOR = rgb(120, 80, 4);        // 오선지(X) TAB악보 라인 의 색상 / Font색상.
     private final static int    DEFAULT_TEXT_COLOR = rgb(90, 60, 4);        // 기본 글자 색상
     private final static int    CURSOR_COLOR = rgb(209, 73, 46);        // 커서 색상은 빨간색
+    private final static int    CURSOR_SHADOW = argb(96, 96, 96, 32);        // 커서 영역은 회색 반투명
     private final static int    THUMB_FINGER_COLOR = rgb(120,80,4);     // 엄지손가락 rgb(96, 96, 96);
     private final static int    INDEX_FINGER_COLOR = rgb(32, 192, 0);    // 검지손가락
     private final static int    MIDDLE_FINGER_COLOR = rgb(203, 51, 203);    // 중지손가락
@@ -63,7 +64,7 @@ public class PlayView extends GameView {
     private boolean[] display_notes;    // 검출된 음 (판단용이 아닌 display용도) - 바깥 클래스(액티비티) 에서 판단한 배열을 복사해서 저장.
     public  double[] spectrum;          // 바깥 클래스(액티비티)에서 녹음/FFT 분석을 마친 스펙트럼 데이터를 실시간으로 저장.
 
-    private Paint  pText, pBG, pPaper, pCursor, pSpectrum, pTitle, pLyric;
+    private Paint  pText, pBG, pPaper, pCursor, pCursorShadow, pSpectrum, pTitle, pLyric;
     private Paint  pInfo;       // 디버깅 정보 등, 부가적인 정보를 표시하기 위한 색상.
     private Bitmap bmpBg, bmpFinger, bmpThumbStroke, bmpChord;
 
@@ -140,6 +141,8 @@ public class PlayView extends GameView {
 
         pCursor = new Paint(pBG);
         pCursor.setColor( CURSOR_COLOR );
+        pCursorShadow = new Paint(pCursor);
+        pCursorShadow.setColor( CURSOR_SHADOW );
 
         pSpectrum = new Paint(pBG);
         pSpectrum.setColor( SPECTRUM_COLOR );    // 스펙트럼 그래프는 회색(?)
@@ -205,15 +208,19 @@ public class PlayView extends GameView {
 
     private long beat_clock = 0;
     private void drawCursor(Canvas canvas, int beat_offset) {
-        canvas.drawText("▼",PLAYING_POSITION-28,LINE_Y-beat_offset, pCursor);
-        canvas.drawText("▲",PLAYING_POSITION-28,LINE_Y+TAB_LINE_SPACE*3+beat_offset, pCursor);
-        if (beat_offset<5) {
-            beat_clock = mGame_clock;
-            canvas.drawRect(new Rect(PLAYING_POSITION-10, 320, PLAYING_POSITION+10, 320+TAB_LINE_SPACE*3), pCursor );       // 정확한 타이밍 일 때
-        } else {
-            canvas.drawRect(new Rect(PLAYING_POSITION-5, 300, PLAYING_POSITION+5, 320+TAB_LINE_SPACE*3), pCursor );       // 플레이 위치 가이드.
-        }
-        canvas.drawText(" " + beat_clock, PLAYING_POSITION-60, LINE_Y-MAX_BEAT_POS, pCursor );
+//        canvas.drawText("▼",PLAYING_POSITION-28,LINE_Y-beat_offset, pCursor);
+//        canvas.drawText("▲",PLAYING_POSITION-28,LINE_Y+TAB_LINE_SPACE*3+beat_offset, pCursor);
+//        if (beat_offset<5) {
+//            beat_clock = mGame_clock;
+//            canvas.drawRect(new Rect(PLAYING_POSITION-10, 320, PLAYING_POSITION+10, 320+TAB_LINE_SPACE*3), pCursor );       // 정확한 타이밍 일 때
+//        } else {
+//            canvas.drawRect(new Rect(PLAYING_POSITION-5, 300, PLAYING_POSITION+5, 320+TAB_LINE_SPACE*3), pCursor );       // 플레이 위치 가이드.
+//        }
+//        canvas.drawText(" " + beat_clock, PLAYING_POSITION-60, LINE_Y-MAX_BEAT_POS, pCursor );
+
+        canvas.drawRect(new Rect(PLAYING_POSITION-24, 380, PLAYING_POSITION-20, 380+TAB_LINE_SPACE*4), pCursor );
+        canvas.drawRect(new Rect(PLAYING_POSITION-20, 380, PLAYING_POSITION+60, 380+TAB_LINE_SPACE*4), pCursorShadow );
+        canvas.drawRect(new Rect(PLAYING_POSITION+60, 380, PLAYING_POSITION+64, 380+TAB_LINE_SPACE*4), pCursor );
     }
 
 
@@ -367,110 +374,56 @@ public class PlayView extends GameView {
     }
 
 
-/*    private final static String[] icons_chordName = {
-            "C","F","G7","Am","Dm","Em",
-            "D", "G", "A7", "Bm", "Em", "F#m",
-            "E", "A", "B7", "C#m", "F#m", "G#m",
-            "F", "Bb", "C7", "Dm", "Gm", "Am",
-            "G", "C", "D7", "Em", "Am", "Bm",
-            "A", "D", "E7", "F#m", "Bm", "C#m",
-            "Bb", "Eb", "F7", "Gm", "Cm", "Dm",
-            "Eb", "Ab", "Bb7", "Cm", "Fm", "Gm",
-            "A", "Am7", "A7", "Am7", "AM7", " ",
-            "Bb", "Bm", "B7", "Bm7", "BM7", " ",
-            "C", "Cm", "C7", "Cm7", "CM7", " ",
-            "D", "Dm", "D7", "Dm7", "DM7", " ",
-            "E", "Em", "E7", "Em7", "Eb", " ",
-            "F", "Fm", "F7", "F#m", "FM7", " ",
-            "G", "Gm", "G7", "Gm7", "GM7", " "
+    private final static String[] icons_chordName = {
+            "C", "Am7","G7", "Am", "Dm", "Em",
+            "D", "Bm7","A7", "Bm", "Gm7","F#m",
+            "E", "Cm7","B7", "C#m","AM7","G#m",
+            "F", "Bb", "C7", "BM7","Gm", "DM7",
+            "G", "Dm7","D7", "CM7"," ",  "FM7",
+            "A", "Em7","E7", "GM7"," ",  " ",
+            "F#m","Eb","F7", " ",  "Cm", " ",
+            " ",  "Ab","Bb7"," ",  "Fm", " "
     };
+//            "C","F","G7","Am","Dm","Em",
+//            "D", "G", "A7", "Bm", "Em", "F#m",
+//            "E", "A", "B7", "C#m", "F#m", "G#m",
+//            "F", "Bb", "C7", "Dm", "Gm", "Am",
+//            "G", "C", "D7", "Em", "Am", "Bm",
+//            "A", "D", "E7", "F#m", "Bm", "C#m",
+//            "Bb", "Eb", "F7", "Gm", "Cm", "Dm",
+//            "Eb", "Ab", "Bb7", "Cm", "Fm", "Gm",
+//            "A", "Am7", "A7", "Am7", "AM7", " ",
+//            "Bb", "Bm", "B7", "Bm7", "BM7", " ",
+//            "C", "Cm", "C7", "Cm7", "CM7", " ",
+//            "D", "Dm", "D7", "Dm7", "DM7", " ",
+//            "E", "Em", "E7", "Em7", "Eb", " ",
+//            "F", "Fm", "F7", "F#m", "FM7", " ",
+//            "G", "Gm", "G7", "Gm7", "GM7", " "
+//    };
+
+    //        canvas.drawBitmap(bmpChord, new Rect(5*245 +4, 1*288 +16, 5*245 +230, 1*288 +260), new Rect(100, 100, 280, 296), null);
+                // x_offset=4, y_offset=16, width = 226, height=244,
 
     private void drawChordName(Canvas canvas, int x, String chordName ) {
         int i;
-        int ix = 0;
-        int iy = 0;
-        int iw = 79;
-        int ih = 94;
+        int ix = 0;         // src_ x_start_offset = 4;
+        int iy = 0;         // src_ y_start_offset = 16;
+        int iw = 226;       // src_w = 226;
+        int ih = 244;       // src_h = 244;
         for ( i=0; i<icons_chordName.length; i++) {
             if (icons_chordName[i].equals(chordName) ) {
-                ix = (i%6) * 81;    iy = (i/6) * 96;
+                ix = 4 + (i%6) * 245;    iy = 16 + (i/6) * 288;              // 소스의 왼쪽 X 여백 = 4, 위쪽 Y 여백=16, 소스 이미지의 x 방향 간격= 245, y 방향 간격 = 288
                 break;
             }
         }
-        if (i >= icons_chordName.length) {
+        if (i >= icons_chordName.length) {      // 못 찾았을 땐 TEXT 로 표시
             canvas.drawText(chordName, x, CHORD_POSITION_Y, pBG);
-        } else {
-            Log.d("ukulele", "found:" + i + ", x="+ix+", y="+iy );
-            canvas.drawBitmap(bmpChord, new Rect(ix,iy,iw,ih), new Rect(x-40, CHORD_POSITION_Y-140, x+80, CHORD_POSITION_Y+10), null);
-        }
-}   */
-
-
-    private void drawChordName(Canvas canvas, int x, String chordName ) {
-
-        switch(chordName) {
-            case "A":
-                bmpChord = decodeResource(this.getResources(), R.drawable.a );   break;
-            case "A7":
-                bmpChord = decodeResource(this.getResources(), R.drawable.a7 );   break;
-            case "Am":
-                bmpChord = decodeResource(this.getResources(), R.drawable.am );   break;
-            case "B7":
-                bmpChord = decodeResource(this.getResources(), R.drawable.b7 );   break;
-            case "Bm":
-                bmpChord = decodeResource(this.getResources(), R.drawable.bm );   break;
-            case "Bb":
-                bmpChord = decodeResource(this.getResources(), R.drawable.bb );   break;
-            case "C":
-                bmpChord = decodeResource(this.getResources(), R.drawable.c );   break;
-            case "C#":
-                bmpChord = decodeResource(this.getResources(), R.drawable.csharp );   break;
-            case "C#m":
-                bmpChord = decodeResource(this.getResources(), R.drawable.csharpm );   break;
-            case "Cm":
-                bmpChord = decodeResource(this.getResources(), R.drawable.cm );   break;
-            case "D":
-                bmpChord = decodeResource(this.getResources(), R.drawable.d );   break;
-            case "D7":
-                bmpChord = decodeResource(this.getResources(), R.drawable.d7 );   break;
-            case "Dm":
-                bmpChord = decodeResource(this.getResources(), R.drawable.dm );   break;
-            case "E":
-                bmpChord = decodeResource(this.getResources(), R.drawable.e );   break;
-            case "E7":
-                bmpChord = decodeResource(this.getResources(), R.drawable.e7 );   break;
-            case "Eb":
-                bmpChord = decodeResource(this.getResources(), R.drawable.eb );   break;
-            case "Em":
-                bmpChord = decodeResource(this.getResources(), R.drawable.em );   break;
-            case "F":
-                bmpChord = decodeResource(this.getResources(), R.drawable.f );   break;
-            case "F#m":
-                bmpChord = decodeResource(this.getResources(), R.drawable.fsharpm );   break;
-            case "F7":
-                bmpChord = decodeResource(this.getResources(), R.drawable.f7 );   break;
-            case "Fm":
-                bmpChord = decodeResource(this.getResources(), R.drawable.fm );   break;
-            case "G":
-                bmpChord = decodeResource(this.getResources(), R.drawable.g );   break;
-            case "G#m":
-                bmpChord = decodeResource(this.getResources(), R.drawable.gsharpm );   break;
-            case "G7":
-                bmpChord = decodeResource(this.getResources(), R.drawable.g7 );   break;
-            case "Gm":
-                bmpChord = decodeResource(this.getResources(), R.drawable.gm );   break;
-            default:
-                bmpChord = null;       break;
-        }
-
-        if (bmpChord == null) {
-            canvas.drawText(chordName, x, CHORD_POSITION_Y, pBG);
-        } else {
-            int w = bmpChord.getWidth(), h = bmpChord.getHeight();
-            canvas.drawBitmap(bmpChord, new Rect(0,0,w,h), new Rect(x-40, CHORD_POSITION_Y-140, x+80, CHORD_POSITION_Y+10), null);
+        } else {            //if (i < icons_chordName.length) {
+            Log.d("ukulele", "found:" + i + ", x="+ix+", y="+iy + ", w="+ iw + ", h=" + ih );
+//            canvas.drawBitmap(bmpChord, new Rect(ix,iy,ix+iw,iy+ih), new Rect(x-40, CHORD_POSITION_Y-140, x+80, CHORD_POSITION_Y+10), null);
+            canvas.drawBitmap(bmpChord, new Rect(ix, iy,ix+iw,iy+ih), new Rect(x-40, CHORD_POSITION_Y-160, x+140, CHORD_POSITION_Y+40), null);
         }
     }
-
 
     private void drawStroke(Canvas canvas, int x, String strokedirection ) {
         switch(strokedirection.charAt(0) ) {
