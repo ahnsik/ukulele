@@ -370,7 +370,7 @@ public class PlayView extends GameView {
         if (i >= icons_chordName.length) {      // 못 찾았을 땐 TEXT 로 표시
             canvas.drawText(chordName, x, CHORD_POSITION_Y, pBG);
         } else {            //if (i < icons_chordName.length) {
-            Log.d("ukulele", "found:" + i + ", x="+ix+", y="+iy + ", w="+ iw + ", h=" + ih );
+//            Log.d("ukulele", "found:" + i + ", x="+ix+", y="+iy + ", w="+ iw + ", h=" + ih );
             canvas.drawBitmap(bmpChord, new Rect(ix, iy,ix+iw,iy+ih), new Rect(x-40, CHORD_POSITION_Y-160, x+140, CHORD_POSITION_Y+40), null);
         }
     }

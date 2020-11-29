@@ -98,7 +98,7 @@ public class NoteData {
             Log.d("TEST", "buffrd.close !!");
             buffrd.close();
             fr.close();
-            Log.d("TEST", "fullText="+datafile);
+//            Log.d("TEST", "fullText="+datafile);
         } catch(Exception e) {
             Log.d("TEST", "Exceptions ");
             e.printStackTrace();
@@ -163,9 +163,9 @@ public class NoteData {
 
     public boolean  setData(String dataFileString) {
 
-        Log.d("ukulele", "-=========== DataFile Dump ===========-");
-        Log.d("ukulele", dataFileString );
-        Log.d("ukulele", "-=========== DataFile Dump END ===========-");
+//        Log.d("ukulele", "-=========== DataFile Dump ===========-");
+//        Log.d("ukulele", dataFileString );
+//        Log.d("ukulele", "-=========== DataFile Dump END ===========-");
         try {
             Log.d("ukulele", "start parse" );
             JSONObject  ukeData = new JSONObject(dataFileString);
