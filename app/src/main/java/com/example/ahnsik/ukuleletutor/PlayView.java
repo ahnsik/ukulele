@@ -10,26 +10,24 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
 
-import static android.graphics.BitmapFactory.*;
 import static android.graphics.Color.*;
-import static com.example.ahnsik.ukuleletutor.R.drawable.finger_guide;
 
 public class PlayView extends GameView {
 
     private final static int    PLAYING_POSITION=460;
     private final static int    MAX_BEAT_POS = 60;
-    private final static int    FINGERGUIDE_X=1460;     // 손가락 guide 비트맵 표시 위치
-    private final static int    FINGERGUIDE_Y=660;
+//    private final static int    FINGERGUIDE_X=1460;     // 손가락 guide 비트맵 표시 위치
+//    private final static int    FINGERGUIDE_Y=660;
 
     // TAB 악보를 그리기 위한 배경색, 기본 좌표 등..
     private final static int    TAB_LEFT_END = 40;
-    private final static int    TAB_RIGHT_END = 1880;
+    private final static int    TAB_RIGHT_END = 2000;
     private final static int    TAB_LINE_SPACE = 80;
-    private final static int    LINE_Y=420;        // TAB악보 가로라인의 세로위치
+    private final static int    LINE_Y=260;        // TAB악보 가로라인의 세로위치
     private final static int    CHORD_POSITION_Y=LINE_Y-90;
 
-    private final static int    TITLE_POSITION_Y=80;
-    private final static int    SCORE_POSITION_X=1200;
+//    private final static int    TITLE_POSITION_Y=80;
+//    private final static int    SCORE_POSITION_X=1200;
     private final static int    LYRIC_POSITION_Y=LINE_Y+TAB_LINE_SPACE*4;
 
     // 각종 색상을 미리 정의 함. (Font 색상 등..)
@@ -58,15 +56,15 @@ public class PlayView extends GameView {
 
     private NoteData songData;
     private double   a_beat;  // 1비트당 시간 (mili-second),  1분(60000밀리초)를 bpm 으로 나눈 값. bpm은 1분당 비트 수
-    private int      score;
+//    private int      score;
     private long     mGame_clock;
 
     private boolean[] display_notes;    // 검출된 음 (판단용이 아닌 display용도) - 바깥 클래스(액티비티) 에서 판단한 배열을 복사해서 저장.
     public  double[] spectrum;          // 바깥 클래스(액티비티)에서 녹음/FFT 분석을 마친 스펙트럼 데이터를 실시간으로 저장.
 
-    private Paint  pText, pBG, pPaper, pCursor, pCursorShadow, pSpectrum, pTitle, pLyric;
+    private Paint  pText, pBG, pPaper, pCursor, pCursorShadow, pSpectrum,  pLyric;
     private Paint  pInfo;       // 디버깅 정보 등, 부가적인 정보를 표시하기 위한 색상.
-    private Bitmap bmpBg, bmpFinger, bmpThumbStroke, bmpChord;
+    private Bitmap bmpBg, bmpThumbStroke, bmpChord;             // , bmpFinger
 
     private final static String[] note_name = {
             "G3", "G#3", "A3", "A#3", "B3", "C4", "C#4", "D4", "D#4", "E4",
@@ -78,7 +76,7 @@ public class PlayView extends GameView {
         super(context);
         resource_load();
         // 게임 정보 초기화
-        score = 0;
+//        score = 0;
         mGame_clock = 0;
     }
 
@@ -91,7 +89,7 @@ public class PlayView extends GameView {
 
         resource_load();
         // 게임 정보 초기화
-        score = 0;
+//        score = 0;
         mGame_clock = 0;
     }
 
@@ -113,9 +111,8 @@ public class PlayView extends GameView {
 
     private void resource_load() {
         // 비트맵 로딩이 Multi Threading 이 된다면.. 먼저 로드를 시작해 두고 나머지를 설정하는 편이 좋다.
-//        bmpBg = BitmapFactory.decodeResource(this.getResources(), R.drawable.bg_paper );
         bmpBg = null;
-        bmpFinger = BitmapFactory.decodeResource(this.getResources(), R.drawable.finger_guide );
+//        bmpFinger = BitmapFactory.decodeResource(this.getResources(), R.drawable.finger_guide );
         bmpThumbStroke = BitmapFactory.decodeResource(this.getResources(), R.drawable.thumb_stroke );
         bmpChord = BitmapFactory.decodeResource(this.getResources(), R.drawable.chord_icons_table );
 
@@ -133,8 +130,8 @@ public class PlayView extends GameView {
         pBG.setTypeface(bgText);
         pBG.setTextSize(80.0f);     // T.A.B  on 탭악보 위의 TAB 글자.
 
-        pTitle = new Paint(pText);
-        pTitle.setTextSize(80.0f);
+//        pTitle = new Paint(pText);
+//        pTitle.setTextSize(80.0f);
 
         pPaper = new Paint(pBG);
         pPaper.setColor(BG_PAPER_COLOR);
@@ -152,7 +149,7 @@ public class PlayView extends GameView {
         pLyric = new Paint(pText);
         pLyric.setTextSize(48.0f);
 
-        Log.d("ukulele", "width="+ this.width + ", height=" + this.height );
+//        Log.d("ukulele", "width="+ this.width + ", height=" + this.height );
 //        if (this.width <= 0 ) {     // width 를 모른다.
 //
 //        }
@@ -168,10 +165,10 @@ public class PlayView extends GameView {
 
         //  게임에서 기본적으로 그려져야 할 것들.
         drawPaper(canvas);
-        drawInfo(canvas);
-        drawScore(canvas);
         //  mGame_clock 기준으로 그려질 내용들
         drawNotes(canvas);
+//        drawInfo(canvas);
+//        drawScore(canvas);
 
         // ......
         double beat_diff = ((double)mGame_clock % a_beat); // 재생시간(클럭)을 비트수로 나눈 나머지를 가지고 메트로놈 계산.
@@ -200,10 +197,6 @@ public class PlayView extends GameView {
         canvas.drawText("T",40,LINE_Y+TAB_LINE_SPACE-10, pBG);
         canvas.drawText("A",38,LINE_Y+TAB_LINE_SPACE*2-10, pBG);
         canvas.drawText("B",40,LINE_Y+TAB_LINE_SPACE*3-10, pBG);
-
-        if (bmpFinger != null) {
-            canvas.drawBitmap(bmpFinger, FINGERGUIDE_X, FINGERGUIDE_Y, null);
-        }
     }
 
     private long beat_clock = 0;
@@ -218,42 +211,16 @@ public class PlayView extends GameView {
 //        }
 //        canvas.drawText(" " + beat_clock, PLAYING_POSITION-60, LINE_Y-MAX_BEAT_POS, pCursor );
 
-        canvas.drawRect(new Rect(PLAYING_POSITION-24, 380, PLAYING_POSITION-20, 380+TAB_LINE_SPACE*4), pCursor );
-        canvas.drawRect(new Rect(PLAYING_POSITION-20, 380, PLAYING_POSITION+60, 380+TAB_LINE_SPACE*4), pCursorShadow );
-        canvas.drawRect(new Rect(PLAYING_POSITION+60, 380, PLAYING_POSITION+64, 380+TAB_LINE_SPACE*4), pCursor );
+        canvas.drawRect(new Rect(PLAYING_POSITION-24, LINE_Y-40, PLAYING_POSITION-20, LINE_Y-40+TAB_LINE_SPACE*4), pCursor );
+        canvas.drawRect(new Rect(PLAYING_POSITION-20, LINE_Y-40, PLAYING_POSITION+60, LINE_Y-40+TAB_LINE_SPACE*4), pCursorShadow );
+        canvas.drawRect(new Rect(PLAYING_POSITION+60, LINE_Y-40, PLAYING_POSITION+64, LINE_Y-40+TAB_LINE_SPACE*4), pCursor );
+
+//        if (bmpFinger != null) {
+//            canvas.drawBitmap(bmpFinger, FINGERGUIDE_X, FINGERGUIDE_Y, null);
+//        }
     }
 
 
-
-
-    private void drawInfo(Canvas canvas) {
-        // 노랙 제목 표시.
-        pTitle.setTextSize(80.0f);
-        if (songData != null) {
-            canvas.drawText(songData.mSongTitle, TAB_LEFT_END, TITLE_POSITION_Y, pTitle);
-            pTitle.setTextSize(40.0f);
-            canvas.drawText("♩="+songData.mBpm, TAB_LEFT_END,CHORD_POSITION_Y-100, pTitle);
-//            canvas.drawText(songData.mBasicBeat, TAB_LEFT_END,CHORD_POSITION_Y-120, pTitle);
-        } else {
-            canvas.drawText("곡 제목 정보가 없습니다.", TAB_LEFT_END, TITLE_POSITION_Y, pTitle);
-        }
-    }
-
-
-    private void drawScore(Canvas canvas) {
-
-        Rect eraserRect = new Rect(SCORE_POSITION_X, TITLE_POSITION_Y-58, 1280, TITLE_POSITION_Y+34);
-        if (null != bmpBg) {
-            canvas.drawBitmap(bmpBg, eraserRect, eraserRect, null );
-        } else {
-            canvas.drawRect(eraserRect, pPaper);
-        }
-
-        pTitle.setTextSize(48.0f);
-        canvas.drawText("Score: " + score, SCORE_POSITION_X, TITLE_POSITION_Y-12, pTitle);
-        pTitle.setTextSize(30.0f);  // 디버깅용 clock offset
-        canvas.drawText("clock: " + mGame_clock, SCORE_POSITION_X+40, TITLE_POSITION_Y+24, pTitle);
-    }
 
 
 
@@ -384,22 +351,6 @@ public class PlayView extends GameView {
             "F#m","Eb","F7", " ",  "Cm", " ",
             " ",  "Ab","Bb7"," ",  "Fm", " "
     };
-//            "C","F","G7","Am","Dm","Em",
-//            "D", "G", "A7", "Bm", "Em", "F#m",
-//            "E", "A", "B7", "C#m", "F#m", "G#m",
-//            "F", "Bb", "C7", "Dm", "Gm", "Am",
-//            "G", "C", "D7", "Em", "Am", "Bm",
-//            "A", "D", "E7", "F#m", "Bm", "C#m",
-//            "Bb", "Eb", "F7", "Gm", "Cm", "Dm",
-//            "Eb", "Ab", "Bb7", "Cm", "Fm", "Gm",
-//            "A", "Am7", "A7", "Am7", "AM7", " ",
-//            "Bb", "Bm", "B7", "Bm7", "BM7", " ",
-//            "C", "Cm", "C7", "Cm7", "CM7", " ",
-//            "D", "Dm", "D7", "Dm7", "DM7", " ",
-//            "E", "Em", "E7", "Em7", "Eb", " ",
-//            "F", "Fm", "F7", "F#m", "FM7", " ",
-//            "G", "Gm", "G7", "Gm7", "GM7", " "
-//    };
 
     //        canvas.drawBitmap(bmpChord, new Rect(5*245 +4, 1*288 +16, 5*245 +230, 1*288 +260), new Rect(100, 100, 280, 296), null);
                 // x_offset=4, y_offset=16, width = 226, height=244,
@@ -420,7 +371,6 @@ public class PlayView extends GameView {
             canvas.drawText(chordName, x, CHORD_POSITION_Y, pBG);
         } else {            //if (i < icons_chordName.length) {
             Log.d("ukulele", "found:" + i + ", x="+ix+", y="+iy + ", w="+ iw + ", h=" + ih );
-//            canvas.drawBitmap(bmpChord, new Rect(ix,iy,ix+iw,iy+ih), new Rect(x-40, CHORD_POSITION_Y-140, x+80, CHORD_POSITION_Y+10), null);
             canvas.drawBitmap(bmpChord, new Rect(ix, iy,ix+iw,iy+ih), new Rect(x-40, CHORD_POSITION_Y-160, x+140, CHORD_POSITION_Y+40), null);
         }
     }
@@ -446,6 +396,12 @@ public class PlayView extends GameView {
         }
     }
 
+    //// 여기 정의된 값들은 모두 SPECTRUM 을 그리는 데에만 사용.
+    private final static float SPECTRUM_BAR_THICK=50;        // 소리를 인식하는 최소 데시벨.     1.0f 으로 하면 화음에서 놓치는 음이 너무 많은 듯.,
+    private final static float SPECTRUM_DISPLAY_X=SPECTRUM_BAR_THICK;        // 소리를 인식하는 최소 데시벨.     1.0f 으로 하면 화음에서 놓치는 음이 너무 많은 듯.,
+    private final static float SPECTRUM_DISPLAY_Y_BUTTOM=720;
+    private final static float SPECTRUM_SCALE=10;        // 소리를 인식하는 최소 데시벨.     1.0f 으로 하면 화음에서 놓치는 음이 너무 많은 듯.,
+
     private void drawWholeNotes(Canvas canvas) {
         if (display_notes==null) {
             return;
@@ -463,16 +419,10 @@ public class PlayView extends GameView {
                 yoffset = -40;
             else
                 yoffset = 0;
-            canvas.drawText( note_name[i], TAB_LEFT_END+i*40, 920 + yoffset, pInfo);
+            canvas.drawText( note_name[i], TAB_LEFT_END+i*40, SPECTRUM_DISPLAY_Y_BUTTOM+100 + yoffset, pInfo);
         }
 //        parseSpectrum(c);
     }
-
-    //// 여기 정의된 값들은 모두 SPECTRUM 을 그리는 데에만 사용.
-    private final static float SPECTRUM_BAR_THICK=50;        // 소리를 인식하는 최소 데시벨.     1.0f 으로 하면 화음에서 놓치는 음이 너무 많은 듯.,
-    private final static float SPECTRUM_DISPLAY_X=SPECTRUM_BAR_THICK;        // 소리를 인식하는 최소 데시벨.     1.0f 으로 하면 화음에서 놓치는 음이 너무 많은 듯.,
-    private final static float SPECTRUM_DISPLAY_Y_BUTTOM=880;
-    private final static float SPECTRUM_SCALE=10;        // 소리를 인식하는 최소 데시벨.     1.0f 으로 하면 화음에서 놓치는 음이 너무 많은 듯.,
 
     public void drawSpectrum(Canvas c) {
         if (spectrum == null)
@@ -496,4 +446,35 @@ public class PlayView extends GameView {
         }
     }
 
+
+//    private void drawInfo(Canvas canvas) {
+//        // 노랙 제목 표시.
+//        pTitle.setTextSize(80.0f);
+//        if (songData != null) {
+//            canvas.drawText(songData.mSongTitle, TAB_LEFT_END, TITLE_POSITION_Y, pTitle);
+//            pTitle.setTextSize(40.0f);
+//            canvas.drawText("♩="+songData.mBpm, TAB_LEFT_END,CHORD_POSITION_Y-100, pTitle);
+////            canvas.drawText(songData.mBasicBeat, TAB_LEFT_END,CHORD_POSITION_Y-120, pTitle);
+//        } else {
+//            canvas.drawText("곡 제목 정보가 없습니다.", TAB_LEFT_END, TITLE_POSITION_Y, pTitle);
+//        }
+//    }
+
+
+//    private void drawScore(Canvas canvas) {
+//
+//        Rect eraserRect = new Rect(SCORE_POSITION_X, TITLE_POSITION_Y-58, 1280, TITLE_POSITION_Y+34);
+//        if (null != bmpBg) {
+//            canvas.drawBitmap(bmpBg, eraserRect, eraserRect, null );
+//        } else {
+//            canvas.drawRect(eraserRect, pPaper);
+//        }
+//
+//        pTitle.setTextSize(96.0f);
+//        canvas.drawText("Score: " + score, SCORE_POSITION_X, TITLE_POSITION_Y-12, pTitle);
+//        pTitle.setTextSize(30.0f);  // 디버깅용 clock offset
+//        canvas.drawText("clock: " + mGame_clock, SCORE_POSITION_X+40, TITLE_POSITION_Y+24, pTitle);
+//    }
+
 }
+

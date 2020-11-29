@@ -8,18 +8,18 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
 
-public class GameView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
+public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
-    public int width;
-    public int height;
+//    public int width;
+//    public int height;
     private SurfaceHolder holder;
     private Thread  thread = null;
 
     public GameView (Context c) {
         super(c);
         Display d = ((WindowManager)c.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        width = d.getWidth();
-        height = d.getHeight();
+//        width = d.getWidth();
+//        height = d.getHeight();
         holder = getHolder();
         holder.addCallback(this);
         setFocusable(true);
@@ -32,8 +32,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
 
 
     public void surfaceCreated(SurfaceHolder h) {
-        thread = new Thread(this);
-        thread.start();
+//        thread = new Thread(this);
+//        thread.start();
     }
     public void surfaceChanged(SurfaceHolder h, int a, int b, int c) {
 
@@ -43,30 +43,29 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
 //            thread.stop();
 //        }
     }
+//
+//    public void run() {
+//
+//        while(true) {
+//            Canvas c = null;
+//            try {
+//                c = holder.lockCanvas(null);
+//                synchronized (holder) {
+//                    draw(c);
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            } finally {
+//                if (c != null) {
+//                    holder.unlockCanvasAndPost(c);
+//                }
+//            }
+//        }
+//    }
 
-    public void run() {
-
-        while(true) {
-            Canvas c = null;
-
-            try {
-                c = holder.lockCanvas(null);
-                synchronized (holder) {
-                    onDraw(c);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (c != null) {
-                    holder.unlockCanvasAndPost(c);
-                }
-            }
-        }
-    }
-
-    public void onDraw(Canvas c) {
-
-    }
+//    public void onDraw(Canvas c) {
+//
+//    }
 
     public void pause() {
 //        mRunning = false;

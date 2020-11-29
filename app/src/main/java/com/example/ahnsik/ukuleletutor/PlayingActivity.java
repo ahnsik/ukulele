@@ -10,7 +10,12 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.SurfaceView;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.VideoView;
 
 import static android.os.SystemClock.sleep;
 
@@ -28,7 +33,7 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
     private Recording mRecording;
 
     private Thread    mThread = null;
-    private boolean   running;
+    private boolean   running, metronom_on;
     private long      mGameStartClock = 0, endofSong = 0;
     private int       playing_pos = 0;      // index of note data (next position what it will be played.)
     private Metronom  mMetronom;
@@ -37,17 +42,32 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPlayingView = new PlayView(this);
-        setContentView(mPlayingView);
+        setContentView(R.layout.activity_playing);                  // 그러나, SurfaceView 와 함께 다른 UI 객체들을 함께 사용할 때에는
+        mPlayingView = (PlayView)findViewById(R.id.viewGameView);   // ContentView 에는 Layout 을 먼저 설정하고, 그 Layout 속에 들어 있는 SurfaceView (customView) 를 가져와서 Control 하면 된다.
+
         // Lock orientation into landscape.
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);       // 연습 도중에 무조작으로 Sleep 모드로 들어가면 곤란하므로, Sleep Mode 로 가지 않게 설정.
+        Button btnReturn = (Button)findViewById(R.id.btnReturn);
+        btnReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         // 연주할 파일의 파일 이름을 가져 옴.
         Intent intent = getIntent();
         String fileName = intent.getExtras().getString("filename");
         // 파일 이름으로 부터 연주할 데이터를 가져옴.
         mSongData.loadFromFile( getFilesDir(), fileName);
+        // 곡 정보(제목,템포)를 표시
+        TextView title = (TextView)findViewById(R.id.textSongTitle);
+        title.setText(mSongData.mSongTitle);
+        TextView bpmText = (TextView)findViewById(R.id.textTempo);
+        bpmText.setText("♩="+mSongData.mBpm);
+
         mPlayingView.setSongData(mSongData);
         // initialize local data
         endofSong = mSongData.mStartOffset + mSongData.timeStamp[mSongData.numNotes-1] + 2000 + 3000;       // 마지막 노트 데이터의 2초 뒤.    +3000 은 setPlayPosition 에서의 옵셋
@@ -57,10 +77,8 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
         mMetronom = new Metronom(this);
         mMetronom.setBpm(mSongData.mBpm);        // defailt 100 BPM for test
         mMetronom.setBeat(4);                   // 4/4 박자 메트로놈.
-
         // 녹음 시작,
         mRecording = new Recording();
-
         mThread = new Thread(this);
         mThread.start();
         running = true;
@@ -76,16 +94,11 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        mMetronom.start(mGameStartClock);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        if (preferences.getBoolean("playing_metronom_onoff", false )) {
-            mMetronom.start(mGameStartClock);
-            Log.d("ukulele", "!@@@@@@@@@@ Start Metronom for playing activity. @@@@@@@ : " );
-        } else {
-            Log.d("ukulele", "!~~~~~~  not playing Metronom for playing activity. ~~~~~~ : " );
-        }
-
+        metronom_on = preferences.getBoolean("playing_metronom_onoff", false);
+        Log.d("ukulele", "metronom : " + metronom_on );
     }
 
     @Override
@@ -148,7 +161,12 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
                 // searching for nearest note from 악보.
 
             }
-            mMetronom.running(System.currentTimeMillis());
+
+            // 메트로놈 소리.
+            if (metronom_on) {
+                mMetronom.running(System.currentTimeMillis());
+            }
+            mPlayingView.invalidate();
         }
     }
 

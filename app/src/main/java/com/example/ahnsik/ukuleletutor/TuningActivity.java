@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
         setContentView(R.layout.activity_tuning);
         // Lock orientation into landscape.
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 //        Toast toast = Toast.makeText(getApplicationContext(),"튜닝 기능은 아직 많이 부족합니다. 사용이 좀 불편하며 불안정 합니다.", Toast.LENGTH_SHORT);
 //        toast.show();
