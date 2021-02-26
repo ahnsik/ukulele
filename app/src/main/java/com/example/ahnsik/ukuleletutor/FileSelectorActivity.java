@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -43,10 +44,11 @@ public class FileSelectorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_file_selector);
         // Lock orientation into landscape.
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         String playingMode = getIntent().getExtras().getString("mode");
         if (playingMode.equals("TrainingMode")) {
@@ -140,6 +142,12 @@ public class FileSelectorActivity extends AppCompatActivity {
         super.onPause();
         finish();
     }
+
+//    public void onConfigurationChanged() {
+//        Toast errmsg = Toast.makeText(this.getApplicationContext(),"가로모드에서만 동작합니다.", Toast.LENGTH_SHORT);
+//        errmsg.show();
+////        finish();
+//    }
 
     class CustomAdaptor extends BaseAdapter {
         @Override

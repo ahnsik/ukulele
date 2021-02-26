@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ukulele.iml" filepath="$PROJECT_DIR$/ukulele.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ukulele.iml" filepath="$PROJECT_DIR$/.idea/modules/ukulele.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ukulele.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ukulele.app.iml" />
     </modules>
   </component>
