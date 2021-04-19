@@ -34,7 +34,7 @@
 	{
 	  "timestamp":3643,
 	  "chord":"",
-	  "tab":["E7"],
+	  "tab":["E7c"],
 	  "note":["B4"]
 	},
 	{
@@ -52,13 +52,13 @@
 	{
 	  "timestamp":4504,
 	  "chord":"Em7",
-	  "tab":["C4","E3","A5"],
+	  "tab":["C4","E3a","A5"],
 	  "note":["E4","G4","D5"]
 	},
 	{
 	  "timestamp":4791,
 	  "chord":"",
-	  "tab":["A3"],
+	  "tab":["A3a"],
 	  "note":["C5"]
 	},
 	{
@@ -70,7 +70,7 @@
 	{
 	  "timestamp":5365,
 	  "chord":"",
-	  "tab":["A3"],
+	  "tab":["A3a"],
 	  "note":["C5"],
 	  "lyric":"g"
 	},
@@ -108,8 +108,7 @@
 	  "timestamp":8809,
 	  "chord":"",
 	  "tab":["A3a"],
-	  "note":["C5"],
-	  "lyric":"Check"
+	  "note":["C5"]
 	},
 	{
 	  "timestamp":9096,
@@ -1070,7 +1069,7 @@
   "author":"ahnsik",
   "author_note":"",
   "category":" Finger Style ",
-  "comment":" 스튜디오지브리 우쿨렐레 - '마녀의 택급편' OST ",
+  "comment":" 지브리 애니메이션 '마녀의 택급편' OST ",
   "create_date":"----/--/--",
   "source":"umigamierumachi.mp3",
   "thumbnail":"",

@@ -147,6 +147,7 @@ public class TerminalActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.d("ukulele", "Trace .. Error #3");
+                    Toast.makeText(getApplicationContext(), "FTP 로그인 실패", Toast.LENGTH_LONG).show();
                     success =false;
                 }
 
@@ -157,6 +158,7 @@ public class TerminalActivity extends AppCompatActivity {
                         log("FTP: 우쿨렐레 폴더로 이동 완료.\n");
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "FTP에서 폴더를 찾지 못했습니다.", Toast.LENGTH_LONG).show();
                         success = false;
                     }
                 }
@@ -201,12 +203,14 @@ public class TerminalActivity extends AppCompatActivity {
 
 
     private boolean copyingUkeFiles() {
+        String filename = "No Name";
         try {
             FTPFile[] ftpfiles = ftpClient.listFiles();
             int length = ftpfiles.length;
 
             for (int i = 0; i < length; i++) {
                 String name = ftpfiles[i].getName();
+                filename = name;
                 boolean isFile = ftpfiles[i].isFile();
                 if (isFile) {
                     if (name.toLowerCase().endsWith(".uke")) {
@@ -278,6 +282,9 @@ public class TerminalActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             e.printStackTrace();
+            String errMsg = "파일 " + filename + " 가져오기 실패.";
+            Toast.makeText(getApplicationContext(), errMsg, Toast.LENGTH_LONG).show();
+            log("FTP: Loading Failed. " + errMsg + "\n" );
             return  false;
         }
         return  true;
@@ -338,7 +345,7 @@ public class TerminalActivity extends AppCompatActivity {
                 song.put("type", songTypes[i] );
 
                 tabJ.put(song);
-                Log.d("ukulele", ".." + i );
+                Log.d("ukulele", ".." + i + " JSON: " + song );
             }
             json.put("songList", tabJ);
 

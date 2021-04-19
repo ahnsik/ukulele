@@ -235,10 +235,13 @@ public class NoteData {
             }
 
             try {
+                Log.d("ukulele", "start to parsing.." );
                 this.mBasicBeat = ukeData.getString("basic_beat");
+                Log.d("ukulele", "reading mBasicBeat : " +  this.mBasicBeat );
                 this.mCommentary = ukeData.getString("comment");
-                this.mCategory = ukeData.getString("category");
-                this.mAuthor = ukeData.getString("author");
+                Log.d("ukulele", "reading mCommentary : " +  this.mCommentary );
+//                this.mCategory = ukeData.getString("category");
+//                this.mAuthor = ukeData.getString("author");
                 Log.d("ukulele", "mCommentary :"+this.mCommentary );
 //                this.mAuthorNote = ukeData.getString("auther_note");
 //                this.mAuthorComment = ukeData.getString("auther_comment");

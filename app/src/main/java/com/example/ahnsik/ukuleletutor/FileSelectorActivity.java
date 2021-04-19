@@ -96,7 +96,7 @@ public class FileSelectorActivity extends AppCompatActivity {
                     Log.d("ukulele", "index="+i+", thumbnailBitmap = "+thumbnailBitmap[i] );
                 }
                 songBpm[i] = info.getString("bpm");
-                songTypes[i] = info.getString("type");         // 멜로디 / 코드 / 핑거스타일
+//                songTypes[i] = info.getString("type");         // 멜로디 / 코드 / 핑거스타일
             }
         } catch (Exception e) {
             Log.d("ukulele", "-xxxxxxxxxxxx Error to parse Index file xxxxxxxxxxxx-");
