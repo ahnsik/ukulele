@@ -118,16 +118,16 @@ public class PlayView extends GameView {
 
         // 전체적으로 기본적으로 사용될 Font 및 기본 색상 등을 지정.
         pText = new Paint();
-        Typeface liryc = Typeface.createFromAsset(getContext().getAssets(), "DX_kyungpil.ttf");
+//        Typeface liryc = Typeface.createFromAsset(getContext().getAssets(), "@font/kyungpil.ttf");
         pText.setColor( DEFAULT_TEXT_COLOR );
-        pText.setTypeface(liryc);
+//        pText.setTypeface(liryc);
         pText.setTextSize(60.0f);
 
         // 배경을 그리는 데 사용될 색상 및 Font를 지정.
         pBG = new Paint();
-        Typeface bgText = Typeface.createFromAsset(getContext().getAssets(), "coolvetica.ttf");
+//        Typeface bgText = Typeface.createFromAsset(getContext().getAssets(), "@font/coolvetica.ttf");
         pBG.setColor( BG_TAB_LINE_COLOR );
-        pBG.setTypeface(bgText);
+//        pBG.setTypeface(bgText);
         pBG.setTextSize(80.0f);     // T.A.B  on 탭악보 위의 TAB 글자.
 
 //        pTitle = new Paint(pText);

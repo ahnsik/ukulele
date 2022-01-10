@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ukulele.iml" filepath="$PROJECT_DIR$/.idea/modules/ukulele.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ukulele.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ukulele.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ukulele_new.iml" filepath="$PROJECT_DIR$/.idea/modules/ukulele_new.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ukulele_new.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ukulele_new.app.iml" />
     </modules>
   </component>
 </project>

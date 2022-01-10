@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:screenOrientation="landscape"
     android:background="@drawable/bg_selector"
+    android:scaleWidth="100%"
+    android:scaleType="centerCrop"
     tools:context=".FileSelectorActivity">
 
     <LinearLayout
