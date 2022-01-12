@@ -1,914 +1,948 @@
 {
   "notes":[
 	{
-	  "timestamp":28548,
+	  "timestamp":14274,
 	  "chord":"",
 	  "tab":["A2"],
 	  "note":["B4"],
 	  "lyric":"이"
 	},
 	{
-	  "timestamp":29484,
+	  "timestamp":14742,
 	  "chord":"",
 	  "tab":["A2"],
 	  "note":["B4"],
 	  "lyric":"젠"
 	},
 	{
-	  "timestamp":30420,
+	  "timestamp":15210,
 	  "chord":"",
 	  "tab":["A0"],
 	  "note":["A4"],
 	  "lyric":"당"
 	},
 	{
-	  "timestamp":31356,
+	  "timestamp":15678,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"],
 	  "lyric":"신"
 	},
 	{
-	  "timestamp":31824,
+	  "timestamp":15912,
 	  "chord":"",
 	  "tab":["E2"],
 	  "note":["F#4"],
 	  "lyric":"이"
 	},
 	{
-	  "timestamp":36036,
+	  "timestamp":18018,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"],
 	  "lyric":"그"
 	},
 	{
-	  "timestamp":36972,
+	  "timestamp":18486,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"],
 	  "lyric":"립"
 	},
 	{
-	  "timestamp":37908,
+	  "timestamp":18954,
 	  "chord":"",
 	  "tab":["E2"],
 	  "note":["F#4"],
 	  "lyric":"지"
 	},
 	{
-	  "timestamp":38844,
+	  "timestamp":19422,
 	  "chord":"",
 	  "tab":["C3"],
 	  "note":["D#4"],
 	  "lyric":"않"
 	},
 	{
-	  "timestamp":39312,
+	  "timestamp":19656,
 	  "chord":"",
 	  "tab":["C3"],
 	  "note":["D#4"],
 	  "lyric":"죠"
 	},
 	{
-	  "timestamp":43524,
+	  "timestamp":21762,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"보"
 	},
 	{
-	  "timestamp":43992,
+	  "timestamp":21996,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"고"
 	},
 	{
-	  "timestamp":44460,
+	  "timestamp":22230,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"싶"
 	},
 	{
-	  "timestamp":44928,
+	  "timestamp":22464,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"은"
 	},
 	{
-	  "timestamp":45396,
+	  "timestamp":22698,
 	  "chord":"",
 	  "tab":["A5"],
 	  "note":["D5"],
 	  "lyric":"마"
 	},
 	{
-	  "timestamp":46332,
+	  "timestamp":23166,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"음"
 	},
 	{
-	  "timestamp":46800,
+	  "timestamp":23400,
 	  "chord":"",
 	  "tab":["A5"],
 	  "note":["D5"],
 	  "lyric":"도"
 	},
 	{
-	  "timestamp":48204,
+	  "timestamp":24102,
 	  "chord":"",
 	  "tab":["E5"],
 	  "note":["A4"],
 	  "lyric":"없"
 	},
 	{
-	  "timestamp":49140,
+	  "timestamp":24570,
 	  "chord":"",
 	  "tab":["E7"],
 	  "note":["B4"],
-	  "lyric":"죠"
+	  "lyric":"죠",
+	  "technic":" |  "
 	},
 	{
-	  "timestamp":51948,
+	  "timestamp":25974,
 	  "chord":"",
 	  "tab":["E5"],
 	  "note":["A4"],
-	  "lyric":"음"
+	  "lyric":"음",
+	  "technic":"h"
 	},
 	{
-	  "timestamp":52416,
+	  "timestamp":26208,
 	  "chord":"",
 	  "tab":["E7"],
-	  "note":["B4"]
+	  "note":["B4"],
+	  "technic":"p"
 	},
 	{
-	  "timestamp":52884,
+	  "timestamp":26442,
 	  "chord":"",
 	  "tab":["E5"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":58032,
+	  "timestamp":29016,
 	  "chord":"",
 	  "tab":["A2"],
 	  "note":["B4"],
 	  "lyric":"사"
 	},
 	{
-	  "timestamp":58968,
+	  "timestamp":29484,
 	  "chord":"",
 	  "tab":["A2"],
 	  "note":["B4"],
 	  "lyric":"랑"
 	},
 	{
-	  "timestamp":59904,
+	  "timestamp":29952,
 	  "chord":"D",
 	  "tab":["A0"],
 	  "note":["A4"],
 	  "lyric":"한"
 	},
 	{
-	  "timestamp":60840,
+	  "timestamp":30420,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"],
 	  "lyric":"것"
 	},
 	{
-	  "timestamp":61308,
+	  "timestamp":30654,
 	  "chord":"",
 	  "tab":["E2"],
 	  "note":["F#4"],
 	  "lyric":"도"
 	},
 	{
-	  "timestamp":65052,
+	  "timestamp":32526,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"],
 	  "lyric":"잊"
 	},
 	{
-	  "timestamp":65988,
+	  "timestamp":32994,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"],
 	  "lyric":"혀"
 	},
 	{
-	  "timestamp":66924,
+	  "timestamp":33462,
 	  "chord":"B7",
 	  "tab":["E2"],
 	  "note":["F#4"],
 	  "lyric":"가"
 	},
 	{
-	  "timestamp":67860,
+	  "timestamp":33930,
 	  "chord":"",
 	  "tab":["C3"],
 	  "note":["D#4"],
 	  "lyric":"네"
 	},
 	{
-	  "timestamp":68328,
+	  "timestamp":34164,
 	  "chord":"",
 	  "tab":["C3"],
 	  "note":["D#4"],
 	  "lyric":"요"
 	},
 	{
-	  "timestamp":72072,
+	  "timestamp":36036,
 	  "chord":"",
 	  "tab":["E0"],
 	  "note":["E4"],
 	  "lyric":"조"
 	},
 	{
-	  "timestamp":73944,
+	  "timestamp":36972,
 	  "chord":"D",
 	  "tab":["A0"],
 	  "note":["A4"],
 	  "lyric":" 용  "
 	},
 	{
-	  "timestamp":76752,
+	  "timestamp":38376,
 	  "chord":"",
 	  "tab":["E7"],
 	  "note":["B4"],
-	  "lyric":"하"
+	  "lyric":"하",
+	  "technic":"s"
 	},
 	{
-	  "timestamp":77688,
+	  "timestamp":38844,
 	  "chord":"G",
 	  "tab":["E3"],
-	  "note":["G4"]
+	  "note":["G4"],
+	  "technic":" |  "
 	},
 	{
-	  "timestamp":78624,
+	  "timestamp":39312,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"],
 	  "lyric":"게"
 	},
 	{
-	  "timestamp":86580,
+	  "timestamp":43290,
 	  "chord":"",
 	  "tab":["A2"],
 	  "note":["B4"],
 	  "lyric":"알"
 	},
 	{
-	  "timestamp":87516,
+	  "timestamp":43758,
 	  "chord":"",
 	  "tab":["A2"],
 	  "note":["B4"],
 	  "lyric":"수"
 	},
 	{
-	  "timestamp":88452,
+	  "timestamp":44226,
 	  "chord":"D",
 	  "tab":["A0"],
 	  "note":["A4"],
 	  "lyric":"없"
 	},
 	{
-	  "timestamp":89388,
+	  "timestamp":44694,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"],
 	  "lyric":"는"
 	},
 	{
-	  "timestamp":89856,
+	  "timestamp":44928,
 	  "chord":"",
 	  "tab":["E2"],
 	  "note":["F#4"],
 	  "lyric":"건"
 	},
 	{
-	  "timestamp":93600,
+	  "timestamp":46800,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"],
 	  "lyric":"그"
 	},
 	{
-	  "timestamp":94536,
+	  "timestamp":47268,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"],
 	  "lyric":"런"
 	},
 	{
-	  "timestamp":95472,
+	  "timestamp":47736,
 	  "chord":"B7",
 	  "tab":["E2"],
 	  "note":["F#4"],
 	  "lyric":"내"
 	},
 	{
-	  "timestamp":96408,
+	  "timestamp":48204,
 	  "chord":"",
 	  "tab":["C3"],
 	  "note":["D#4"],
 	  "lyric":"맘"
 	},
 	{
-	  "timestamp":96876,
+	  "timestamp":48438,
 	  "chord":"",
 	  "tab":["C3"],
 	  "note":["D#4"],
 	  "lyric":"이"
 	},
 	{
-	  "timestamp":100620,
+	  "timestamp":50310,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"비"
 	},
 	{
-	  "timestamp":101088,
+	  "timestamp":50544,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"가"
 	},
 	{
-	  "timestamp":101556,
+	  "timestamp":50778,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"오"
 	},
 	{
-	  "timestamp":102024,
+	  "timestamp":51012,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"면"
 	},
 	{
-	  "timestamp":102492,
+	  "timestamp":51246,
 	  "chord":"D",
 	  "tab":["A5"],
 	  "note":["D5"],
 	  "lyric":"눈"
 	},
 	{
-	  "timestamp":103428,
+	  "timestamp":51714,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"물"
 	},
 	{
-	  "timestamp":103896,
+	  "timestamp":51948,
 	  "chord":"",
 	  "tab":["A5"],
 	  "note":["D5"],
 	  "lyric":"이"
 	},
 	{
-	  "timestamp":105300,
+	  "timestamp":52650,
 	  "chord":"",
 	  "tab":["E5"],
 	  "note":["A4"],
 	  "lyric":"나"
 	},
 	{
-	  "timestamp":106236,
+	  "timestamp":53118,
 	  "chord":"G",
 	  "tab":["E7"],
 	  "note":["B4"],
-	  "lyric":"요"
+	  "lyric":"요",
+	  "technic":" |  "
 	},
 	{
-	  "timestamp":109044,
+	  "timestamp":54522,
 	  "chord":"",
 	  "tab":["E5"],
 	  "note":["A4"],
-	  "lyric":"음"
+	  "lyric":"음",
+	  "technic":"h"
 	},
 	{
-	  "timestamp":109512,
+	  "timestamp":54756,
 	  "chord":"",
 	  "tab":["E7"],
-	  "note":["B4"]
+	  "note":["B4"],
+	  "technic":"p"
 	},
 	{
-	  "timestamp":109980,
+	  "timestamp":54990,
 	  "chord":"D",
 	  "tab":["E5"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":115128,
+	  "timestamp":57564,
 	  "chord":"",
 	  "tab":["A2"],
 	  "note":["B4"],
 	  "lyric":"아"
 	},
 	{
-	  "timestamp":116064,
+	  "timestamp":58032,
 	  "chord":"",
 	  "tab":["A2"],
 	  "note":["B4"],
 	  "lyric":"주"
 	},
 	{
-	  "timestamp":117000,
+	  "timestamp":58500,
 	  "chord":"D",
 	  "tab":["A0"],
 	  "note":["A4"],
 	  "lyric":"오"
 	},
 	{
-	  "timestamp":117936,
+	  "timestamp":58968,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"],
 	  "lyric":"래"
 	},
 	{
-	  "timestamp":118404,
+	  "timestamp":59202,
 	  "chord":"",
 	  "tab":["E2"],
 	  "note":["F#4"],
 	  "lyric":"전"
 	},
 	{
-	  "timestamp":122148,
+	  "timestamp":61074,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"],
 	  "lyric":"당"
 	},
 	{
-	  "timestamp":123084,
+	  "timestamp":61542,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"],
 	  "lyric":"신"
 	},
 	{
-	  "timestamp":124020,
+	  "timestamp":62010,
 	  "chord":"B7",
 	  "tab":["E2"],
 	  "note":["F#4"],
 	  "lyric":"떠"
 	},
 	{
-	  "timestamp":124956,
+	  "timestamp":62478,
 	  "chord":"",
 	  "tab":["A2"],
 	  "note":["B4"],
 	  "lyric":"나"
 	},
 	{
-	  "timestamp":125424,
+	  "timestamp":62712,
 	  "chord":"",
 	  "tab":["A2"],
 	  "note":["B4"],
 	  "lyric":"던"
 	},
 	{
-	  "timestamp":129168,
+	  "timestamp":64584,
 	  "chord":"",
 	  "tab":["E0"],
 	  "note":["E4"],
 	  "lyric":"그"
 	},
 	{
-	  "timestamp":130104,
+	  "timestamp":65052,
 	  "chord":"",
 	  "tab":["E3"],
 	  "note":["G4"]
 	},
 	{
-	  "timestamp":131040,
+	  "timestamp":65520,
 	  "chord":"D",
 	  "tab":["A0"],
 	  "note":["A4"],
 	  "lyric":"날"
 	},
 	{
-	  "timestamp":133380,
+	  "timestamp":66690,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
-	  "lyric":"처"
+	  "lyric":"처",
+	  "technic":"s"
 	},
 	{
-	  "timestamp":134784,
+	  "timestamp":67392,
 	  "chord":"G",
 	  "tab":["A3"],
 	  "note":["C5"],
-	  "lyric":"럼"
+	  "lyric":"럼",
+	  "technic":" |  "
 	},
 	{
-	  "timestamp":143676,
+	  "timestamp":71838,
 	  "chord":"",
 	  "tab":["A2"],
 	  "note":["B4"],
-	  "lyric":"이"
+	  "lyric":"이",
+	  "stroke":"D"
 	},
 	{
-	  "timestamp":145548,
+	  "timestamp":72774,
 	  "chord":"D",
 	  "tab":["A5"],
 	  "note":["D5"],
-	  "lyric":"젠"
+	  "lyric":"젠",
+	  "stroke":"D"
 	},
 	{
-	  "timestamp":150696,
+	  "timestamp":75348,
 	  "chord":"",
 	  "tab":["A10"],
 	  "note":["G5"],
 	  "lyric":"괜"
 	},
 	{
-	  "timestamp":151632,
+	  "timestamp":75816,
 	  "chord":"",
 	  "tab":["A10"],
 	  "note":["G5"],
 	  "lyric":"찬"
 	},
 	{
-	  "timestamp":152100,
+	  "timestamp":76050,
 	  "chord":"",
 	  "tab":["A9"],
 	  "note":["F#5"],
 	  "lyric":"은"
 	},
 	{
-	  "timestamp":153036,
+	  "timestamp":76518,
 	  "chord":"",
 	  "tab":["E10"],
 	  "note":["D5"],
 	  "lyric":"데"
 	},
 	{
-	  "timestamp":157248,
+	  "timestamp":78624,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"사"
 	},
 	{
-	  "timestamp":157716,
+	  "timestamp":78858,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"랑"
 	},
 	{
-	  "timestamp":158184,
+	  "timestamp":79092,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"따"
 	},
 	{
-	  "timestamp":158652,
+	  "timestamp":79326,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"윈"
 	},
 	{
-	  "timestamp":159120,
+	  "timestamp":79560,
 	  "chord":"D",
 	  "tab":["A5"],
 	  "note":["D5"],
 	  "lyric":"저"
 	},
 	{
-	  "timestamp":159588,
+	  "timestamp":79794,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"버"
 	},
 	{
-	  "timestamp":160992,
+	  "timestamp":80496,
 	  "chord":"",
 	  "tab":["A5"],
 	  "note":["D5"],
 	  "lyric":"렸"
 	},
 	{
-	  "timestamp":161928,
+	  "timestamp":80964,
 	  "chord":"",
 	  "tab":["E5"],
 	  "note":["A4"],
 	  "lyric":"는"
 	},
 	{
-	  "timestamp":162864,
+	  "timestamp":81432,
 	  "chord":"G",
 	  "tab":["E7"],
 	  "note":["B4"],
-	  "lyric":"데"
+	  "lyric":"데",
+	  "stroke":"D",
+	  "technic":" |  "
 	},
 	{
-	  "timestamp":165672,
+	  "timestamp":82836,
 	  "chord":"",
 	  "tab":["E5"],
 	  "note":["A4"],
-	  "lyric":"음"
+	  "lyric":"음",
+	  "stroke":"D",
+	  "technic":"h"
 	},
 	{
-	  "timestamp":166140,
+	  "timestamp":83070,
 	  "chord":"",
 	  "tab":["E7"],
-	  "note":["B4"]
+	  "note":["B4"],
+	  "stroke":"U",
+	  "technic":"p"
 	},
 	{
-	  "timestamp":166608,
+	  "timestamp":83304,
 	  "chord":"D",
 	  "tab":["E5"],
-	  "note":["A4"]
+	  "note":["A4"],
+	  "stroke":"D"
 	},
 	{
-	  "timestamp":171756,
+	  "timestamp":85878,
 	  "chord":"",
 	  "tab":["A2"],
 	  "note":["B4"],
-	  "lyric":"바"
+	  "lyric":"바",
+	  "stroke":"D"
 	},
 	{
-	  "timestamp":173628,
+	  "timestamp":86814,
 	  "chord":"D",
 	  "tab":["A5"],
 	  "note":["D5"],
-	  "lyric":"보"
+	  "lyric":"보",
+	  "stroke":"D"
 	},
 	{
-	  "timestamp":178776,
+	  "timestamp":89388,
 	  "chord":"",
 	  "tab":["A10"],
 	  "note":["G5"],
 	  "lyric":"같"
 	},
 	{
-	  "timestamp":179712,
+	  "timestamp":89856,
 	  "chord":"",
 	  "tab":["A10"],
 	  "note":["G5"],
 	  "lyric":"은"
 	},
 	{
-	  "timestamp":180180,
+	  "timestamp":90090,
 	  "chord":"",
 	  "tab":["A9"],
 	  "note":["F#5"],
 	  "lyric":"난"
 	},
 	{
-	  "timestamp":185328,
+	  "timestamp":92664,
 	  "chord":"",
 	  "tab":["E12"],
 	  "note":["E5"],
 	  "lyric":"눈"
 	},
 	{
-	  "timestamp":186264,
+	  "timestamp":93132,
 	  "chord":"",
 	  "tab":["A10"],
 	  "note":["G5"],
 	  "lyric":"물"
 	},
 	{
-	  "timestamp":187668,
+	  "timestamp":93834,
 	  "chord":"",
 	  "tab":["A14"],
 	  "note":["B5"],
 	  "lyric":"이"
 	},
 	{
-	  "timestamp":189540,
+	  "timestamp":94770,
 	  "chord":"",
 	  "tab":["E12"],
 	  "note":["E5"],
 	  "lyric":"날"
 	},
 	{
-	  "timestamp":190944,
+	  "timestamp":95472,
 	  "chord":"",
 	  "tab":["A10"],
 	  "note":["G5"],
-	  "lyric":"까"
+	  "lyric":"까",
+	  "stroke":"D"
 	},
 	{
-	  "timestamp":198900,
+	  "timestamp":99450,
 	  "chord":"",
 	  "tab":["A2"],
 	  "note":["B4"],
-	  "lyric":"다"
+	  "lyric":"다",
+	  "stroke":"D"
 	},
 	{
-	  "timestamp":200772,
+	  "timestamp":100386,
 	  "chord":"D",
 	  "tab":["A5"],
 	  "note":["D5"],
-	  "lyric":"신"
+	  "lyric":"신",
+	  "stroke":"D"
 	},
 	{
-	  "timestamp":205920,
+	  "timestamp":102960,
 	  "chord":"",
 	  "tab":["A10"],
 	  "note":["G5"],
 	  "lyric":"안"
 	},
 	{
-	  "timestamp":206856,
+	  "timestamp":103428,
 	  "chord":"",
 	  "tab":["A10"],
 	  "note":["G5"],
 	  "lyric":"울"
 	},
 	{
-	  "timestamp":207324,
+	  "timestamp":103662,
 	  "chord":"",
 	  "tab":["A9"],
 	  "note":["F#5"],
 	  "lyric":"텐"
 	},
 	{
-	  "timestamp":208260,
+	  "timestamp":104130,
 	  "chord":"",
 	  "tab":["E10"],
 	  "note":["D5"],
 	  "lyric":"데"
 	},
 	{
-	  "timestamp":209196,
+	  "timestamp":104598,
 	  "chord":"",
 	  "tab":["E10"],
 	  "note":["D5"]
 	},
 	{
-	  "timestamp":212472,
+	  "timestamp":106236,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"잊"
 	},
 	{
-	  "timestamp":212940,
+	  "timestamp":106470,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"지"
 	},
 	{
-	  "timestamp":213408,
+	  "timestamp":106704,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"못"
 	},
 	{
-	  "timestamp":213876,
+	  "timestamp":106938,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"한"
 	},
 	{
-	  "timestamp":214344,
+	  "timestamp":107172,
 	  "chord":"D",
 	  "tab":["A5"],
 	  "note":["D5"],
 	  "lyric":"내"
 	},
 	{
-	  "timestamp":214812,
+	  "timestamp":107406,
 	  "chord":"",
 	  "tab":["A7"],
 	  "note":["E5"],
 	  "lyric":"가"
 	},
 	{
-	  "timestamp":216216,
+	  "timestamp":108108,
 	  "chord":"",
 	  "tab":["A5"],
 	  "note":["D5"],
 	  "lyric":"싫"
 	},
 	{
-	  "timestamp":217152,
+	  "timestamp":108576,
 	  "chord":"",
 	  "tab":["E5"],
 	  "note":["A4"],
 	  "lyric":"은"
 	},
 	{
-	  "timestamp":218088,
+	  "timestamp":109044,
 	  "chord":"G",
 	  "tab":["E7"],
 	  "note":["B4"],
-	  "lyric":"데"
+	  "lyric":"데",
+	  "stroke":"D",
+	  "technic":" |  "
 	},
 	{
-	  "timestamp":220896,
+	  "timestamp":110448,
 	  "chord":"",
 	  "tab":["E5"],
 	  "note":["A4"],
-	  "lyric":"음"
+	  "lyric":"음",
+	  "stroke":"D",
+	  "technic":"h"
 	},
 	{
-	  "timestamp":221364,
+	  "timestamp":110682,
 	  "chord":"",
 	  "tab":["E7"],
-	  "note":["B4"]
+	  "note":["B4"],
+	  "stroke":"U",
+	  "technic":"p"
 	},
 	{
-	  "timestamp":221832,
+	  "timestamp":110916,
 	  "chord":"D",
 	  "tab":["E5"],
-	  "note":["A4"]
+	  "note":["A4"],
+	  "stroke":"D"
 	},
 	{
-	  "timestamp":226980,
+	  "timestamp":113490,
 	  "chord":"",
 	  "tab":["A2"],
 	  "note":["B4"],
-	  "lyric":"언"
+	  "lyric":"언",
+	  "stroke":"D"
 	},
 	{
-	  "timestamp":228852,
+	  "timestamp":114426,
 	  "chord":"D",
 	  "tab":["A5"],
 	  "note":["D5"],
-	  "lyric":"제"
+	  "lyric":"제",
+	  "stroke":"D"
 	},
 	{
-	  "timestamp":234000,
+	  "timestamp":117000,
 	  "chord":"",
 	  "tab":["A10"],
 	  "note":["G5"],
 	  "lyric":"까"
 	},
 	{
-	  "timestamp":234936,
+	  "timestamp":117468,
 	  "chord":"",
 	  "tab":["A10"],
 	  "note":["G5"],
 	  "lyric":"지"
 	},
 	{
-	  "timestamp":235404,
+	  "timestamp":117702,
 	  "chord":"",
 	  "tab":["A9"],
 	  "note":["F#5"],
 	  "lyric":"나"
 	},
 	{
-	  "timestamp":240552,
+	  "timestamp":120276,
 	  "chord":"",
 	  "tab":["E12"],
 	  "note":["E5"],
 	  "lyric":"맘"
 	},
 	{
-	  "timestamp":241488,
+	  "timestamp":120744,
 	  "chord":"",
 	  "tab":["A10"],
 	  "note":["G5"],
 	  "lyric":"은"
 	},
 	{
-	  "timestamp":242892,
+	  "timestamp":121446,
 	  "chord":"",
 	  "tab":["A14"],
 	  "note":["B5"],
 	  "lyric":"아"
 	},
 	{
-	  "timestamp":244764,
+	  "timestamp":122382,
 	  "chord":"",
 	  "tab":["E12"],
 	  "note":["E5"],
 	  "lyric":"플"
 	},
 	{
-	  "timestamp":246168,
+	  "timestamp":123084,
 	  "chord":"",
 	  "tab":["A10"],
 	  "note":["G5"],
-	  "lyric":"까"
+	  "lyric":"까",
+	  "stroke":"D"
 	}  ],
 
   "title":" 비와 당신 ",
-  "author":"��모",
+  "author":"��모",
   "author_note":"",
   "category":"Chord",
   "comment":" 박중훈 노래 – 영화 '라디오스타' OST ",
@@ -916,5 +950,6 @@
   "source":"",
   "thumbnail":"tabulature_ukulele.jpg",
   "start_offset":"0",
+  "basic_beat":"4/4",
   "bpm":" 64.0"
 }
