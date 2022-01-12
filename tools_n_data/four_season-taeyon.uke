@@ -1,291 +1,1274 @@
 {
   "notes":[
 	{
-	  "timestamp":1362,
+	  "timestamp":978,
 	  "chord":"Dm",
 	  "tab":["G2","C2","E1","A0"],
 	  "note":["A4","D4","F4","A4"],
-	  "lyric":"계절이"
+	  "lyric":"계절이",
+	  "technic":"|"
 	},
 	{
-	  "timestamp":3178,
+	  "timestamp":2282,
 	  "chord":"Gm",
 	  "tab":["G0","C2","E3","A1"],
 	  "note":["G4","D4","G4","A#4"],
 	  "lyric":"와"
 	},
 	{
-	  "timestamp":4994,
+	  "timestamp":3586,
 	  "chord":"C7",
 	  "tab":["G0","C0","E0","A1"],
 	  "note":["G4","C4","E4","A#4"],
-	  "lyric":"그리고"
+	  "lyric":"그리고",
+	  "technic":"|"
 	},
 	{
-	  "timestamp":6810,
+	  "timestamp":4890,
 	  "chord":"F",
 	  "tab":["G2","C0","E1","A0"],
 	  "note":["A4","C4","F4","A4"],
 	  "lyric":" 또 떠나 "
 	},
 	{
-	  "timestamp":8172,
+	  "timestamp":5868,
 	  "chord":"Bb",
 	  "tab":["G3","C2","E1","A1"],
 	  "note":["A#4","D4","F4","A#4"],
-	  "lyric":"겨울을"
+	  "lyric":"겨울을",
+	  "technic":"|"
 	},
 	{
-	  "timestamp":9988,
+	  "timestamp":7172,
 	  "chord":"Gm",
 	  "tab":["G0","C2","E3","A1"],
 	  "note":["G4","D4","G4","A#4"],
 	  "lyric":"주고"
 	},
 	{
-	  "timestamp":11350,
+	  "timestamp":8150,
 	  "chord":"A7",
 	  "tab":["C1"],
 	  "note":["C#4"],
-	  "lyric":" 름도 주었지 "
+	  "lyric":" 름도 주었지 ",
+	  "technic":"|"
 	},
 	{
-	  "timestamp":13166,
+	  "timestamp":9454,
 	  "chord":"Dm",
 	  "tab":["G2","C2","E1","A0"],
 	  "note":["A4","D4","F4","A4"],
 	  "lyric":"온세상"
 	},
 	{
-	  "timestamp":14982,
+	  "timestamp":10758,
 	  "chord":"Bb",
 	  "tab":["G3","C2","E1","A1"],
 	  "note":["A#4","D4","F4","A#4"],
-	  "lyric":" 이던 널 "
+	  "lyric":" 이던 널 ",
+	  "technic":"|"
 	},
 	{
-	  "timestamp":16344,
+	  "timestamp":11736,
 	  "chord":"Am",
 	  "tab":["G0","C0","E1","A0"],
 	  "note":["G4","C4","F4","A4"],
 	  "lyric":"보낼"
 	},
 	{
-	  "timestamp":16798,
+	  "timestamp":12062,
 	  "chord":"Gm",
 	  "tab":["G0","C2","E3","A1"],
 	  "note":["G4","D4","G4","A#4"],
 	  "lyric":"래"
 	},
 	{
-	  "timestamp":17706,
+	  "timestamp":12714,
 	  "chord":"Gm",
 	  "tab":["G0","C2","E3","A1"],
 	  "note":["G4","D4","G4","A#4"]
 	},
 	{
-	  "timestamp":18160,
+	  "timestamp":13040,
 	  "chord":"Gm",
 	  "tab":["G0","C2","E3","A1"],
 	  "note":["G4","D4","G4","A#4"]
 	},
 	{
-	  "timestamp":18614,
+	  "timestamp":13366,
+	  "chord":"A7",
+	  "tab":["G0","C1","E0","A0"],
+	  "note":["G4","C#4","E4","A4"],
+	  "technic":"|"
+	},
+	{
+	  "timestamp":15648,
+	  "chord":"Dm",
+	  "tab":["G2"],
+	  "note":["A4"],
+	  "technic":"|"
+	},
+	{
+	  "timestamp":15974,
+	  "chord":"",
+	  "tab":["C2","E1","A0"],
+	  "note":["D4","F4","A4"]
+	},
+	{
+	  "timestamp":16300,
+	  "chord":"Bb",
+	  "tab":["G3"],
+	  "note":["A#4"]
+	},
+	{
+	  "timestamp":16626,
+	  "chord":"",
+	  "tab":["C2","E1","A1"],
+	  "note":["D4","F4","A#4"]
+	},
+	{
+	  "timestamp":16952,
+	  "chord":"F",
+	  "tab":["G2"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":17278,
+	  "chord":"",
+	  "tab":["C0","E1","A0"],
+	  "note":["C4","F4","A4"]
+	},
+	{
+	  "timestamp":17604,
+	  "chord":"A7",
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":17930,
+	  "chord":"",
+	  "tab":["C1","E0","A0"],
+	  "note":["C#4","E4","A4"]
+	},
+	{
+	  "timestamp":18256,
+	  "chord":"Dm",
+	  "tab":["G2"],
+	  "note":["A4"],
+	  "lyric":" 언제야 봄이던가 ",
+	  "technic":"|"
+	},
+	{
+	  "timestamp":18582,
+	  "chord":"",
+	  "tab":["C2","E1","A0"],
+	  "note":["D4","F4","A4"]
+	},
+	{
+	  "timestamp":18908,
+	  "chord":"Bb",
+	  "tab":["G3"],
+	  "note":["A#4"]
+	},
+	{
+	  "timestamp":19234,
+	  "chord":"",
+	  "tab":["C2","E1","A1"],
+	  "note":["D4","F4","A#4"]
+	},
+	{
+	  "timestamp":19560,
+	  "chord":"F",
+	  "tab":["G2"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":19886,
+	  "chord":"",
+	  "tab":["C0","E1","A0"],
+	  "note":["C4","F4","A4"]
+	},
+	{
+	  "timestamp":20212,
+	  "chord":"A7",
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":20538,
+	  "chord":"",
+	  "tab":["C1","E0","A0"],
+	  "note":["C#4","E4","A4"]
+	},
+	{
+	  "timestamp":20864,
+	  "chord":"Dm",
+	  "tab":["G2"],
+	  "note":["A4"],
+	  "lyric":" 맞아 그땐 한 참을 서로 가 ",
+	  "technic":"|"
+	},
+	{
+	  "timestamp":21190,
+	  "chord":"",
+	  "tab":["C2","E1","A0"],
+	  "note":["D4","F4","A4"]
+	},
+	{
+	  "timestamp":21516,
+	  "chord":"Bb",
+	  "tab":["G3"],
+	  "note":["A#4"]
+	},
+	{
+	  "timestamp":21842,
+	  "chord":"",
+	  "tab":["C2","E1","A1"],
+	  "note":["D4","F4","A#4"]
+	},
+	{
+	  "timestamp":22168,
+	  "chord":"F",
+	  "tab":["G2"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":22494,
+	  "chord":"",
+	  "tab":["C0","E1","A0"],
+	  "note":["C4","F4","A4"]
+	},
+	{
+	  "timestamp":22820,
+	  "chord":"A7",
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":23146,
+	  "chord":"",
+	  "tab":["C1","E0","A0"],
+	  "note":["C#4","E4","A4"]
+	},
+	{
+	  "timestamp":23472,
+	  "chord":"Dm",
+	  "tab":["G2"],
+	  "note":["A4"],
+	  "lyric":" 세익스피어의 연극같은 ",
+	  "technic":"|"
+	},
+	{
+	  "timestamp":23798,
+	  "chord":"",
+	  "tab":["C2","E1","A0"],
+	  "note":["D4","F4","A4"]
+	},
+	{
+	  "timestamp":24124,
+	  "chord":"Bb",
+	  "tab":["G3"],
+	  "note":["A#4"]
+	},
+	{
+	  "timestamp":24450,
+	  "chord":"",
+	  "tab":["C2","E1","A1"],
+	  "note":["D4","F4","A#4"]
+	},
+	{
+	  "timestamp":24776,
+	  "chord":"F",
+	  "tab":["G2"],
+	  "note":["A4"],
+	  "lyric":" 마지막이될 사랑 맞이한듯 "
+	},
+	{
+	  "timestamp":25102,
+	  "chord":"",
+	  "tab":["C0","E1","A0"],
+	  "note":["C4","F4","A4"]
+	},
+	{
+	  "timestamp":25428,
+	  "chord":"A7",
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":25754,
+	  "chord":"",
+	  "tab":["C1","E0","A0"],
+	  "note":["C#4","E4","A4"]
+	},
+	{
+	  "timestamp":26080,
+	  "chord":"Dm",
+	  "tab":["G2"],
+	  "note":["A4"],
+	  "technic":"|"
+	},
+	{
+	  "timestamp":26406,
+	  "chord":"",
+	  "tab":["C2","E1","A0"],
+	  "note":["D4","F4","A4"]
+	},
+	{
+	  "timestamp":26732,
+	  "chord":"Bb",
+	  "tab":["G3"],
+	  "note":["A#4"]
+	},
+	{
+	  "timestamp":27058,
+	  "chord":"",
+	  "tab":["C2","E1","A1"],
+	  "note":["D4","F4","A#4"]
+	},
+	{
+	  "timestamp":27384,
+	  "chord":"F",
+	  "tab":["G2"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":27710,
+	  "chord":"",
+	  "tab":["C0","E1","A0"],
+	  "note":["C4","F4","A4"]
+	},
+	{
+	  "timestamp":28036,
+	  "chord":"A7",
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":28362,
+	  "chord":"",
+	  "tab":["C1","E0","A0"],
+	  "note":["C#4","E4","A4"]
+	},
+	{
+	  "timestamp":28688,
+	  "chord":"Bb",
+	  "tab":["G3","C2","E1","A1"],
+	  "note":["A#4","D4","F4","A#4"],
+	  "lyric":" 다른 걸 좀 ᄇᅠ ",
+	  "technic":"|"
+	},
+	{
+	  "timestamp":29340,
 	  "chord":"A7",
 	  "tab":["G0","C1","E0","A0"],
 	  "note":["G4","C#4","E4","A4"]
 	},
 	{
-	  "timestamp":21792,
+	  "timestamp":29992,
+	  "chord":"A7",
+	  "tab":["G0","C1","E0","A0"],
+	  "note":["G4","C#4","E4","A4"]
+	},
+	{
+	  "timestamp":30644,
+	  "chord":"A7",
+	  "tab":["G0","C1","E0","A0"],
+	  "note":["G4","C#4","E4","A4"]
+	},
+	{
+	  "timestamp":31296,
 	  "chord":"Dm",
-	  "tab":["A0"],
+	  "tab":["G2"],
+	  "note":["A4"],
+	  "lyric":" I gave you the world ",
+	  "technic":"|"
+	},
+	{
+	  "timestamp":31622,
+	  "chord":"",
+	  "tab":["G2","C2","E1","A0"],
+	  "note":["A4","D4","F4","A4"]
+	},
+	{
+	  "timestamp":31948,
+	  "chord":"Gm",
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":32274,
+	  "chord":"",
+	  "tab":["G0","C2","E3","A1"],
+	  "note":["G4","D4","G4","A#4"]
+	},
+	{
+	  "timestamp":32600,
+	  "chord":"C7",
+	  "tab":["G0"],
+	  "note":["G4"],
+	  "lyric":" 너만이 전부라 "
+	},
+	{
+	  "timestamp":32926,
+	  "chord":"",
+	  "tab":["G0","C0","E0","A1"],
+	  "note":["G4","C4","E4","A#4"]
+	},
+	{
+	  "timestamp":33252,
+	  "chord":"F",
+	  "tab":["G2"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":22246,
+	  "timestamp":33578,
 	  "chord":"",
-	  "tab":["G2","C2","E1"],
-	  "note":["A4","D4","F4"]
+	  "tab":["G2","C0","E1","A0"],
+	  "note":["A4","C4","F4","A4"]
 	},
 	{
-	  "timestamp":22700,
+	  "timestamp":33904,
 	  "chord":"Bb",
-	  "tab":["A1"],
+	  "tab":["G3"],
+	  "note":["A#4"],
+	  "lyric":" 내 겨울을 주고 ",
+	  "technic":"|"
+	},
+	{
+	  "timestamp":34230,
+	  "chord":"",
+	  "tab":["G3","C2","E1","A1"],
+	  "note":["A#4","D4","F4","A#4"]
+	},
+	{
+	  "timestamp":34556,
+	  "chord":"Gm",
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":34882,
+	  "chord":"",
+	  "tab":["G2","C2","E3","A1"],
+	  "note":["A4","D4","G4","A#4"]
+	},
+	{
+	  "timestamp":35208,
+	  "chord":"A7",
+	  "tab":["G0"],
+	  "note":["G4"],
+	  "lyric":" 또 여름도 주었지 "
+	},
+	{
+	  "timestamp":35534,
+	  "chord":"",
+	  "tab":["G0","C1","E0","A0"],
+	  "note":["G4","C#4","E4","A4"]
+	},
+	{
+	  "timestamp":35860,
+	  "chord":"Dm",
+	  "tab":["G2"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":36186,
+	  "chord":"",
+	  "tab":["G2","C2","E1","A0"],
+	  "note":["A4","D4","F4","A4"]
+	},
+	{
+	  "timestamp":36512,
+	  "chord":"Bb",
+	  "tab":["G3"],
+	  "note":["A#4"],
+	  "lyric":" 뜨겁고 차갑던 "
+	},
+	{
+	  "timestamp":36838,
+	  "chord":"",
+	  "tab":["G3","C2","E1","A1"],
+	  "note":["A#4","D4","F4","A#4"]
+	},
+	{
+	  "timestamp":37164,
+	  "chord":"Am",
+	  "tab":["G2"],
+	  "note":["A4"],
+	  "lyric":"그계절에"
+	},
+	{
+	  "timestamp":37490,
+	  "chord":"",
+	  "tab":["G2","C0","E0","A0"],
+	  "note":["A4","C4","E4","A4"]
+	},
+	{
+	  "timestamp":37816,
+	  "chord":"Gm",
+	  "tab":["G0"],
+	  "note":["G4"],
+	  "lyric":" 정말 너를 사랑 했을까 "
+	},
+	{
+	  "timestamp":38142,
+	  "chord":"",
+	  "tab":["G0","C2","E3","A1"],
+	  "note":["G4","D4","G4","A#4"]
+	},
+	{
+	  "timestamp":38468,
+	  "chord":"A7",
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":38794,
+	  "chord":"",
+	  "tab":["G0","C1","E0","A0"],
+	  "note":["G4","C#4","E4","A4"]
+	},
+	{
+	  "timestamp":39120,
+	  "chord":"Dm",
+	  "tab":["G2"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":39446,
+	  "chord":"",
+	  "tab":["G2","C2","E1","A0"],
+	  "note":["A4","D4","F4","A4"]
+	},
+	{
+	  "timestamp":39772,
+	  "chord":"Bb",
+	  "tab":["G3"],
 	  "note":["A#4"]
 	},
 	{
-	  "timestamp":23154,
+	  "timestamp":40098,
 	  "chord":"",
-	  "tab":["G3","C2","E1"],
-	  "note":["A#4","D4","F4"]
+	  "tab":["G3","C2","E1","A1"],
+	  "note":["A#4","D4","F4","A#4"]
 	},
 	{
-	  "timestamp":23608,
+	  "timestamp":40424,
 	  "chord":"F",
-	  "tab":["A0"],
-	  "note":["A4"]
+	  "tab":["G2"],
+	  "note":["A4"],
+	  "lyric":" 내가 너를 사랑 했을 까 "
 	},
 	{
-	  "timestamp":24062,
+	  "timestamp":40750,
 	  "chord":"",
-	  "tab":["G2","C0","E1"],
-	  "note":["A4","C4","F4"]
+	  "tab":["G2","C0","E1","A0"],
+	  "note":["A4","C4","F4","A4"]
 	},
 	{
-	  "timestamp":24516,
+	  "timestamp":41076,
 	  "chord":"A7",
-	  "tab":["A0"],
-	  "note":["A4"]
+	  "tab":["G0"],
+	  "note":["G4"]
 	},
 	{
-	  "timestamp":24970,
+	  "timestamp":41402,
 	  "chord":"",
-	  "tab":["G0","C1","E0"],
-	  "note":["G4","C#4","E4"]
+	  "tab":["G0","C1","E0","A0"],
+	  "note":["G4","C#4","E4","A4"]
 	},
 	{
-	  "timestamp":25424,
+	  "timestamp":41728,
 	  "chord":"Dm",
-	  "tab":["A0"],
+	  "tab":["G2"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":25878,
+	  "timestamp":42054,
 	  "chord":"",
-	  "tab":["G2","C2","E1"],
-	  "note":["A4","D4","F4"]
+	  "tab":["G2","C2","E1","A0"],
+	  "note":["A4","D4","F4","A4"]
 	},
 	{
-	  "timestamp":26332,
+	  "timestamp":42380,
 	  "chord":"Bb",
-	  "tab":["A1"],
+	  "tab":["G3"],
 	  "note":["A#4"]
 	},
 	{
-	  "timestamp":26786,
+	  "timestamp":42706,
 	  "chord":"",
-	  "tab":["G3","C2","E1"],
-	  "note":["A#4","D4","F4"]
+	  "tab":["G3","C2","E1","A1"],
+	  "note":["A#4","D4","F4","A#4"]
 	},
 	{
-	  "timestamp":27240,
+	  "timestamp":43032,
 	  "chord":"F",
-	  "tab":["A0"],
+	  "tab":["G2"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":27694,
+	  "timestamp":43358,
 	  "chord":"",
-	  "tab":["G2","C0","E1"],
-	  "note":["A4","C4","F4"]
+	  "tab":["G2","C0","E1","A0"],
+	  "note":["A4","C4","F4","A4"]
 	},
 	{
-	  "timestamp":28148,
+	  "timestamp":43684,
 	  "chord":"A7",
-	  "tab":["A0"],
-	  "note":["A4"]
+	  "tab":["G0"],
+	  "note":["G4"]
 	},
 	{
-	  "timestamp":28602,
+	  "timestamp":44010,
 	  "chord":"",
-	  "tab":["G0","C1","E0"],
-	  "note":["G4","C#4","E4"]
+	  "tab":["G0","C1","E0","A0"],
+	  "note":["G4","C#4","E4","A4"]
 	},
 	{
-	  "timestamp":29056,
+	  "timestamp":44336,
 	  "chord":"Dm",
-	  "tab":["A0"],
+	  "tab":["G2"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":29510,
+	  "timestamp":44662,
 	  "chord":"",
-	  "tab":["G2","C2","E1"],
-	  "note":["A4","D4","F4"]
+	  "tab":["G2","C2","E1","A0"],
+	  "note":["A4","D4","F4","A4"]
 	},
 	{
-	  "timestamp":29964,
+	  "timestamp":44988,
 	  "chord":"Bb",
-	  "tab":["A1"],
+	  "tab":["G3"],
 	  "note":["A#4"]
 	},
 	{
-	  "timestamp":30418,
+	  "timestamp":45314,
 	  "chord":"",
-	  "tab":["G3","C2","E1"],
-	  "note":["A#4","D4","F4"]
+	  "tab":["G3","C2","E1","A1"],
+	  "note":["A#4","D4","F4","A#4"]
 	},
 	{
-	  "timestamp":30872,
-	  "chord":"F",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":31326,
-	  "chord":"",
-	  "tab":["G2","C0","E1"],
-	  "note":["A4","C4","F4"]
-	},
-	{
-	  "timestamp":31780,
-	  "chord":"A7",
-	  "tab":["A0"],
-	  "note":["A4"]
-	},
-	{
-	  "timestamp":32234,
-	  "chord":"",
-	  "tab":["G0","C1","E0"],
-	  "note":["G4","C#4","E4"]
-	},
-	{
-	  "timestamp":32688,
+	  "timestamp":45640,
 	  "chord":"Dm",
-	  "tab":["A0"],
-	  "note":["A4"]
+	  "tab":["G2"],
+	  "note":["A4"],
+	  "lyric":" 서로를 그리워 했고 "
 	},
 	{
-	  "timestamp":33142,
+	  "timestamp":45966,
 	  "chord":"",
-	  "tab":["G2","C2","E1"],
-	  "note":["A4","D4","F4"]
+	  "tab":["C2","E1","A0"],
+	  "note":["D4","F4","A4"]
 	},
 	{
-	  "timestamp":33596,
+	  "timestamp":46292,
 	  "chord":"Bb",
-	  "tab":["A1"],
+	  "tab":["G3"],
 	  "note":["A#4"]
 	},
 	{
-	  "timestamp":34050,
+	  "timestamp":46618,
 	  "chord":"",
-	  "tab":["G3","C2","E1"],
-	  "note":["A#4","D4","F4"]
+	  "tab":["C2","E1","A1"],
+	  "note":["D4","F4","A#4"]
 	},
 	{
-	  "timestamp":34504,
+	  "timestamp":46944,
 	  "chord":"F",
-	  "tab":["A0"],
+	  "tab":["G2"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":34958,
+	  "timestamp":47270,
 	  "chord":"",
-	  "tab":["G2","C0","E1"],
-	  "note":["A4","C4","F4"]
+	  "tab":["C0","E1","A0"],
+	  "note":["C4","F4","A4"]
 	},
 	{
-	  "timestamp":35412,
+	  "timestamp":47596,
 	  "chord":"A7",
-	  "tab":["A0"],
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":47922,
+	  "chord":"",
+	  "tab":["C1","E0","A0"],
+	  "note":["C#4","E4","A4"]
+	},
+	{
+	  "timestamp":48248,
+	  "chord":"Dm",
+	  "tab":["G2"],
+	  "note":["A4"],
+	  "lyric":" 서로를 지겨워 하지 "
+	},
+	{
+	  "timestamp":48574,
+	  "chord":"",
+	  "tab":["C2","E1","A0"],
+	  "note":["D4","F4","A4"]
+	},
+	{
+	  "timestamp":48900,
+	  "chord":"Bb",
+	  "tab":["G3"],
+	  "note":["A#4"]
+	},
+	{
+	  "timestamp":49226,
+	  "chord":"",
+	  "tab":["C2","E1","A1"],
+	  "note":["D4","F4","A#4"]
+	},
+	{
+	  "timestamp":49552,
+	  "chord":"F",
+	  "tab":["G2"],
 	  "note":["A4"]
 	},
 	{
-	  "timestamp":35866,
+	  "timestamp":49878,
 	  "chord":"",
-	  "tab":["G0","C1","E0"],
-	  "note":["G4","C#4","E4"]
+	  "tab":["C0","E1","A0"],
+	  "note":["C4","F4","A4"]
+	},
+	{
+	  "timestamp":50204,
+	  "chord":"A7",
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":50530,
+	  "chord":"",
+	  "tab":["C1","E0","A0"],
+	  "note":["C#4","E4","A4"]
+	},
+	{
+	  "timestamp":50856,
+	  "chord":"Dm",
+	  "tab":["G2"],
+	  "note":["A4"],
+	  "lyric":" 그 긴 낮과 밤들이 "
+	},
+	{
+	  "timestamp":51182,
+	  "chord":"",
+	  "tab":["C2","E1","A0"],
+	  "note":["D4","F4","A4"]
+	},
+	{
+	  "timestamp":51508,
+	  "chord":"Bb",
+	  "tab":["G3"],
+	  "note":["A#4"]
+	},
+	{
+	  "timestamp":51834,
+	  "chord":"",
+	  "tab":["C2","E1","A1"],
+	  "note":["D4","F4","A#4"]
+	},
+	{
+	  "timestamp":52160,
+	  "chord":"F",
+	  "tab":["G2"],
+	  "note":["A4"],
+	  "lyric":" 낡아 녹이 슬기 전에 "
+	},
+	{
+	  "timestamp":52486,
+	  "chord":"",
+	  "tab":["C0","E1","A0"],
+	  "note":["C4","F4","A4"]
+	},
+	{
+	  "timestamp":52812,
+	  "chord":"A7",
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":53138,
+	  "chord":"",
+	  "tab":["C1","E0","A0"],
+	  "note":["C#4","E4","A4"]
+	},
+	{
+	  "timestamp":53464,
+	  "chord":"Dm",
+	  "tab":["G2"],
+	  "note":["A4"],
+	  "lyric":" 우리 다시 반짝이자 "
+	},
+	{
+	  "timestamp":53790,
+	  "chord":"",
+	  "tab":["C2","E1","A0"],
+	  "note":["D4","F4","A4"]
+	},
+	{
+	  "timestamp":54116,
+	  "chord":"Bb",
+	  "tab":["G3"],
+	  "note":["A#4"]
+	},
+	{
+	  "timestamp":54442,
+	  "chord":"",
+	  "tab":["C2","E1","A1"],
+	  "note":["D4","F4","A#4"]
+	},
+	{
+	  "timestamp":54768,
+	  "chord":"F",
+	  "tab":["G2"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":55094,
+	  "chord":"",
+	  "tab":["C0","E1","A0"],
+	  "note":["C4","F4","A4"]
+	},
+	{
+	  "timestamp":55420,
+	  "chord":"A7",
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":55746,
+	  "chord":"",
+	  "tab":["C1","E0","A0"],
+	  "note":["C#4","E4","A4"]
+	},
+	{
+	  "timestamp":56072,
+	  "chord":"Bb",
+	  "tab":["G3","C2","E1","A1"],
+	  "note":["A#4","D4","F4","A#4"],
+	  "lyric":" 또 계절이 바뀌잖아 "
+	},
+	{
+	  "timestamp":57376,
+	  "chord":"A7",
+	  "tab":["G0","C1","E0","A0"],
+	  "note":["G4","C#4","E4","A4"]
+	},
+	{
+	  "timestamp":58028,
+	  "chord":"A7",
+	  "tab":["G0","C1","E0","A0"],
+	  "note":["G4","C#4","E4","A4"]
+	},
+	{
+	  "timestamp":58680,
+	  "chord":"A7",
+	  "tab":["G0","C1","E0","A0"],
+	  "note":["G4","C#4","E4","A4"]
+	},
+	{
+	  "timestamp":59984,
+	  "chord":"Dm",
+	  "tab":["G2"],
+	  "note":["A4"],
+	  "lyric":" I gave you the world "
+	},
+	{
+	  "timestamp":60310,
+	  "chord":"",
+	  "tab":["G2","C2","E1","A0"],
+	  "note":["A4","D4","F4","A4"]
+	},
+	{
+	  "timestamp":60636,
+	  "chord":"Gm",
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":60962,
+	  "chord":"",
+	  "tab":["G0","C2","E3","A1"],
+	  "note":["G4","D4","G4","A#4"]
+	},
+	{
+	  "timestamp":61288,
+	  "chord":"C7",
+	  "tab":["G0"],
+	  "note":["G4"],
+	  "lyric":" 너만이 전부라 "
+	},
+	{
+	  "timestamp":61614,
+	  "chord":"",
+	  "tab":["G0","C0","E0","A1"],
+	  "note":["G4","C4","E4","A#4"]
+	},
+	{
+	  "timestamp":61940,
+	  "chord":"F",
+	  "tab":["G2"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":62266,
+	  "chord":"",
+	  "tab":["G2","C0","E1","A0"],
+	  "note":["A4","C4","F4","A4"]
+	},
+	{
+	  "timestamp":62592,
+	  "chord":"Bb",
+	  "tab":["G3"],
+	  "note":["A#4"],
+	  "lyric":" 내 겨울을 주고  "
+	},
+	{
+	  "timestamp":62918,
+	  "chord":"",
+	  "tab":["G3","C2","E1","A1"],
+	  "note":["A#4","D4","F4","A#4"]
+	},
+	{
+	  "timestamp":63244,
+	  "chord":"Gm",
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":63570,
+	  "chord":"",
+	  "tab":["G0","C2","E3","A1"],
+	  "note":["G4","D4","G4","A#4"]
+	},
+	{
+	  "timestamp":63896,
+	  "chord":"A7",
+	  "tab":["G0"],
+	  "note":["G4"],
+	  "lyric":" 또 여름도 주었지 "
+	},
+	{
+	  "timestamp":64222,
+	  "chord":"",
+	  "tab":["G0","C1","E0","A0"],
+	  "note":["G4","C#4","E4","A4"]
+	},
+	{
+	  "timestamp":64548,
+	  "chord":"Dm",
+	  "tab":["G2"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":64874,
+	  "chord":"",
+	  "tab":["G2","C2","E1","A0"],
+	  "note":["A4","D4","F4","A4"]
+	},
+	{
+	  "timestamp":65200,
+	  "chord":"Bb",
+	  "tab":["G3"],
+	  "note":["A#4"],
+	  "lyric":" 뜨겁고 차갑던  "
+	},
+	{
+	  "timestamp":65526,
+	  "chord":"",
+	  "tab":["G3","C2","E1","A1"],
+	  "note":["A#4","D4","F4","A#4"]
+	},
+	{
+	  "timestamp":65852,
+	  "chord":"Am",
+	  "tab":["G2"],
+	  "note":["A4"],
+	  "lyric":" 그 계절에 "
+	},
+	{
+	  "timestamp":66178,
+	  "chord":"",
+	  "tab":["G2","C0","E0","A0"],
+	  "note":["A4","C4","E4","A4"]
+	},
+	{
+	  "timestamp":66504,
+	  "chord":"Gm",
+	  "tab":["G0"],
+	  "note":["G4"],
+	  "lyric":" 정말 너를 사랑 했을까 "
+	},
+	{
+	  "timestamp":66830,
+	  "chord":"",
+	  "tab":["G0","C2","E3","A1"],
+	  "note":["G4","D4","G4","A#4"]
+	},
+	{
+	  "timestamp":67156,
+	  "chord":"A7",
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":67482,
+	  "chord":"",
+	  "tab":["G0","C1","E0","A0"],
+	  "note":["G4","C#4","E4","A4"]
+	},
+	{
+	  "timestamp":67808,
+	  "chord":"Dm",
+	  "tab":["G2"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":68134,
+	  "chord":"",
+	  "tab":["G2","C2","E1","A0"],
+	  "note":["A4","D4","F4","A4"]
+	},
+	{
+	  "timestamp":68460,
+	  "chord":"Bb",
+	  "tab":["G3"],
+	  "note":["A#4"]
+	},
+	{
+	  "timestamp":68786,
+	  "chord":"",
+	  "tab":["G3","C2","E1","A1"],
+	  "note":["A#4","D4","F4","A#4"]
+	},
+	{
+	  "timestamp":69112,
+	  "chord":"F",
+	  "tab":["G2"],
+	  "note":["A4"],
+	  "lyric":" 내가 너를 사랑 했을까 "
+	},
+	{
+	  "timestamp":69438,
+	  "chord":"",
+	  "tab":["G2","C0","E1","A0"],
+	  "note":["A4","C4","F4","A4"]
+	},
+	{
+	  "timestamp":69764,
+	  "chord":"A7",
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":70090,
+	  "chord":"",
+	  "tab":["G0","C1","E0","A0"],
+	  "note":["G4","C#4","E4","A4"]
+	},
+	{
+	  "timestamp":70416,
+	  "chord":"Dm",
+	  "tab":["G2"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":70742,
+	  "chord":"",
+	  "tab":["G2","C2","E1","A0"],
+	  "note":["A4","D4","F4","A4"]
+	},
+	{
+	  "timestamp":71068,
+	  "chord":"Bb",
+	  "tab":["G3"],
+	  "note":["A#4"]
+	},
+	{
+	  "timestamp":71394,
+	  "chord":"",
+	  "tab":["G3","C2","E1","A1"],
+	  "note":["A#4","D4","F4","A#4"]
+	},
+	{
+	  "timestamp":71720,
+	  "chord":"F",
+	  "tab":["G2"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":72046,
+	  "chord":"",
+	  "tab":["G2","C0","E1","A0"],
+	  "note":["A4","C4","F4","A4"]
+	},
+	{
+	  "timestamp":72372,
+	  "chord":"A7",
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":72698,
+	  "chord":"",
+	  "tab":["G0","C1","E0","A0"],
+	  "note":["G4","C#4","E4","A4"]
+	},
+	{
+	  "timestamp":73024,
+	  "chord":"Dm",
+	  "tab":["G2"],
+	  "note":["A4"],
+	  "lyric":" 가 도 돼 "
+	},
+	{
+	  "timestamp":73350,
+	  "chord":"",
+	  "tab":["C2","E1","A0"],
+	  "note":["D4","F4","A4"]
+	},
+	{
+	  "timestamp":73676,
+	  "chord":"Gm",
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":74002,
+	  "chord":"",
+	  "tab":["C2","E3","A1"],
+	  "note":["D4","G4","A#4"]
+	},
+	{
+	  "timestamp":74328,
+	  "chord":"C7",
+	  "tab":["G0"],
+	  "note":["G4"],
+	  "lyric":" 뒤 돌아 볼 때  "
+	},
+	{
+	  "timestamp":74654,
+	  "chord":"",
+	  "tab":["C0","E0","A1"],
+	  "note":["C4","E4","A#4"]
+	},
+	{
+	  "timestamp":74980,
+	  "chord":"F",
+	  "tab":["G2","C0","E1","A0"],
+	  "note":["A4","C4","F4","A4"],
+	  "lyric":" 쯤엔 난없 어 "
+	},
+	{
+	  "timestamp":75306,
+	  "chord":"C",
+	  "tab":["G0","C0","E0","A3"],
+	  "note":["G4","C4","E4","C5"]
+	},
+	{
+	  "timestamp":75632,
+	  "chord":"Bb",
+	  "tab":["G3"],
+	  "note":["A#4"]
+	},
+	{
+	  "timestamp":75958,
+	  "chord":"",
+	  "tab":["C2","E1","A1"],
+	  "note":["D4","F4","A#4"]
+	},
+	{
+	  "timestamp":76284,
+	  "chord":"Gm",
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":76610,
+	  "chord":"",
+	  "tab":["C2","E3","A1"],
+	  "note":["D4","G4","A#4"]
+	},
+	{
+	  "timestamp":76936,
+	  "chord":"A7",
+	  "tab":["G0"],
+	  "note":["G4"],
+	  "lyric":" 우린 꽤 괜찬았어 "
+	},
+	{
+	  "timestamp":77262,
+	  "chord":"",
+	  "tab":["C1","E0","A0"],
+	  "note":["C#4","E4","A4"]
+	},
+	{
+	  "timestamp":77588,
+	  "chord":"Dm",
+	  "tab":["G2"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":77914,
+	  "chord":"",
+	  "tab":["C2","E1","A0"],
+	  "note":["D4","F4","A4"]
+	},
+	{
+	  "timestamp":78240,
+	  "chord":"Bb",
+	  "tab":["G3"],
+	  "note":["A#4"],
+	  "lyric":" 그거면 된거야 "
+	},
+	{
+	  "timestamp":78566,
+	  "chord":"",
+	  "tab":["C2","E1","A1"],
+	  "note":["D4","F4","A#4"]
+	},
+	{
+	  "timestamp":78892,
+	  "chord":"Am",
+	  "tab":["G2"],
+	  "note":["A4"]
+	},
+	{
+	  "timestamp":79218,
+	  "chord":"",
+	  "tab":["C0","E0","A0"],
+	  "note":["C4","E4","A4"]
+	},
+	{
+	  "timestamp":79544,
+	  "chord":"Gm",
+	  "tab":["G0"],
+	  "note":["G4"],
+	  "lyric":" 떠날 때~ 아하~~ "
+	},
+	{
+	  "timestamp":79870,
+	  "chord":"",
+	  "tab":["C2","E3","A1"],
+	  "note":["D4","G4","A#4"]
+	},
+	{
+	  "timestamp":80196,
+	  "chord":"A7",
+	  "tab":["G0"],
+	  "note":["G4"]
+	},
+	{
+	  "timestamp":80522,
+	  "chord":"",
+	  "tab":["C1","E0","A0"],
+	  "note":["C#4","E4","A4"]
 	}  ],
 
   "title":" 사계 – 태연 ",
@@ -298,5 +1281,5 @@
   "thumbnail":"healing_ukulele.jpg",
   "start_offset":"0",
   "basic_beat":"4/4",
-  "bpm":" 66.0"
+  "bpm":" 92.0"
 }

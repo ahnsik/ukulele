@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -43,10 +44,11 @@ public class FileSelectorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_file_selector);
-        // Lock orientation into landscape.
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        setContentView(R.layout.activity_file_selector);
+        // Lock orientation into landscape.
 
         String playingMode = getIntent().getExtras().getString("mode");
         if (playingMode.equals("TrainingMode")) {
@@ -94,7 +96,7 @@ public class FileSelectorActivity extends AppCompatActivity {
                     Log.d("ukulele", "index="+i+", thumbnailBitmap = "+thumbnailBitmap[i] );
                 }
                 songBpm[i] = info.getString("bpm");
-                songTypes[i] = info.getString("type");         // 멜로디 / 코드 / 핑거스타일
+//                songTypes[i] = info.getString("type");         // 멜로디 / 코드 / 핑거스타일
             }
         } catch (Exception e) {
             Log.d("ukulele", "-xxxxxxxxxxxx Error to parse Index file xxxxxxxxxxxx-");
@@ -140,6 +142,12 @@ public class FileSelectorActivity extends AppCompatActivity {
         super.onPause();
         finish();
     }
+
+//    public void onConfigurationChanged() {
+//        Toast errmsg = Toast.makeText(this.getApplicationContext(),"가로모드에서만 동작합니다.", Toast.LENGTH_SHORT);
+//        errmsg.show();
+////        finish();
+//    }
 
     class CustomAdaptor extends BaseAdapter {
         @Override

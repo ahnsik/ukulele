@@ -705,8 +705,6 @@ int get_note_from_line(char *chord_line) {
         if (uke_version >= 2.0f) {
           if (note.technic[0] == '/') {     // 일시적으로 반음만 처리.
             time_stamp += (beat_length_msec / 2);
-          } else if (note.technic[0] == '3') {     // 셋잇단음표 처리.
-              time_stamp += (beat_length_msec*4 / 3);
           } else {
             time_stamp += beat_length_msec;
           }

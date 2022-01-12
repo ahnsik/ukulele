@@ -1,12 +1,14 @@
 package com.example.ahnsik.ukuleletutor;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -50,6 +52,9 @@ public class TerminalActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_terminal);
 
         Button btnReturn = (Button)findViewById(R.id.btnReturn);
@@ -142,6 +147,7 @@ public class TerminalActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.d("ukulele", "Trace .. Error #3");
+                    Toast.makeText(getApplicationContext(), "FTP 로그인 실패", Toast.LENGTH_LONG).show();
                     success =false;
                 }
 
@@ -152,6 +158,7 @@ public class TerminalActivity extends AppCompatActivity {
                         log("FTP: 우쿨렐레 폴더로 이동 완료.\n");
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "FTP에서 폴더를 찾지 못했습니다.", Toast.LENGTH_LONG).show();
                         success = false;
                     }
                 }
@@ -196,12 +203,14 @@ public class TerminalActivity extends AppCompatActivity {
 
 
     private boolean copyingUkeFiles() {
+        String filename = "No Name";
         try {
             FTPFile[] ftpfiles = ftpClient.listFiles();
             int length = ftpfiles.length;
 
             for (int i = 0; i < length; i++) {
                 String name = ftpfiles[i].getName();
+                filename = name;
                 boolean isFile = ftpfiles[i].isFile();
                 if (isFile) {
                     if (name.toLowerCase().endsWith(".uke")) {
@@ -273,6 +282,9 @@ public class TerminalActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             e.printStackTrace();
+            String errMsg = "파일 " + filename + " 가져오기 실패.";
+            Toast.makeText(getApplicationContext(), errMsg, Toast.LENGTH_LONG).show();
+            log("FTP: Loading Failed. " + errMsg + "\n" );
             return  false;
         }
         return  true;
@@ -333,7 +345,7 @@ public class TerminalActivity extends AppCompatActivity {
                 song.put("type", songTypes[i] );
 
                 tabJ.put(song);
-                Log.d("ukulele", ".." + i );
+                Log.d("ukulele", ".." + i + " JSON: " + song );
             }
             json.put("songList", tabJ);
 

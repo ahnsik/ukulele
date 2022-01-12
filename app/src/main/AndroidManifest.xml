@@ -15,11 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
-        tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".HelpReadTabActivity"></activity>
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".AboutUkuleleActivity" />
         <activity android:name=".SetupActivity" />
-        <activity android:name=".TerminalActivity" />
+        <activity android:name=".TerminalActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity android:name=".ChordC_Activity" />
         <activity android:name=".ChordC7_Activity" />
         <activity android:name=".ChordCm_Activity" />
@@ -57,12 +57,13 @@
         </activity>
         <activity
             android:name=".FileSelectorActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_file_selector"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".TrainingActivity"
             android:label="@string/title_activity_training"
-            android:theme="@style/FullscreenTheme" />
+           android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".TuningActivity"
             android:label="@string/title_activity_Tuning"
