@@ -15,8 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
-        tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".HelpReadTabActivity"></activity>
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".AboutUkuleleActivity" />
         <activity android:name=".SetupActivity" />
         <activity android:name=".TerminalActivity"
@@ -64,7 +63,7 @@
         <activity
             android:name=".TrainingActivity"
             android:label="@string/title_activity_training"
-            android:theme="@style/FullscreenTheme" />
+           android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".TuningActivity"
             android:label="@string/title_activity_Tuning"
