@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#80453d3c"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/jeonnamfont"
             android:textSize="22sp"
             android:textColor="#f4d62f"
             android:text="화면을 터치하여 BPM을 계산해 보세요."/>
@@ -34,7 +34,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/jeonnamfont"
                 android:textSize="44sp"
                 android:text="Last BPM:" />
 
@@ -46,7 +46,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="62dp"
                 android:layout_marginBottom="16dp"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/jeonnamfont"
                 android:textSize="52sp"
                 android:text="Average BPM:" />
 
@@ -59,7 +59,7 @@
                 android:layout_marginTop="120dp"
                 android:layout_marginBottom="16dp"
                 android:gravity="center"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/jeonnamfont"
                 android:textSize="20sp"
                 android:text="Time from first touch:" />
 
@@ -76,7 +76,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/button_shape"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/jeonnamfont"
         android:textSize="24sp"
         android:text="@string/btntxt_back"
         app:layout_constraintEnd_toEndOf="parent"

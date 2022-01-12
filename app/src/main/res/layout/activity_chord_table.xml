@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#80453d3c"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/katuri"
             android:textSize="22sp"
             android:textColor="#f4d62f"
             android:text="코드 표를 터치하여 전체 화면으로 볼 수 있습니다."/>
@@ -298,7 +298,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/button_shape"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/jeonnamfont"
         android:textSize="24sp"
         android:text="@string/btntxt_back"
         app:layout_constraintEnd_toEndOf="parent"

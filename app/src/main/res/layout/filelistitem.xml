@@ -38,7 +38,7 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:text="no filename"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/jeonnamfont"
                     android:textSize="18sp" />
 
                 <TextView
@@ -48,7 +48,7 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:text="bps: unknown"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/jeonnamfont"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -59,7 +59,7 @@
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:text="A long long length of string title"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/katuri"
                 android:textSize="22sp" />
 
         </LinearLayout>
@@ -71,7 +71,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:text="A long long length of description strings here. something like, who made this file, mood of songs, difficulty levels, training levels, or ranking, etc.. "
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/jeonnamfont"
             android:textSize="18sp" />
 
     </LinearLayout>

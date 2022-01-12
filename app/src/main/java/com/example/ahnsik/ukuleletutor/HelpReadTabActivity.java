@@ -24,4 +24,22 @@ public class HelpReadTabActivity extends AppCompatActivity {
             }
         });
     }
+
+/*    // *** 하단 네비게이션 바 숨기기
+    public void hideNavigationBar() {
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility( // Set the content to appear under the system bars so that the
+                // content doesn't resize when the system bars hide and show.
+                // Hide the nav bar and status bar
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION| View.SYSTEM_UI_FLAG_IMMERSIVE | View.SYSTEM_UI_FLAG_FULLSCREEN);
+    }
+
+    @Override public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            hideNavigationBar();
+        }
+    }
+    //출처: https://ddunnimlabs.tistory.com/3 [뚠님 연구소]
+*/
 }

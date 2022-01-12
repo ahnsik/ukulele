@@ -3,10 +3,10 @@
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/titlefont"/>
+        android:font="@font/katuri"/>
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/buttonfont"/>
+        android:font="@font/jeonnamfont"/>
 </font-family>
 

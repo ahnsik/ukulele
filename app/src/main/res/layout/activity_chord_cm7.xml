@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#80453d3c"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/katuri"
         android:text="@string/c_g4_c4_e4_a4s"
         android:textColor="#f4d62f"
         android:textSize="22sp"

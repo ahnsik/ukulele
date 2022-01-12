@@ -9,10 +9,32 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/android_ukulele.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/drawable/button_shape.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/font-v26/font.xml" value="0.20625" />
         <entry key="app/src/main/res/font/font.xml" value="0.2078125" />
-        <entry key="app/src/main/res/layout/activity_file_selector.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_about_ukulele.xml" value="0.19635416666666666" />
+        <entry key="app/src/main/res/layout/activity_bpm_tool.xml" value="0.19635416666666666" />
+        <entry key="app/src/main/res/layout/activity_chord_a.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/layout/activity_chord_a7.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/layout/activity_chord_am.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/layout/activity_chord_am7.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/layout/activity_chord_b.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/layout/activity_chord_b7.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/layout/activity_chord_bm.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/layout/activity_chord_cm7.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/layout/activity_chord_gm7.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/layout/activity_chord_table.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/layout/activity_file_selector.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_guide_top.xml" value="0.19635416666666666" />
+        <entry key="app/src/main/res/layout/activity_help_read_tab.xml" value="0.20104166666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_playing.xml" value="0.196875" />
+        <entry key="app/src/main/res/layout/activity_setup.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/layout/activity_terminal.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/layout/activity_tuning.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/layout/activity_video_test_class.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/layout/filelistitem.xml" value="0.19635416666666666" />
       </map>
     </option>
   </component>

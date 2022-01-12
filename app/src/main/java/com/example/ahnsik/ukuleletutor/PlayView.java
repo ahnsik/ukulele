@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 
@@ -118,16 +119,18 @@ public class PlayView extends GameView {
 
         // 전체적으로 기본적으로 사용될 Font 및 기본 색상 등을 지정.
         pText = new Paint();
-//        Typeface liryc = Typeface.createFromAsset(getContext().getAssets(), "@font/kyungpil.ttf");
+//        Typeface liryc = Typeface.createFromAsset(getContext().getAssets(), "@font/kyungpil.ttf"); //  asset 폴더에 따로 보관하는 폰트인 경우.
+        Typeface liryc = ResourcesCompat.getFont(getContext(), R.font.jeonnamfont);            // res/font  폴더에 들어 있어 UI 에서 사용하는 폰트인 경우.
         pText.setColor( DEFAULT_TEXT_COLOR );
-//        pText.setTypeface(liryc);
+        pText.setTypeface(liryc);
         pText.setTextSize(60.0f);
 
         // 배경을 그리는 데 사용될 색상 및 Font를 지정.
         pBG = new Paint();
-//        Typeface bgText = Typeface.createFromAsset(getContext().getAssets(), "@font/coolvetica.ttf");
+//        Typeface bgText = Typeface.createFromAsset(getContext().getAssets(), "@font/coolvetica.ttf"); //  asset 폴더에 따로 보관하는 폰트인 경우.
+        Typeface bgText = ResourcesCompat.getFont(getContext(), R.font.jeonnamfont);            // res/font  폴더에 들어 있어 UI 에서 사용하는 폰트인 경우.
         pBG.setColor( BG_TAB_LINE_COLOR );
-//        pBG.setTypeface(bgText);
+        pBG.setTypeface(bgText);
         pBG.setTextSize(80.0f);     // T.A.B  on 탭악보 위의 TAB 글자.
 
 //        pTitle = new Paint(pText);
@@ -448,7 +451,7 @@ public class PlayView extends GameView {
 
 
 //    private void drawInfo(Canvas canvas) {
-//        // 노랙 제목 표시.
+//        // 노래 제목 표시.  -->  UI component 로 변경
 //        pTitle.setTextSize(80.0f);
 //        if (songData != null) {
 //            canvas.drawText(songData.mSongTitle, TAB_LEFT_END, TITLE_POSITION_Y, pTitle);
@@ -462,7 +465,7 @@ public class PlayView extends GameView {
 
 
 //    private void drawScore(Canvas canvas) {
-//
+//              //   -->  UI component 로 변경
 //        Rect eraserRect = new Rect(SCORE_POSITION_X, TITLE_POSITION_Y-58, 1280, TITLE_POSITION_Y+34);
 //        if (null != bmpBg) {
 //            canvas.drawBitmap(bmpBg, eraserRect, eraserRect, null );
