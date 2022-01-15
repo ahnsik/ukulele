@@ -15,9 +15,15 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 public class SetupActivity extends AppCompatActivity {
 
     private int     hiddenTouchCount = 0;
+
+    public  final String  PREFERENCE = "ukuleletutor";
+    public  final String  prefkeyPlayingMetronom = "playing_metronom_onoff";
+    public  final String  prefkeyTrainingMetronom = "training_metronom_onoff";
 
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
@@ -27,7 +33,6 @@ public class SetupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
-
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -39,53 +44,52 @@ public class SetupActivity extends AppCompatActivity {
             }
         });
 
-        preferences = PreferenceManager.getDefaultSharedPreferences( getApplicationContext() );
+//        preferences = PreferenceManager.getDefaultSharedPreferences( getApplicationContext() );       // PreferenceManager 를 이용해야 저장된다고 한다. - 그런데 이건 아예 기존 값도 유지하지 못하고 있다. 왜 ??
+        preferences = getSharedPreferences(PREFERENCE, MODE_PRIVATE); //이건 왠지 파일(?)로 저장되지 않음. 그래서 App 을 재시작 하면 초기화 되어 있었다.  -->  코드 안에 warning 을 제거하고 나니 정상으로 돌아 왔다. 왜 ??
 
-        CheckBox chkPlayingMetronomOnOff = (CheckBox)findViewById(R.id.chkPlayingMetronomOnOff);
+        boolean playingPref = Objects.equals(preferences.getString(prefkeyPlayingMetronom, ""), "on");
+        boolean trainingPref = Objects.equals(preferences.getString(prefkeyTrainingMetronom, ""), "on");
+        Log.d("ukulele", "playingPref="+playingPref+", trainingPref="+trainingPref );
+
+        CheckBox chkPlayingMetronomOnOff = findViewById(R.id.chkPlayingMetronomOnOff);
+        CheckBox chkTraingMetronomOnOff = findViewById(R.id.chkTraingMetronomOnOff);
+        chkPlayingMetronomOnOff.setChecked(playingPref);
+        chkTraingMetronomOnOff.setChecked(trainingPref);
+
         chkPlayingMetronomOnOff.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("CommitPrefEdits")
             @Override
             public void onClick(View view) {
                 editor = preferences.edit();
                 if ( ((CheckBox)view).isChecked() ) {
-                    // TODO : CheckBox is checked.
                     Log.d("ukulele", "Playing Metronom ON !");
-                    editor.putBoolean("playing_metronom_onoff", true);
+                    editor.putString( prefkeyPlayingMetronom, "on");
                 } else {
-                    // TODO : CheckBox is unchecked.
                     Log.d("ukulele", "Playing Metronom OFF !");
-                    editor.putBoolean("playing_metronom_onoff", false);
+                    editor.putString( prefkeyPlayingMetronom, "off");
                 }
+                editor.commit();
+                Log.d("ukulele", "preference commit !");
             }
         });
-        if (preferences.getBoolean("playing_metronom_onoff", false )) {
-            chkPlayingMetronomOnOff.setChecked(true);
-        } else {
-            chkPlayingMetronomOnOff.setChecked(false);
-        }
 
-        CheckBox chkTraingMetronomOnOff = (CheckBox)findViewById(R.id.chkTraingMetronomOnOff);
         chkTraingMetronomOnOff.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("CommitPrefEdits")
             @Override
             public void onClick(View view) {
                 editor = preferences.edit();
                 if ( ((CheckBox)view).isChecked() ) {
-                    // TODO : CheckBox is checked.
                     Log.d("ukulele", "Training Metronom ON !");
-                    editor.putBoolean("training_metronom_onoff", true);
+                    editor.putString( prefkeyTrainingMetronom, "on");
                 } else {
                     // TODO : CheckBox is unchecked.
                     Log.d("ukulele", "Training Metronom OFF !");
-                    editor.putBoolean("training_metronom_onoff", false);
+                    editor.putString( prefkeyTrainingMetronom, "off");
                 }
+                editor.commit();
+                Log.d("ukulele", "preference commit !");
             }
         });
-        if (preferences.getBoolean("training_metronom_onoff", true )) {
-            chkTraingMetronomOnOff.setChecked(true);
-        } else {
-            chkTraingMetronomOnOff.setChecked(false);
-        }
 
         TextView txtAppTitle = (TextView) findViewById(R.id.txtAppTitle);
         txtAppTitle.setOnClickListener(new View.OnClickListener() {

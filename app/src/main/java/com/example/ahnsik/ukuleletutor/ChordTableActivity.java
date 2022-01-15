@@ -262,9 +262,15 @@ public class ChordTableActivity extends AppCompatActivity {
     protected void gotoActivity(String activityName)
     {
         Intent i = new Intent();
-        ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor."+activityName);
+//        ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor."+activityName);
+        ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.ChildChord_Activity");
         i.setComponent(name);
+        i.putExtra("childActivity", activityName );
         startActivity(i);
+
+        //  모든 코드의 설명을 위해 하나의 Activity 를 공유하여 코드를 간결하게 하기위해,  아래 링크를 참고하고 있음.
+        //   https://stackoverflow.com/questions/3913592/start-an-activity-with-a-parameter
+
     }
 
 /*    // *** 하단 네비게이션 바 숨기기

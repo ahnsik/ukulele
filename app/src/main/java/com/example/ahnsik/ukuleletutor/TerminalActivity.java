@@ -201,7 +201,6 @@ public class TerminalActivity extends AppCompatActivity {
         }
     }
 
-
     private boolean copyingUkeFiles() {
         String filename = "No Name";
         try {
@@ -385,7 +384,5 @@ public class TerminalActivity extends AppCompatActivity {
 
         return json;
     }
-
-
 
 }
