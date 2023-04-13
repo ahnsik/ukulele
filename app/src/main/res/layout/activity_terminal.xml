@@ -24,7 +24,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:background="#D0EBBC7E"
-            android:fontFamily="@font/katuri"
+            android:fontFamily="@font/moonhwajaedolbomfont"
             android:inputType="textPersonName"
             android:text="command here.."
             android:textSize="24sp"
@@ -46,7 +46,7 @@
                 android:id="@+id/txtLogs"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/jeonnamfont"
+                android:fontFamily="@font/moonhwajaedolbomfont"
                 android:background="#D0DFDFDF"
                 android:text="Terminal logs.."
                 android:textSize="24sp" />

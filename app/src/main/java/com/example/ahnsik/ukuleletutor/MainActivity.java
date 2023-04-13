@@ -109,8 +109,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void replaceFragment(Fragment newFragment) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.slide_in,R.anim.fade_out,R.anim.slide_out,R.anim.fade_in);
         ft.replace(R.id.layoutMenu, newFragment);
-//        ft.setCustomAnimations(R.anim.slide_in,R.anim.fade_out,R.anim.fade_in,R.anim.slide_out);
         ft.commit();
     }
 

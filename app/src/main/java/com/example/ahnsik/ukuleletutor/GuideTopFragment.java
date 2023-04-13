@@ -1,7 +1,10 @@
 package com.example.ahnsik.ukuleletutor;
 
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,13 +79,37 @@ public class GuideTopFragment extends Fragment {
             }
         });
 
-        Button btnSetup = rootView.findViewById(R.id.btnSetup);
-        btnSetup.setOnClickListener(new View.OnClickListener() {
+        Button btnExplainUkulele = rootView.findViewById(R.id.btnExplainUkulele);
+        btnExplainUkulele.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Toast.makeText( getContext(), "Setup Selected", Toast.LENGTH_LONG).show();
-                setupMenuFragment setupMenu = new setupMenuFragment();
-                ((MainActivity) getActivity()).replaceFragment(setupMenu);
+                Log.d("ukulele", "Show major chord tables. ");
+                Intent i = new Intent();
+                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.AboutUkuleleActivity");
+                i.setComponent(name);
+                startActivity(i);
+            }
+        });
+
+        Button btnTuning = rootView.findViewById(R.id.btnTuning);
+        btnTuning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent();
+                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.TuningActivity");
+                i.setComponent(name);
+                startActivity(i);
+            }
+        });
+
+        Button btnHowtoReadTAB = rootView.findViewById(R.id.btnHowtoReadTAB);
+        btnHowtoReadTAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent();
+                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.HelpReadTabActivity");
+                i.setComponent(name);
+                startActivity(i);
             }
         });
 
@@ -92,6 +119,16 @@ public class GuideTopFragment extends Fragment {
             public void onClick(View view) {
                 chordTableFragment chordFragment = new chordTableFragment();
                 ((MainActivity) getActivity()).replaceFragment(chordFragment);
+            }
+        });
+
+        Button btnSetup = rootView.findViewById(R.id.btnSetup);
+        btnSetup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Toast.makeText( getContext(), "Setup Selected", Toast.LENGTH_LONG).show();
+                setupMenuFragment setupMenu = new setupMenuFragment();
+                ((MainActivity) getActivity()).replaceFragment(setupMenu);
             }
         });
 

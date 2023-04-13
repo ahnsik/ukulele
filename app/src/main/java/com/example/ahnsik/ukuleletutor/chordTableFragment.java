@@ -66,8 +66,8 @@ public class chordTableFragment extends Fragment {
         btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TopMenuFragment topMenu = new TopMenuFragment();
-                ((MainActivity) getActivity()).replaceFragment(topMenu);
+                GuideTopFragment guideTopMenu = new GuideTopFragment();
+                ((MainActivity) getActivity()).replaceFragment(guideTopMenu);
             }
         });
 
