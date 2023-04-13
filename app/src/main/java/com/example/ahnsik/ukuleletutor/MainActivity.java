@@ -13,6 +13,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,45 +64,55 @@ public class MainActivity extends AppCompatActivity {
         videoView.start();
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        Button btnGuideTop = (Button)findViewById(R.id.btnGuideTop);
-        btnGuideTop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent();
-                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.GuideTopActivity");
-                i.setComponent(name);
-                startActivity(i);
-            }
-        });
+        TopMenuFragment topMenuFragment = new TopMenuFragment();
 
-        Button btnTraining = (Button)findViewById(R.id.btnTraining);
-        btnTraining.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent();
-                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.FileSelectorActivity");
-                i.setComponent(name);
-                i.putExtra("mode", "TrainingMode");
-                startActivity(i);
-            }
-        });
+        getSupportFragmentManager().beginTransaction().replace(R.id.layoutMenu, topMenuFragment).commit();
 
-        Button btnPlaying = (Button)findViewById(R.id.btnPlaying);
-        btnPlaying.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent();
-                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.FileSelectorActivity");
-                i.setComponent(name);
-                i.putExtra("mode", "PlayingMode");
-                startActivity(i);
-
-//                Toast toast = Toast.makeText(getApplicationContext(), "연주하며 연습하는 기능은 아직 구현되지 않았습니다.", Toast.LENGTH_SHORT);
-//                toast.show();
-            }
-        });
+//        Button btnGuideTop = (Button)findViewById(R.id.btnGuideTop);
+//        btnGuideTop.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent();
+//                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.GuideTopActivity");
+//                i.setComponent(name);
+//                startActivity(i);
+//            }
+//        });
+//
+//        Button btnTraining = (Button)findViewById(R.id.btnTraining);
+//        btnTraining.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent();
+//                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.FileSelectorActivity");
+//                i.setComponent(name);
+//                i.putExtra("mode", "TrainingMode");
+//                startActivity(i);
+//            }
+//        });
+//
+//        Button btnPlaying = (Button)findViewById(R.id.btnPlaying);
+//        btnPlaying.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent();
+//                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.FileSelectorActivity");
+//                i.setComponent(name);
+//                i.putExtra("mode", "PlayingMode");
+//                startActivity(i);
+//
+////                Toast toast = Toast.makeText(getApplicationContext(), "연주하며 연습하는 기능은 아직 구현되지 않았습니다.", Toast.LENGTH_SHORT);
+////                toast.show();
+//            }
+//        });
     }
 
+    public void replaceFragment(Fragment newFragment) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.layoutMenu, newFragment);
+//        ft.setCustomAnimations(R.anim.slide_in,R.anim.fade_out,R.anim.fade_in,R.anim.slide_out);
+        ft.commit();
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode,

@@ -20,66 +20,71 @@
             tools:layout_editor_absoluteX="40dp"
             tools:layout_editor_absoluteY="388dp" />
 
-        <Button
-            android:id="@+id/btnGuideTop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/button_shape"
-            android:fontFamily="@font/jeonnamfont"
-            android:textColor="#333"
-            android:text="@string/Label_first_start"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <Button-->
+<!--            android:id="@+id/btnGuideTop"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:background="@drawable/button_shape"-->
+<!--            android:fontFamily="@font/jeonnamfont"-->
+<!--            android:textColor="#333"-->
+<!--            android:text="@string/Label_first_start"-->
+<!--            android:textSize="24sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-        <Button
-            android:id="@+id/btnTraining"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/button_shape"
-            android:fontFamily="@font/jeonnamfont"
-            android:textColor="#333"
-            android:text="@string/Label_TrainingFinger"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/btnPlaying"
-            app:layout_constraintEnd_toEndOf="parent" />
+<!--        <Button-->
+<!--            android:id="@+id/btnTraining"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:background="@drawable/button_shape"-->
+<!--            android:fontFamily="@font/jeonnamfont"-->
+<!--            android:textColor="#333"-->
+<!--            android:text="@string/Label_TrainingFinger"-->
+<!--            android:textSize="24sp"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/btnPlaying"-->
+<!--            app:layout_constraintEnd_toEndOf="parent" />-->
 
-        <Button
-            android:id="@+id/btnPlaying"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/button_shape"
-            android:fontFamily="@font/jeonnamfont"
-            android:textColor="#333"
-            android:text="@string/Label_TrainingWithPlay"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+<!--        <Button-->
+<!--            android:id="@+id/btnPlaying"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:background="@drawable/button_shape"-->
+<!--            android:fontFamily="@font/jeonnamfont"-->
+<!--            android:textColor="#333"-->
+<!--            android:text="@string/Label_TrainingWithPlay"-->
+<!--            android:textSize="24sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent" />-->
 
-        <TextView
-            android:id="@+id/txtAppTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="40dp"
-            android:fontFamily="@font/katuri"
-            android:shadowColor="#333"
-            android:shadowDx="2"
-            android:shadowDy="2"
-            android:shadowRadius="4"
-            android:text="@string/Label_MainTitle"
-            android:textColor="#fabc11"
-            android:textSize="48sp"
-            android:typeface="sans"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <TextView-->
+<!--            android:id="@+id/txtAppTitle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="40dp"-->
+<!--            android:layout_marginTop="40dp"-->
+<!--            android:fontFamily="@font/katuri"-->
+<!--            android:shadowColor="#333"-->
+<!--            android:shadowDx="2"-->
+<!--            android:shadowDy="2"-->
+<!--            android:shadowRadius="4"-->
+<!--            android:text="@string/Label_MainTitle"-->
+<!--            android:textColor="#fabc11"-->
+<!--            android:textSize="48sp"-->
+<!--            android:typeface="sans"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
+        <FrameLayout
+            android:id="@+id/layoutMenu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
 </android.support.constraint.ConstraintLayout>
