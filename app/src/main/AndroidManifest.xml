@@ -17,11 +17,15 @@
         android:theme="@style/FullscreenTheme"
         android:screenOrientation="landscape"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".AboutUkuleleActivity" />
-        <activity android:name=".SetupActivity" />
+        <activity android:name=".AboutUkuleleActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".HelpReadTabActivity"
+            android:screenOrientation="landscape" />
         <activity android:name=".TerminalActivity"
-                android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name=".ChildChord_Activity" />
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:name=".ChildChord_Activity"
+            android:screenOrientation="landscape" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,21 +34,22 @@
         </activity>
         <activity
             android:name=".FileSelectorActivity"
+            android:screenOrientation="landscape"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_file_selector" />
         <activity
             android:name=".TrainingActivity"
+            android:screenOrientation="landscape"
             android:label="@string/title_activity_training" />
         <activity
             android:name=".TuningActivity"
+            android:screenOrientation="landscape"
             android:label="@string/title_activity_Tuning" />
         <activity
             android:name=".PlayingActivity"
+            android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_playing" />
-        <activity android:name=".VideoTestClassActivity" />
-        <activity android:name=".GuideTopActivity" />
-        <activity android:name=".ChordTableActivity" />
     </application>
 
 </manifest>

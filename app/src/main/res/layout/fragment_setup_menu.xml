@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:screenOrientation="landscape"
-    tools:context=".SetupActivity">
+    android:screenOrientation="landscape" >
 
     <TextView
         android:id="@+id/txtAppTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#80453d3c"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/katuri"
@@ -23,7 +23,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
@@ -41,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="40dp"
+            android:fontFamily="@font/jeonnamfont_m"
             android:text="@string/chkLabelTrainigMetronomOnOff"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/jeonnamfont_m"
             android:text="@string/chkLabelPlayingMetronomOnOff"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"

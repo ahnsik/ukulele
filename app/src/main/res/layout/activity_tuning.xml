@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#80453d3c"
-            android:fontFamily="@font/jeonnamfont"
+            android:fontFamily="@font/katuri"
             android:text="@string/explainToTuneUkulele"
             android:textColor="#f4d62f"
             android:textSize="22sp" />
@@ -38,8 +38,10 @@
                 android:layout_width="535dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="0dp"
-                android:fontFamily="@font/jeonnamfont"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/jeonnamfont_m"
                 android:text="@string/txtBasicHighGTune"
                 android:textSize="22sp" />
 
@@ -57,20 +59,20 @@
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_ukulele_tune_none" />
 
-                <com.example.ahnsik.ukuleletutor.TuneIndicatorView
-                    android:id="@+id/imgTunedNote"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="34dp"
-                    android:background="#ddd"
-                    app:srcCompat="@drawable/ic_ukulele_tune_none" />
+                <!--                <com.example.ahnsik.ukuleletutor.TuneIndicatorView-->
+                <!--                    android:id="@+id/imgTunedNote"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="50dp"-->
+                <!--                    android:layout_marginTop="34dp"-->
+                <!--                    android:background="#ddd"-->
+                <!--                    app:srcCompat="@drawable/ic_ukulele_tune_none" />-->
 
                 <TextView
                     android:id="@+id/txtTunedFreq"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:fontFamily="@font/jeonnamfont"
+                    android:fontFamily="@font/jeonnamfont_m"
                     android:gravity="center"
                     android:text="442.5 Hz"
                     android:textSize="20sp"
@@ -81,7 +83,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="26dp"
                     android:layout_marginTop="8dp"
-                    android:fontFamily="@font/jeonnamfont"
+                    android:fontFamily="@font/jeonnamfont_m"
                     android:gravity="center"
                     android:text="@string/txtAdjustNom"
                     android:textSize="24sp" />

@@ -45,7 +45,7 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
             }
         });
 
-        tuneIndicatorView = (TuneIndicatorView) findViewById(R.id.imgTunedNote);
+//        tuneIndicatorView = (TuneIndicatorView) findViewById(R.id.imgTunedNote);
 
         mHandler = new TunerMessageHander();
         startTuningTask();
@@ -64,8 +64,8 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
             TextView freqText = (TextView) findViewById(R.id.txtTunedFreq);
             float freq = m.getData().getFloat("Freq");
             freqText.setText(":"+freq);
-            tuneIndicatorView.setDetectFreq(mDetectedFreq);
-            tuneIndicatorView.invalidate();
+//            tuneIndicatorView.setDetectFreq(mDetectedFreq);
+//            tuneIndicatorView.invalidate();
             Log.d("ukulele", "[][][][][][][][] Draw CustomView [][][][][][]" + mDetectedFreq + "Hz");
 
             detectedNote = FindNote.NoteName(freq);
