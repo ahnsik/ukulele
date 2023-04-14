@@ -7,12 +7,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class HelpReadTabActivity extends AppCompatActivity {
+public class StrumTrainingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_help_read_tab);
+        setContentView(R.layout.activity_strum_training);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 

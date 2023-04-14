@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,32 +60,52 @@ public class TopMenuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_top_menu, container, false);
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_top_menu , container, false);
 
         Button btnGuideTop = rootView.findViewById(R.id.btnGuideTop);
         btnGuideTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent i = new Intent();
-//                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.GuideTopActivity");
-//                i.setComponent(name);
-//                startActivity(i);
                 GuideTopFragment guideTopMenu = new GuideTopFragment();
                 ((MainActivity) getActivity()).replaceFragment(guideTopMenu);
             }
         });
 
-        Button btnTraining = rootView.findViewById(R.id.btnTraining);
-        btnTraining.setOnClickListener(new View.OnClickListener() {
+//        Button btnTraining = rootView.findViewById(R.id.btnTraining);
+//        btnTraining.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent();
+//                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.FileSelectorActivity");
+//                i.setComponent(name);
+//                i.putExtra("mode", "TrainingMode");
+//                startActivity(i);
+//            }
+//        });
+
+        Button btnStrunmTraining = rootView.findViewById(R.id.btnStrumTraining);
+        btnStrunmTraining.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent();
-                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.FileSelectorActivity");
-                i.setComponent(name);
-                i.putExtra("mode", "TrainingMode");
-                startActivity(i);
+//                Intent i = new Intent();
+//                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.FileSelectorActivity");
+//                i.setComponent(name);
+//                i.putExtra("mode", "TrainingMode");
+//                startActivity(i);
+                Toast.makeText( getContext(), "준비중입니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button btnChordTraining = rootView.findViewById(R.id.btnChordTraining);
+        btnChordTraining.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent i = new Intent();
+//                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.FileSelectorActivity");
+//                i.setComponent(name);
+//                i.putExtra("mode", "TrainingMode");
+//                startActivity(i);
+                Toast.makeText( getContext(), "구상중입니다.", Toast.LENGTH_SHORT).show();
             }
         });
 

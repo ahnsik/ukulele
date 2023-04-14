@@ -14,7 +14,9 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import static android.os.SystemClock.sleep;
@@ -38,6 +40,7 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
     private int       playing_pos = 0;      // index of note data (next position what it will be played.)
     private Metronom  mMetronom;
     private SharedPreferences preferences;
+    ImageButton btnPlay0_5, btnPlay0_75, btnPlay1_0, btnPlay1_25, btnPlay1_5, btnPlay2_0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +52,61 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);       // 연습 도중에 무조작으로 Sleep 모드로 들어가면 곤란하므로, Sleep Mode 로 가지 않게 설정.
+
         Button btnReturn = (Button)findViewById(R.id.btnReturn);
         btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        btnPlay0_5 = (ImageButton)findViewById(R.id.btnPlay0_5);
+        btnPlay0_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeSpeed( 0.5f );
+                btnPlay0_5.setImageResource(R.drawable.on_slow0_5);
+            }
+        });
+        btnPlay0_75 = (ImageButton)findViewById(R.id.btnPlay0_75);
+        btnPlay0_75.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeSpeed( 0.75f );
+                btnPlay0_75.setImageResource(R.drawable.on_slow0_75);
+            }
+        });
+        btnPlay1_0 = (ImageButton)findViewById(R.id.btnPlay1_0);
+        btnPlay1_0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeSpeed( 1.0f );
+                btnPlay1_0.setImageResource(R.drawable.on_ff1_0);
+            }
+        });
+        btnPlay1_25 = (ImageButton)findViewById(R.id.btnPlay1_25);
+        btnPlay1_25.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeSpeed( 1.25f );
+                btnPlay1_25.setImageResource(R.drawable.on_ff1_25);
+            }
+        });
+        btnPlay1_5 = (ImageButton)findViewById(R.id.btnPlay1_5);
+        btnPlay1_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeSpeed( 1.5f );
+                btnPlay1_5.setImageResource(R.drawable.on_ff1_5);
+            }
+        });
+        btnPlay2_0 = (ImageButton)findViewById(R.id.btnPlay2_0);
+        btnPlay2_0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeSpeed( 2.0f );
+                btnPlay2_0.setImageResource(R.drawable.on_ff2_0);
             }
         });
 
@@ -237,4 +290,13 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
         return result;
     }
 
+    private void changeSpeed(float speed) {
+        Toast.makeText(this, "Change to " + speed, Toast.LENGTH_SHORT).show();
+        btnPlay0_5.setImageResource(R.drawable.off_slow0_5);
+        btnPlay0_75.setImageResource(R.drawable.off_slow0_75);
+        btnPlay1_0.setImageResource(R.drawable.off_ff1_0);
+        btnPlay1_25.setImageResource(R.drawable.off_ff1_25);
+        btnPlay1_5.setImageResource(R.drawable.off_ff1_5);
+        btnPlay2_0.setImageResource(R.drawable.off_ff2_0);
+    }
 }

@@ -19,7 +19,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".AboutUkuleleActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".HelpReadTabActivity"
+        <activity android:name=".StrumTrainingActivity"
             android:screenOrientation="landscape" />
         <activity android:name=".TerminalActivity"
             android:screenOrientation="landscape"

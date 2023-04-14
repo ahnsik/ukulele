@@ -102,12 +102,12 @@ public class GuideTopFragment extends Fragment {
             }
         });
 
-        Button btnHowtoReadTAB = rootView.findViewById(R.id.btnHowtoReadTAB);
+        Button btnHowtoReadTAB = rootView.findViewById(R.id.btnStrumPattern);
         btnHowtoReadTAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent();
-                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.HelpReadTabActivity");
+                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.StrumTrainingActivity");
                 i.setComponent(name);
                 startActivity(i);
             }

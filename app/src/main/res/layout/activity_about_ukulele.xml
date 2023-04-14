@@ -8,32 +8,29 @@
     android:background="@drawable/bg_title"
     tools:context=".FileSelectorActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:fillViewport="true">
 
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fillViewport="true">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/about_ukulele"
-                />
+            />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/howto_read_tab"
+            />
 
-
-            </ScrollView>
-
-        </RelativeLayout>
-
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/btnReturn"

@@ -54,14 +54,14 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/btnHowtoReadTAB"
+        android:id="@+id/btnStrumPattern"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/button_shape"
         android:fontFamily="@font/jeonnamfont"
-        android:text="@string/Label_HowtoReadTAB"
+        android:text="@string/Label_Strum_Pattern"
         android:textColor="#333"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/btnChordTable"
@@ -78,7 +78,7 @@
         android:text="@string/labelTuningUkulele"
         android:textColor="#333"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnHowtoReadTAB"
+        app:layout_constraintBottom_toTopOf="@+id/btnStrumPattern"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button

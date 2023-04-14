@@ -7,7 +7,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_paper"
+    android:background="#DEAD63"
     android:screenOrientation="landscape"
     tools:context=".FileSelectorActivity">
 
@@ -55,7 +55,7 @@
                 <ImageView
                     android:id="@+id/imgTune"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="177dp"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_ukulele_tune_none" />
 

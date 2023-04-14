@@ -34,8 +34,36 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+<!--    <Button-->
+<!--        android:id="@+id/btnTraining"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:background="@drawable/button_shape"-->
+<!--        android:fontFamily="@font/jeonnamfont"-->
+<!--        android:textColor="#333"-->
+<!--        android:text="@string/Label_TrainingFinger"-->
+<!--        android:textSize="24sp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/btnPlaying"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
+
     <Button
-        android:id="@+id/btnTraining"
+        android:id="@+id/btnChordTraining"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button_shape"
+        android:fontFamily="@font/jeonnamfont"
+        android:text="@string/Label_TrainingChord"
+        android:textColor="#333"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnStrumTraining"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnStrumTraining"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -43,7 +71,7 @@
         android:background="@drawable/button_shape"
         android:fontFamily="@font/jeonnamfont"
         android:textColor="#333"
-        android:text="@string/Label_TrainingFinger"
+        android:text="@string/Label_TrainingStrumming"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/btnPlaying"
         app:layout_constraintEnd_toEndOf="parent" />

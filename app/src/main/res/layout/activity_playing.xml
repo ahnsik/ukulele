@@ -71,19 +71,83 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textPoint"
-            android:layout_width="154dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btnReturn"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            android:text="POINT"
-            android:textAlignment="textEnd"
-            android:textColor="#BD7C38"
-            android:textSize="32sp"
-            android:textStyle="bold|italic" />
+        <ImageButton
+            android:id="@+id/btnPlay0_5"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="left"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/speed_button_shape"
+            android:scaleType="fitXY"
+            android:src="@drawable/off_slow0_5" />
+
+        <ImageButton
+            android:id="@+id/btnPlay0_75"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="left"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="16dp"
+            android:layout_toEndOf="@+id/btnPlay0_5"
+            android:background="@drawable/speed_button_shape"
+            android:scaleType="fitXY"
+            android:src="@drawable/off_slow0_75" />
+
+        <ImageButton
+            android:id="@+id/btnPlay1_0"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="left"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="16dp"
+            android:layout_toEndOf="@+id/btnPlay0_75"
+            android:background="@drawable/speed_button_shape"
+            android:scaleType="fitXY"
+            android:src="@drawable/on_ff1_0" />
+
+        <ImageButton
+            android:id="@+id/btnPlay1_25"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="left"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="16dp"
+            android:layout_toEndOf="@+id/btnPlay1_0"
+            android:background="@drawable/speed_button_shape"
+            android:scaleType="fitXY"
+            android:src="@drawable/off_ff1_25" />
+
+        <ImageButton
+            android:id="@+id/btnPlay1_5"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="left"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="16dp"
+            android:layout_toEndOf="@+id/btnPlay1_25"
+            android:background="@drawable/speed_button_shape"
+            android:scaleType="fitXY"
+            android:src="@drawable/off_ff1_5" />
+
+        <ImageButton
+            android:id="@+id/btnPlay2_0"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="left"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="16dp"
+            android:layout_toEndOf="@+id/btnPlay1_5"
+            android:background="@drawable/speed_button_shape"
+            android:scaleType="fitXY"
+            android:src="@drawable/off_ff2_0" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -94,6 +158,19 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="0dp"
             app:srcCompat="@drawable/finger_guide" />
+
+        <TextView
+            android:id="@+id/textScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnReturn"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="48dp"
+            android:fontFamily="@font/jeonnamfont"
+            android:text="SCORE"
+            android:textColor="#5A3C04"
+            android:textSize="28sp" />
 
     </RelativeLayout>
 

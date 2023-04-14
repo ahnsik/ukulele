@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:screenOrientation="landscape"
     android:background="@drawable/bg_title"
-    tools:context=".HelpReadTabActivity">
+    tools:context=".StrumTrainingActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/howto_read_tab"
+                    android:background="@drawable/major_stroke_pattern"
                     />
 
 
