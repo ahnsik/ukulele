@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
     private boolean   running, metronom_on;
     private long      mGameStartClock = 0, endofSong = 0;
     private int       playing_pos = 0;      // index of note data (next position what it will be played.)
+    private int       total_playLength = 0;      // index of note data (next position what it will be played.)
     private Metronom  mMetronom;
     private SharedPreferences preferences;
     ImageButton btnPlay0_5, btnPlay0_75, btnPlay1_0, btnPlay1_25, btnPlay1_5, btnPlay2_0;
@@ -139,11 +141,18 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
 
         mp = new MediaPlayer();
         Log.d("ukulele", "!@@@@@@@@@@ MP3 Play ? @@@@@@@ : " + getFilesDir()+"/"+mSongData.mMusicURL );
+        mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                total_playLength = mp.getDuration();
+            }
+        });
 
         try {
             mp.reset();
             mp.setDataSource( getFilesDir()+"/"+mSongData.mMusicURL );
             mp.prepare();
+            total_playLength = 1;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -185,6 +194,7 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
         mRecording.start();
         mGameStartClock = System.currentTimeMillis();     // 시작 싯점의 시스템 클럭을 저장.
         mp.start();
+//        total_playLength = mp.getDuration();
     }
 
     public void run() {
@@ -194,7 +204,14 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
         playing_pos = 0;
 
         while (running) {
-            playing_clock = System.currentTimeMillis() - mGameStartClock;     // 시작 싯점의 시스템 클럭을 저장.
+            if ( (mp != null)&&(mp.isPlaying()) ) {
+                playing_clock = mp.getCurrentPosition();
+//                if (mp.isPlaying())
+//                    total_playLength = mp.getDuration();
+//                Log.d("ukulele", "Playing Position = " + playing_clock + " / " + total_playLength );
+//            } else {
+//                playing_clock = System.currentTimeMillis() - mGameStartClock;
+            }
             if (endofSong <= playing_clock ) {
                 Log.d("ukulele", "End of this song." + playing_clock + "("+endofSong+")" );
                 finish();
@@ -212,7 +229,6 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
                 // 스트로크 입력된 시점의 time stamp 를 일단 저장.
                 stroked_clock = playing_clock;
                 // searching for nearest note from 악보.
-
             }
 
             // 메트로놈 소리.
@@ -291,12 +307,18 @@ public class PlayingActivity extends AppCompatActivity implements Runnable {
     }
 
     private void changeSpeed(float speed) {
-        Toast.makeText(this, "Change to " + speed, Toast.LENGTH_SHORT).show();
         btnPlay0_5.setImageResource(R.drawable.off_slow0_5);
         btnPlay0_75.setImageResource(R.drawable.off_slow0_75);
         btnPlay1_0.setImageResource(R.drawable.off_ff1_0);
         btnPlay1_25.setImageResource(R.drawable.off_ff1_25);
         btnPlay1_5.setImageResource(R.drawable.off_ff1_5);
         btnPlay2_0.setImageResource(R.drawable.off_ff2_0);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Toast.makeText(this, "Playing.." + speed+"x", Toast.LENGTH_SHORT).show();
+            mp.setPlaybackParams(mp.getPlaybackParams().setSpeed(speed));
+        } else {
+            Toast.makeText(this, "Need to upgrade to M or over", Toast.LENGTH_SHORT).show();
+        }
     }
 }

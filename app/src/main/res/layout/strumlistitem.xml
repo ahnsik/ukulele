@@ -1,0 +1,75 @@
+<!--suppress ALL -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#c0dcb47d"
+    android:id="@+id/filelistItem">
+
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/strumPatternName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingLeft="16dp"
+            android:text="Calipso"
+            android:fontFamily="@font/katuri"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/strumPatternBeat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingRight="16dp"
+            android:text="4/4"
+            android:gravity="right"
+            android:fontFamily="@font/jeonnamfont"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/strumPatternSpeed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingRight="16dp"
+            android:text="8bit"
+            android:gravity="right"
+            android:fontFamily="@font/jeonnamfont"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/strumPatternText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingRight="16dp"
+            android:text="d-du-u-du"
+            android:gravity="right"
+            android:fontFamily="@font/jeonnamfont"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/patternImageView"
+        android:layout_width="438dp"
+        android:layout_height="107dp"
+        android:layout_margin="2dp"
+        android:background="#449922"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/strumming_pattern_1" />
+
+</LinearLayout>

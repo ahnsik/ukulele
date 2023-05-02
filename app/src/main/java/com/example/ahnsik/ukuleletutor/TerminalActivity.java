@@ -146,7 +146,6 @@ public class TerminalActivity extends AppCompatActivity {
                     log("FTP: 로그인 완료.\n");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.d("ukulele", "Trace .. Error #3");
                     Toast.makeText(getApplicationContext(), "FTP 로그인 실패", Toast.LENGTH_LONG).show();
                     success =false;
                 }
@@ -177,7 +176,7 @@ public class TerminalActivity extends AppCompatActivity {
 
     public class FtpAccessMessageHander extends Handler {
         public void handleMessage(Message m) {
-            Log.d("ukulele", "Message Handler !! m="+m );
+//            Log.d("ukulele", "Message Handler !! m="+m );
             String detectedNote;
 
             String result_msg = m.getData().getString("result_msg");
@@ -218,10 +217,8 @@ public class TerminalActivity extends AppCompatActivity {
                         ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
                         ftpClient.enterLocalPassiveMode();
                         boolean result = false;
-//                        Log.d("ukulele", "Local file name: " + getFilesDir() + "/" + name );
                         FileOutputStream fos = new FileOutputStream(getFilesDir() + "/" + name );
                         result = ftpClient.retrieveFile(name, fos);
-//                        Log.d("ukulele", "Retrieve " + name + "- result: " + result);
                         fos.close();
 
                         // *.uke 파일 전송이 완료되면, 해당 파일을 읽어서 mp3 음악소스를 확인하고 copy 해야 한다.
@@ -309,21 +306,6 @@ public class TerminalActivity extends AppCompatActivity {
         return temp.mMusicURL;
     }
 
-/*    private String getThumbnailFile(String name, int index) {
-        boolean jsonResult = false;
-
-        NoteData temp = new NoteData();
-        jsonResult = temp.loadFromFile( getFilesDir(), name );
-        if ( !jsonResult) {
-            Log.d("ukulele", "FTP: Could not get thumbnail-file info." );
-            return null;
-        }
-        thumbfiles[index] = temp.mThumbnailURL;   // 앨범사진 파일이름
-        Log.d("ukulele", "Thumbnail:"+thumbfiles[index] );
-
-        return temp.mThumbnailURL;
-    }
-*/
     private JSONObject  makeFileIndexData() {
         JSONObject json = new JSONObject();
 
@@ -341,10 +323,14 @@ public class TerminalActivity extends AppCompatActivity {
                 else
                     song.put("thumbnail", thumbfiles[i] );
                 song.put("bpm", songBpm[i] );
-                song.put("type", songTypes[i] );
+                if (songTypes[i] != null) {
+                    song.put("type", songTypes[i] );
+                } else {
+                    song.put("type", ".." );
+                }
 
                 tabJ.put(song);
-                Log.d("ukulele", ".." + i + " JSON: " + song );
+                Log.d("ukulele", ".." + i + " songType:"+songTypes[i]+ " JSON: " + song );
             }
             json.put("songList", tabJ);
 
@@ -353,7 +339,6 @@ public class TerminalActivity extends AppCompatActivity {
             return null;
         }
 
-//        Log.d("ukulele", json.toString() );
         File file = new File( getFilesDir() + "/" + INDEXFILENAME ) ;
         FileWriter fw = null ;
         BufferedWriter bufwr = null ;

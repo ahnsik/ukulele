@@ -1,5 +1,6 @@
 package com.example.ahnsik.ukuleletutor;
 
+import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,6 +74,27 @@ public class setupMenuFragment extends Fragment {
             public void onClick(View view) {
                 GuideTopFragment guideTopMenu = new GuideTopFragment();
                 ((MainActivity) getActivity()).replaceFragment(guideTopMenu);
+            }
+        });
+
+        Button btnUpdateList = (Button)rootView.findViewById(R.id.btnUpdateList);
+        btnUpdateList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText( getContext(), "음악데이터를 가져올 Dialog 를 준비 중입니다.", Toast.LENGTH_SHORT).show();
+//                Dialog dlgLog;
+//                dlgLog = new Dialog(getContext() );
+//                dlgLog.setContentView(R.layout.dialog_terminal);
+//
+//                Button btnClose = dlgLog.findViewById(R.id.btnReturn);
+//                btnClose.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        dlgLog.dismiss();
+//                    }
+//                });
+//
+//                dlgLog.show();
             }
         });
 

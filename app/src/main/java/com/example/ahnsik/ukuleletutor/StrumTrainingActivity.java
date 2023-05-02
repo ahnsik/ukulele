@@ -23,6 +23,10 @@ public class StrumTrainingActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        //  여기에서 스트럼 패턴 정보를 참고할 껏. - Audio 파일도 있으므로..
+        //  https://www.ukulele-tabs.com/strumming-patterns.html
+
     }
 
 /*    // *** 하단 네비게이션 바 숨기기

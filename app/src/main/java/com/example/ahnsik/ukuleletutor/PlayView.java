@@ -63,6 +63,8 @@ public class PlayView extends GameView {
     private boolean[] display_notes;    // 검출된 음 (판단용이 아닌 display용도) - 바깥 클래스(액티비티) 에서 판단한 배열을 복사해서 저장.
     public  double[] spectrum;          // 바깥 클래스(액티비티)에서 녹음/FFT 분석을 마친 스펙트럼 데이터를 실시간으로 저장.
 
+    public  int     canvas_width, canvas_height;
+
     private Paint  pText, pBG, pPaper, pCursor, pCursorShadow, pSpectrum,  pLyric;
     private Paint  pInfo;       // 디버깅 정보 등, 부가적인 정보를 표시하기 위한 색상.
     private Bitmap bmpBg, bmpThumbStroke, bmpChord;             // , bmpFinger
@@ -79,6 +81,9 @@ public class PlayView extends GameView {
         // 게임 정보 초기화
 //        score = 0;
         mGame_clock = 0;
+        Log.d("ukulele", "RESOLUTION: 해상도 체크 " + getWidth() + ", " + getHeight() );
+        canvas_width = getWidth();
+        canvas_height = getHeight();
     }
 
     public PlayView(Context context, AttributeSet attributeSet) {
@@ -92,6 +97,9 @@ public class PlayView extends GameView {
         // 게임 정보 초기화
 //        score = 0;
         mGame_clock = 0;
+        Log.d("ukulele", "RESOLUTION: 해상도 체크 " + getWidth() + ", " + getHeight() );
+        canvas_width = getWidth();
+        canvas_height = getHeight();
     }
 
     public void setSongData(NoteData songData) {
@@ -111,6 +119,7 @@ public class PlayView extends GameView {
     }
 
     private void resource_load() {
+
         // 비트맵 로딩이 Multi Threading 이 된다면.. 먼저 로드를 시작해 두고 나머지를 설정하는 편이 좋다.
         bmpBg = null;
 //        bmpFinger = BitmapFactory.decodeResource(this.getResources(), R.drawable.finger_guide );
@@ -152,16 +161,13 @@ public class PlayView extends GameView {
         pLyric = new Paint(pText);
         pLyric.setTextSize(48.0f);
 
-//        Log.d("ukulele", "width="+ this.width + ", height=" + this.height );
-//        if (this.width <= 0 ) {     // width 를 모른다.
-//
-//        }
+
     }
 
 
     @Override
     public void onDraw(Canvas canvas) {
-
+//        Log.d("ukulele", " 해상도 체크 " + canvas_width + ", " + canvas_height );
         if (canvas == null) {
             return;
         }
@@ -379,6 +385,10 @@ public class PlayView extends GameView {
     }
 
     private void drawStroke(Canvas canvas, int x, String strokedirection ) {
+        // 그릴 게 없으면 통과
+        if ( strokedirection.isEmpty() ) {
+            return;
+        }
         switch(strokedirection.charAt(0) ) {
             case '^':
             case 'u':

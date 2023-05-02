@@ -177,6 +177,7 @@ public class NoteData {
 
             this.mStartOffset = ukeData.getInt("start_offset");
             this.mBpm = (float) ukeData.getDouble("bpm");
+            this.mCategory = ukeData.getString("category");
 
             JSONArray noteData = ukeData.getJSONArray("notes" );
             this.numNotes = noteData.length();
@@ -240,7 +241,7 @@ public class NoteData {
                 Log.d("ukulele", "reading mBasicBeat : " +  this.mBasicBeat );
                 this.mCommentary = ukeData.getString("comment");
                 Log.d("ukulele", "reading mCommentary : " +  this.mCommentary );
-//                this.mCategory = ukeData.getString("category");
+                this.mCategory = ukeData.getString("category");
 //                this.mAuthor = ukeData.getString("author");
                 Log.d("ukulele", "mCommentary :"+this.mCommentary );
 //                this.mAuthorNote = ukeData.getString("auther_note");

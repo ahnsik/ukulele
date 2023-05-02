@@ -33,6 +33,7 @@ public class TuningActivity extends AppCompatActivity implements Runnable {
         // Lock orientation into landscape.
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 //        Toast toast = Toast.makeText(getApplicationContext(),"튜닝 기능은 아직 많이 부족합니다. 사용이 좀 불편하며 불안정 합니다.", Toast.LENGTH_SHORT);
 //        toast.show();

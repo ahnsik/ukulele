@@ -175,7 +175,9 @@ public class Recording extends Thread {
 //            Log.d("ukulele", "  check peak- , prev:"+ (int)prev_amplitude + ", now:" + (int)mRecording.detected_volume + ", inc:"+vol_increment );
         if ( vol_increment && (prev_amplitude > detected_volume )) {     // prev_amplitude 의 값이 peak 이어야 함.
             Log.d("ukulele", "  Stroke detected !!   vol:"+ detected_volume + ", freq:" + center_freq );
-            stroked = true;
+            if (detected_volume > 2.0f) {      // 그 중에서도 volume 이 2 이상으로 좀 음량이 있는 것으로 한정함.
+                stroked = true;
+            }
         }
 
         if ( prev_amplitude > detected_volume)

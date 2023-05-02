@@ -16,6 +16,7 @@
     <string name="title_activity_chord_cm7">ChordCm7</string>
     <string name="title_activity_chord_d_">ChordD_Activity</string>
     <string name="Label_Setup">설정</string>
+    <string name="Label_UpdateList">음악파일 업데이트</string>
     <string name="Label_ChordTable">주요 코드표</string>
     <string name="Label_TrainingFinger">혼자 연습하기</string>
     <string name="Label_TrainingStrumming">스트럼 연습하기</string>
@@ -34,6 +35,7 @@
     <string name="txtAdjustNom">Adjust NOB</string>
     <string name="txtTitleHelpTab">타브 악보 보는 법</string>
     <string name="txtSelectFile">연습할 파일을 선택하세요.</string>
+    <string name="txtSelectPattern">연습할 패턴을 선택하세요.</string>
     <string name="chkLabelTrainigMetronomOnOff">연습할 때 메트로놈 켜기</string>
     <string name="chkLabelPlayingMetronomOnOff">연주할 때 메트로놈 켜기</string>
     <!-- TODO: Remove or change this placeholder text -->

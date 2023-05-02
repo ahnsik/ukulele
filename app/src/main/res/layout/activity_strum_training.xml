@@ -13,6 +13,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#80453d3c"
+            android:fontFamily="@font/katuri"
+            android:textSize="22sp"
+            android:textColor="#f4d62f"
+            android:text="스트러밍 패턴을 터치하여 소리를 들을 수 있습니다."/>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -22,12 +31,176 @@
                 android:layout_height="wrap_content"
                 android:fillViewport="true">
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/major_stroke_pattern"
-                    />
+                <TableLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp" >
 
+                    <TableRow>
+
+                        <Button
+                            android:id="@+id/btnStrumPatrn_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/strumming_pattern_1" />
+
+                        <Button
+                            android:id="@+id/btnStrumPatrn_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/strumming_pattern_2" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <Button
+                            android:id="@+id/btnStrumPatrn_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/strumming_pattern_3" />
+
+                        <Button
+                            android:id="@+id/btnStrumPatrn_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/strumming_pattern_4" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <Button
+                            android:id="@+id/btnStrumPatrn_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/strumming_pattern_5" />
+
+                        <Button
+                            android:id="@+id/btnStrumPatrn_6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/strumming_pattern_6" />
+                    </TableRow>
+                    <TableRow>
+
+                        <Button
+                            android:id="@+id/btnStrumPatrn_7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/strumming_pattern_7" />
+
+                        <Button
+                            android:id="@+id/btnStrumPatrn_8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/strumming_pattern_8" />
+                    </TableRow>
+                    <TableRow>
+
+                        <Button
+                            android:id="@+id/btnStrumPatrn_10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/strumming_pattern_10" />
+                        <Button
+                            android:id="@+id/btnStrumPatrn_9"
+                            android:layout_width="438px"
+                            android:layout_height="107px"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/strumming_pattern_8" />
+                    </TableRow>
+                    <TableRow>
+
+                        <Button
+                            android:id="@+id/btnStrumPatrn_11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/strumming_pattern_11" />
+
+                        <Button
+                            android:id="@+id/btnStrumPatrn_12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/strumming_pattern_12" />
+                    </TableRow>
+                    <TableRow>
+
+                        <Button
+                            android:id="@+id/btnStrumPatrn_13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/strumming_pattern_13" />
+
+                        <Button
+                            android:id="@+id/btnStrumPatrn_14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/strumming_pattern_14" />
+                    </TableRow>
+                    <TableRow>
+
+                        <Button
+                            android:id="@+id/btnStrumPatrn_15"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/strumming_pattern_15" />
+
+                        <Button
+                            android:id="@+id/btnStrumPatrn_16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/strumming_pattern_16" />
+                    </TableRow>
+                    <TableRow>
+
+                        <Button
+                            android:id="@+id/btnStrumPatrn_17"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/strumming_pattern_17" />
+
+                        <Button
+                            android:id="@+id/btnStrumPatrn_18"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/strumming_pattern_18" />
+                    </TableRow>
+
+                </TableLayout>
 
             </ScrollView>
 

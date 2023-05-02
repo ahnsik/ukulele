@@ -83,19 +83,6 @@ public class TopMenuFragment extends Fragment {
 //            }
 //        });
 
-        Button btnStrunmTraining = rootView.findViewById(R.id.btnStrumTraining);
-        btnStrunmTraining.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent i = new Intent();
-//                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.FileSelectorActivity");
-//                i.setComponent(name);
-//                i.putExtra("mode", "TrainingMode");
-//                startActivity(i);
-                Toast.makeText( getContext(), "준비중입니다.", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         Button btnChordTraining = rootView.findViewById(R.id.btnChordTraining);
         btnChordTraining.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +93,19 @@ public class TopMenuFragment extends Fragment {
 //                i.putExtra("mode", "TrainingMode");
 //                startActivity(i);
                 Toast.makeText( getContext(), "구상중입니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button btnStrunmTraining = rootView.findViewById(R.id.btnStrumTraining);
+        btnStrunmTraining.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Toast.makeText( getContext(), "준비중입니다.", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent();
+                ComponentName name= new ComponentName("com.example.ahnsik.ukuleletutor", "com.example.ahnsik.ukuleletutor.StrumListActivity");
+                i.setComponent(name);
+                i.putExtra("mode", "PlayingMode");
+                startActivity(i);
             }
         });
 

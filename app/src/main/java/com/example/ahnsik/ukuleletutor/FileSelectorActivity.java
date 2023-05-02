@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -65,9 +66,8 @@ public class FileSelectorActivity extends AppCompatActivity {
         });
 
     /*--------- INDEXFILENAME 이란 파일에서 List Object를 구성할 데이터를 읽어 오기 ---------------------- */
-        try
-        {
-            String listOfJSON = readTextFile( getFilesDir() + "/" + INDEXFILENAME);
+        try {
+            String listOfJSON = readTextFile(getFilesDir() + "/" + INDEXFILENAME);
             JSONObject jsonFile = new JSONObject(listOfJSON);
             int numUkeFiles = jsonFile.getInt("num_of_songs");
 
@@ -80,23 +80,28 @@ public class FileSelectorActivity extends AppCompatActivity {
             songTypes = new String[numUkeFiles];         // 멜로디 / 코드 / 핑거스타일
             defaultThumbnail = BitmapFactory.decodeResource(getResources(), R.drawable.ukulele_icon);
 
-            JSONArray songList = jsonFile.getJSONArray("songList" );
-            for (int i=0; i<numUkeFiles; i++ ) {
-                JSONObject  info = songList.getJSONObject(i);
-                songfiles[i] = info.getString("filename");;
+            JSONArray songList = jsonFile.getJSONArray("songList");
+            for (int i = 0; i < numUkeFiles; i++) {
+                JSONObject info = songList.getJSONObject(i);
+                Log.d("ukulele", "index=" + i + ", info: " + info.toString() );
+
+                songfiles[i] = info.getString("filename");
+                ;
                 songTitles[i] = info.getString("title");        // 곡목
                 songComments[i] = info.getString("comment");      // 곡목에 대한 설명
                 thumbPath[i] = info.getString("thumbnail");          // 곡의 thumbnail 파일명
-                Log.d("ukulele", "index="+i+", thumbnail:"+thumbPath[i] );
-                if ( thumbPath[i]==null || thumbPath[i].equals("null") ) {
+                Log.d("ukulele", "index=" + i + ", thumbnail:" + thumbPath[i]);
+                if (thumbPath[i] == null || thumbPath[i].equals("null")) {
                     thumbnailBitmap[i] = null;
                 } else {
-                    thumbnailBitmap[i] = BitmapFactory.decodeFile( getFilesDir() + "/" + thumbPath[i] );
-                    Log.d("ukulele", "index="+i+", thumbnailBitmap = "+thumbnailBitmap[i] );
+                    thumbnailBitmap[i] = BitmapFactory.decodeFile(getFilesDir() + "/" + thumbPath[i]);
+                    Log.d("ukulele", "index=" + i + ", thumbnailBitmap = " + thumbnailBitmap[i]);
                 }
                 songBpm[i] = info.getString("bpm");
-//                songTypes[i] = info.getString("type");         // 멜로디 / 코드 / 핑거스타일
+                songTypes[i] = info.getString("type");         // indexing 하면서 category 의 데이터를 index file 에서는 "type" 으로 지정해서 저장하고 있다. 이름은 카테고리 라고 했지만, 실제로는 Strum Pattern 을 지정하기로 한다. - 어차피 text 처리만 할 꺼임.
             }
+//        } catch (JSONException) {
+//            Log.d("ukulele", "JSON data parse ERROR.");
         } catch (Exception e) {
             Log.d("ukulele", "-xxxxxxxxxxxx Error to parse Index file xxxxxxxxxxxx-");
             e.printStackTrace();
@@ -171,6 +176,10 @@ public class FileSelectorActivity extends AppCompatActivity {
             filenameTextview.setText(songfiles[i]);
             TextView songTitleTextview = (TextView) view.findViewById(R.id.songTitleText);
             songTitleTextview.setText(songTitles[i]);
+            TextView songBpmTextview = (TextView) view.findViewById(R.id.bpmText);
+            songBpmTextview.setText(songBpm[i]);
+            TextView strumPatterTextview = (TextView) view.findViewById(R.id.strumPatterText);
+            strumPatterTextview.setText(songTypes[i]);
             TextView songCommentTextview = (TextView) view.findViewById(R.id.descriptionText);
             songCommentTextview.setText(songComments[i]);
             ImageView thumbnailImageview = (ImageView) view.findViewById(R.id.fileImageView);
